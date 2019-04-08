@@ -1,0 +1,80 @@
+
+Cross Compilation of 68000 real-FORTH for Atari.
+
+LENGTH Isn't Unique (DIS) Isn't Unique DISASSEM Isn't Unique | Isn't Unique 
+MF Isn't Unique LITERAL Isn't Unique UNARY Isn't Unique BINARY Isn't Unique 
+IMMEDIATE Isn't Unique INTERPRET Isn't Unique LOAD Isn't Unique THRU Isn't Unique 
+CODE Isn't Unique CONSTANT Isn't Unique VARIABLE Isn't Unique USER Isn't Unique 
+OFUSER Isn't Unique *+ Isn't Unique IP Isn't Unique +LOAD Isn't Unique 
++THRU Isn't Unique SETLEN Isn't Unique FIXED Isn't Unique ;C Isn't Unique 
+NEXT Isn't Unique : Isn't Unique 
+Wednesday  3 April, 2019 13:51:02 
+728 Kilobytes of Dictionary space available. C000 Target bytes left. 
+
+     1F6 bytes of preamble used.       A Bytes of preamble left.
+strtup =  81E16
+FastForth 3.0  3  4 19 
+
+160 Buffers 
+Wednesday  3 April, 2019 13:51:10 
+
+
+
+
+
+Atari FastForth 3.0  3  4 19 
+
+fastForth on Atari ST              (c) 1985-96 by Charles Curley
+
+VLIST  of kernel.
+
+BRING    SAVEOVER    SETVOCS    SETDICT    VERCHK    GETDICT    NEWBLK    
+ADVANCE    HEAD@+    SYSCHECK    SYSCHK    CHX    ;    SETL    LAST?    
+4SR    2SR    DOBSR    6SR    C>P    (RES)    FIXED    SETLEN    
+LEN?    LEN    EXEC    EXECS    END    WHILE    REPEAT    AGAIN    
+UNTIL    BKWD    LBKWD    SBKWD    BEGIN    ENDIF    ELSE    THEN    
+IF    RESOLVE    BRAN    0BRAN    +LOOP    LOOP    DO    :    (CREATE)    
+WHERENOW    FORGET    (FORGET)    TASKFIX    PFUI2    PFUI    (LIST)    
+LIST    INDEX    '    (R/W)    R>    >R    FLUSH    #BUFS    -->    
+LOAD    MESSAGE    .LINE    (LINE)    BLOCK    R    BUFFER    VLIST    
+C?    W?    ?    .    .R    D.    D.R    #S    #    SIGN    #>    
+<#    SPACES    M/MOD    */    */MOD    MOD    /    /MOD    *    
+M/    MAX    MIN    DABS    ABS    D+-    +-    UPDATE    +BUF    
+COLD    FDATE    WTF    RDF    OPENIT    (OPF)    WHANDLE    RHANDLE    
+(ATT)    LSEEK    (CLF)    FF.SCR    CMDBOOT    GETCMD    CT->0    
+EMPT    (ABORT)    (QUIT)    COMPILE    (    DEFINITIONS    FORTH    
+VOCABULARY    INTERPRET    ?STACK    DLITERAL    LITERAL    [COMPILE]    
+EMPTY-BUFFERS    SETU/P    DRIVE    B/SIDE    B/DRV    MAXBLK    
+'B/SIDE    'MAXBLK    'B/DRV    ID.    ERROR    -FIND    NUMBER    
+(NUMBER)    UPPER    WORD    X    QUERY    EXPECT    (EXPECT)    
+."    (CR)    (.")    -TRAILING    (TYPE)    COUNT    DOES>    (;CODE)    
+BYE    ERRNO    IMMEDIATE    REPLACE    TYPE    ABORT    QUIT    
+BLANKS    ERASE    FILL    CREATE    PAD    HOLD    BOUNDS    DECIMAL    
+HEX    SMUDGE    ]    [    <COMPILE>    ?LOADING    ?CSP    ?PAIRS    
+?EXEC    ?COMP    ?ERROR    !CSP    4*    4/    ?ALIGN    U<    (PAGE)    
+SPACE    N>L    LATEST    TRAVERSE    N>C    C>N    ?TERMINAL    
+R/W    CR    PAGE    EMIT    KEY    =    <COMP>    <SUB>    <BSR>    
+BACK    XOR    AND    OR    -    +    F@    F!    OFF    1+!    W,    
+C,    ,    ALLOT    HERE    LIMIT    FIRST    PREV    USE    HLD    
+R#    CSP    FLD    DPL    BASE    STATE    CURRENT    CONTEXT    
+OFFSET    SCR    OUT    IN    BLK    REL    LASTSUB    LASTTHEN    
+I/O    LENGTH    BOTSTACK    'LIMIT    'FIRST    'CREATE    'ABORT    
+'QUIT    'R/W    'CR    'LIST    'PAGE    'GOTOXY    'TYPE    'EMIT    
+'?TERMINAL    'EXPECT    'KEY    VOC-LINK    DP    FENCE    WARNING    
+WIDTH    TIB    USER    +ORIGIN    0    B/SCR    B/BUF    BL    C/L    
+CONSTANT    VARIABLE    CMOVE    M*    F!    F@    W!    W@    6-    
+1+!    OFF    ON    1-    2-    4-    C!    !    C@    @    WITHIN    
+TOGGLE    +!    NIP    2DUP    -DUP    DUP    SWAP    S->D    OVER    
+DMINUS    MINUS    D+    -    +    ROT    <    ?LEAVE    LEAVE    
+RP!    XOR    OR    AND    =CELLS    1+    2+    4+    U/    U*    
+2*S    2/S    2DROP    DROP    >    0<    0=    (?TERMINAL)    (KEY)    
+(EMIT)    ELSEL    THENL    IFL    STOP    CTL    ASCII    ELSE    
+REPEAT    AGAIN    UNTIL    WHILE    BEGIN    +LOOP    LOOP    DO    
+THEN    IF    ;    RP@    SP@    SP!    <EXEC>    @EXECUTE    ENCLOSE    
+(FIND)    DIGIT    I!    I    PAUSE    (DO)    (+LOOP)    (LOOP)    
+(OF)    ;S    EXECUTE    +HEAD    >MEM    S0    MOI    RDROP    R    
+R>    >R    WHERE    SEE:    LITERAL    FORTH    (    }    {    ."    
+DOES>    ;CODE    [COMPILE]    COMPILE    GAP    \         OF/NF    
+
+
+

@@ -1,0 +1,191 @@
+
+    603 LENGTH Isn't Unique Empty 
+    604 (DIS) Isn't Unique DISASSEM Isn't Unique Empty 
+    605 Empty 
+    606 Empty 
+    607 Empty 
+    608 Empty 
+    609 Empty 
+    610 Empty 
+    611 Empty 
+    612 Empty 
+    613 Empty 
+    614 | Isn't Unique MF Isn't Unique Empty 
+    615 LITERAL Isn't Unique Empty 
+    616 UNARY Isn't Unique      6:    9FEE8        2    9FF30        2    9FF58        2 
+    617 BINARY Isn't Unique Empty 
+    618 Empty 
+    619 IMMEDIATE Isn't Unique INTERPRET Isn't Unique Empty 
+    620 LOAD Isn't Unique THRU Isn't Unique Empty 
+    621 CODE Isn't Unique CONSTANT Isn't Unique Empty 
+    622 VARIABLE Isn't Unique Empty 
+    623 USER Isn't Unique Empty 
+    624 OFUSER Isn't Unique *+ Isn't Unique IP Isn't Unique +LOAD Isn't Unique 
++THRU Isn't Unique Empty 
+    625 SETLEN Isn't Unique FIXED Isn't Unique ;C Isn't Unique NEXT Isn't Unique 
+Empty 
+    626 Empty 
+    627 : Isn't Unique OF/NF Empty 
+    628 X \ GAP COMPILE [COMPILE] Empty 
+    629 ;CODE DOES> ." Empty 
+    630 { } ( FORTH LITERAL SEE: WHERE Empty 
+    631 >R R> R RDROP MOI S0 >MEM +HEAD Empty 
+Sunday 10 February, 2019 13:52:40 
+728 Kilobytes of Dictionary space available. C000 Target bytes left. 
+  381 
+  382         2:    927BE       12 
+  383         2:    927BE       12 
+  384         2:    927BE       12 
+  385    Empty 
+  386    Empty 
+  387    Empty 
+  388    Empty 
+  389         2:    9295A        2 
+  390    Empty 
+  391    Empty 
+  392    Empty 
+     1F4 bytes of preamble used.       C Bytes of preamble left.   Empty 
+  483 801B2 EXECUTE 801C4 ;S    Empty 
+  484 801DE (OF) 80206 (LOOP)         2:    92AA8        1 
+  485 80224 (+LOOP) 80244 (DO) 8026E PAUSE    Empty 
+  486 8028A I 8029C I! 802B0 DIGIT    Empty 
+  487 802F0 (FIND)         4:    92BB8        1    92BC6        2 
+  488    Empty 
+  489 8034C ENCLOSE    Empty 
+  490 8039C @EXECUTE 803B6 <EXEC> 803D0 SP! 803E4 SP@ 
+      803F6 RP@    Empty 
+  645 ;    Empty 
+  646 IF THEN DO LOOP +LOOP BEGIN WHILE UNTIL AGAIN REPEAT    Empty 
+  647 ELSE ASCII CTL STOP IFL THENL ELSEL    Empty 
+  491 8040E (EMIT) 80434 (KEY) 80474 (?TERMINAL)    Empty 
+  492 804A6 0= 804C0 0< 804D8 >    Empty 
+  493 804F6 DROP 8050A 2DROP 8051C 2/S 80534 2*S    Empty 
+  494 8054C U*    Empty 
+  495 8059A U/ 805CA 4+ 805DC 2+ 805EE 1+ 80604 =CELLS    Empty 
+  496 8061C AND 80630 OR 80644 XOR 80658 RP! 8066E LEAVE 
+      80684 ?leave    Empty 
+  497 80698 < 806B4 ROT 806D2 + 806E4 - 806F8 D+    Empty 
+  498 80718 MINUS 8072E DMINUS 80746 OVER 8075C S->D 
+      80778 SWAP 80790 DUP    Empty 
+  499 807A4 -DUP 807BC 2DUP 807D4 NIP 807E6 +! 80800 TOGGLE 
+      8081A WITHIN    Empty 
+  500 8083C @ 8085C C@ 80872 !    Empty 
+  501 8088C C! 808A2 4- 808B4 2- 808C6 1- 808D8 ON 
+      808EE OFF 80902 1+!    Empty 
+  502 80916 6- 80928 W@ 80942 W! 8095A F@ 8096E F!    Empty 
+  503 80982 M*    Empty 
+  504 809DC CMOVE    Empty 
+  505    Empty 
+  506 80A00 VARIABLE 80A2C CONSTANT 80A56 C/L 80A6A BL 
+      80A80 B/BUF 80A96 B/SCR 80AA8 0    Empty 
+  507 80ABE +ORIGIN 80AD6 USER 80B24 TIB 80B38 WIDTH 
+      80B4E WARNING 80B62 FENCE 80B74 DP 80B8E VOC-LINK    Empty 
+  508 80BA4 'KEY 80BBC 'EXPECT 80BD8 '?TERMINAL 80BEE 'EMIT 
+      80C04 'TYPE 80C1C 'GOTOXY 80C32 'PAGE 80C48 'LIST 
+      80C5C 'CR 80C72 'R/W 80C88 'QUIT 80CA0 'ABORT 
+      80CB8 'CREATE 80CD0 'FIRST 80CE8 'LIMIT <orphan> 
+      80CEE BOTSTACK 80D06 LENGTH 80D1A I/O    Empty 
+  509 80D34 LASTTHEN 80D4C LASTSUB 80D60 REL 80D74 BLK 
+      80D88 IN 80D9C OUT 80DB0 SCR 80DC8 OFFSET 80DE0 CONTEXT 
+      80DF8 CURRENT 80E0E STATE 80E24 BASE 80E38 DPL 
+      80E4C FLD 80E60 CSP 80E74 R# 80E88 HLD 80E9C USE 
+      80EB2 PREV    Empty 
+  510 80EC8 FIRST 80EDE LIMIT 80EF4 HERE 80F0A ALLOT 
+      80F1E , 80F38 C, 80F52 W,    Empty 
+  650 1+! OFF F! F@ + - OR AND XOR    Empty 
+  511 80F6E BACK 80F88 <BSR> 80FD0 <SUB> 81022 <COMP>    Empty 
+  512 8108E = 810AA KEY 810C8 EMIT 810EA PAGE 81106 CR 
+      81122 R/W 81144 ?TERMINAL    Empty 
+  513 8116A C>N 81184 N>C 811A8 TRAVERSE 811C4 LATEST 
+      811DA N>L    Empty 
+  514 811EE SPACE 81208 (PAGE) 8121E U< 8123E ?ALIGN 
+      8125A 4/ 81270 4*    Empty 
+  515 81288 !CSP 812A0 ?ERROR 812C2 ?COMP 812E0 ?EXEC 
+      812FC ?PAIRS 81316 ?CSP 8133A ?LOADING    Empty 
+  516 8135E <COMPILE> 8137E [ 81390 ] 813AC SMUDGE    Empty 
+  517 813C6 HEX 813E0 DECIMAL 813FA BOUNDS 81416 HOLD 
+      81432 PAD 81450 CREATE    Empty 
+  518 8146A FILL 81488 ERASE 8149E BLANKS 814B2 QUIT 
+      814CC ABORT 814E6 TYPE    Empty 
+  519 81502 REPLACE 8157C IMMEDIATE 81598 ERRNO 815AE BYE    Empty 
+  520 815D0 (;CODE) 815FE DOES>    Empty 
+  521 8162A COUNT 81648 (TYPE) 81684 -TRAILING 816AA (.") 
+      816D4 (CR)    Empty 
+  522 816EA ." 8173E (EXPECT) 817F6 EXPECT 81814 QUERY    Empty 
+  523 81830 X 81850 WORD 818C2 UPPER 818F4 (NUMBER)    Empty 
+  524 81950 NUMBER 819BE -FIND 81A18 ERROR 81A66 ID.    Empty 
+  525 <orphan> 81AA6 'B/DRV 81AC0 'MAXBLK <orphan> 
+      81AC8 'B/SIDE 81AE2 MAXBLK 81AFA B/DRV 81B14 B/SIDE 
+      81B2C DRIVE 81B50 SETU/P 81B76 EMPTY-BUFFERS    Empty 
+  526 81BA0 [COMPILE] 81BC6 LITERAL    Empty 
+  527 81C20 DLITERAL 81C44 ?STACK 81C7C INTERPRET    Empty 
+  528 81CD4 VOCABULARY 81D16 FORTH 81D36 DEFINITIONS 
+      81D4A (    Empty 
+  529 81D64 COMPILE 81D94 (QUIT) 81DD4 (ABORT)    Empty 
+  530 <orphan> 81E0E EMPT 
+strtup =  81E16   Empty 
+  531 81E6C CT->0 <orphan> 81E7A GETCMD <orphan> 
+      81EAA CMDBOOT    Empty 
+  532 81F20 FF.SCR 81F40 (CLF)    Empty 
+  533 81F60 LSEEK 81F88 (ATT) 81FA2 RHANDLE 81FBC WHANDLE    Empty 
+  534 81FD4 (OPF) 81FF8 OPENIT    Empty 
+  535 82088 RDF 820AE WTF    Empty 
+  536 820D6 FDATE    Empty 
+  537    Empty 
+  538    Empty 
+  540    Empty 
+  541 82182 COLD    Empty 
+  542 821BC +BUF 821F0 UPDATE 82208 +- 8221E D+- 
+      82238 ABS 82250 DABS    Empty 
+  543 82262 MIN 8227C MAX 82296 M/ 822D6 * 822EE /MOD 
+      82304 / 82318 MOD 8232E */MOD 82348 */ 8235E M/MOD    Empty 
+  544 8238A SPACES 823BA <# 823CE #> 823F0 SIGN 82412 # 
+      82448 #S 8246A D.R 824A6 D. 824BC .R 824D2 . 
+      824E4 ? 824F8 W? 8250C C?    Empty 
+  545 82522 VLIST 8257C BUFFER 825D2 R    Empty 
+  546 825F8 BLOCK 82678 (LINE) 826AC .LINE 826C8 MESSAGE 
+      8270A LOAD 8273E -->    Empty 
+  547 8275C #BUFS 827AC FLUSH 827D8 >R 827FC R>    Empty 
+  549 82822 (R/W)    Empty 
+  550 8294E ' 82972 INDEX 829BC LIST 829D8 (LIST)    Empty 
+  551 <orphan> 82A28 PFUI <orphan> 82A46 PFUI2 <orphan> 
+      82A52 TASKFIX 82A72 (FORGET) 82B0C FORGET    Empty 
+  552 82B3C WHERENOW    Empty 
+  553 82B74 (CREATE) 82C32 :    Empty 
+  554 82C7A DO 82CA0 LOOP 82CC4 +LOOP 82CE8 0BRAN 
+      82D0C BRAN 82D30 RESOLVE 82D52 IF 82D6E THEN 
+      82D94 ELSE    Empty 
+  555 82DC0 ENDIF 82DD2 BEGIN <orphan> 82DE0 SBKWD <orphan> 
+      82E0A LBKWD <orphan> 82E2A BKWD 82E5E UNTIL 
+      82E88 AGAIN 82EAA REPEAT 82ECA WHILE 82EE0 END    Empty 
+  556 82EF4 EXECS 82F3C EXEC 82F54 LEN 82F6C LEN? 
+      82F84 SETLEN 82FA0 FIXED    Empty 
+  557 82FB4 (RES) 83044 C>P <orphan> 83090 6SR <orphan> 
+      830BE DOBSR    Empty 
+  558 <orphan> 830DE 2SR <orphan> 830F4 4SR <orphan> 
+      83104 LAST? 83190 SETL 831BC ;    Empty 
+  559 8320E CHX 83234 SYSCHK    Empty 
+  560 83268 SYSCHECK    Empty 
+  561 <orphan> 83290 HEAD@+ <orphan> 8329A ADVANCE <orphan> 
+      832B4 NEWBLK    Empty 
+  562 <orphan> 832C8 GETDICT 83360 VERCHK    Empty 
+  563 <orphan> 83370 SETDICT <orphan> 833BE SETVOCS    Empty 
+  564 83402 SAVEOVER    Empty 
+  565 83472 BRING    Empty 
+  591    Empty 
+  592    Empty 
+  593    Empty 
+  594    Empty 
+  595    Empty 
+  596    Empty 
+  597    Empty 
+  598  Forward references resolved. 
+       target here =     83500       target size =      3600
+
+       Addresses of long words containing 0 in them:
+ 8017E 80190 80194 8019C 801A4 8159C 81F24 81F8C
+FastForth 2.0 10  2 19 
+   Empty 
+  599    Empty 
+160 Buffers 
+Sunday 10 February, 2019 13:52:50 
