@@ -1,0 +1,2160 @@
+**********************  fastForth  MODEL  **********************
+*                                                              *
+*                             by                               *
+*                                                              *
+*                        Charles Curley                        *
+*                        P. O. Box 845                         *
+*                    Thermopolis, WY 82443                     *
+*                                                              *
+*                                                              *
+*                  Miscellaneous Goodies Disk                  *
+*                                                              *
+*                                                              *
+*                                                              *
+*               Distributed by Charles Curley for              *
+*              Atari ST and other 680x0 computers              *
+*****  Further distribution must include the above notice. *****
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\ goodies disk load screen                ( 18  4 19 crc 10:13 )
+forget task  forth definitions  decimal
+
+  15 2- +blk loader calcpi
+  30 2- +blk loader life
+  45 2- +blk loader Sieves \ actually the first of 6 versions
+  60 2- +blk loader queens
+  75 2- +blk loader protobt     \ Build a proto boot sector
+  90 2- +blk loader morsecode
+ 105 2- +blk loader dialer      \ telephone dialer
+ 120 2- +blk loader jabberwocky \ In French and English
+: task ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\ reboot the processor                    (  9  6 91 CRC 10:50 )
+debug forth definitions         forget task
+: task ;                        base @ hex
+code reboot
+  ar0 ar0 sub,  4 # ar0 addq,           \ start w/ new pc.
+  ar0 [+ dr1 .w mov,  dr1 .w swap,      \ get new pc the hard
+  ar0 [ dr1 .w mov,                     \ way due to hw.
+  dr1 ar0 mov,  ar0 [ jmp, ;c           \ jump to new pc.
+
+base !
+editor flush            un: reboot
+
+
+
+
+
+\ sound generator chip dump               ( 13  3 91 CRC 14:50 )
+  debug                         forget task
+: task ;                        base @ >r
+hex ff8800 constant sound
+
+: getsound      \ r# --- c | get contents of rth register
+  sound c!  sound c@ ;
+
+: dsound        \ --- | display all 16 registers
+  base @  10 0 do  i 8 mod 0= if cr then
+  debug sr@  2700 sr!
+  decimal i 4 .r  hex  i getsound 3 .r  sr!  loop  base ! ;
+r> base !   editor flush
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\ calculate pi w/ random numbers          (  8  8 93 CRC 13:04 )
+debug forget task               forth definitions : task ;
+decimal         length f@       22 length f!
+598 needed ,.r
+1 11 +thru
+
+
+length f!
+
+
+
+
+editor flush
+
+
+
+\ 16-32 math functions                    (  8  8 93 CRC 11:41 )
+code w/         \ div dvr --- quo | 32 bits divided by 16
+  s [+ dr0 mov,  ne if,  s [ dr1 mov,  dr0 dr1 divu,
+    dr0 clr,  dr1 dr0 .w mov,
+    else,  dr0 clr,   4 # s addq,  then,     dr0 s [ mov,
+  rts,  ;c
+
+CODE W*    \ w w --- n | 16bit x 16bit --> 32bit prod
+  S [+ DR0 MOV,  S [ DR1 MOV,  DR1 DR0 MULS,  DR0 S [ MOV,
+  next ;c
+
+
+
+
+
+
+\ Ting: Brodie's Random number            (  6  8 93 CRC  8:31 )
+here variable rnd       \ compile time random init!
+
+: random        \ --- n | a random number, 0 - 32 bits
+  rnd f@ 31421 *                \ rnd*31421
+  6927 +                        \ rnd*31421+6927, mod 32 bits
+  dup rnd f! ;                  \ refresh the seed
+
+: choose        \ n1 --- n2 | a random number in the range 0-n1
+  random u* nip ;
+
+
+
+
+
+
+\ Ting: newton's method, by crc           (  6  8 93 CRC  9:17 )
+\ if n = guess at sqrt of m, then better guess =  (n+m/n)/2
+0 variable last
+
+: guess  \ r m --- better r | make a guess at a better root
+  over / +  2/  dup last f! ;
+
+: newt  \ m --- r | square root of m, per newton's method
+  abs  -dup if                  \ non-0 positive only!
+    dup  2/   dup last f!       \ first guess
+    begin  2dup / 2dup =        \ is our guess good enough?
+      swap last f@ >  or        \ or repeating?
+\       ?terminal if  drop  1  then     \ bail
+      0=  while  over guess     \ make next guess
+      repeat  nip
+  else  0  then ;               \ fake it!
+\ assembler extensions for Atari A-line   (  7  8 93 CRC 14:39 )
+base f@ hex
+: aline  create w, immediate  does> w@ w, ;
+
+  a000 aline init               a001 aline setpt
+  a002 aline getpixel           a003 aline drawline
+  a004 aline hline          \   a005 aline fillrectangle
+\ a006 aline fillpolygon        a007 aline bitblkxfer
+\ a008 aline txtblkxfer         a009 aline enablemouse
+\ a00a aline disablemouse
+
+forth definitions               base f!
+
+
+
+
+\ get initial values                      (  7  8 93 CRC 14:56 )
+0 variable datafield            0 variable contrl
+0 variable intin                0 variable ptsin
+0 variable intout               0 variable ptsout
+
+code initarray  \ set up variables for graphics
+  init  ar0 datafield @#l mov,  4 # ar0 addq,
+  ar0 [+ contrl @#l mov,
+  ar0 [+ intin @#l mov,
+  ar0 [+ ptsin @#l mov,
+  ar0 [+ intout @#l mov,
+  ar0 [+ ptsout @#l mov,
+  next ;c
+
+initarray       forget initarray
+
+\ setpixel                                (  7  8 93 CRC 15:07 )
+code setpix     \ x y  ---  | set pixel at x,y on
+  ptsin *+ ar0 mov,
+  s [+ dr0 mov,  dr0 ar0 [+ .w mov,
+  s [+ dr0 mov,  dr0 ar0 [ .w mov,
+  intin *+ ar0 mov,  3 # ar0 [ .w mov,
+  setpt  nop, nop, nop,
+\ ]] (key) drop [[
+  rts, ;c
+
+
+
+
+
+
+
+\ indexes into datafield array            (  7  8 93 CRC 15:24 )
+: dtf   \ c: offset ---   | set up constant
+        \ r:  ---  addr | return address of entry
+  over datafield f@ +  constant  + ;
+
+24
+2 dtf _fg_bp_1                  2 dtf _fg_bp_2
+2 dtf _fg_bp_3                  2 dtf _fg_bp_4
+
+34
+2 dtf _ln_mask                  2 dtf _wrt_mode
+2 dtf _x1                       2 dtf _y1
+2 dtf _x2                       2 dtf _y2
+4 dtf _patptr                   2 dtf _patmsk
+2drop
+
+\ getcolor                                (  8  8 93 CRC 22:01 )
+\ from pixel at x,y, get color & set up for line draw
+code getcolor
+  ptsin *+ ar0 mov,
+  s [+ dr0 mov,  dr0 ar0 [+ .w mov,
+  s [+ dr0 mov,  dr0 ar0 [ .w mov,
+  getpixel   dr1 .w clr,  1 # dr2 movq,
+  1 # dr0 .w  addq,  3 # dr0 .w and,
+  0 # dr0 btst,  ne if,  dr2 _fg_bp_1 @#l .w mov,
+     else,  dr1 _fg_bp_1 @#l .w mov,  then,
+  1 # dr0 btst,  ne if,  dr2 _fg_bp_2 @#l .w mov,
+     else,  dr1 _fg_bp_2 @#l .w mov,  then,
+  next ;c
+
+\ 2 dtf _fg_bp_1                  2 dtf _fg_bp_2
+
+\ write horizontal line                   (  7  8 93 CRC 15:36 )
+-1 variable mask        \ all lines have this fill
+
+: (whline)      \ x1 y1 x2  ----   | set up to put a line there
+  0 _patmsk w!  mask _patptr f!  0 _wrt_mode w!
+  _x2 w!  _y1 w!  _x1 w! ;
+
+: whline        \ x1 y1 x2  ----   | put a line there
+  (whline) hline ;
+
+: line          \ x1 y1 x2 y2 ----   | put a line there
+  mask f@  _ln_mask w!
+  _y2 w! (whline) drawline ;
+
+
+
+\ put box for circle area                 (  7  8 93 CRC 16:03 )
+183 constant maxx               maxx 2* constant maxy
+170 constant scale              maxx scale * constant maxrad
+
+: box           \  ---  edge of area to be shaded
+  1 _fg_bp_1 w!  0 _fg_bp_2 w!  \ set color for box
+  0 maxx maxy whline   maxy maxx  maxy 0 line ;
+
+: circle?       \ x 2y --- fl | is point w/in 1/4 circle?
+  dup w*  swap dup w*  +  newt  maxrad < ;
+
+0 variable hits
+
+
+
+
+\ draw pixels,                            (  7  8 93 CRC 16:08 )
+: apix          \ a randomly selected pixel
+  maxrad choose  maxrad choose
+  2dup  circle?
+  if  hits 1+!  >r scale w/  r> scale w/ 2*
+    2dup getcolor
+    swap over 1+  whline
+    else  2drop  then ;
+
+: pics          \ check n pairs to see if they are in circle
+  editor flush  forth  blanc
+  dup  hits off  page  maxx 8 w/ 1+ 0 gotoxy  box
+  0 do  i 255 and 0= if  i 12 ,.r  ctl m emit  then
+        apix  ?stack   ?key if  key drop  leave then  loop
+  clr.eop  12 ,.r  hits f@ 4*  12 ,.r  display ;
+: pix  pics ;                   : pixels pics ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\ Will Baden game of life                 ( 11  7 87 CRC 10:19 )
+\ with cycle detection and measurement. From handout at
+\ Orange County fig meeting 3 4 85 Figmentation by CRC
+DEBUG FORTH DEFINITIONS  \  DECIMAL  419 NEEDED SILENT
+C/L 1- CONSTANT #COLS           B/BUF C/L / 1- CONSTANT #ROWS
+HEX
+0 VARIABLE LIVEDEAD         100    4- ALLOT
+0 VARIABLE BICYCLE   B/BUF  100 +  4- ALLOT
+0 VARIABLE UNICYCLE  B/BUF  100 +  4- ALLOT
+DECIMAL   1  10 +THRU            \      
+: SEE  PAGE  MAXBLK SCR @ DO I BLOCK W@ IF
+   CR I SCR ! LIFE SPACE I .SCR SPACE pTODAY  800 WAIT  THEN
+   LOOP SPACE ;
+: FOREVER  BEGIN  SEE  SCR OFF  AGAIN STOP
+WARNING ON      FOREVER
+
+\ Will Baden game of life                 ( 31 12 86 CRC 17:13 )
+CODE CONCEIVE \ addr --- | increment neighbours of all live ones
+  S [+ AR0 MOV,   C/L 1+ #L AR0 ADD,
+  #ROWS C/L * 2- #L DR0 MOV,   FALSE DR0 DO,
+      BL 8 + # AR0 [+ .B CMP,  GT IF,
+      1 # -66 AR0 &[ .B ADDQ,  1 # -65 AR0 &[ .B ADDQ,
+      1 # -64 AR0 &[ .B ADDQ,  1 #  -2 AR0 &[ .B ADDQ,
+      1 #     AR0  [ .B ADDQ,  1 #  62 AR0 &[ .B ADDQ,
+      1 #  63 AR0 &[ .B ADDQ,  1 #  64 AR0 &[ .B ADDQ,  THEN,
+  LOOP,  NEXT   ;C
+
+
+
+
+
+
+\ Will Baden game of life                 ( 11  7 87 CRC 10:20 )
+CODE HATCH \ addr --- | give birth to next generation
+  S [+ AR0 MOV,  C/L #L AR0 ADD,   BL # DR0 .W MOV,
+  DR0 AR0 [+ .B MOV,  LIVEDEAD #L AR1 MOV,   DR3 .W CLR,
+  #ROWS 2- # DR1 .W MOV,  FALSE DR1 DO,
+     #COLS 1- # DR2 .W MOV,  FALSE DR2 DO,   AR0 [ DR3 .B MOV,
+                  0 AR1 3 &D[ AR0 [+ .B MOV,  LOOP,
+     DR0 AR0 [+ .B MOV,  LOOP,     NEXT         ;C
+
+: DOKEY  KEY DUP LI = IF 1 0 CURSCONF
+         SP! ."  aok" QUIT THEN  DROP ;
+
+0 VARIABLE BACKS -4 ALLOT CTL H DUP 2DUP C, C, C, C,
+
+
+
+\ Will Baden game of life                 (  1  1 87 CRC 15:31 )
+: SPAWN  \ addr ---   | make a new generation
+  PAUSE DUP CONCEIVE
+  DUP [ #COLS 2+ ] LITERAL BLANKS   DUP HATCH
+  [ #ROWS C/L * ] LITERAL +  [ #COLS 2+ ] LITERAL BLANKS
+  ?TERMINAL IF DOKEY      THEN ;
+
+BASE @ HEX
+CODE CLEARDISP  \ --- | clear the display area only
+  F08 #L AR0 MOV,  44E @# AR0 ADD,  \ _v_bas_ad
+  10 8 * 1- # DR0 .W MOV,   FALSE DR0 DO,
+     20 1- # DR1 .W MOV,  FALSE DR1 DO,
+       AR0 [+ CLR,  LOOP,  20 #L AR0 ADD,  LOOP,  NEXT  ;C
+BASE !
+
+
+\ Will Baden game of life                 (  3  1 87 CRC  9:03 )
+BASE @ HEX
+\ r:      --- addr  | image addr ready for assembler use
+\ c:  words*8  ---  | compile image
+: IMAGE  CREATE   8 0 DO C, ?STACK LOOP
+  HERE 80 BLANKS     \ prep for next one...
+  DOES>  [ LASTSUB OFF ] ;
+
+  HERE 80 BLANKS     \ prep for next one...
+2 BASE !
+
+;s
+: IMAGE  <BUILDS  8 0 DO C, ?STACK LOOP
+
+
+
+\ Will Baden game of life                 (  1  1 87 CRC 12:27 )
+ 00000000
+ 00000000
+ 00000000
+ 00000000
+ 00000000
+ 00000000
+ 00000000
+ 00000000            IMAGE DEAD
+
+
+
+
+
+
+
+\ Will Baden game of life                 (  1  1 87 CRC 12:27 )
+ 00000000
+ 01111100
+ 10101010
+ 10010010
+ 10000010
+ 10101010
+ 10000010
+ 01111100            IMAGE LIVE         HEX
+
+
+
+
+
+
+
+\ Will Baden game of life                 (  3  1 87 CRC  9:55 )
+HEX HERE ASSEMBLER    ASCII ( # AR0 [+ .B CMP,
+  GT IF,  LIVE *+ AR2 LEA,  ELSE,  DEAD *+ AR2 LEA, THEN,
+  07 # DR3 .W MOV,  AR1 AR5 MOV,
+  DR3 FALSE DO,  AR2 [+ AR5 [ .B MOV,  A0 #L AR5 ADD,  LOOP,
+  RTS,       >R
+
+CODE BURST  \ addr ---   | display current generation on crt
+  S [+ AR0 MOV,  1408 #L AR1 MOV,  44E @# AR1 ADD,  \ _v_bas_ad
+  C/L #L AR0 ADD,  #ROWS 1- # DR0 .W MOV,  FALSE DR0 DO,
+    #COLS 2/ # DR1 .W MOV, FALSE DR1 DO,
+       R> DUP *+ BSR,  1 # AR1 ADDQ, \ do 2 cells,
+              *+ BSR,  3 # AR1 ADDQ,  \ then skip 2.
+    LOOP,  A0 8 * 80 - #L AR1 ADD,  LOOP,
+  NEXT  ;C      BASE !
+
+\ Will Baden game of life                 ( 11  7 87 CRC 10:22 )
+: CREATION \   ---  addr a2 0 | In the beginning....
+  1156 C@  3 1156 C! ( bell off)
+  EDITOR L  FORTH 400 WAIT  1156 C!
+  CLEARDISP   SCR @ BLOCK  UNICYCLE B/BUF CMOVE
+  UNICYCLE BICYCLE B/BUF CMOVE  BICYCLE UNICYCLE 0 ;
+
+        \ terminal i/o here down
+: .ATLAS \ addr n2 ---   | display generation w/ count on crt
+  SWAP  BURST  BACKS 4 TYPE 4 U.R ;
+
+: SETDISPLAY  0 0 CURSCONF  19 0 GOTOXY -LINE
+  23 30 GOTOXY ERL ;
+
+
+
+\ Will Baden game of life                 (  1  1 87 CRC 13:20 )
+: AGE \  a n ---  a n+1 | process & display one generation
+  OVER SPAWN 1+ 2DUP .ATLAS ;
+
+: GENERATION \ addr a2 n3 --- addr a2 a3 | go untl cycle found
+  2DUP .ATLAS   BEGIN AGE >R  OVER SPAWN OVER SPAWN
+    2DUP B/BUF SWAP EDITOR -CSTEXT    WHILE R> REPEAT R> ;
+
+: DEGENERATION  \ addr a2 n3 -- addr a2 n3 | a cycle of gens
+  CTL M EMIT ."     in cycle of    "
+  >R 0  BEGIN  AGE DUP  BACKS 4 TYPE
+    4 .R >R 2DUP B/BUF SWAP EDITOR -CSTEXT    WHILE R> REPEAT
+  R> R> ."  after" 5 .R DROP 2DROP  1 0 CURSCONF ;
+
+
+
+\ Will Baden game of life                 (  1  1 87 CRC 13:22 )
+: LIFE   CREATION SETDISPLAY GENERATION DEGENERATION ;
+
+: LIVES  CREATION SETDISPLAY GENERATION 2DROP
+         BEGIN  DUP SPAWN DUP BURST  AGAIN STOP
+
+LIVEDEAD   256 BLANKS    \ do setup for state machine
+ASCII O DUP LIVEDEAD BL +     3 + C!
+        DUP LIVEDEAD OVER +   2+  C!
+            LIVEDEAD OVER +   3 + C!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\ Sieve of Erostosthenes: V1:             ( 30  7 86 CRC 10:55 )
+  \ From version by JDS of Software Composers
+HEX 44E @ CONSTANT WORK DECIMAL   WORK 8191 + CONSTANT ENDWORK
+WORK 8192 -1 FILL
+
+CODE 3+  3 # S [ ADDQ, NEXT
+
+: SIEVE   WORK 8192 -1 FILL
+  0 0 BEGIN >R R WORK + C@
+  IF R 2* 3+ DUP R + 8191 -
+     BEGIN DUP 0< WHILE 0 OVER WORK + C! OVER + REPEAT
+     2DROP 1+ THEN
+  R> 1+ DUP 8191 = UNTIL DROP ;
+
+: SIEVES   100 0  DO  SIEVE DROP  LOOP ;
+EDITOR FLUSH    \ count: 44355  221 sec.
+\ Sieve of Erostosthenes: V2:             ( 30  7 86 CRC 10:57 )
+  \ From version by JDS of Software Composers
+HEX 44E @ CONSTANT WORK DECIMAL   WORK 8191 + CONSTANT ENDWORK
+WORK 8192 -1 FILL
+
+CODE 3+  3 # S [ ADDQ, NEXT
+
+\    BEGIN DUP 0< WHILE 0 OVER ENDWORK + C! OVER + REPEAT
+
+CODE FACTORS \ ct addr ---  | flag all multiples of n as non-pri
+  S [+ DR0 MOV,  S [+ DR1 MOV,   ENDWORK @#L AR0 LEA,
+  BEGIN,  DR0 TST,  MI WHILE,  0 ( dr ) AR0 0 .LR &D[ .B CLR,
+        DR1 DR0 ADD,  REPEAT,  NEXT
+-->
+
+
+\ Sieve of Erostosthenes: V2:             ( 30  7 86 CRC 12:14 )
+: SIEVE   WORK 8192 -1 FILL
+  0 0 BEGIN >R R WORK + C@
+  IF R 2* 3+ DUP R + 8191 -  FACTORS 1+ THEN
+  R> 1+ DUP 8191 = UNTIL DROP ;
+
+: SIEVES   100 0  DO  SIEVE DROP  LOOP ;
+EDITOR FLUSH    \ count: 20847  104 sec.
+
+;S   storage for debug version of code.
+  R> 1+ DUP 8191 = UNTIL DROP ;
+  R> dup 5 .r 1+ DUP 1 ( 8191) = ?terminal or UNTIL DROP ;
+
+
+
+
+\ Sieve of Erostosthenes: V3:             ( 30  7 86 CRC 10:57 )
+  \ From version by JDS of Software Composers
+HEX 44E @ CONSTANT WORK DECIMAL   WORK 8191 + CONSTANT ENDWORK
+WORK 8192 -1 FILL
+
+CODE 3+  3 # S [ ADDQ, NEXT
+
+\    BEGIN DUP 0< WHILE 0 OVER ENDWORK + C! OVER + REPEAT
+CODE FACTORS \ ct addr ---  | flag all multiples of n as non-pri
+  S [+ DR0 MOV,  S [+ DR1 MOV,   ENDWORK @#L AR0 LEA,
+  BEGIN,  DR0 TST,  MI WHILE,  0 ( dr ) AR0 0 .LR &D[ .B CLR,
+        DR1 DR0 ADD,  REPEAT,  NEXT
+-->
+
+
+
+\ Sieve of Erostosthenes: V3:             ( 30  7 86 CRC 12:14 )
+\      2* 3+ DUP R + 8191 -
+CODE COMPUTES \ n ---  n addr | computes arguments for  factors
+  S [ DR1 MOV,  DR1 DR0 MOV,  1 # DR1 LSL,  3 # DR1 ADDQ,
+  DR1 DR0 ADD,  8191 #L DR0 SUB,
+  DR1 S [ MOV,  DR0 S -[ MOV,  NEXT
+
+: SIEVE   WORK 8192 -1 FILL
+  0 0 BEGIN >R R WORK + C@
+  IF R COMPUTES              FACTORS 1+ THEN
+  R> 1+ DUP 8191 = UNTIL DROP ;
+
+: SIEVES   100 0  DO  SIEVE DROP  LOOP ;
+EDITOR FLUSH    \ count: 19405   97 sec.
+
+
+\ Sieve of Erostosthenes: V4:             ( 30  7 86 CRC 12:39 )
+  \ From version by JDS of Software Composers
+HEX 44E @ CONSTANT WORK DECIMAL   WORK 8191 + CONSTANT ENDWORK
+WORK 8192 -1 FILL
+
+\      2* 3+ DUP R + 8191 -
+\    BEGIN DUP 0< WHILE 0 OVER ENDWORK + C! OVER + REPEAT
+CODE FACTORS \ n       ---  | flag all multiples of n as non-pri
+  S [+ DR1 MOV,  DR1 DR0 MOV,  1 # DR1 LSL,  3 # DR1 ADDQ,
+  DR1 DR0 ADD,  8191 #L DR0 SUB,  ENDWORK @#L AR0 LEA,
+  BEGIN,  DR0 TST,  MI WHILE,  0 ( dr ) AR0 0 .LR &D[ .B CLR,
+        DR1 DR0 ADD,  REPEAT,  NEXT
+-->
+
+
+
+\ Sieve of Erostosthenes: V4:             ( 30  7 86 CRC 12:39 )
+: SIEVE   WORK 8192 -1 FILL
+  0 0 BEGIN >R R WORK + C@
+  IF R FACTORS 1+ THEN
+  R> 1+ DUP 8191 = UNTIL DROP ;
+
+: SIEVES   100 0  DO  SIEVE DROP  LOOP ;
+EDITOR FLUSH    \ count: 19016   95 sec.
+
+
+: EMPTIES  100 0  DO  I DROP  LOOP ;
+EDITOR FLUSH    \ count:     1    0 sec.
+
+
+
+
+\ Sieve of Erostosthenes: V5:             ( 30  7 86 CRC 12:47 )
+  \ From version by JDS of Software Composers
+HEX 44E @ CONSTANT WORK DECIMAL   WORK 8191 + CONSTANT ENDWORK
+WORK 8192 -1 FILL
+
+\ 0 0 BEGIN >R R WORK + C@
+\ IF R 2* 3+ DUP R + 8191 -
+\    BEGIN DUP 0< WHILE 0 OVER ENDWORK + C! OVER + REPEAT
+\    1+ THEN
+\ R> 1+ DUP 8191 = UNTIL DROP ;
+-->
+DR0 -- base address for inner loop   AR0 -- base addr for inner
+DR1 -- spacing for inner loop        AR1 -- base for outer test
+DR2 -- outer loop index
+DR3 -- outer loop counter            DR5 -- constant 8191
+DR4 -- primes count
+\ Sieve of Erostosthenes: V5:             ( 30  7 86 CRC 12:47 )
+CODE (SIEVE) \         ---  | do complete sieve
+  DR4 CLR,  8190 #L DR3 MOV,  DR2 CLR,   8191 #L DR5 MOV,
+  WORK @#L AR1 LEA,    ENDWORK @#L AR0 LEA,
+  DR3 FALSE DO,  0 AR1 2 ( dr) .LR &D[ .B TST,  NE IF,
+    DR2 DR1 MOV,  DR1 DR0 MOV,  1 # DR1 LSL,  3 # DR1 ADDQ,
+    DR1 DR0 ADD,  DR5 DR0 SUB,
+    BEGIN,  DR0 TST,  MI WHILE,  0 AR0 0 ( dr) .LR &D[ .B CLR,
+        DR1 DR0 ADD,  REPEAT,  1 # DR4 ADDQ, THEN,
+  1 # DR2 ADDQ,  LOOP,  DR4 S -[ MOV,  NEXT
+
+: SIEVE   WORK 8192 -1 FILL (SIEVE) ;
+
+: SIEVES   100 0  DO  SIEVE DROP  LOOP ;
+EDITOR FLUSH    \ count:  3909   19 sec.
+
+\ Sieve of Erostosthenes: V6:             ( 30  7 86 CRC 13:57 )
+  \ From version by JDS of Software Composers
+HEX 44E @ CONSTANT WORK DECIMAL   WORK 8191 + CONSTANT ENDWORK
+WORK 8192 -1 FILL
+
+\ 0 0 BEGIN >R R WORK + C@
+\ IF R 2* 3+ DUP R + 8191 -
+\    BEGIN DUP 0< WHILE 0 OVER ENDWORK + C! OVER + REPEAT
+\    1+ THEN
+\ R> 1+ DUP 8191 = UNTIL DROP ;
+-->
+DR0 -- base address for inner loop   AR0 -- base addr for inner
+DR1 -- spacing for inner loop        AR1 -- base for outer test
+DR2 -- outer loop index
+DR3 -- outer loop counter            DR5 -- constant 8191
+DR4 -- primes count
+\ Sieve of Erostosthenes: V6:             ( 30  7 86 CRC 14:09 )
+CODE (SIEVE) \         ---  | do complete sieve
+  DR4 CLR,  8190 # DR3 .W MOV,  DR2 CLR,   8191 # DR5 .W MOV,
+  WORK @#L AR1 LEA,    ENDWORK @#L AR0 LEA,
+  DR3 FALSE DO,  0 AR1 2 ( dr) &D[ .B TST,  NE IF,
+    DR2 DR1 .W MOV,  DR1 DR0 .W MOV,  1 # DR1 .W LSL,
+    3 # DR1 .W ADDQ,  DR1 DR0 .W ADD,  DR5 DR0 .W SUB,
+    BEGIN,  DR0 .W TST,  MI WHILE,
+        0 AR0 0 ( dr) .LR &D[ .B CLR,
+        DR1 DR0 .W ADD,  REPEAT,  1 # DR4 .W ADDQ, THEN,
+  1 # DR2 .W ADDQ,  LOOP,  DR4 S -[ MOV,  NEXT
+
+: SIEVE   WORK 8192 -1 FILL (SIEVE) ;
+
+: SIEVES   100 0  DO  SIEVE DROP  LOOP ;
+EDITOR FLUSH    \ count:  3575   17 sec.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\ 8 queens problem rf 2.0                 ( 18 12 91 CRC 18:46 )
+674 needed time
+debug forget task forth definitions     decimal
+( 660 needed new )   forth definitions     decimal
+: task ;                        editor flush
+
+: NOT  0= ;     \ now they are different words!
+
+CODE 0<>  S [  TST,  NEXT  ;C
+-->
+
+
+
+
+
+
+\ 8 queens problem rf 2.0                 ( 18 12 91 CRC 18:46 )
+true  constant usenew           usenew not constant useold
+length f@ 16 length f!
+
+code -rot  s [ dr0 mov,  s 4 &[ s [ mov,  s 8 &[ s 4 &[ mov,
+  dr0 s 8 &[ mov,  next  ;c
+ 0 constant falseflag           -1 constant trueflag
+ 8 constant boardsize           boardsize 1- constant boardmask
+
+: recurse  latest n>c <sub> ;   immediate
+: a@  compile  c@  ;    immediate
+: a!  compile  c!  ;    immediate       -->
+
+
+
+
+\ 8 queens problem rf 2.0                 ( 18 12 91 CRC 18:46 )
+: iarray ( n -- )  create  ( 2* 2*) allot
+  ;code ( n -- adr )  rp [+ dr0 mov,  dr0 s [ add,  next  ;c
+
+boardsize    iarray ax          boardsize 2* iarray bx
+boardsize 2* iarray cx          boardsize    iarray xx
+
+: safe? ( n1 n2 -- f )
+  dup ax a@ -rot              \ -- ax[n2] n1 n2
+  2dup + bx a@ -rot           \ -- ax[n2] bx[n1+n2] n1 n2
+  swap - boardmask + cx a@    \ -- ax[n2] bx[n1+n2] cx[n2-n1+7]
+  and and ;                   \ -- fl
+                                -->
+  does> ( n -- adr )  + ;
+  does> ( n -- adr )  >r 2* 2* r> + ;
+  ;code ( n -- adr )  rp [+ dr0 mov,  dr0 s [ add,  next  ;c
+\ 8 queens problem rf 2.0                 ( 18 12 91 CRC 18:46 )
+: mark ( n1 n2 -- )
+  dup ax  falseflag swap a! ( -- n1 n2 )
+  2dup + bx  falseflag swap a! ( -- n1 n2 )
+  swap - boardmask + cx  falseflag swap a! ( -- ) ;
+
+: unmark ( n1 n2 -- )
+  dup ax  trueflag swap a! ( -- n1 n2 )
+  2dup + bx  trueflag swap a! ( -- n1 n2 )
+  swap - boardmask + cx  trueflag swap a! ( -- ) ;
+
+0 variable printsol?            falseflag printsol? f!
+0 variable tries                0 variable hits
+
+: laconic   printsol? off ;     : verbose   printsol? on ;
+                                -->
+\ 8 queens problem rf 2.0                 ( 18 12 91 CRC 18:46 )
+USEOLD IFTRUE
+: printsol ( -- )
+  printsol? f@  if  ." Found on try " tries f@ 6 .r cr
+      boardsize 0 do  i xx a@ 1+ 5 .r  loop cr  then
+  hits 1+! ;
+
+: run ( 0 -- )   ( -- recursion count ) boardsize 0 do
+  1 tries +! \  ?key if key abort then
+  dup i safe? if  dup i mark dup i swap xx a!
+  dup boardmask < if dup 1+ recurse
+              else printsol then
+                  dup i unmark then  loop drop ;
+IFEND
+  -->
+
+\ 8 queens problem rf 2.0                 ( 12  1 92 CRC 11:33 )
+USENEW IFTRUE
+: printsol ( -- )
+  printsol? f@ 0<> if  ." Found on try " tries f@ 6 .r cr
+      boardsize 0 do  i xx a@ 1+ 5 .r  loop cr  then
+  hits 1+! ;
+
+: run ( 0 -- )   ( -- recursion count ) boardsize 0 do
+  1 tries +!    \ ?key eq if key abort then
+  dup i safe? 0<> if  dup i mark dup i swap xx a!
+  dup boardmask < if dup 1+ recurse
+              else printsol then
+                  dup i unmark then  loop drop ;
+IFEND
+  --> results: shaves .015 sec off laconic run, .035 sec off
+verbose run.
+\ 8 queens problem rf 2.0                 ( 18 12 91 CRC 18:46 )
+: unmark-all ( -- )
+  boardsize    0 do  trueflag i ax a!  trueflag i xx a! loop
+  boardsize 2* 0 do  trueflag i bx a!  trueflag i cx a! loop ;
+
+: do-it ( -- )  tries off  hits off
+  unmark-all  0 ( counter ) run  tries ?  hits ? ;
+
+length f!
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\ protobt: prototype boot sector for tos  ( 28 11 87 CRC 11:00 )
+DEBUG  FORGET TASK FORTH DEFINITIONS  DECIMAL 107 NEEDED IFTRUE
+: TASK ;  53 LOAD  DISKING DEFINITIONS   8 +LOAD
+HEX 0 VARIABLE SECTOR  200 4- FORTH ALLOT   SECTOR 200 ERASE
+
+CODE +SECTOR   \  n --- addr | return location within sector
+  SECTOR *+ AR0 LEA,  S [ AR0 ADD,  AR0 S [ MOV,  NEXT  ;c
+
+CODE (PROTOBT)  \ ser# dsktype execfl ---  | do it!
+  RP DR7 MOV,
+  S [+ DR0 MOV,  DR0 RP -[ .W MOV,   \ word execflag
+  S [+ DR0 MOV,  DR0 RP -[ .W MOV,   \ word disktype
+  S [+ RP -[ MOV,     \ serial#
+  SECTOR *+ PEA,      \ buffer address
+  12 # RP -[ .W MOV,  \ function # 18 in hex
+  0E # TRAP,   DR7 RP MOV,   NEXT ;c        -->
+\ protobt: prototype boot sector for tos  ( 28  6 87 CRC 14:43 )
+CODE ><   S [ DR0 MOV,   DR0 DR1 MOV,  8 # DR0 LSL,
+  8 # DR1 LSR,  FF # DR1 .W AND,  DR1 DR0 .W OR,
+  FFFF #L DR0 AND,  DR0 S [ MOV,  NEXT  ;c
+
+: SW!  SWAP >< SWAP  W! ;
+
+: SW@  W@  >< ;                 : SW?  SW@ . ;
+
+: PROTOBTS    -1  2  0  (PROTOBT) ;  \ ss
+
+: PROTOBTD    -1  3  0  (PROTOBT) ;  \ ds
+-->
+
+
+
+\ protobt: prototype boot sector for tos  ( 21  8 87 CRC 19:18 )
+: DESCRIPT  CONSTANT  DOES>  F@ +SECTOR ;     DECIMAL
+
+  0 DESCRIPT BRLOAD    2 DESCRIPT NAME      8 DESCRIPT SERIAL
+ 11 DESCRIPT BPS      13 DESCRIPT SPC      14 DESCRIPT RES
+ 16 DESCRIPT FAT      17 DESCRIPT DIREC    19 DESCRIPT SEC
+ 21 DESCRIPT MEDIA    22 DESCRIPT SPF      24 DESCRIPT SPT
+ 26 DESCRIPT SIDE     28 DESCRIPT HID     510 DESCRIPT CHKSUM
+
+2 +BLK LOADER 10SECT
+3 +blk loader  9sect
+
+-->
+
+
+
+\ protobt: prototype boot sector for tos  ( 10  4 92 CRC 12:23 )
+: (FORMAT)    \  --  | create a files disk 10.ds
+   9SECT  SECTOR  FORMATTED F@ B/DRV * BLOCK  512 CMOVE UPDATE
+  FLUSH ;
+: FORMAT   INIT (FORMAT)  ;
+CODE (LABEL)  \ addr --- ec | create a label on disk
+  8 # RP -[ .W MOV,  S [ RP -[ MOV,  60 # RP -[ .W MOV,
+  1 # TRAP,  8 # RP ADDQ,  DR0  S [ MOV,  NEXT  ;c
+: LABEL:    \  --  | build a label for disk
+  FILING CURDRV  FORMATTED F@ (SETDEF) DROP  PARSEFILE:  FILE
+  (LABEL)  swap (SETDEF) DROP
+  DUP 0< IF .FILEERR ELSE  HANDLE F!  CLF THEN ;
+: CLEAN  0 2 (INIT)  (FORMAT) ;
+: FORMAT:  FORMAT LABEL: ;
+: DRIVE:  [COMPILE] CTL  31 AND  1-  FORMATTED F! ;
+FORTH DEFINITIONS  EDITOR FLUSH DISKING
+\ protobt: prototype boot sector for tos  ( 13  9 87 CRC 16:24 )
+BASE F@ DECIMAL        DISKING
+SINGLE F@ IFTRUE  PROTOBTS             \ single sided
+      OTHERWISE  PROTOBTD       IFEND \ double sided
+  SINGLE F@ IFTRUE   820  SEC SW@ -      \ single sided!!
+                    820  SEC SW!        \ total number of sector
+        OTHERWISE  1640  SEC SW@ -      \ double sided!!
+                   1640  SEC SW!  IFEND \ total number of sector
+      10  SPT SW@ - +
+      10  SPT SW!                       \ sectors per track
+      MINUS  \ fudge for checksum
+          CHKSUM SW@ +
+          CHKSUM SW!  \ install it checksum
+EDITOR FLUSH BASE F! DISKING
+
+
+\ protobt: extend ms-dos to 720k          ( 29 11 87 CRC 17:16 )
+base f@ decimal
+disking definitions b/drv block  sector  b/buf 2/ cmove
+
+                   1440  SEC SW@ -      \ double sided!!
+                   1440  SEC SW!  IFEND \ total number of sector
+      10  SPT SW@ - +
+      10  SPT SW!                       \ sectors per track
+      MINUS  \ fudge for checksum
+          CHKSUM SW@ +
+          CHKSUM SW!  \ install it checksum
+base F!
+: snark  sector  b/drv block  b/buf 2/ cmove  update ;
+snark  forget snark     forth definitions
+editor flush
+
+\ protobt: prototype boot sector for tos  ( 30  8 87 CRC 16:44 )
+: FORMAT \ :      \  ---  | create a files disk 10.ds
+  INIT  10SECT  SECTOR B/DRV BLOCK  512 CMOVE UPDATE FLUSH  ;
+
+FORTH DEFINITIONS  EDITOR FLUSH DISKING        ;S
+
+: READHDBOOT   \  ---   | reads hdisk proto secotr into sector
+  HDRV F@ >R  HDRV F@ 1- HDRV F!
+  MAXBLK 1+ BLOCK  SECTOR 200 CMOVE  R> HDRV F! ;
+
+: WRITEHDBOOT  \  ---   | writes hdisk proto secotr to disk
+  EDITOR FLUSH  FORTH HDRV F@  DUP >R  1-  HDRV F!
+  SECTOR  MAXBLK 1 + BLOCK  200 CMOVE  UPDATE
+  EDITOR FLUSH  R> HDRV F! ;         EDITOR FLUSH
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\ redisk w/ p random #s                   (  3  7 90 CRC 21:05 )
+BASE @ >R DECIMAL       0 VARIABLE MAP 820 4* 4- FORTH ALLOT
+0 VARIABLE HITS         0 VARIABLE CT
+
+CODE RND   \   ---  rn | rnd number generator
+  17 # RP -[ .W MOV,  14 # TRAP,  2 # RP ADDQ,
+  DR0 S -[ MOV,  NEXT   ;c
+
+: SCTR  RND B/DRV MOD  DUP 4* MAP + DUP @ SWAP ON ;
+
+: DOSECTOR SCTR IF  HITS 1+!
+  ELSE DUP 5 .R  BLOCK UPDATE  CT 1+!  THEN  DROP ;
+
+: REDISK  MINUS HITS !  CR  MAP B/DRV 4* ERASE  CT OFF  BEGIN
+  DOSECTOR ?STACK  ?TERMINAL  HITS @ 0=  OR  UNTIL  FLUSH ;
+R> BASE !
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\ Morse Code                              ( 24 10 87 CRC  8:28 )
+DEBUG
+FORGET TASK FORTH DEFINITIONS    197 NEEDED SAVEOUTS
+: TASK ;                        editor flush forth
+BASE @ DECIMAL
+ 20 CONSTANT DITIME
+DITIME 3 * CONSTANT DATIME
+
+1 12 +THRU
+BASE !
+
+  5 rands
+
+
+
+
+\ Morse Code                              ( 23 10 87 CRC 20:47 )
+CODE GI!  \ n r# ---  | store to gi sound chip
+  S [+ DR0 MOV,  7 # DR0 BSET,  DR0 RP -[ .W MOV,
+  S [+ DR0 MOV,  DR0 RP -[ .W MOV,
+  28 # RP -[ .W MOV,  14 # TRAP,
+  6 # RP ADDQ,  NEXT  ;c
+
+CODE GI@  \ r# --- n  | read from gi sound chip
+  S [ DR0 MOV,  7 # DR0 BCLR,  DR0 RP -[ .W MOV,
+  RP -[ .W CLR,  28 # RP -[ .W MOV,  14 # TRAP,
+  DR0 S [ MOV,  6 # RP ADDQ,  NEXT  ;c
+
+: GIDUMP    BASE @ HEX
+  CR 16 0 DO I GI@ 3 .R LOOP  BASE ! ;
+;S
+
+\ Morse Code                              ( 27 11 87 CRC 21:54 )
+HEX
+: SETGI  \  ---   | set up the gi chip for dis and dahs
+  4 WAIT  E0 0 GI!  ;
+
+: GION   \  ---   | turn sound on
+  FE 7 GI! 0F 8 GI! ;
+
+: GIOFF  \  ---   | turn sound off
+  0 8 GI!  FF 7 GI! ;
+
+CODE 3*   S [ DR0 MOV,  DR0 DR1 MOV,  1 # DR0 LSL,
+  DR1 DR0 ADD,  DR0 S [ MOV,  NEXT  ;c
+
+DECIMAL
+
+\ Morse Code: test                        ( 27 11 87 CRC 22:41 )
+: DI   \  ---  | send a di
+  GION  ascii . (emit) DITIME WAIT  GIOFF  DITIME 2* WAIT ;
+
+: DA   \  ---  | send a dah
+  GION  ascii _ (emit) DATIME WAIT  GIOFF  DITIME 2* WAIT ;
+
+: SETTIME   dup ' DITIME !  3* ' datime ! ;
+
+0 VARIABLE CHARSCT
+
+0 VARIABLE CHARS  50 4* ALLOT    \ array of letters on which
+CHARS 4+ HERE OVER - ERASE       \ to drill
+
+VOCABULARY MORSE
+
+\ Morse Code: test                        ( 27 11 87 CRC 22:41 )
+400 VARIABLE WAITCHAR
+: CHAR    \ c: ct ---  | compile list of dis and dahs
+  create   DUP W, 0 DO -FIND
+  IF DROP , ELSE HERE COUNT TYPE ABORT"  ??" THEN  LOOP
+  LATEST n>c  CHARSCT @ 4* CHARS + !  CHARSCT 1+!
+  IN @  BL WORD HERE C@ 1+ ALLOT  IN !
+  CURRENT @ >R  ' MORSE c>p CURRENT !
+  CREATE ( SMUDGE)  R> CURRENT !
+  DOES>  SETGI  DUP 2+  SWAP W@ 0 DO DUP @ EXECUTE 4+ LOOP
+  WAITCHAR @ WAIT SAVEOUTS OK COUNT TYPE SPACE RESTOREOUTS ;
+
+: LETTERS  \ n ---  | set number of chars on which to drill
+  CHARSCT ! ;
+
+
+\ Morse Code: code defs                   ( 24 10 87 CRC 14:01 )
+CODE RND   \   ---  rn | rnd number generator
+  17 # RP -[ .W MOV,  14 # TRAP,  2 # RP ADDQ,
+  DR0 S -[ MOV,  NEXT  ;c
+
+: CRAND    \  ---  | grab a random char to test
+  RND 3 2/S CHARSCT @ MOD 4*  CHARS +  @ EXECUTE ;
+
+: RANDOMS  \ n --- | do n random chars.
+  0 DO CRAND LOOP ;
+
+: RANDS  RANDOMS ;              : RAND   RANDOMS ;
+
+
+
+
+\ Morse Code: code defs                   ( 24 10 87 CRC 14:13 )
+2 CHAR MA DI DA              a
+4 CHAR MB DA DI DI DI        b
+4 CHAR MC DA DI DA DI        c
+3 CHAR MD DA DI DI           d
+1 CHAR ME DI                 e
+4 CHAR MF DI DI DA DI        f
+3 CHAR MG DA DA DI           g
+4 CHAR MH DI DI DI DI        h
+2 CHAR MI DI DI              i
+4 CHAR MJ DI DA DA DA        j
+3 CHAR MK DA DI DA           k
+4 CHAR ML DI DA DI DI        l
+
+
+
+\ Morse Code: code defs                   ( 27 11 87 CRC 19:02 )
+2 CHAR MM DA DA              m
+2 CHAR MN DA DI              n
+3 CHAR MO DA DA DA           o
+4 CHAR MP DI DA DA DI        p
+4 CHAR MQ DA DA DI DA        q
+3 CHAR MR DI DA DI           r
+3 CHAR MS DI DI DI           s
+1 CHAR MT DA                 t
+3 CHAR MU DI DI DA           u
+4 CHAR MV DI DI DI DA        v
+3 CHAR MW DI DA DA           w
+4 CHAR MX DA DI DI DA        x
+4 CHAR MY DA DI DA DA        y
+4 CHAR MZ DA DA DI DI        z
+
+\ Morse Code: code defs                   ( 27 11 87 CRC 21:24 )
+5 CHAR M1 DI DA DA DA DA     1
+5 CHAR M2 DI DI DA DA DA     2
+5 CHAR M3 DI DI DI DA DA     3
+5 CHAR M4 DI DI DI DI DA     4
+5 CHAR M5 DI DI DI DI DI     5
+5 CHAR M6 DA DI DI DI DI     6
+5 CHAR M7 DA DA DI DI DI     7
+5 CHAR M8 DA DA DA DI DI     8
+5 CHAR M9 DA DA DA DA DI     9
+5 CHAR M0 DA DA DA DA DA     0
+6 CHAR SK DI DI DI DA DI DA  SK
+5 CHAR M/ DA DI DI DA DI     /
+6 CHAR M? DI DI DA DA DI DI  ?
+5 CHAR AR DI DA DI DA DI     AR
+: SPACEOUT  GIOFF DATIME WAIT ;
+\ Morse Code: code defs                   ( 27 11 87 CRC 22:06 )
+6 CHAR M, DA DA DI DI DA DA  ,
+6 CHAR M. DI DA DI DA DI DA  .
+5 CHAR BT DA DI DI DI DA     BT
+
+1 CHAR SPC SPACEOUT          Q
+   HEX   BL HERE 0F - C! A0 HERE 9 - C!  DECIMAL
+
+: MAN   MM MA MN SPC ;
+
+: PARIS  MP MA MR MI MS  SPC ;
+
+: TIMER
+  CR .TIME  SPACE PARIS PARIS PARIS PARIS PARIS .TIME ;
+
+
+\ Morse Code: search voc                  ( 27 11 87 CRC 20:06 )
+-1 charsct +!
+FORTH MORSE ' A FORTH c>n n>l OFF  \ seal vocabulary
+
+0 VARIABLE SAFE  1 SAFE C!
+
+: MFIND  \  ---  | c at here 1+, execute morse char
+  SAFE DUP COUNT UPPER  [ ' MORSE c>p ] LITERAL @  (FIND)
+  IF DROP  c>n  BEGIN  DUP @
+     [ ' M9 ( CFA) @ ] LITERAL -
+     WHILE  1-  REPEAT  EXECUTE
+  ELSE ok ABORT" Not a valid Morse Character" THEN ;
+
+: MEMIT  \ c ---   | send out as morse char
+  SAFE 1+ C!  MFIND ;
+
+\ Morse Code: repeats                     ( 27 11 87 CRC 20:06 )
+: repeats  \ n ---  | repeat char n times
+  bl word here 1+ c@ safe 1+ c!
+  0 do mfind loop ;
+
+
+: SETS
+  0 DO  CR  400 WAIT
+  I 1+ 4 .R  SPACE rnd 7 and 5 + RANDS  LOOP ;
+
+: morse  [ ' memit ( cfa) ] literal  'emit ! ;
+
+
+
+
+
+\ Morse Code: morse                       ( 27 11 87 CRC 20:06 )
+\ : morse  [ ' memit ( cfa) ] literal 'emit ! ;
+
+: m"  morse [compile] ."  ok ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\ tone dialer: load                       (  4  6 87 CRC 11:56 )
+\ After Al Lew. ST Applications, 10 85
+FORGET TASK                     : TASK ;
+BASE @ >R DECIMAL
+VOCABULARY TONES IMMEDIATE      TONES DEFINITIONS
+
+1 4 +THRU
+
+R> BASE !     EDITOR FLUSH
+
+
+
+
+
+
+
+\ tone dialer: load                       (  4  6 87 CRC 12:07 )
+CODE >PSG   \  data r# ---  | access to GI sound chip
+  S [+ DR0 MOV,      S [+ DR1 MOV,
+  DR0 RP -[ .W MOV,  DR1 RP -[ .W MOV,
+  28 # RP -[ .W MOV,  14 # TRAP,  6 # RP ADDQ,  NEXT ;c
+
+: PITCHA  \  n ---   | send pitch to channel A
+  256 /MOD  129 >PSG   128 >PSG ;
+
+: PITCHB  \  n ---   | send pitch to channel B
+  256 /MOD  131 >PSG   130 >PSG ;
+
+
+
+
+
+\ tone dialer:                            (  4  6 87 CRC 12:13 )
+: MIXER  \  b ---  | mixer byte of psg
+  255 XOR 135 >PSG ;
+
+: VOLUMEA  \ b ---  | set volume of channel A
+  136 >PSG ;
+
+: VOLUMEB  \ b ---  | set volume of channel B
+  137 >PSG ;
+
+: WAITTONE \  ---  | wait a tone length
+  3 MIXER  15 VOLUMEA  15 VOLUMEB  40 WAIT ;
+
+: TONEOFF  \  ---   | turn the sound generator off
+  0 MIXER  ( 1 WAIT) 3 MIXER  \ 1 WAIT
+  0 MIXER 10 WAIT ;
+\ tone dialer:                            (  4  6 87 CRC 12:13 )
+: ATONE            \ r:   ---   | execute a tone
+  create   W, W,   \ c: chb cha  ---   | compile a tone
+  DOES>  DUP W@ PITCHA
+         2+  W@ PITCHB  WAITTONE TONEOFF ;
+
+103 178 ATONE ONE     94 178 ATONE TWO     85 178 ATONE THREE
+103 163 ATONE FOUR    94 163 ATONE FIVE    85 163 ATONE SIX
+103 148 ATONE SEVEN   94 148 ATONE EIGHT   85 148 ATONE NINE
+                      94 133 ATONE ZERO
+
+
+
+
+
+
+\ tone dialer:                            (  4  6 87 CRC 12:13 )
+: TONEDIAL    \ n ---   | dial that number
+  DUP 0 9 WITHIN 0= 0 ?ERROR
+  EXEC  ZERO  ONE   TWO   THREE FOUR
+        FIVE  SIX   SEVEN EIGHT NINE  STOP
+
+: DIALDIGIT   \ ch --  | dial iff legal # between 0 & 9
+  10 DIGIT  IF TONEDIAL THEN ;
+
+: PARSE     \ addr ct -- | dial number at address for count
+  BOUNDS DO I C@ DUP EMIT  DIALDIGIT LOOP ;
+
+: DIAL:  BL WORD HERE COUNT PARSE ;
+
+: CP  PAD COUNT PARSE ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\ Jabberwocky: load screen                ( 29  1 93 CRC 10:09 )
+FORTH DEFINITIONS FORGET TASK   : TASK ;  BASE @ DECIMAL
+0 VARIABLE JABBER
+
+: LANGUAGE  CREATE  ,  DOES> F@ JABBER F! ;
+
+3 +BLK LANGUAGE ENGLISH         ENGLISH
+
+5 +BLK DUP LANGUAGE FRANCAIS    LANGUAGE FRENCH
+
+7 +BLK DUP LANGUAGE DEUTCH      LANGUAGE GERMAN
+-->    Jabberwocky by Lewis Carroll (who else?) in the Annotated
+Alice, Martin Gardner, 1960. French translation by Frank L.
+Warrin, also in the Annotated Alice, Through the Looking Glass
+note 11. I haven't yet entered the German version, in the same
+note.
+\ Jabberwocky:                            ( 29  1 93 CRC 10:17 )
+: .LINE  \ ln# ---    | line printed out
+  16 /MOD JABBER @ + .LINE ;
+
+: VERSE CR 4* 4 0 DO DUP I + .LINE CR LOOP DROP ;
+
+: JABBERWOCKY  \ editor flush forth
+  24 CR .LINE CR 6 0 DO I VERSE
+  ?TERMINAL IF LEAVE THEN       LOOP 0 VERSE ;
+
+\ : CHARS 256 128 DO I BL MOD 0= IF CR THEN I EMIT LOOP ;
+
+BASE ! EDITOR FLUSH
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'Twas brillig, and the slithy toves
+  Did gyre and gimble in the wabe.
+All mimsy were the borogoves,
+  And the mome raths outgrabe.
+"Beware the Jabberwock, my son!
+  The jaws that byte, the claws that catch!
+Beware the Jubjub bird, and shun
+  The frumious Bandersnatch!"
+He took his vorpal sword in hand:
+  Long time the manxome foe he sought--
+So rested he by the Tumtum tree,
+  And stood a while in thought.
+And, as in uffish thought he stood,
+  The Jabberwock, with eyes of flame,
+Came whiffling through the tulgey wood,
+  And burbled as it came!
+One, two! One, two! And through and through!
+  The vorpal blade went snicker-snack!
+He left it dead, and with its head
+  He went galumphing back.
+"And hast thou slain the Jabberwock?
+  Come to my arms, my beamish boy!
+Oh frabjous day! Callooh! Callay!"
+  He chortled in his joy.
+         JABBERWOCKY
+
+
+
+
+
+
+
+Il brilgue: les t“ves lubricilleux
+Se gyrent en vrillant dans le guave,
+Enmmes sont les gougebosqueux,
+Et le m“merade horgrave.
+Garde-toi du Jaseroque, mon fils!
+La gueule qui mord; la griff qui prend!
+Garde-toi de l'oiseau Jube, ‚vite
+Le frumieux Band-†-prend.
+Son glaive vorpal en main il va-
+T-… la recherche du fauve manscant,
+Puis arriv‚ … l'arbre T‚-T‚,
+Il y reste, r‚fl‚chissant.
+Pendant qu'il pense, tout uffus‚
+Le Jaseroque, … l'oeil flambant,
+Vient siblent par le bois tullegeais
+Et burbule en venant.
+Un deux, un deux, par le milieu,
+Le glaive vorpal fait pat-a-pan!
+La bˆte d‚faite, avec sa tˆte,
+Il rentre gallomphant.
+As-tu tu‚ le Jaseroqu?
+Viens… mon coeur, fils rayonnais!
+O jour frabbejeais! Calleau! Callai!
+Il cortule dan sa joie.
+        LE JASEROQUE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
