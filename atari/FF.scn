@@ -6835,10 +6835,10 @@ FORTH DEFINITIONS       SCREENS
 \ lsize     delta       forth name      path\filename
    2 DISKS  0 DISKS   SCRFILE: MAINF    \ff\ff.scr  \ this file
    2 DISKS  2 DISKS   SCRFILE: FFX      \ff\ffx.scr \ source
-   2 DISKS  4 DISKS   SCRFILE: GLOS     \ff\glossary.scr
-   2 disks  6 disks   scrfile: goodies  d:\ff\goodies.scr
-   2 disks  8 disks   scrfile: xferff   \ff\xferff.scr \ xfer
-   2 disks 10 disks   scrfile: xferffx  \ff\xferffx.scr \ xfer
+\  2 DISKS  4 DISKS   SCRFILE: GLOS     \ff\glossary.scr
+\  2 disks  6 disks   scrfile: goodies  d:\ff\goodies.scr
+\  2 disks  8 disks   scrfile: xferff   \ff\xferff.scr \ xfer
+\  2 disks 10 disks   scrfile: xferffx  \ff\xferffx.scr \ xfer
 
 
 
@@ -6914,7 +6914,7 @@ FORTH DEFINITIONS
 \  22 +VOL: STP  LOADER DISKING
 \ 302 +VOL: STP  LOADER DESKJET
 \   3 +VOL: DBMS LOADER DATABASE
-    0 +VOL: GLOS LOADER ~~~
+\   0 +VOL: GLOS LOADER ~~~
 \   3 +VOL: STP  LOADER LIFE
 \ 660 +VOL: STP  LOADER DIALER
 
