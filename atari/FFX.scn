@@ -478,486 +478,486 @@ EDITOR FLUSH
 
 
 
-\ 68000 assem: load, user variables       ( 26  2 86 CRC 18:11 )
-BASE F@ HEX                     VOCABULARY ASSEMBLER IMMEDIATE
-ASSEMBLER DEFINITIONS           1 VARIABLE SIZE
-aka create ncreate
-
-130 USER DP2                    134 USER (QUIET)
-138 USER OP#
-13C USER REG                    150 USER REG1
-140 USER MODE                   154 USER MOD1
-144 USER EXT                    158 USER EXT1
-148 USER EXTL                   15C USER EXTL1
-14C USER ADTYPE                 160 USER ADTYPE1
-DP2 EXTL1 OVER - 4+ ERASE      REG1 REG - CONSTANT VARLEN
-  DECIMAL 1 +blk 27 +blk HEX THRU  BASE F!
-
-
-\ 68000 assem: clearvar, sizes, .scr&line ( 12  9 85 CRC       )
-: CLEARVAR     REG  VARLEN ERASE  0F REG  F! ;    CLEARVAR
-
-: CLEARVAR1    REG1 VARLEN ERASE  0F REG1 F! ;    CLEARVAR1
-
-: 0U.  0 <# # # # # #> TYPE ;
-
-: .SCR&LINE  \ print current line
-  BLK F@ DUP .SCR SPACE IN F@ C/L / DUP 3 .R 10 TAB SWAP .LINE ;
-
-: .SIZE CREATE , DOES> F@ SIZE F! ;
-
-0 .SIZE .B        1 .SIZE .W     2 .SIZE .L
-DECIMAL
-: .MSG  -DUP IF [ 26 +blk ] literal
-         (LINE) -TRAILING TYPE THEN ;   hex
-\ 68000 assem: 1st, error, (operand), v!  ( 17  7 86 CRC 11:33 )
-: 1ST ( !CSP)  CLEARVAR CLEARVAR1   .L  \ set to cell size
-  (QUIET) F@ IF BASE F@ DECIMAL CR .SCR&LINE 52 TAB
-  HEX HERE  0U. ( ASCII |) 7C EMIT BASE F! THEN ;
-: 2ND REG  REG1 VARLEN CMOVE          CLEARVAR ;
-: ~  OP# OFF CLEARVAR  CLEARVAR1 ;   \ reset operand info
-: ERROR ~  HERE COUNT TYPE ."  ? "  .MSG  \ custom error stuff
-     SP!  BLK F@ IF IN F@ BLK F@ THEN  QUIT [ SMUDGE
-: ?ERROR    SWAP IF ERROR ELSE DROP THEN ;
-: (OPERAND)  OP# F@ -DUP IF  \ operand storage setup
-      1-  1 ?ERROR   2ND ELSE 1ST THEN OP# 1+! ;
-: ^ ;  IMMEDIATE    \ maintain compatibility
-: SIZECK  -1 XOR OVER AND  3 ?ERROR ;
-: V!  ADTYPE F! MODE F! 7 SIZECK REG F! ;
-: { [COMPILE] [ ;   IMMEDIATE
-
-\ 68000 assem: registers, .lr             (  1  2 93 CRC 21:42 )
-: .LR   EXT F@ 800 OR EXT F! ;  \ make index reg long
-
-: INDEXREG   7 SIZECK  0c 2*s  EXT F@ OR SWAP FF SIZECK OR ;
-
-: DATAREG   CREATE W,  DOES> (OPERAND)  W@  0 1 V! ;
-: ADDREG    CREATE W,  DOES> (OPERAND)  W@  1 2 V! ;
-
-  0 DATAREG DR0  1 DATAREG DR1  2 DATAREG DR2  3 DATAREG DR3
-  4 DATAREG DR4  5 DATAREG DR5  6 DATAREG DR6  7 DATAREG DR7
-
-  0  ADDREG AR0  1  ADDREG AR1  2  ADDREG AR2  3  ADDREG AR3
-  4  ADDREG AR4  5  ADDREG AR5  6  ADDREG AR6  7  ADDREG AR7
-                                               3  ADDREG S
-                                6  ADDREG U    7  ADDREG RP
- \ These just happen to be the "C" registers, ay - yup!!
-\ 68000 assem: addressing modes           ( 29  5 86 CRC 14:53 )
-: DOL  DUP EXT F! EXTL F! ; \ do longs
- \ register indirect            register indirect w/ postinc.
-:  [ REG F@ 2 4  V! ;           : [+ REG F@ 3 8  V! ;
- \ addr indirect w/ predec      register indirect w/ displace .w
-: -[ REG F@ 4 10 V! ;           : &[ REG F@ 5 20 V!  EXT F! ;
- \ address reg indirect w/ index ( and displacement)
-: &D[ REG F@ 6 40 V!  INDEXREG 7FFF AND EXT F! ; \ # ar dr# &d[
- \ e.g.  4 ar0 3 &d[: disp 4 + ar0 + dr3  disp: 8 bits s. ext.
-: &A[ REG F@ 6 40 V!  INDEXREG 8000 OR  EXT F! ; \ # ar ar# &a[
- \ absolute short address
-: @#  (OPERAND)  0 7  80 V!       EXT F!       ; \ absolute
- \ absolute long address
-: @#L (OPERAND)  1 7 100 V!  DOL ;   \   r# mod adtype
-: ?PCREL  \ addr --- offset for pc relative & indexed modes
-  HERE - 2- DUP 100 -100 WITHIN 0E ?ERROR FF AND  REL OFF ;
-\ 68000 assem: more addressing modes      (  2  4 86 CRC 15:37 )
-: *+    (OPERAND)  2 7  200 V! HERE  - 2- EXT F! ;
-  \ pc w/ index ( and displacement) -- data register
-: &D*+  (OPERAND)  3 7  400 V! SWAP ?PCREL SWAP
-         INDEXREG 7FFF AND EXT F!  ; \ disp dr &D*+
-  \ pc w/ index ( and displacement) -- addr register
-: &A*+  (OPERAND)  3 7  400 V! SWAP ?PCREL SWAP
-         INDEXREG 8000 OR  EXT F! ; \ disp ar &A*+
-  \ immediate data ( word)
-: #     (OPERAND)  4 7  800 V!  EXT F! ;
-  \ immediate data ( long)
-: #L    (OPERAND)  4 7 1000 V! DOL ;
-: SR    (OPERAND)  4 7 4000 V!  .W ;
-: CCR   (OPERAND)  4 7 2000 V!  ;
-: USP   (OPERAND)  4 7 8000 V!  ;
-
-\ 68000 assem: lay, odds&ends, bad        (  7  8 86 CRC 12:34 )
-: LAY    DUP tW, (QUIET) F@ IF BASE F@ HEX SWAP 0U. BASE F!
-      2 SPACES ELSE DROP THEN ;
-
-: ODDS&ENDS   \ SP@ CSP F@ - -DUP IF 6 .R    3 ERROR
-  ADTYPE1 F@ 1000 = IF SIZE F@ 2-    4 ?ERROR THEN
-\ ADTYPE1 F@  800 = IF SIZE F@ 2 AND 5 ?ERROR THEN
-  ADTYPE  F@ 2 AND ADTYPE1 F@ 2 AND OR SIZE F@ 0= AND
-  7 ?ERROR ;  \ reset for next instruction.
 
-: BAD  7 ERROR   { SMUDGE
 
-: LOUD    (QUIET) ON  ;
 
-: QUIET   (QUIET) OFF ;
 
-\ 68000 assem: layext, finish             ( 19  1 86 CRC       )
-: LAYEXT        ADTYPE1  F@  0EE0 AND
-   IF  \ &[  &D[ &A[  @#  *+  &D*+  &A*+  #
-     EXT1 F@ LAY    ELSE  ADTYPE1 F@  1100 AND
-   IF  ( @#L  #L ) EXTL1 W@ LAY EXT1 F@ LAY   THEN THEN
-                ADTYPE   F@  0EE0 AND
-   IF  \ &[  &D[ &A[  @#  *+  &D*+  &A*+  #
-     EXT  F@ LAY    ELSE  ADTYPE  F@  1100 AND
-   IF  ( @#L  #L ) EXTL  W@ LAY EXT F@ LAY    THEN THEN    ;
-
-: FINISH  ODDS&ENDS LAY  LAYEXT ~ ;     ;S
-     rather than play around with how this code works, I split
-long word operands into two parts, as per the 16 bit version.
-But the division is done between the  F!  in  DOL  and the  W@
-here.
-
-\ 68000 assem: condition codes, ?bytebr   (  5  2 92 CRC  9:24 )
-: BRCH  CREATE W,  DOES> W@  ;
-
-  0 BRCH TRUE   100 BRCH FALSE   200 BRCH HI     300 BRCH LS
-400 BRCH CC     500 BRCH CS      600 BRCH NE     700 BRCH EQ
-400 BRCH HS     500 BRCH LO   \ synonyms
-800 BRCH VC     900 BRCH VS      A00 BRCH PL     B00 BRCH MI
-C00 BRCH GE     D00 BRCH LT      E00 BRCH GT     F00 BRCH LE
-
-: ?BYTEBR  ( n --- n f )  DUP -80 7F WITHIN  >R FF AND R> ;
-;S
-FORTH DEFINITIONS
-: ;C   ?EXEC ?CSP  SMUDGE  [COMPILE] FORTH
-  REL F@ IF  HERE  LATEST N>C - 2- SETLEN  THEN ;
-ASSEMBLER DEFINITIONS
-
-\ 68000 assem: typesfit, case stuff       ( 20 10 85 CRC       )
-: TYPESFIT?  \ caseval1, caseval2 --- fl
-        ADTYPE  F@ -DUP IF AND 0= THEN SWAP
-        ADTYPE1 F@ -DUP IF AND 0= THEN OR 0= ;
-
-: TYPESOF    \ executes if operand1 & operand2 types are in
-             \ caseval pairs.
-        4 ?PAIRS COMPILE TYPESFIT?   0BRAN
-        5 ; IMMEDIATE
-
-: ENDTYPESCASE  4 ?PAIRS COMPILE BAD
-       \ does bad if mode illegal; adds finish at end
-         BEGIN  SP@ CSP F@ -
-         WHILE 2 [COMPILE] THEN  REPEAT
-         CSP F! COMPILE FINISH ;   IMMEDIATE
-
-\ 68000 assem:  1manip --  6manip, 11-14  (  1  2 93 CRC 22:01 )
-:  1MANIP   REG1 F@ OR ;              \ 0-2R1
-:  2MANIP   REG  F@ OR ;              \ 0-2R1
-
-:  3MANIP   REG1 F@ 9 2*s OR ;        \ 9-11R1
-:  4MANIP   REG  F@ 9 2*s OR ;        \ 9-11R1
-
-:  5MANIP   1MANIP  MOD1 F@ 3 2*s OR ;  \  EA1
-:  6MANIP   2MANIP  MODE F@ 3 2*s OR ;  \  EA1
-
-: 11MANIP   SIZE F@ 0=   8 ?ERROR ;
-: 12MANIP   SIZE F@      9 ?ERROR ;
-: 13MANIP   SIZE F@ 1-  0A ?ERROR ;
-: 14MANIP   SIZE F@ 2-  0B ?ERROR ;
-
-
-\ 68000 assem:  7manip -- 10manip, 15-17  (  1  2 93 CRC 22:01 )
-:  7MANIP   SIZE F@  6 2*s OR ;         \ 6-7 size
-:  8MANIP   11MANIP  SIZE F@ 2 / 6 2*s OR ;
-:  9MANIP   11MANIP  SIZE F@ 2 / 8 2*s OR ;
-
-10003000 VARIABLE MSIZE 2000 W, 3000 W,            \ movesi
-: 10MANIP   MODE F@ 6 2*s OR SIZE F@ 2* MSIZE + W@ OR ;
-
-: 15MANIP   EXT F@ ?BYTEBR       \ bra, bsr
-      IF ( 8 bit) ADTYPE OFF OR ELSE DROP  THEN ;
-
-: 16MANIP   SWAP F00 SIZECK OR ;  \  branch
-: 17MANIP   ROT  F00 SIZECK OR  SWAP 7 SIZECK OR ;  \ dbcc
-
-
-
-\ 68000 assem: 18manip -- 22manip         (  1  2 93 CRC 22:01 )
-         \ addq
-: 18MANIP   ADTYPE1 OFF  EXT1 F@ 1- 7 SIZECK 1+ 7 AND 9 2*s OR ;
-
-: 19MANIP   ADTYPE1 OFF ADTYPE OFF EXT1 F@ FF SIZECK OR ; \ move
-
-: 20MANIP   MOD1 F@ 0= IF 20 OR REG1 F@  \ shift
-            ELSE EXT1 F@ 1- 7 SIZECK 1+ 7 AND
-            ADTYPE1 OFF THEN  9 2*s OR ;
-
-: 21MANIP   ADTYPE OFF EXT F@ 0F SIZECK OR ;  \ trap
-
-                               \ movem
-: 22MANIP   EXT F@ EXT1 F@ EXT F! EXT1 F!  EXTL1 F@ EXTL F!
-            ADTYPE F@ ADTYPE1 F@ ADTYPE F! ADTYPE1 F! ;
-
-\ 68000 assem: 23manip -- manip           ( 22  5 86 CRC 18:15 )
-: 23MANIP   ADTYPE F@ 10 = ( reverse mask?)
-            IF EXT1 F@ 10 0 DO  0 2 U/ LOOP
-                    1 10 0 DO  ROT OVER * ROT OR SWAP 2* LOOP
-            DROP EXT1 F! THEN ;
-: MANIP  DUP 0< 7 ?ERROR  19 MIN   EXEC
-  |       1MANIP  2MANIP  3MANIP  4MANIP  5MANIP  6MANIP  7MANIP
-  8MANIP  9MANIP 10MANIP 11MANIP 12MANIP 13MANIP 14MANIP 15MANIP
- 16MANIP 17MANIP 18MANIP 19MANIP 20MANIP 21MANIP 22MANIP 23MANIP
- .B      BAD   { SMUDGE
-;s
-: OFUSER  \  --  | assemble an access to a user: u off &[
-  U [COMPILE] '
-  DUP (RES) { ' BASE (RES) ] LITERAL -  0F ?ERROR
-  C>P W@ &[ ;   \ e.g:
-\ code definitions  ofuser context ofuser current mov, next
-\ 68000 assem: saveset, getlegal, forminst( 20 10 85 CRC       )
-
-: SAVESET W, ( 3rd manip) W, ( 2nd) W, ( 1st) \ make , to
-           W, ( instruction basis)     \ use on pdp 11 - word!!
-      W, W,  ( bit mapped set of 1st & 2nd legal modes) ;
-
-: GETLEGALTYPESET \ ptr -- ptr modset modset
-\     DUP  7 +  @ OVER 5 +  @ ;                       \ byte
-      DUP 0A + W@ OVER 8 + W@ ;                       \ 11, 68k
-: FORMINST  \ ptr -- instruction word                \ 11:
-      DUP 6 + W@   \ get basis                        \  6 +
-      OVER 4+ W@ MANIP   \ modify basis by 1st manip \  4 +
-      OVER 2+ W@ MANIP   \ modify basis by 2nd manip \  2+
-      SWAP    W@ MANIP   \ modify basis by 3rd manip
-   ;
-
-\ 68000 assem: savesets, 1mi, 2mi         ( 20 10 85 CRC       )
-:  SAVESETS \ tos has count, number of sets to save.
-   0 DO SAVESET  LOOP ;
-
-: 1MI CREATE   SAVESET   DOES> CASE
-        GETLEGALTYPESET  TYPESOF FORMINST ENDOF
-           ENDTYPESCASE ;
-
-: 2MI CREATE 2 SAVESETS  DOES> CASE
-        GETLEGALTYPESET  TYPESOF FORMINST ENDOF
-  0C +  GETLEGALTYPESET  TYPESOF FORMINST ENDOF \ 11 version
-           ENDTYPESCASE ;
-
-\  9 +  GETLEGALTYPESET  TYPESOF FORMINST ENDOF \ byte ver
-
-
-\ 68000 assem: 4mi, 6mi                   ( 20 10 85 CRC       )
-: 4MI CREATE 4 SAVESETS  DOES> CASE
-        GETLEGALTYPESET  TYPESOF FORMINST ENDOF
-  0C +  GETLEGALTYPESET  TYPESOF FORMINST ENDOF \ 11 version
-  0C +  GETLEGALTYPESET  TYPESOF FORMINST ENDOF \ 11 version
-  0C +  GETLEGALTYPESET  TYPESOF FORMINST ENDOF \ 11 version
-           ENDTYPESCASE ;
-: 6MI CREATE 6 SAVESETS  DOES> CASE
-        GETLEGALTYPESET  TYPESOF FORMINST ENDOF
-  0C +  GETLEGALTYPESET  TYPESOF FORMINST ENDOF \ 11 version
-  0C +  GETLEGALTYPESET  TYPESOF FORMINST ENDOF \ 11 version
-  0C +  GETLEGALTYPESET  TYPESOF FORMINST ENDOF \ 11 version
-  0C +  GETLEGALTYPESET  TYPESOF FORMINST ENDOF \ 11 version
-  0C +  GETLEGALTYPESET  TYPESOF FORMINST ENDOF \ 11 version
-           ENDTYPESCASE ;
-
-\ 68000 assem: instructions adbc -- and   ( 23  7 85 CRC       )
-\    1     1 C100    1    4   0C
-\   10    10 C108    1    4   0C     2MI ADBC,
-  1FFF     2 D0C0    4    5    9               \ adda,
-  1800   1FD  600    0    6    7               \ addi,
-   7FF     1 D000    4    5    7
-     1   1FC D100    3    6    7     4MI ADD,
-   800   1FF 5000    6    7   12     1MI ADDQ,
-     1     1 D100    1    4    7
-    10    10 D108    1    4    7     2MI ADDX,
-  1800  41FD  200    0    6    7               \ andi,
-     1   1FC C100    3    6    7
-   7FD     1 C000    4    5    7
-   7FD     1 C000    4    5    7     4MI AND,
-
-
-\ 68000 assem: instructions asl  -- bsr   ( 12  9 85 CRC       )
-   801     1 E100    2    7   14
-     0   1FC E1C0    0    6   13     2MI ASL,
-\  801     1 E000    2    7   14
-\    0   1FC E0C0    0    6   0D     2MI ASR,
-     0   200 6000    0   0F   10     1MI BCC,
-     1   1FD  140    0    3    6
-   800   1FD  840    0    0    6     2MI BCHG,
-\    1   1FD  180    0    3    6
-\  800   1FD  880    0   18    6     2MI BCLR,
-     0   200 6000    0    0   0F     1MI BRA,
-\    1   1FD  1C0    0    3    6
-\  800   1FD  8C0    0   18    6     2MI BSET,
-     0   200 6100    0    0   0F     1MI BSR,
-
-
-\ 68000 assem: instructions btst -- eor   ( 23  7 85 CRC       )
-     1   1FD  100    0    3    6
-   800   1FD  800    0   18    6     2MI BTST,
-\  FFD     1 4180    4    5   0D     1MI CHK,
-     0   1FD 4200    0    6    7     1MI CLR,
-  1FFF     2 B0C0    4    5    9               \ cmpa,
-  1800   1FD  C00    0    6    7               \ cmpi
-     8     8 B108    1    4    7               \ cmpm
-   7FF     1 B000    4    5    7     4MI CMP,
-     0   200 50C8    0    0   11     1MI DBCC,
-\  FFD     1 81C0    0    4    5     1MI DIVS,
-\  FFD     1 80C0    0    4    5     1MI DIVU,
-  1800  41FD  A00    0    6    7               \ eori
-     1   1FD B100    3    6    7     2MI EOR,
-
-
-\ 68000 assem: instructions exg  -- lsr   ( 11  9 85 CRC       )
-\    1     1 C140    2    3   0E
-\    2     2 C148    2    3   0E
-\    1     2 C188    1    4   0E
-\    2     1 C188    2    3   0E     4MI EXG,
-     0     1 4880    0    2    8     1MI EXT,
-     0   7E4 4EC0    0    0    6     1MI JMP,
-\    0   7E4 4E80    0    0    6     1MI JSR,
-   7E4     2 41C0    4    5   0E     1MI LEA,
-\    2   800 4E50    0    0    1     1MI LINK,
-   801     1 E108    2    7   14
-     0   1FC E3C0    0    6   0D     2MI LSL,
-   801     1 E008    2    7   14
-     0   1FC E2C0    0    6   0D     2MI LSR,
-
-
-\ 68000 assem: instructions mov  -- mulu  ( 19  3 86 CRC 14:33 )
-  1FFF   1FF    0    4    5   0A               \ mov, incl mova
-   FFD  2000 44C0    0    5   0C               \ mov, to ccr
-   FFD  4000 46C0    0    5   0D               \ mov, to sr
-  4000   1FD 40C0    0    6   0D               \ mov, from sr
-     2  8000 4E60    0    1   0E               \ mov, to usp
-  8000     2 4E68    0    2   0E     6MI MOV,  \ mov, from usp
-\  7EC   800 4C80    5    8   16
-\  800   1F4 4880    6    8   17     2MI MOVM,
-\    1    20  188    2    3    8
-\   20     1  108    1    4    8     2MI MOVP,
-   800     1 7000    0    4   13     1MI MOVQ,
-\  FFD     1 C1C0    0    4    5     1MI MULS,
-   FFD     1 C0C0    0    4    5     1MI MULU,
-
-
-\ 68000 assem: instructions nbcd -- rol   ( 23  7 85 CRC       )
-\    0   1FD 4800    0    6   0C     1MI NBCD,
-     0   1FD 4400    0    6    7     1MI NEG,
-     0   1FD 4000    0    6    7     1MI NEGX,
-\    0     0 4E71    0    0    0     1MI NOP,
-\    0   1FD 4600    0    6    7     1MI NOT,
-  1800  41FD    0    0    6    7               \ ori,
-     1   1FC 8100    3    6    7
-   7FD     1 8000    4    5    7
-   7FD     1 8000    4    5    7     4MI OR,
-\    0   7E4 4840    0    0    6     1MI PEA,
-\    0     0 4E70    0    0    0     1MI RESET,
-   801     1 E118    2    7   14
-     0   1FC E7C0    0    6   0D     2MI ROL,
-
-
-\ 68000 assem: instructions ror  -- stop  ( 23  7 85 CRC       )
-\  801     1 E018    2    7   14
-\    0   1FC E6C0    0    6   0D     2MI ROR,
-   801     1 E110    2    7   14
-     0   1FC E5C0    0    6   0D     2MI ROXL,
-\  801     1 E010    2    7   14
-\    0   1FC E4C0    0    6   0D     2MI ROXR,
-\    0     0 4E73    0    0    0     1MI RTE,
-\    0     0 4E77    0    0    0     1MI RTR,
-     0     0 4E75    0    0    0     1MI RTS,
-\    1     1 8100    1    4   0C
-\   10    10 8108    1    4   0C     2MI SBCD,
-\    0   1FD 50C0    6   0C   10     1MI SCC,
-\    0   800 4E72    0    0   0D     1MI STOP,
-
-
-\ 68000 assem: instructions sub  -- unlk  (  2  9 85 CRC       )
-  1FFF     2 90C0    4    5    9               \ suba,
-  1800   1FD  400    0    6    7               \ subi,
-   7FF     1 9000    4    5    7
-     1   1FC 9100    3    6    7     4MI SUB,
-   800   1FF 5100    6    7   12     1MI SUBQ,
-\    1     1 9100    1    4    7
-\   10    10 9108    1    4    7     2MI SUBX,
-     0     1 4840    0    2   0D     1MI SWAP,
-\    0   1FD 4AC0   18    6   0C     1MI TAS,
-     0   800 4E40    0    0   15     1MI TRAP,
-\    0     0 4E76    0    0    0     1MI TRAPV,
-     0   1FD 4A00    0    6    7     1MI TST,
-\    0     2 4E58    0    0    2     1MI UNLK,
-
-
-\ 68000 assem: next, fillbr, condbr       ( 26  2 92 CRC 12:08 )
-: NEXT   RTS, ;
-
-: BYTEBRCHK  ?BYTEBR 0= 0C ?ERROR ;
-: FILLBR   HERE OVER - 2- BYTEBRCHK OVER tW@ OR SWAP (QUIET) F@
-  IF 2DUP  4 SPACES 0U.  ( ASCII |) 7C EMIT 0U. THEN tW! ;
-
-: CONDBR  F00 SIZECK 100 XOR 6000 OR ; \ cond --- 6x00
-: ENDBR   SWAP HERE - 2- ?BYTEBR IF OR ~ LAY
-   ELSE SWAP ~ LAY LAY THEN ;   \ addr 6x00  ---
-
-: IF,     CONDBR ~ LAY HERE 2- 2 ;
-: ELSE,   2 ?PAIRS 6000 ~ LAY FILLBR HERE 2- 2 ;
-: SETLAST HERE LASTTHEN F! ;
-: THEN,   2 ?PAIRS FILLBR  SETLAST  ;
-: BEGIN,  HERE 1 ~ ;
-\ 68000 assem: conditionals               (  2  1 91 CRC 20:50 )
-: AGAIN,  ?EXEC 1 ?PAIRS 6000 ENDBR  ;
-: UNTIL,  ?EXEC SWAP 1 ?PAIRS CONDBR ENDBR ;
-    \  --- whileaddr beginaddr 1 |
-: WHILE,  ?EXEC SWAP 1 ?PAIRS CONDBR ~ LAY HERE 2- SWAP 1 ;
-: REPEAT, AGAIN, FILLBR ;
-\ : IFL,    IF, 0 LAY DROP 2+ 12 ;
-\ : ELSEL,  ?EXEC 12 ?PAIRS 6000 ~ LAY 0 LAY  HERE OVER -
-\           SWAP tW!   HERE 2- 12 ;
-\ : THENL,  ?EXEC 12 ?PAIRS HERE OVER - SWAP tW! ~  SETLAST  ;
-\ : WHILEL, WHILE, 0 LAY ;
-\ : REPEATL, AGAIN, 2+ HERE OVER - SWAP tW! ;
-: DO,    \ cc  ---  cc reg addr chk | mark start of  dbcc  loop
-  ADTYPE F@ 1-  0D ?ERROR REG F@ BEGIN, 4+  ~ ;
-: LOOP,  \ cc reg addr chk ---  | assemble  dbcc  loop
-  5 ?PAIRS *+ DBCC, ;   \ e.g. NE DR0 DO, ...  LOOP,
-\ 68000 assem: entry points               (  7  2 93 CRC 17:12 )
-: ;C ?EXEC  REL F@  ?HEADs F@ AND
-  IF HERE  delta +  LATEST  N>C  -
-     2-  SETLEN THEN  [compile] host ;
-
-: OFUSER  \  --  | assemble an access to a user: u off &[
-  U  native context f@ >r  host [compile] target
-  [compile] ' c>p  8 + W@
-  host assembler &[  r> native context f! ;
-
-HOST ( FORTH) DEFINITIONS ASSEMBLER
-: ENTERCODE   [COMPILE] ASSEMBLER   ASSEMBLER ~ ;
-\ : ;CODE   COMPILE (;CODE) [COMPILE] [ ENTERCODE ; IMMEDIATE
-: LABEL  HERE EQU  ENTERCODE ;
-DECIMAL
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-\ 68000 assem: message screen!!!          ( 22  5 86 CRC 18:12 )
- Too many operands??
- Wrong argument count!
- Something too large here!!
- #L requires .L !!
- # requires .W !!
- No byte ops on addr regsisters!
- Has Wrong Addressing Mode
- Can't use byte!
- Byte only!
- Word only!
- Long only!
- Branch out of Range
- Data Register only
- PC Relative out of range!
- >> NOT a User Variable <<
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3760,10 +3760,9 @@ NECPAGE  SCR !
 
 \       target compiler: loaders, 132col  ( 27  1 92 CRC 11:49 )
 FORTH DEFINITIONS
-365 +BLK LOADER JSR    \ jsr threaded xcompiler
-  5 +BLK LOADER TARGET ( itc )  245 +BLK LOADER ATARI \ ff xcomp
- 43      LOADER BOOT              3 +BLK LOADER DOCUMENTED
-169 +BLK LOADER FILE
+365 +BLK LOADER JSR             245 +BLK LOADER ATARI \ ff xcomp
+169 +BLK LOADER FILE              3 +BLK LOADER DOCUMENTED
+
 : BOTH  JSR ATARI ;     \ build atari fastForth
 
 : ?CR   OUT @ C/L > IF CR THEN ;        ?CR
@@ -3773,6 +3772,7 @@ FORTH DEFINITIONS
 : 80COL  ( ?PRINT IF CR CTL Y EMIT THEN ) ;     immediate
 
 \ : 2CONSTANT  <BUILDS SWAP  , ,    DOES> 2@ ;
+
 
 \ 68000 addressing setup                  (  2  9 85 CRC       )
 BASE @ HEX 8300 CONSTANT COMPILE-ADDR \ set on 241
@@ -3838,421 +3838,421 @@ EDITOR         SCR !
 
 
 
-\ 68000      target compiler: load        ( 14  8 91 CRC 13:38 )
-EDITOR FLUSH   CR pTODAY CR CR
-DECIMAL FORTH DEFINITIONS  FORGET TASK
-DECIMAL FORTH DEFINITIONS       : TASK ;     QUIET
-300 ' atari !
-241 242  THRU  \ 299 LOAD  \ 68k
-: RLOAD DUP BLOCK @ IF DUP CR   7 .R SPACE LOAD .S
-      ELSE DROP THEN ;
-: RTHRU  1+ SWAP DO I RLOAD LOOP ;
-HEX HERE FIRST OVER - ERASE DECIMAL
-243  257  RTHRU    260 263 RTHRU
-CR  FORTH DEFINITIONS   pTODAY    ;S
-
-load  321 & 322 after  ;s ,  (loop) ,  (+loop) ,  branch  and
-0Branch  have been defined in the target memory
-
-\ Target compiler: set fundamentals       ( 27  6 91 CRC 18:12 )
-BASE @ HEX                      FORTH  DEFINITIONS
-TRUE  CONSTANT PRIVATE          \ version
-200  CONSTANT PREAMBLE          1C CONSTANT OVERHEAD
-0 VARIABLE COMPILE-ADDR         \ work-space
-COMPILE-ADDR  4000 DUP 4- ALLOT  ERASE
-HERE  CONSTANT IMAGETOP
-50100 PREAMBLE - CONSTANT BASE-ADDR     \ run time origin
-COMPILE-ADDR CONSTANT WORKSPACE
-COMPILE-ADDR BASE-ADDR - CONSTANT DELTA
-                                  DELTA FUDGE !
-78000 CONSTANT TM             400 CONSTANT   *B/BUF*
-    20   *B/BUF*    6     +  *    CONSTANT CO
-\ count  b/buf   overhead +  * == count of buffer space
-                              180 CONSTANT US
-base-addr preamble + constant fbase
-\ Target compiler: target memory          ( 11 12 86 CRC 17:25 )
-              \ note the  non-standard memory map!
-TM  40  -           CONSTANT TOS
-TM 1A0  -           CONSTANT BOT
-TM 210  -           CONSTANT RTS
-TM 400  -           CONSTANT TIBX
-TIBX                CONSTANT EM
-
-ASSEMBLER DEFINITIONS
-: ;C ?EXEC ?CSP SMUDGE [COMPILE] FORTH ;
-FORTH DEFINITIONS    BASE  !
-
-0 VARIABLE CHOPLINE   0 , 0 ,
-DELTA 0= IFTRUE  CODE TRIAL  BASE-ADDR @#L JMP,  IFEND
-
-
-\ Target compiler: compiler addrs         ( 13  5 86 CRC 15:40 )
-FORTH  DEFINITIONS
- 0 CONSTANT *(.")*               0 CONSTANT *USER*
- 0 CONSTANT *DOES>*              0 CONSTANT *COLON*
- 0 CONSTANT *(;CODE)*            0 CONSTANT *CONSTANT*
- 0 CONSTANT *VARIABLE*           0 CONSTANT *VOCAB*
- 0 CONSTANT *USERCONSTANT*       0 CONSTANT *;S*
- 0 CONSTANT *ABORT*              0 CONSTANT *QUIT*
- 0 CONSTANT *@EXEC*
- 0 CONSTANT *(LOOP)*             0 CONSTANT *(+LOOP)*
- 0 CONSTANT *BRAN*               0 CONSTANT *0BRAN*
-
-   '  LIT CFA DUP                  CONSTANT *LIT*
-   CONSTANT OF*LIT*              0 CONSTANT NF*LIT*
-   ' WLIT CFA DUP                  CONSTANT *WLIT*
-   CONSTANT OF*WLIT*             0 CONSTANT NF*WLIT*
-\ Target compiler: newforth               ( 13  5 86 CRC 14:20 )
-VOCABULARY NEWFORTH IMMEDIATE        BASE  @  HEX
-: OF/NF [COMPILE] NEWFORTH DEFINITIONS [COMPILE] FORTH ;
- 0 VARIABLE DPOLD   COMPILE-ADDR   VARIABLE DPNEW
- 0 VARIABLE O/N    \ old/new:  t=new, false=old
-  1F  ( 0) VARIABLE TWIDTH   \ target width. 0 = headerless
-  1F  ( 0) VARIABLE WID      \ width for a word. use | to make
-                             \ an ophan out of it.
-: SETOLD   O/N  @    IF O/N OFF HERE DPNEW !
-                    OF*WLIT*  ' *WLIT*  !
-     DPOLD  @  DP ! OF*LIT*   ' *LIT*   !          THEN ;
-: SETNEW   O/N  @ 0= IF O/N ON  HERE DPOLD !
-                    NF*WLIT*  ' *WLIT*  !
-     DPNEW  @  DP ! NF*LIT*   ' *LIT*   !          THEN ;
-DELTA VARIABLE LAST   \ addr of top of new dictionary
-BASE !  ;S
-\ Target compiler: ?0s                    ( 14  5 86 CRC 16:57 )
-: ?0S  CR 15 [ BLK  @ ] LITERAL .LINE 80 OUT ! DPNEW  @ DELTA -
-  FBASE DO 2 I T@ 0= IF ?CR I 6 U.R 2+ THEN
-  ?TERMINAL IF LEAVE THEN  +LOOP  ;
-BASE @ HEX
-: TID. PAD BL ASCII _ FILL DUP PFA LFA OVER -
-  PAD SWAP CMOVE PAD COUNT 1F AND
-  1- 2DUP TYPE  + C@ 7F AND EMIT          SPACE ;
-BASE !
-: .HERE  DPNEW  @ DELTA - 13 [ BLK  @ ] LITERAL .LINE
-  10 .R ;
-: .SIZE  DPNEW  @ DELTA -  BASE-ADDR - 14 [ BLK  @ ] LITERAL
-  .LINE         10  U.R ;                        ;S
-       target here =
-       target size =
-       Addresses of long words containing 0 in them:
-\ Target compiler: /smudged               ( 14  5 86 CRC 13:21 )
-BASE  @ HEX  0 VARIABLE <IMMED> 70 ALLOT
-<IMMED> HERE OVER - ERASE                  <IMMED> 4+ <IMMED> !
-: /SMUDGE <IMMED>  @ <IMMED> 4+ 2DUP - IF
-  DO I  @ BL TOGGLE 4 +LOOP ELSE 2DROP THEN ;
-: NFFIND BL WORD HERE DUP COUNT UPPER
-  [ ' NEWFORTH 2+ ] LITERAL   @ (FIND) ;
-: 'NF  /SMUDGE  NFFIND DUP         \ new does> structure !!!
-   IF SWAP DROP THEN      /SMUDGE 0=    \ use 4 + on old vocabs
-   IF HERE COUNT TYPE SPACE ." NF?" QUIT THEN ;
-: REPLACED:BY              'NF CFA  @ SWAP ! ;
-: BYTE:IN                  'NF CFA  @ DELTA + + 4+ ;
-: [FROM:NEWFORTH]          'NF CFA  @ , ;  IMMEDIATE
-: NFSEE:   'NF NFA 4-  @ WHERETHEN  R# ! EDIT ;
-: NFDUMP:  BASE  @ HEX   >R DELTA FUDGE !  'NF CFA  @ DUP
-   6 U.R  10 - -10 AND C/L WDUMP R> BASE ! ;   BASE ! ;S
-\ Target compiler: auto-disk buffer grabbe( 12  2 87 CRC 19:41 )
-BASE @ HEX
-0 VARIABLE FILEHEADER  -4 ALLOT
-HERE OVERHEAD DUP ALLOT ERASE
-: +OVERHEAD    FILEHEADER + ;
-
-HEX 601A FILEHEADER W!
-
-\ DECIMAL  396 RLOAD
-BASE !
-
-: NFDIS:   DELTA FUDGE !  'NF CFA @ T@ DISASSEM ;
-
-
-
-
-\ Target compiler: create-old create-new 6( 29  5 86 CRC 11:59 )
-BASE  @ HEX
-: CREATE-OLD SETOLD FIRST ( TAREA ) PAD - 0< 2 ?ERROR 0 ,
-  ?ALIGN BL WORD HERE DUP  DUP C@ WIDTH @ MIN 1+ =CELLS ALLOT
-  DUP DUP COUNT TYPE SPACE 80 TOGGLE HERE 1- 80 TOGGLE
-  WHERENOW  SWAP  4- ! \  installs scr & line #s
-  [COMPILE] NEWFORTH DEFINITIONS LATEST , CURRENT  @ ! ;
-
-: CREATE-NEW SETNEW  OUT @ 32 > IF CR 6 SPACES THEN  ?ALIGN
-  IMAGETOP DPNEW @ [ PAD HERE - C/L + ] LITERAL - - 0< 2 ?ERROR
-  ( ?-BUF)  WID  @ IF
-  BL WORD HERE DUP C@ TWIDTH @ 1F AND MIN 1+ =CELLS ALLOT
-  DUP 80 TOGGLE HERE 1- 80 TOGGLE
-  LAST  @ DELTA - , LAST ! THEN BASE  @ HEX HERE DELTA - 5 U.R
-  BASE ! SPACE TWIDTH  @ WID ! ;   BASE ! ;S
-
-\ initialises: easier setup for the colds ( 10  6 86 CRC 12:08 )
-: BOOTPARAMETER  FBASE +  DELTA +  ! ;
-
-
-: INITIALISES  'NF 4-  @ DELTA + DUP @ *USER* -
-    IF ." Invalid user name " 0 ERROR  THEN
-    4+ W@ ( 11/68k version ) 16 + BOOTPARAMETER ;
-
-;S syntax:  val-1  INITIALISES  username
-where  val  is some value, and username is the user variable
-it will initialise.
-Typical uses:
-'NF (EMIT) CFA  HIWORD INITIALISES 'EMIT
-EM US - CO -           INITIALISES 'FIRST
-
-    2+ @ ( 11/68k version ) 12 + COMPILE-ADDR + ! ;
-\ Target compiler: nf: nf; ascii txt      ( 14  5 86 CRC 12:25 )
-: NF: !CSP CREATE-OLD SMUDGE
-   [ ' QUIT CFA  @ ] LITERAL , IMMEDIATE [COMPILE] FORTH ] ;
-
-: NF; ?CSP COMPILE ;S SMUDGE [COMPILE] [ ;           IMMEDIATE
-
-: TXT ASCII " WORD  HERE C@ 1+ =CELLS ALLOT ( ?-BUF)  ;
-   IMMEDIATE
-
-: |  ?CR  WID OFF ." <orphan> "  ;
-
-: mf  CR mf  BASE @ HEX
-  IMAGETOP DPNEW @ - . ." Target bytes left. " BASE ! ;
-
-: OFDUMP   BASE  @ HEX   >R FUDGE OFF [COMPILE] ' DUP CFA
-   6 U.R  16 - -16 AND C/L WDUMP R> BASE ! ;
-\ Target/resident literal                 ( 26  7 87 CRC 15:21 )
-BASE  @ HEX
-: <LIT>  DUP  FFFF8000  7FFF WITHIN
-           IF   NF*WLIT* , W, ELSE       \ 16 bit target literal
-                NF*LIT* ,  ,  THEN ;     \ 32 bit target literal
-
-: LITERAL  STATE  @ IF
-   O/N  @  IF DPL @ 1+ IF
-             SWAP  <LIT>   <LIT>         \ 64 bit target literal
-             ELSE DROP  <LIT> THEN  ELSE \ 32 bit target literal
-      DPL  @ 1+ IF      \ resident literal, any size
-      [COMPILE] DLITERAL ELSE [COMPILE] LITERAL
-    THEN  THEN       \ interpretive literal
-   ELSE DPL  @  1+ 0= IF DROP THEN  THEN  ;
-IMMEDIATE             BASE ! ;S
-
-\ Target compiler: literal -- interpret   ( 14  5 86 CRC 12:17 )
-BASE  @ HEX
-: IMMEDIATE LAST  @ C/L TOGGLE LATEST
-        <IMMED>  @ ! 4 <IMMED> +! SMUDGE ;
-
-: INTERPRET   BEGIN -FIND  IF  ( found) STATE  @ <
-        IF CFA O/N  @ IF           @ THEN ,
-        ELSE CFA  EXECUTE THEN
-        ELSE HERE NUMBER [COMPILE] LITERAL
-        THEN
-\       ?TERMINAL IF IN  @ R# ! BLK  @ SCR ! ABORT THEN
-        AGAIN ;
-
-: V   IN @ NFDUMP: IN ! OFDUMP ;
-
-                      BASE ! ;S
-\ Target compiler: quit -- label          ( 13  5 86 CRC 14:51 )
-: NFQUIT BLK OFF [COMPILE] [
-     BEGIN BEGIN RP! CR QUERY INTERPRET OK STATE  @ 0= UNTIL
-        .S ." NK"       AGAIN STOP
-: LOAD  DUP BLOCK  W@ IF
-        DUP BASE  @ >R DECIMAL SWAP CR 5 U.R SPACE  HEX
-        BLK 2@ >R >R  C/L IN ! BLK ! INTERPRET
-        R> R> BLK 2! ?CR 3 SPACES HEX .S R> BASE !
-        ELSE DROP THEN ;
-: THRU  1+ SWAP DO I LOAD LOOP ;
-: CFA CFA  @ ;
-: ==       ?EXEC SETOLD CURRENT  @ >R
-     [COMPILE] ASSEMBLER DEFINITIONS CONSTANT
-     R> CURRENT ! [COMPILE] FORTH SETNEW ;
-: LABEL SETOLD DPNEW  @ DELTA - ==
-     [COMPILE] ASSEMBLER ;
-\ Target compiler: code -- variable       ( 14  5 86 CRC 11:05 )
-BASE  @ HEX
-: CODE  !CSP IN  @ ?EXEC CREATE-NEW
-    IN ! HERE DELTA - CREATE-OLD , SMUDGE SETNEW
-    HERE DELTA - 4+ , [COMPILE] ASSEMBLER  ASSEMBLER ~ ;
-
-: CONSTANT IN  @ CREATE-NEW
-    IN ! HERE DELTA - *CONSTANT* , SWAP   ,
-    CREATE-OLD , SETNEW [COMPILE] FORTH ;
-
-: VARIABLE IN  @ CREATE-NEW
-    IN ! HERE DELTA - *VARIABLE* , SWAP   ,
-    CREATE-OLD , SETNEW [COMPILE] FORTH ;
- BASE  !   ;S
-
-
-\ assembler extensions for target compiler(  1  7 86 CRC 14:31 )
-ASSEMBLER DEFINITIONS  BASE @ HEX
-
-: OFUSER  \  --  | assemble an access to a user: u off &[
-  U 'NF CFA DUP T@ *USER* -  0F ?ERROR   4+ TW@ &[ ;
-
-: *+  DELTA + *+ ;
-
-BASE ! FORTH DEFINITIONS
-
-: +LOAD  +BLK LOAD ;
-
-: +THRU  1+ SWAP DO I +LOAD LOOP ;
-
-
-
-\ Target compiler: vocabulary -- user  68K( 13  5 86 CRC 14:56 )
-BASE  @ HEX
-\ : VOCABULARY IN  @ CREATE-NEW
-\     IN ! HERE DELTA - ( *DOES>* , )  *VOCAB* ,  A081 W,
-\     LAST  @ DELTA - , 0 ,    \ new does>   !!
-\     CREATE-OLD , SETNEW [COMPILE] FORTH ;
-
-: USER     IN  @ CREATE-NEW
-    IN ! HERE DELTA - *USER*     , SWAP W,  \ words for 68K!!
-    CREATE-OLD , SETNEW [COMPILE] FORTH ;   \ offset is 16 bit
-
-\ : COMPILE   ?COMP R> DUP 4+ >R  @ ,   ;  \ n.b. target only!
-BASE !   ;S
-    IN ! HERE DELTA - ( *DOES>* , )  *VOCAB* ,  A081 ,
-
-
-\ chop target compiler                    ( 11 12 86 CRC 17:16 )
-: GOLDEN  \ -- | saves data to chop xcompiler
-  [ ' NEWFORTH  2+ ] LITERAL @ CHOPLINE    !
-  [ ' ASSEMBLER 2+ ] LITERAL @ CHOPLINE 4+ !
-  HERE                         CHOPLINE 8 + ! ;
-
-: CHOP   [COMPILE] FORTH DEFINITIONS   EDITOR FLUSH
-  CHOPLINE 8 + @ DP !  DELTA FUDGE !
-  WORKSPACE IMAGETOP OVER - ERASE    ASSEMBLER ~ FORTH
-  SETNEW  COMPILE-ADDR DP !  SETOLD SETNEW  DELTA LAST !
-  <IMMED> 4+ <IMMED> !  CHOPLINE @ [ ' NEWFORTH 2+ ] LITERAL !
-  CHOPLINE 4+ @ [ ' ASSEMBLER 2+ ] LITERAL !  ;    ;S
-
-WARNING:  no additions to any voc save  NEWFORTH  and  ASSEMBLER
-after  GOLDEN  is invoked!!!!!!!!!!!!!!!
-
-\ 68000 ASSEMBLER ADDRESSING MODES          08 08 85 BJR
-;S
-     DRn                data reg direct         Dn
-     ARn                addr reg direct         An
-     ARn [              indirect                (An)
-     ARn [+             indirect postincr       (An)+
-     ARn -[             indirect predecr        -(An)
-   d ARn &[             indirect w/ displ       d(An)
-   d ARn i &A[          indirect w/ index       d(An,Ai.W)
-   d ARn i &A[ .LR              "               d(An,Ai.L)
-   d ARn i &D[                  "               d(An,Di.W)
-   d ARn i &D[ .LR              "               d(An,Di.L)
- abs @#                 absolute short          abs.W
- abs @#L                absolute long           abs.L
-
-
-\ 68000 ASSEMBLER ADDRESSING MODES          08 08 85 BJR
-;S
-     *+                 PC w/ displ             d(PC)
- d i &A*+               PC w/ index             d(PC,Ai.W)
- d i &A*+ .LR                "                  d(PC,Ai.L)
- d i &D*+                    "                  d(PC,Di.W)
- d i &D*+ .LR                "                  d(PC,Di.L)
-   n #                  immediate               #nnn
-   n #L                 immediate long          #nnn
-     CCR                implicit                CCR
-     SR                     "                   SR
-     USP                    "                   USP
-
-Note 1: size indicators  .B  .W  .L  precede opcode
-Note 2: immediate mode must match size (e.g. .L requires #L)
-Note 3:   cc i adr *+ DBCC,  is equivalent to  DBcc Di,adr
-\ Target compiler: user -- vocabulary  68k( 14  5 86 CRC 14:18 )
-BASE  @ HEX
-: WHO DELTA + 4+ NFA ID. ;
-
-: :   !CSP IN  @ ?EXEC CREATE-NEW
-    IN ! HERE DELTA - *COLON*    ,
-    CREATE-OLD , SMUDGE SETNEW ] ;
-
-NF: OF/NF [COMPILE] NEWFORTH DEFINITIONS [COMPILE] FORTH  NF;
-
-
-' NFQUIT 4- ' 'NF 40 + !       LATEST PFA LFA OFF
- BASE  !   ;S
-
-
-
-\ Target compiler: nf: x -- [compile]     ( 11  7 86 CRC 11:41 )
-BASE  @ HEX
-NF: X BLK  @    IF ?EXEC THEN R> DROP NF;
-80 LATEST 1+ C!                     \ rename it "null"
-
-NF: \ [COMPILE] \ NF;
-
-NF: GAP   0 , NF;
-
-NF: [COMPILE] [COMPILE] [FROM:NEWFORTH]  NF;
- BASE  !   ;S
-
-NF: WHO DELTA + NFA ID.  NF;
-
-
-
-\ Target compiler: nf: ;code -- ."        ( 13  5 86 CRC 15:01 )
-BASE  @ HEX
-NF: ;CODE
-     *(;CODE)*  , HERE DELTA - -4  CSP +!    \ adjust csp
-     [COMPILE] ASSEMBLER   [COMPILE] [  NF;
-\  HERE  is left on the stack. The programmer MUST manually
-\ insert it into the proper *xxxxx*  constant
-\ e.g. : fred .... ;code ... next  ' *fred* !
-
-\ NF: ASSEMBLER    ASSEMBLER                      NF;
-
-NF: DOES>            *(;CODE)* ,  HERE DELTA -  -4 CSP +!
-  4EB9 ,          *DOES>* ,  NF;   \ in *xxx* constant
- \ absolute .long jsr,
-NF: ."           *(.")*  , [COMPILE]  TXT   NF;
- BASE  !   ;S
-\ Target compiler: {         -- }         ( 16  1 87 CRC 18:59 )
-NF: {  SETOLD   [COMPILE] FORTH     [COMPILE] [ NF;
-
-NF: }  SETNEW ] [COMPILE] NEWFORTH              NF;
-
-NF: <BUILDS 0 CONSTANT -4 ALLOT NF;
-
-NF: ( [COMPILE] ( NF;
-
-NF: FORTH                      NF;
-
-NF: LITERAL              <LIT> NF;
-
-NF: SEE: SEE: NF;
-
-NF: WHERE    OF/NF [COMPILE] WHERE   NF;    GOLDEN
-\ Target compiler: nf: ;  -- while        ( 13  5 86 CRC 15:22 )
-BASE @ HEX
-NF: ;   ?CSP COMPILE  [FROM:NEWFORTH] ;S
-     SMUDGE [COMPILE] FORTH [COMPILE] [ NF;
-NF: THEN        HERE OVER - SWAP W! NF;
-NF: BEGIN       HERE NF;
-NF: DO          COMPILE [FROM:NEWFORTH] (DO) HERE NF;
-NF: LOOP        COMPILE [FROM:NEWFORTH] (LOOP)  HERE - W, NF;
-NF: +LOOP       COMPILE [FROM:NEWFORTH] (+LOOP) HERE - W, NF;
-NF: UNTIL       COMPILE [FROM:NEWFORTH] 0BRANCH HERE - W, NF;
-NF: IF          COMPILE [FROM:NEWFORTH] 0BRANCH HERE 0 W, NF;
-NF: WHILE       COMPILE [FROM:NEWFORTH] 0BRANCH HERE 0 W, NF;
- BASE  !   ;S
-NF: ENDIF       HERE OVER - SWAP W! NF;
-N.B.  all branches use 16 bit displacements!!!
-if you can't write a word with that, you're in trouble.
-\ Target compiler: again  -- stop         ( 13  5 86 CRC 15:21 )
-BASE @ HEX
-NF: AGAIN       COMPILE [FROM:NEWFORTH] BRANCH HERE - W, NF;
-NF: REPEAT SWAP COMPILE [FROM:NEWFORTH] BRANCH HERE - W,
-             HERE OVER - SWAP W! NF;
-NF: ELSE        COMPILE [FROM:NEWFORTH] BRANCH HERE 0 W,
-        SWAP HERE OVER - SWAP W! NF;
-
-NF: ASCII   *WLIT* ,  BL WORD  HERE 1+ C@          W,  NF;
-
-NF: CTL     *WLIT* ,  BL WORD  HERE 1+ C@
-  WLIT [ 1F W, ] AND                               W,  NF;
-
-NF: STOP    SMUDGE [COMPILE] FORTH [COMPILE] [ SETOLD NF;
- BASE  !   ;S
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -4318,468 +4318,468 @@ TRACING      -- start tracing in a compile word.
 TRACE        -- start tracing at a given address.
 WHERE        -- points the editor to the error source
   Scr 241 has some sample code for use with the debugger.
-\ 68000 assem: load, user variables       ( 12  9 85 CRC       )
-FORTH DEFINITIONS               VOCABULARY ASSEMBLER IMMEDIATE
-BASE @ HEX
-ASSEMBLER DEFINITIONS           1 VARIABLE SIZE
-   \ double these for use on 32 bit machine!!
-90 USER DP2                    92 USER (QUIET)
-94 USER OP#
-96 USER REG                    A0 USER REG1
-98 USER MODE                   A2 USER MOD1
-9A USER EXT                    A4 USER EXT1
-9C USER EXTL                   A6 USER EXTL1
-9E USER ADTYPE                 A8 USER ADTYPE1
-DP2 EXTL1 OVER - 2+ ERASE      REG1 REG - CONSTANT VARLEN
-  DECIMAL 271 296 HEX THRU
-BASE ! FORTH DEFINITIONS
-
-\ 68000 assem: clearvar, sizes, .scr&line ( 19  5 86 CRC 15:37 )
-: CLEARVAR     REG  VARLEN ERASE  0F REG  ! ;    CLEARVAR
-
-: CLEARVAR1    REG1 VARLEN ERASE  0F REG1 ! ;    CLEARVAR1
-
-: 0U.  0 <# # # # # #> TYPE ;
-
-: .SCR&LINE  \ print current line
-   BLK @ DUP .SCR SPACE IN @ C/L / DUP 3 .R 10 TAB SWAP .LINE ;
-
-: .SIZE <BUILDS , DOES> @ SIZE ! ;
-
-0 .SIZE .B        1 .SIZE .W     2 .SIZE .L
-DECIMAL
-: .MSG    -DUP IF 297 (LINE) -TRAILING TYPE THEN ;
-HEX
-\ 68000 assem: 1st, error, (operand), v!  ( 28  9 85 CRC       )
-: 1ST ( !CSP)  CLEARVAR CLEARVAR1   .L  \ set to cell size
-  (QUIET) @ IF BASE @ DECIMAL CR .SCR&LINE 52 TAB
-  HEX HERE FUDGE @ - 0U. ASCII | EMIT BASE ! THEN ;
-: 2ND REG  REG1 VARLEN CMOVE          CLEARVAR ;
-: ~  OP# OFF CLEARVAR  CLEARVAR1 ;   \ reset operand info
-: ERROR ~  HERE COUNT TYPE ."  ? "  .MSG
-     SP! IN  @ BLK @  QUIT  STOP  \ custom error stuff
-: ?ERROR    SWAP IF ERROR ELSE DROP THEN ;
-: (OPERAND)  OP# @ -DUP IF  \ operand storage setup
-      1-  1 ?ERROR   2ND ELSE 1ST THEN OP# 1+! ;
-: ^ ;     \ maintain compatibility
-: SIZECK  -1 XOR OVER AND  3 ?ERROR ;
-: V!  ADTYPE ! MODE ! 7 SIZECK REG ! ;
-: {  [COMPILE] [ ;       IMMEDIATE
-
-\ 68000 assem: registers, .lr               11 02 85 CRC
-: .LR   EXT @ 800 OR EXT ! ;
-
-: INDEXREG   7 SIZECK 1000 * EXT @ OR SWAP FF SIZECK OR ;
-
-: DATAREG   <BUILDS ,   DOES> (OPERAND)  @  0 1 V! ;
-: ADDREG    <BUILDS ,   DOES> (OPERAND)  @  1 2 V! ;
-
-  0 DATAREG DR0  1 DATAREG DR1  2 DATAREG DR2  3 DATAREG DR3
-  4 DATAREG DR4  5 DATAREG DR5  6 DATAREG DR6  7 DATAREG DR7
-
-  0  ADDREG AR0  1  ADDREG AR1  2  ADDREG AR2  3  ADDREG AR3
-  4  ADDREG AR4  5  ADDREG AR5  6  ADDREG AR6  7  ADDREG AR7
-                                               3  ADDREG S
-  4  ADDREG IP   5  ADDREG W    6  ADDREG U    7  ADDREG RP
- \ These just happen to be the "C" registers, ay - yup!!
-\ 68000 assem: addressing modes           (  4  9 85 CRC       )
- \ register indirect            register indirect w/ postinc.
-:  [ REG @ 2 4  V! ;            : [+ REG @ 3 8  V! ;
- \ addr indirect w/ predec      register indirect w/ displace
-: -[ REG @ 4 10 V! ;            : &[ REG @ 5 20 V!  EXT ! ;
- \ address reg indirect w/ index ( and displacement)
-: &D[ REG @ 6 40 V!  INDEXREG 7FFF AND EXT ! ; \ # ar dr# &d[
-       \ e.g.  4 ar0 3 &d[: disp 4 + ar0 + dr3
-: &A[ REG @ 6 40 V!  INDEXREG 8000 OR  EXT ! ; \ # ar ar# &a[
- \ absolute short address
-: @#  (OPERAND)  0 7  80 V!       EXT !        ; \ absolute
- \ absolute long address
-: @#L (OPERAND)  1 7 100 V!       EXT ! EXTL ! ;
- \   r# mod adtype
-
-
-\ 68000 assem: more addressing modes      (  4  9 85 CRC       )
-: *+    (OPERAND)  2 7  200 V! HERE - 2- EXT ! ;
-  \ pc w/ index ( and displacement) -- data register
-: &D*+  (OPERAND)  3 7  400 V! SWAP HERE - 2- SWAP
-         INDEXREG 7FFF AND EXT ! ; \ disp dr &D*+
-  \ pc w/ index ( and displacement) -- addr register
-: &A*+  (OPERAND)  3 7  400 V! SWAP HERE - 2- SWAP
-         INDEXREG 8000 OR  EXT ! ; \ disp dr &A*+
-  \ immediate data ( word)
-: #     (OPERAND)  4 7  800 V!  EXT !        ;
-  \ immediate data ( long)
-: #L    (OPERAND)  4 7 1000 V!  EXT ! EXTL ! ;
-: SR    (OPERAND)  4 7 4000 V!  .W ;
-: CCR   (OPERAND)  4 7 2000 V!  ;
-: USP   (OPERAND)  4 7 8000 V!  ;
-
-\ 68000 assem: lay, odds&ends, bad        ( 12  9 85 CRC       )
-: LAY    DUP , (QUIET) @ IF BASE @ HEX SWAP 0U. BASE !
-      2 SPACES ELSE DROP THEN ;
-
-: ODDS&ENDS   \ SP@ CSP @ - -DUP IF 6 .R    3 ERROR
-      ADTYPE1 @ 1000 = IF SIZE @ 2-    4 ?ERROR THEN
-      ADTYPE1 @  800 = IF SIZE @ 2 AND 5 ?ERROR THEN
-      ADTYPE  @ 2 AND ADTYPE1 @ 2 AND OR SIZE @ 0= AND 7 ?ERROR
-       ;  \ reset for next instruction.
 
-: BAD  7 ERROR   STOP
 
 
 
 
 
-\ 68000 assem: layext, finish             ( 12  9 85 CRC       )
-: LAYEXT        ADTYPE1  @  0EE0 AND
-   IF  \ &[  &D[ &A[  @#  *+  &D*+  &A*+  #
-     EXT1 @ LAY    ELSE  ADTYPE1 @  1100 AND
-   IF  ( @#L  #L ) EXT1 2@ LAY LAY   THEN THEN
-                ADTYPE   @  0EE0 AND
-   IF  \ &[  &D[ &A[  @#  *+  &D*+  &A*+  #
-     EXT  @ LAY    ELSE  ADTYPE  @  1100 AND
-   IF  ( @#L  #L ) EXT  2@ LAY LAY  THEN THEN    ;
 
-: FINISH  ODDS&ENDS LAY  LAYEXT ~ ;
 
 
 
 
 
-\ 68000 assem: condition codes, ?bytebr     08 10 84 CRC
-: BRCH <BUILDS ,  DOES> @  ;
 
-  0 BRCH TRUE   100 BRCH FALSE   200 BRCH HI     300 BRCH LS
-400 BRCH CC     500 BRCH CS      600 BRCH NE     700 BRCH EQ
-800 BRCH VC     900 BRCH VS      A00 BRCH PL     B00 BRCH MI
-C00 BRCH GE     D00 BRCH LT      E00 BRCH GT     F00 BRCH LE
 
-: ?BYTEBR  ( n --- n f )  DUP -81 OVER < SWAP 80 < AND
-      SWAP FF AND SWAP ;
 
 
 
 
 
 
-\ 68000 assem: typesfit, case stuff       ( 12  9 85 CRC       )
-: TYPESFIT?  \ caseval1, caseval2 --- fl
-        ADTYPE  @ -DUP IF AND 0= THEN SWAP
-        ADTYPE1 @ -DUP IF AND 0= THEN OR 0= ;
-transient
-: TYPESOF    \ executes if operand1 & operand2 types are in
-             \ caseval pairs.
-        4 ?PAIRS COMPILE TYPESFIT?  COMPILE 0BRANCH
-        HERE 0 , 5 ; IMMEDIATE
 
-: ENDTYPESCASE  4 ?PAIRS COMPILE BAD
-       \ does bad if mode illegal; adds finish at end
-         BEGIN  SP@ CSP @ = 0=
-         WHILE 2 [COMPILE] THEN  REPEAT
-         CSP ! COMPILE FINISH ;   IMMEDIATE
-permanent
-\ 68000 assem:  1manip --  6manip, 11-14  ( 12  9 85 CRC       )
-:  1MANIP   REG1 @ OR ;              \ 0-2R1
-:  2MANIP   REG  @ OR ;              \ 0-2R1
 
-:  3MANIP   REG1 @ 200 * OR ;        \ 9-11R1
-:  4MANIP   REG  @ 200 * OR ;        \ 9-11R1
 
-:  5MANIP   1MANIP  MOD1 @ 8 * OR ;  \  EA1
-:  6MANIP   2MANIP  MODE @ 8 * OR ;  \  EA1
 
-: 11MANIP   SIZE @ 0=   8 ?ERROR ;
-: 12MANIP   SIZE @      9 ?ERROR ;
-: 13MANIP   SIZE @ 1 - 0A ?ERROR ;
-: 14MANIP   SIZE @ 2 - 0B ?ERROR ;
 
 
-\ 68000 assem:  7manip -- 10manip, 15-17  ( 23  7 85 CRC       )
-:  7MANIP   SIZE @ C/L * OR ;         \ 6-7 size
-:  8MANIP   11MANIP  SIZE @ BL * OR ;
-:  9MANIP   11MANIP  SIZE @ 80 * OR ;
 
-1000 VARIABLE MSIZE 3000 , 2000 , 3000 ,
-: 10MANIP   MODE @ 40 * OR  SIZE @ 2* MSIZE + @ OR ;  \ movesize
 
-: 15MANIP   EXT @ ?BYTEBR       \ bra, bsr
-      IF ( 8 bit) ADTYPE OFF OR ELSE DROP  THEN ;
 
-: 16MANIP   SWAP F00 SIZECK OR ;  \  branch
-: 17MANIP   ROT  F00 SIZECK OR  SWAP 7 SIZECK OR ;  \ dbcc
 
 
 
-\ 68000 assem: 18manip -- 22manip         ( 23  7 85 CRC       )
-         \ addq
-: 18MANIP   ADTYPE1 OFF  EXT1 @ 1- 7 SIZECK 1+ 7 AND 200 * OR ;
 
-: 19MANIP   ADTYPE1 OFF ADTYPE OFF EXT1 @ FF SIZECK OR ; \ moveq
 
-: 20MANIP   MOD1 @ 0= IF 20 OR REG1 @  \ shift
-            ELSE EXT1 @ 1- 7 SIZECK 1+ 7 AND
-            ADTYPE1 OFF THEN  200 * OR ;
-
-: 21MANIP   ADTYPE OFF EXT @ 0F SIZECK OR ;  \ trap
 
-: 22MANIP   EXT @ EXT1 @ EXT ! EXT1 !  EXTL1 @ EXTL !  \ movem
-            ADTYPE @ ADTYPE1 @ ADTYPE ! ADTYPE1 ! ;
 
 
-\ 68000 assem: 23manip -- manip           ( 12  9 85 CRC       )
-: 23MANIP   ADTYPE @ 10 = ( reverse mask?)
-            IF EXT1 @ 10 0 DO  0 2 U/ LOOP
-                    1 10 0 DO  ROT OVER * ROT OR SWAP 2* LOOP
-            DROP EXT1 ! THEN ;
-
-: 24MANIP   .B ;  \ used to force bit instr to correct size
-
-: MANIP     DUP 0< 7 ?ERROR   19 MIN  EXEC
-  |       1MANIP  2MANIP  3MANIP  4MANIP  5MANIP  6MANIP  7MANIP
-  8MANIP  9MANIP 10MANIP 11MANIP 12MANIP 13MANIP 14MANIP 15MANIP
- 16MANIP 17MANIP 18MANIP 19MANIP 20MANIP 21MANIP 22MANIP 23MANIP
- 24MANIP   BAD   STOP
-
-
-
-\ 68000 assem: saveset, getlegal, forminst  11 02 85 CRC
-transient
-: SAVESET  C, ( 3rd manip) C,  ( 2nd) C,  ( 1st) \ make , to
-           ,  ( instruction basis)     \ use on pdp 11 - word!!
-        , ,  ( bit mapped set of 1st & 2nd legal modes) ;
-permanent
-: GETLEGALTYPESET \ ptr -- ptr modset modset
-      DUP  7 + @ OVER 5 + @ ;                       \ 11, 68K
-\     DUP 0A + @ OVER 8 + @ ;                       \ byte
-: FORMINST  \ ptr -- instruction word                \ 11:
-      DUP 3 + @   \ get basis                        \  6 +
-      OVER 2+ C@ MANIP   \ modify basis by 1st manip \  4 +
-      OVER 1+ C@ MANIP   \ modify basis by 2nd manip \  2+
-      SWAP    C@ MANIP   \ modify basis by 3rd manip
-   ;
-
-\ 68000 assem: savesets, 1mi, 2mi           04 01 85 CRC
-transient
-:  SAVESETS \ tos has count, number of sets to save.
-   0 DO SAVESET  LOOP ;
-permanent
-: 1MI <BUILDS   SAVESET   DOES> CASE
-        GETLEGALTYPESET  TYPESOF FORMINST ENDOF
-           ENDTYPESCASE ;
-
-: 2MI <BUILDS 2 SAVESETS  DOES> CASE
-        GETLEGALTYPESET  TYPESOF FORMINST ENDOF
-   9 +  GETLEGALTYPESET  TYPESOF FORMINST ENDOF
-           ENDTYPESCASE ;
-
-\ 0C +  GETLEGALTYPESET  TYPESOF FORMINST ENDOF \ 11 version
-
-\ 68000 assem: 4mi, 6mi                     04 01 85 CRC
-: 4MI <BUILDS 4 SAVESETS  DOES> CASE
-        GETLEGALTYPESET  TYPESOF FORMINST ENDOF
-   9 +  GETLEGALTYPESET  TYPESOF FORMINST ENDOF
-   9 +  GETLEGALTYPESET  TYPESOF FORMINST ENDOF
-   9 +  GETLEGALTYPESET  TYPESOF FORMINST ENDOF
-           ENDTYPESCASE ;
-: 6MI <BUILDS 6 SAVESETS  DOES> CASE
-        GETLEGALTYPESET  TYPESOF FORMINST ENDOF
-   9 +  GETLEGALTYPESET  TYPESOF FORMINST ENDOF
-   9 +  GETLEGALTYPESET  TYPESOF FORMINST ENDOF
-   9 +  GETLEGALTYPESET  TYPESOF FORMINST ENDOF
-   9 +  GETLEGALTYPESET  TYPESOF FORMINST ENDOF
-   9 +  GETLEGALTYPESET  TYPESOF FORMINST ENDOF
-           ENDTYPESCASE ;
-
-\ 68000 assem: instructions adbc -- and   ( 23  7 85 CRC       )
-\    1     1 C100    1    4   0C
-\   10    10 C108    1    4   0C     2MI ADBC,
-  1FFF     2 D0C0    4    5    9         \ adda,
-  1800   1FD  600    0    6    7         \ addi,
-   7FF     1 D000    4    5    7
-     1   1FC D100    3    6    7     4MI ADD,
-   800   1FF 5000    6    7   12     1MI ADDQ,
-     1     1 D100    1    4    7
-    10    10 D108    1    4    7     2MI ADDX,
-  1800  41FD  200    0    6    7         \ andi,
-     1   1FC C100    3    6    7
-   7FD     1 C000    4    5    7
-   7FD     1 C000    4    5    7     4MI AND,
-
-
-\ 68000 assem: instructions asl  -- bsr   ( 23  4 86 CRC 11:19 )
-   801     1 E100    2    7   14
-     0   1FC E1C0    0    6   0D     2MI ASL,
-   801     1 E000    2    7   14
-     0   1FC E0C0    0    6   0D     2MI ASR,
-     0   200 6000    0   0F   10     1MI BCC,
-     1   1FD  140    0    3    6
-   800   1FD  840    0    0    6     2MI BCHG,
-     1   1FD  180    0    3    6
-   800   1FD  880    0   18    6     2MI BCLR,
-     0   200 6000    0    0   0F     1MI BRA,
-     1   1FD  1C0    0    3    6
-   800   1FD  8C0    0   18    6     2MI BSET,
-     0   200 6100    0    0   0F     1MI BSR,
-
-
-\ 68000 assem: instructions btst -- eor   ( 23  7 85 CRC       )
-     1   1FD  100    0    3    6
-   800   1FD  800    0   18    6     2MI BTST,
-   FFD     1 4180    4    5   0D     1MI CHK,
-     0   1FD 4200    0    6    7     1MI CLR,
-  1FFF     2 B0C0    4    5    9         \ cmpa,
-  1800   1FD  C00    0    6    7         \ cmpi
-     8     8 B108    1    4    7         \ cmpm
-   7FF     1 B000    4    5    7     4MI CMP,
-     0   200 50C8    0    0   11     1MI DBCC,
-   FFD     1 81C0    0    4    5     1MI DIVS,
-   FFD     1 80C0    0    4    5     1MI DIVU,
-  1800  41FD  A00    0    6    7         \ eori
-     1   1FD B100    3    6    7     2MI EOR,
-
-
-\ 68000 assem: instructions exg  -- lsr   ( 11  9 85 CRC       )
-     1     1 C140    2    3   0E
-     2     2 C148    2    3   0E
-     1     2 C188    1    4   0E
-     2     1 C188    2    3   0E     4MI EXG,
-     0     1 4880    0    2    8     1MI EXT,
-     0   7E4 4EC0    0    0    6     1MI JMP,
-     0   7E4 4E80    0    0    6     1MI JSR,
-\  7E4     2 41C0    4    5   0E     1MI LEA,
-\    2   800 4E50    0    0    1     1MI LINK,
-   801     1 E108    2    7   14
-     0   1FC E3C0    0    6   0D     2MI LSL,
-   801     1 E008    2    7   14
-     0   1FC E2C0    0    6   0D     2MI LSR,
-
-
-\ 68000 assem: instructions mov  -- mulu  ( 23  7 85 CRC       )
-  1FFF   1FF    0    4    5   0A         \ mov, incl mova
-   FFD  2000 44C0    0    5   0C         \ mov, to ccr
-   FFD  4000 46C0    0    5   0D         \ mov, to sr
-  4000   1FD 40C0    0    6   0D         \ mov, from sr
-     2  8000 4E60    0    1   0E         \ mov, to usp
-  8000     2 4E68    0    2   0E         \ mov, from usp
-                                     6MI MOV,
-   7EC   800 4C80    5    8   16
-   800   1F4 4880    6    8   17     2MI MOVM,
-\    1    20  188    2    3    8
-\   20     1  108    1    4    8     2MI MOVP,
-   800     1 7000    0    4   13     1MI MOVQ,
-   FFD     1 C1C0    0    4    5     1MI MULS,
-   FFD     1 C0C0    0    4    5     1MI MULU,
-
-\ 68000 assem: instructions nbcd -- rol   ( 23  7 85 CRC       )
-\    0   1FD 4800    0    6   0C     1MI NBCD,
-     0   1FD 4400    0    6    7     1MI NEG,
-     0   1FD 4000    0    6    7     1MI NEGX,
-     0     0 4E71    0    0    0     1MI NOP,
-     0   1FD 4600    0    6    7     1MI NOT,
-  1800  41FD    0    0    6    7         \ ori,
-     1   1FC 8100    3    6    7
-   7FD     1 8000    4    5    7
-   7FD     1 8000    4    5    7     4MI OR,
-\    0   7E4 4840    0    0    6     1MI PEA,
-\    0     0 4E70    0    0    0     1MI RESET,
-   801     1 E118    2    7   14
-     0   1FC E7C0    0    6   0D     2MI ROL,
-
-
-\ 68000 assem: instructions ror  -- stop  ( 23  7 85 CRC       )
-   801     1 E018    2    7   14
-     0   1FC E6C0    0    6   0D     2MI ROR,
-   801     1 E110    2    7   14
-     0   1FC E5C0    0    6   0D     2MI ROXL,
-   801     1 E010    2    7   14
-     0   1FC E4C0    0    6   0D     2MI ROXR,
-     0     0 4E73    0    0    0     1MI RTE,
-\    0     0 4E77    0    0    0     1MI RTR,
-     0     0 4E75    0    0    0     1MI RTS,
-\    1     1 8100    1    4   0C
-\   10    10 8108    1    4   0C     2MI SBCD,
-     0   1FD 50C0    6   12   10     1MI SCC,
-\    0   800 4E72    0    0   0D     1MI STOP,
-
-
-\ 68000 assem: instructions sub  -- unlk  (  2  9 85 CRC       )
-  1FFF     2 90C0    4    5    9         \ suba,
-  1800   1FD  400    0    6    7         \ subi,
-   7FF     1 9000    4    5    7
-     1   1FC 9100    3    6    7     4MI SUB,
-   800   1FF 5100    6    7   12     1MI SUBQ,
-     1     1 9100    1    4    7
-    10    10 9108    1    4    7     2MI SUBX,
-     0     1 4840    0    2   0D     1MI SWAP,
-     0   1FD 4AC0   18    6   0C     1MI TAS,
-     0   800 4E40    0    0   15     1MI TRAP,
-\    0     0 4E76    0    0    0     1MI TRAPV,
-     0   1FD 4A00    0    6    7     1MI TST,
-\    0     2 4E58    0    0    2     1MI UNLK,
-
-
-\ 68000 assem: next, fillbr, condbr       ( 28  9 85 CRC       )
-\ HERE   ~ IP [+ ^ W MOV, ~  W [+ ^ AR0 MOV,  ~ AR0 [ JMP,
-\ : NEXT  {  2 CSP +! ] LITERAL  HERE 6 DUP ALLOT CMOVE ;
-: NEXT ~ IP [+ ^ W MOV, ~  W [+ ^ AR0 MOV,  ~ AR0 [ JMP, ;
-: BYTEBRCHK  ?BYTEBR 0= 0C ?ERROR ;
-: FILLBR   HERE OVER - 2- BYTEBRCHK OVER @ OR SWAP (QUIET) @
-  IF 2DUP  4 SPACES FUDGE @ - 0U. ASCII | EMIT 0U. THEN ! ;
-
-: CONDBR  F00 SIZECK 100 XOR 6000 OR ; \ cond --- 6x00
-: ENDBR   SWAP HERE - 2- ?BYTEBR IF OR ~ LAY
-   ELSE SWAP ~ LAY LAY THEN ;   \ addr 6x00  ---
-
-: IF, ?EXEC CONDBR ~ LAY HERE 2- 2 ;
-: ELSE,   ?EXEC 2 ?PAIRS 6000 ~ LAY FILLBR HERE 2- 2 ;
-: THEN,   ?EXEC 2 ?PAIRS FILLBR ;
-: BEGIN,  ?EXEC HERE 1 ~ ;
-\ 68000 assem: conditionals               ( 14  9 85 CRC       )
-: AGAIN,  ?EXEC 1 ?PAIRS 6000 ENDBR ;
-: UNTIL,  ?EXEC SWAP 1 ?PAIRS CONDBR ENDBR ;
-    \  --- whileaddr beginaddr 1 |
-: WHILE,  ?EXEC SWAP 1 ?PAIRS CONDBR ~ LAY HERE 2- SWAP 1 ;
-: REPEAT, AGAIN, FILLBR ;
-\ : IFL,    IF, 0 LAY DROP 2+ 12 ;
-\ : ELSEL,  ?EXEC 12 ?PAIRS 6000 ~ LAY 0 LAY  HERE OVER -
-\           SWAP !   HERE 2- 12 ;
-\ : THENL,  ?EXEC 12 ?PAIRS HERE OVER - SWAP ! ~ ;
-\ : WHILEL, WHILE, 0 LAY ;
-\ : REPEATL, AGAIN, 2+ HERE OVER - SWAP ! ;
-: DO,    \ cc  ---  cc reg addr chk | mark start of  dbcc  loop
-  ADTYPE @ 1-  0D ?ERROR REG @ BEGIN, 4 + ;
-: LOOP,  \ cc reg addr chk ---  | assemble  dbcc  loop
-  5 ?PAIRS *+ DBCC, ;   \ e.g. screen 394
-\ 68000 assem: message screen!!!          ( 12  9 85 CRC       )
- Too many operands??
- Something too large here!!
- Wrong argument count!
- #L requires .L !
- # requires .W !
- No byte ops on addr regsisters!
- Has Wrong Addressing Mode
- Can't use byte!
- Byte only!
- Word only!
- Long only!
- Branch out of Range
- Data Register only
- PC Relative out of range!
- >> NOT a User Variable <<
-\ 68000 Source Code: trial loader         ( 12  9 85 CRC       )
-BASE @ HEX FORTH DEFINITIONS   DELTA LAST ! OF/NF    CR
-DELTA FUDGE !   COMPILE-ADDR DUP DPNEW ! FIRST OVER - ERASE
-SETOLD COMPILE-ADDR DPNEW ! mf SETNEW     DECIMAL WARNING ON
-LOUD
-\ LABEL >OUTPUT  2 , LABEL >INPUT  2 ,
-\ 311 LOAD   \ source to be tried
-ASSEMBLER DPNEW @ DELTA - LABEL IOB 18 ALLOT 359 LOAD
-QUIET SETOLD CR mf DPNEW @ FIRST OVER - ERASE DECIMAL
-?CRT 0= IFTRUE PAGE IFEND
-BASE-ADDR  DPNEW @ DELTA - OVER - HEX  2DUP DUMP WDUMP
-
-?CRT 0= IFTRUE PAGE IFEND
-DECIMAL SPACE #BUFS . ." Buffers left"   BASE ! ;S
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \ PDP 11 target compiler: dump              24 01 85 CRC
@@ -4798,34 +4798,7 @@ DECIMAL SPACE #BUFS . ." Buffers left"   BASE ! ;S
    ASCI  I  F0 AND F0 = IF I WHEAD THEN
    ?TERMINAL  IF LEAVE  THEN  10 +LOOP CR R> BASE ! ;
   BASE !   ;S
-\ 68000 Source Code: loader               ( 26  7 87 CRC 14:59 )
-BASE @ >R       DECIMAL -60 +BLK NEEDED WORKSPACE
-HEX FORTH DEFINITIONS    pTODAY  CHOP
-SETOLD mf SETNEW     DECIMAL       WARNING ON
-       81 +LOAD   \ loader pre-amble
-   3   10 +THRU   \ source from lit to sp!
- -36  -35 +THRU   \ compiler directives
-  11   64 +THRU   \ source from (key) to while
-  75   79 +THRU   \ source from (key) on
-(  73     +LOAD CR (  wdump)  SETOLD SETNEW
- 112  119 +THRU  \ forward references
-TXT Copyright 1986-1991 C. Curley" setold setnew
-       80 +LOAD   \ tos loader patches
-QUIET SETOLD CR mf HEX  DPNEW @ IMAGETOP OVER - ERASE
-DECIMAL CR #BUFS . ." Buffers"  R> BASE !       CR pTODAY CR
 
-\ base-addr memory map                    ( 17 10 85 CRC       )
-all addresses are offset from base-addr
-addr   count   comment
-   0       6   jump to cold start
-   6       6   jump to warm start
-  0C       4   "68000" in radix 36, per fig model
-  10       4   nfa of top of dictionary. Why, I don't know.
-  14       4   backspace characters. Usually 7F & 08
-  18       4   user area base address
-  1C       4   top of parameter stack; orphaned user  S0
-  20       4   top of return stack
-  24      60   initial values for user variables
 
 
 
@@ -4843,303 +4816,36 @@ addr   count   comment
 
 
 
-
-
-
-\ 68000 : boot parameters area            ( 26  7 87 CRC 15:24 )
-ASSEMBLER HEX ~ 0 @#L .L JMP,   \ cold start jmp,
- ( 4EF9 )     ~ 0 @#L .L JMP,   \ warm start jmp,
-  9F7800 ,             0 ,    7F W, CTL H W, \ 2 backspaces on
-\ 68000 radix 36   dict top   backspace chr  \ atari & ibm pc
-HERE 78  DUP == COLDS  4- DUP ALLOT   ERASE  \ colds
-CODE LIT  IP [+ S -[ MOV,  NEXT  ;C  'NF LIT  CFA  ' NF*LIT* !
-
-CODE WLIT  IP [+ AR0 .W MOV,   AR0 S -[ MOV,  NEXT  ;C
-       'NF WLIT  CFA    ' NF*WLIT*  !
-
-CODE EXECUTE  S [+ W MOV,  W [+ AR0 MOV,  AR0 [ JMP, ;C
-
-
-
-
-\ 68000 : branch 0branch (of) (loop) ;s   (  3  2 87 CRC 11:14 )
-CODE BRANCH   BEGIN, 2DUP 2DUP  >R >R >R >R >R >R
-  LABEL LP3   IP [ IP .W ADD,  NEXT ;C
-CODE 0BRANCH  S [+ TST,  R> R> NE UNTIL,  2 # IP ADDQ, NEXT  ;C
-   'NF 0BRANCH CFA  ' *0BRAN* !   'NF BRANCH CFA  ' *BRAN* !
-
-CODE (OF)     S [+ DR0 MOV,   S [ DR0 CMP,   R> R> EQ UNTIL,
-              2 # IP ADDQ,  4 # S ADDQ,  NEXT    ;C
-
-CODE (LOOP)   1 # RP [ ADDQ,
-  LABEL LP2   4 RP &[ DR7 MOV,  RP [ DR7 CMP,  R> R>  LE UNTIL,
-  LABEL LP5   8 # RP ADDQ,  2 # IP ADDQ,   NEXT ;C
-'NF (LOOP) CFA  ' *(LOOP)* !
-
-CODE ;S       RP [+ IP MOV,  NEXT  ;C
-         'NF ;S CFA  ' *;S*  !
-\ 68000 : (+loop) (do) (pause) paws       ( 21  1 87 CRC 20:50 )
-CODE (+LOOP)  S [+ DR7 MOV,  DR7 RP [ ADD,  DR7 TST,
-              PL LP2 *+ BCC,
-              4 RP &[ DR7 MOV,  RP [ DR7 CMP,
-              GE LP5 *+ BCC,   LP3 *+ BRA,   ;C
-'NF (+LOOP) CFA  ' *(+LOOP)* !
-CODE (DO)  S [+ DR7 MOV,  S [+ RP -[ MOV,
-           DR7 RP -[ MOV,  NEXT ;C
-  \ call to pause current task.
-LABEL (PAUSE)  RP 4 U &[ MOV, ( BEGIN,)  8 U &[ U MOV,
- ( U [ TST,  NE UNTIL,)  4 U &[ RP MOV,  RTS,
-  \ call from i/o code definitions inside loops
-LABEL PAWS   IP RP -[ MOV,  S RP -[ MOV,
-             (PAUSE) *+ BSR,   \ execution resumes here
-             RP [+ S MOV,  RP [+ IP MOV,  RTS,
-
-\ 68000 : i digit pause                   ( 20  5 86 CRC 10:11 )
-   \ or expand it out
-CODE PAUSE  PAWS *+ BSR, NEXT   ;C
-
-CODE I                                                       ;C
-
-CODE DIGIT  DR7 CLR,  S [+ DR1 MOV,  S [ DR0 MOV,
-   ASCII 0 # DR0 .W SUB,   CS IF,
-LABEL BADDIG   DR7 S [ MOV,  NEXT  THEN, \ error exit
-   09 # DR0 .W CMP,
-   GT IF,  11 # DR0 .W CMP,  LT BADDIG *+ BCC,
-   7 # DR0 .W SUB,    THEN,
-   DR1 DR0 .W CMP,  GE BADDIG *+ BCC,
-   DR0 .L EXT,  1 # DR7 ADDQ,
-   DR0 S [ MOV,    DR7 S -[  MOV, NEXT   ;C
-
-\ 68000 : (find) - part 1                 ( 18  9 88 CRC  9:14 )
-\ DEBUG FORGET TASK
-\ FORTH DEFINITIONS  : TASK ;        BASE @ >R HEX
-CODE (FIND)  S [+ AR1 MOV,  S [ AR0 MOV,
-  AR0 [+ DR7 .B MOV,  AR0 DR6 MOV,                \ -> 1st char
-  6A ( forth's pseudo nfa) U &[ W LEA,            \ taskfix
-  BEGIN,  AR1 W CMP,  LE IF,  W AR1 MOV,  THEN,   \ taskfix
-    AR1 [ DR1 .B MOV,  3F # .W DR1 AND,   \ get len
-    DR7 DR1 .B CMP,  EQ IF,   \  br on lens /=
-    AR1 AR2 MOV,  1 # AR2 ADDQ,  DR6 AR0 MOV,
-;S  -->
-
-dr6 : word being searched
-dr0 : word sought               dr7 : len of word sought
-dr1 : length of current word
-trial code for mods on scr 5298
-\ 68000 : (find) - part 2                 ( 18  9 88 CRC  9:32 )
-    BEGIN,  AR2 [+ .B DR4 MOV,  AR0 [+ DR0 .B MOV,
-       DR0 DR4 .B EOR,  1 # DR4 .B ASL,
-          EQ IF, ( ** ) >R >R  CS UNTIL,
-       8 # AR2 ADDQ,  AR2 S [ MOV,                    \ pfa
-       DR1 CLR,  AR1 [ DR1 .B MOV,  DR1 S -[ MOV,     \ count
-       1 # DR0 MOVQ,  DR0 S -[ MOV,  NEXT             \ flag
-    ( **) R> R> THEN, THEN,  1 # AR1 SUBQ,
-    BEGIN,  2 # AR1 ADDQ,  7 # AR1 [ BTST, NE UNTIL, \ nf -> lf
-    1 AR1 &[ AR1 MOV,  AR1 DR0 MOV,  EQ UNTIL,
-  DR0 S [ MOV, NEXT  ;C
-
-;s
-: TEST  BL WORD  HERE COUNT UPPER  HERE 10 DUMP
-        HERE LATEST FND ;
-editor flush   r> base !
-\ 68000 : enclose                         ( 26  2 86 CRC       )
-CODE ENCLOSE  S [+ DR0 MOV,      S [ AR0 MOV,
-              -1 #L DR1 MOV,
-      BEGIN,  1 # DR1 ADDQ,      0 AR0 1 &D[ DR0 .B CMP,
-              NE UNTIL,          DR1 S -[ MOV,
-LABEL ENCL3   0 AR0 1 &D[ DR0 .B CMP,      NE IF,
-              0 # 0 AR0 1 &D[ .B CMP,      NE IF,
-              1 # DR1 ADDQ,      ENCL3 *+ BRA,
-      THEN,   S [ DR1 CMP,       EQ IF,
-              1 # DR1 ADDQ,      DR1 S -[ MOV,
-LABEL ENCL8   DR1 S -[ MOV,      NEXT
-      THEN,   DR1 S -[ MOV,      ENCL8 *+ BRA,
-      THEN,   DR1 S -[ MOV,      1 # DR1 ADDQ,
-              ENCL8 *+ BRA,                    ;C
-;S
-
-\ 68000 : @execute exec sp@ sp!           ( 19  4 91 CRC 12:47 )
-CODE @EXECUTE   RP [+ IP MOV,  S [+ AR1 MOV,
-  AR1 [ W MOV,  W [+ AR0 MOV,  AR0 [ JMP, ;C
-'NF @EXECUTE CFA  ' *@EXEC* !
-
-CODE EXEC  \ index ---  | index to execution array
-  S [+ DR0 MOV,  2 # DR0 ASL,  DR0 IP ADD,
-  IP [ W MOV,  RP [+ IP MOV,  W [+ AR0 MOV,  AR0 [ JMP,  ;C
-
-CODE SP!  0C U &[ S MOV,                   NEXT     ;C
-
-CODE SP@  S S -[ MOV, NEXT  ;C
-
-ASSEMBLER LABEL MASK 7F W,
-
-
-\ 68000 : (emit) (key) (?terminal) mon    ( 19  4 91 CRC 12:46 )
-CODE (EMIT)  S [+ DR0 MOV,  MASK *+ .W DR0 AND,  \ data
-  DR0 RP -[ .W MOV,  U 7A ( i/o) &[ RP -[ .W MOV,
-  3 # RP -[ .W MOV, \ routine            ^ device
-  0D # TRAP,  6 # RP ADDQ,  NEXT   ;C
-CODE (KEY)   BEGIN,  PAWS *+ BSR,  U 78 &[ RP -[ .W MOV,
-  1 # RP -[ .W MOV, 0D # TRAP,  4 # RP ADDQ,  DR0 TST, NE UNTIL,
-  U 78 &[ RP -[ .W MOV,  2 # RP -[ .W MOV,  0D # TRAP,
-  4 # RP ADDQ,  FF #L DR0 AND,  DR0 S -[ MOV,  NEXT  ;C
-CODE (?TERMINAL)   DR6 CLR,  U 78 ( i/o) &[ RP -[ .W MOV,  \ dev
-  1 # RP -[ .W MOV, ( routine # ) 0D # TRAP,  DR0 .W TST,
-  NE IF, ( eat it)  4 # RP ADDQ,   U 78 ( i/o) &[ RP -[ .W MOV,
-  2 # RP -[ .W MOV,  0D # TRAP,  1 # DR6 ADDQ,
-  THEN,  DR6 S -[ MOV,  4 # RP ADDQ,  NEXT    ;C
-CODE MON   -FC FBASE + @#L AR0 MOV,  AR0 USP MOV,
-  RP -[ .W CLR,  1 # TRAP,  ;C
-\ 68000 : cmove 0= 0< >                   (  2  6 86 CRC 15:04 )
-\ CODE QCMOVE    \ Warning: max count $7fff!!
-\   S [+ DR0 MOV,  S [+ AR1 MOV,        scr 323
-\   S [+ AR0 MOV,   HERE 4+ DELTA - *+ BRA,
-\   FALSE DR0 DO,  AR0 [+ AR1 [+ .B MOV,   LOOP,  NEXT  ;C
-\ <cmove removed from code; is separate word for addons
-
-CODE 0=   DR7 CLR,   S [ TST,   EQ IF,  1 # DR7 ADDQ,  THEN,
-  DR7 S [ MOV,  NEXT    ;C
-
-CODE 0<   DR7 CLR,   S [ TST,   MI IF,  1 # DR7 ADDQ,  THEN,
-  DR7 S [ MOV,  NEXT    ;C
-
-CODE >    DR0 CLR,  S [+ DR1 MOV,  S [ DR1 CMP,
-   LT IF,  1 # DR0 ADDQ,  THEN,  DR0 S [ MOV,  NEXT ;C
-
-\ 68000 : drop 2drop u*                   ( 15  7 86 CRC 11:51 )
-CODE DROP   4 # S ADDQ,  NEXT  ;C
-CODE 2DROP  8 # S ADDQ,  NEXT  ;C
-
-CODE U* S [+ DR0 MOV,     DR0 DR2 MOV,   DR0 DR4 MOV,
-        S [+ DR1 MOV,     DR1 DR3 MOV,   DR1 DR5 MOV,
-        DR2 .W SWAP,      DR3 .W SWAP,
-        DR2 DR6 MOV,      DR3 DR7 MOV,
-        DR7 DR2 MULU,     DR6 DR1 MULU,
-        DR5 DR0 MULU,     DR4 DR3 MULU,  DR7 CLR,
-        DR0 S -[ .W MOV,  DR0 .W SWAP,
-        DR0 DR1 .W ADD,   DR7 DR2 ADDX,  DR2 .W SWAP,
-        DR3 DR1 ADD,      DR7 DR2 ADDX,  DR2 .W SWAP,
-        DR1 S -[ .W MOV,  DR1 .W SWAP,
-        DR1 DR2 .W ADD,   DR2 S -[ MOV,
-  NEXT   ;C
-\ 68000 : u/ 4+ 2+ 1+ =cells              ( 12  2 87 CRC 17:38 )
-CODE U/   S [+ DR2 MOV,  S [+ DR0 MOV,  S [ DR1 MOV,
-  1F # DR3 .W MOV,     FALSE DR3 DO,
-  1 # DR1 LSL,  1 # DR0 ROXL,   DR2 DR0 SUB,
-  CS IF,  DR2 DR0 ADD,  ELSE,  1 # DR1 ADDQ, THEN,  LOOP,
-  DR0 S [ MOV,   DR1 S -[ MOV,   NEXT   ;C
-
-CODE 4+  4 # S [ ADDQ,   NEXT ;C
-
-CODE 2+  2 # S [ ADDQ,   NEXT ;C
-
-CODE 1+  1 # S [ ADDQ,   NEXT ;C
-
-CODE =CELLS  S [ DR0 MOV,  1 # DR1 MOVQ,  DR1 DR0 AND,
-  DR0 S [ ADD,  NEXT ;C
-
-\ 68000 : and or xor rp! leave >r r> r      16  2 85 CRC
-CODE AND   S [+ DR7 MOV,  DR7 S [ AND,          NEXT     ;C
-
-CODE OR    S [+ DR7 MOV,  DR7 S [ OR,           NEXT     ;C
-
-CODE XOR   S [+ DR7 MOV,  DR7 S [ EOR,          NEXT     ;C
-
-CODE RP!   10 U &[ RP MOV,                      NEXT     ;C
-
-CODE LEAVE  RP [ 4 RP &[  MOV,                  NEXT     ;C
 
-CODE >R   S [+ RP -[ MOV,                       NEXT     ;C
 
-CODE R>   RP [+ S -[ MOV,                       NEXT     ;C
 
-CODE R    RP [  S -[ MOV,                       NEXT     ;C
-\ 68000 : < rot + - d+                    ( 16  2 86 CRC       )
-CODE <   DR0 CLR,  S [+ DR1 MOV,  S [ DR1 CMP,
-   GT IF,  1 # DR0 ADDQ,  THEN,  DR0 S [ MOV,  NEXT  ;C
 
-CODE ROT   S 8 &[ DR0 MOV,  S 4 &[ S 8 &[ MOV,
-   S [ S 4 &[ MOV,  DR0 S [ MOV,  NEXT ;C
 
-CODE +     S [+ DR7 MOV,  DR7 S [ ADD,     NEXT     ;C
 
-CODE -     S [+ DR7 MOV,  DR7 S [ SUB,     NEXT     ;C
 
-CODE D+    S [+ DR0 .L MOV,  S [+ DR1 .L MOV,
-           DR1 S 4 &[  ADD,
-           S [ DR1 MOV,  DR1 DR0 ADDX,
-           DR0 S [ MOV,  NEXT ;C
 
-\ 68000 : minus dminus over s->d swap dup   17  2 85 CRC
-CODE MINUS   S [ NEG,  NEXT  ;C
 
-CODE DMINUS   S 4 &[ NEG,  S [ NEGX,  NEXT ;C
 
-CODE OVER   4 S &[ S -[ MOV,  NEXT ;C
 
-CODE S->D   DR0 CLR, S [  TST,   MI IF,
-    1 # DR0 SUBQ,  THEN,  DR0 S -[ MOV,  NEXT ;C
 
-CODE SWAP   S [+ DR0 MOV,  S [ DR1 MOV,
-            DR0 S [  MOV,  DR1 S -[ MOV,   NEXT ;C
 
-CODE DUP   S [ S -[ MOV, NEXT  ;C
 
 
-\ 68000 : -dup 2dup +! toggle within      ( 27  6 91 CRC  9:17 )
-CODE -DUP   S [ TST,  'NF DUP CFA 4+ *+ NE BCC,  NEXT   ;C
 
-CODE 2DUP   4 S &[ S -[ MOV,  4 S &[ S -[ MOV,  NEXT ;C
 
-CODE NIP  S [+ S [ MOV,  NEXT   ;C
 
-CODE +!   S [+ AR0 MOV,  S [+ DR1 MOV,  DR1 AR0 [ ADD,  NEXT ;C
 
-CODE TOGGLE   S [+ DR1 MOV,  S [+ AR0 MOV,
-              DR1 AR0 [ .B EOR,  NEXT ;C
 
-CODE WITHIN  \ n l1 l2 --- fl | is n between lim1 & lim2 incl.?
- 1 # DR0 MOVQ,  S [+ DR1 MOV,   S [+ DR2 MOV,
- S [ DR1 CMP,  LT IF,  DR0 CLR,  THEN,
- S [ DR2 CMP,  GT IF,  DR0 CLR,  THEN,  DR0 S [ MOV,  NEXT ;C
-\ 68000 : @ c@ !                            21  2 85 CRC
-CODE @   S [ AR0 .L MOV,       \ avoid byte boundary
-   AR0 [+   S  [ .B MOV,       \ problems
-   AR0 [+ 1 S &[ .B MOV,
-   AR0 [+ 2 S &[ .B MOV,
-   AR0 [  3 S &[ .B MOV,  NEXT  ;C
 
-CODE C@  DR0 CLR,  S [ AR0 .L MOV,
-         AR0 [ DR0 .B MOV,
-         DR0 S [ MOV,   NEXT ;C
 
-CODE !   S [+ AR0 .L MOV,
-         S [+ AR0 [+ .B MOV,
-         S [+ AR0 [+ .B MOV,
-         S [+ AR0 [+ .B MOV,
-         S [+ AR0 [  .B MOV, NEXT ;C
-\ 68000 : c! 4- 2- 1- on off 1+!          ( 18  3 86 CRC       )
-CODE C!  S [+ AR0 MOV,  3 # S ADDQ,
-         S [+ AR0 [ .B MOV,  NEXT ;C
 
-CODE 4-  4 # S [ SUBQ,  NEXT ;C
 
-CODE 2-  2 # S [ SUBQ,  NEXT ;C
 
-CODE 1-  1 # S [ SUBQ,  NEXT ;C
 
-CODE ON  S [+ AR0 MOV,  1 # DR0 MOVQ,  DR0 AR0 [ MOV,  NEXT ;C
 
-CODE OFF S [+ AR0 MOV,  AR0 [ CLR,  NEXT                 ;C
 
-CODE 1+! S [+ AR0 MOV,  1 # AR0 [ ADDQ,  NEXT   ;C
 
-\ 68000 : w@ w!                           ( 23  4 86 CRC 12:10 )
-CODE W@   S [+ AR0 MOV,  AR0 1 &[ S -[ .B MOV,
-  AR0 [ S -[ .B MOV,  S -[ .W CLR,   NEXT ;C
 
-CODE W!   S [+ AR0 MOV,  2 # S ADDQ,  S [+ AR0 [+ .B MOV,
-  S [+ AR0 [ .B MOV,  NEXT  ;C
 
 
 
@@ -5150,27 +4856,9 @@ CODE W!   S [+ AR0 MOV,  2 # S ADDQ,  S [+ AR0 [+ .B MOV,
 
 
 
-\ 68000 : m*                                19  2 85 CRC
-CODE M*    S [ DR2 MOV,  S 4 &[ DR1 MOV,
-   DR1 DR3 MOV,  DR1 DR4 MOV,  DR4 .W SWAP,
-   DR2 DR0 MOV,  DR0 .W SWAP,
 
-   DR2 DR1 MULU,  DR4 DR2 MULU,  DR0 DR3 MULU,  DR0 DR4 MULU,
 
-   DR1 .W SWAP,  DR2 DR1 .W ADD,
-   DR0 CLR,  DR0 DR4 ADDX,  DR3 DR1 .W ADD,  DR0 DR4 ADDX,
-   DR1 .W SWAP,  DR2 .W CLR,  DR2 .W SWAP, DR3 .W CLR,
-   DR3 .W SWAP, DR3 DR2 ADD,  DR4 DR2 ADD,
 
-   S [ TST,  MI IF,  S 4 &[ DR2 SUB,  THEN,
-   S 4 &[ TST,  MI IF,  S [ DR0 SUB,  THEN,
-   DR2 S [ MOV,  DR1 S 4 &[ MOV,
-   NEXT ;C
-\ 68000 : cmove                           ( 20  5 94 CRC 19:59 )
-CODE CMOVE  \ slower than qcmove, but larger count
-   S [+ DR0 MOV,  S [+ AR1 MOV,  S [+ AR0 MOV, \  DR0 TST,
-   NE IF,  BEGIN,  AR0 [+ AR1 [+ .B MOV,  1 # DR0 SUBQ,
-           EQ UNTIL,  THEN,  NEXT ;C
 
 
 
@@ -5182,348 +4870,112 @@ CODE CMOVE  \ slower than qcmove, but larger count
 
 
 
-\ 68000 : m/                              ( 23  7 86 CRC 12:41 )
-;S
-CODE TM/      EDITOR FLUSH ASSEMBLER  HEX
-  S [+ DR2 MOV,  S [+ DR0 MOV,  S [ DR1 MOV,
-  DR2 TST,  MI IF,  DR1 NEG,  DR0 NEGX,  DR2 NEG,  THEN,
-  DR0 TST,  MI IF,  DR2 DR0 ADD,  THEN,
-  1F # DR3 .W MOV,  1 # DR1 LSL,
-  FALSE DR3 DO,  1 # DR0 ROXL,  DR2 DR0 SUBX,
-      CS IF,  DR2 DR0 ADD,  THEN,  1 # DR1 ROXL,  LOOP,
-  DR1 NOT,  DR0 S [ MOV,  DR1 S -[ MOV,  NEXT   ;C   ;S
 
 
 
 
 
 
-\ 68000 : : ; constant variable           ( 22  8 91 CRC 15:04 )
-: :     GAP  ( ?exec) GAP ( !csp) GAP ( current)  @
-        GAP  ( context)  !  GAP  ( create)  GAP  (  ] )
-   ;CODE  IP RP -[ MOV,  W IP MOV,  NEXT  ;C IMMEDIATE
-' *COLON*  !
 
-: ;   GAP ( ?csp) GAP ( compile) ;S GAP ( smudge)
-      GAP ( [ ) ;       IMMEDIATE
 
-: CONSTANT  GAP ( create) GAP ( smudge) GAP ( , )
-   ;CODE  W [ S -[ MOV,  NEXT  ;C  ' *CONSTANT* !
 
-: VARIABLE  CONSTANT  ;CODE
-  W S -[ MOV,  NEXT  ;C         ' *VARIABLE*  !
 
 
-\ 68000 : user some constants +origin     (  7  8 86 CRC 13:51 )
-: USER   GAP ( create) GAP ( smudge )  GAP  ( w, )
-  ;CODE   U AR0 MOV,   W [ AR0 .W ADD,
-  AR0 S -[ MOV,  NEXT ;C       ' *USER* !
 
-    5 CONSTANT 5              40 CONSTANT C/L
-    0 CONSTANT 0               1 CONSTANT 1
-    2 CONSTANT 2               3 CONSTANT 3
-    4 CONSTANT 4              20 CONSTANT BL
 
-*B/BUF*  CONSTANT B/BUF   400 *B/BUF* / CONSTANT B/SCR
 
-CODE +ORIGIN  FBASE #L S [ ADD,  NEXT ;C
 
 
 
-\ 68000 : initialised user variable       ( 18  6 86 CRC 10:29 )
-HEX  |  0 USER MOI              | 0C USER S0
-       14 USER TIB                18 USER WIDTH
-       1C USER WARNING            20 USER FENCE
-       24 USER DP                 28 USER VOC-LINK
-       2C USER 'KEY               30 USER 'EXPECT
-       34 USER '?TERMINAL         38 USER 'EMIT
-       3C USER 'TYPE              40 USER 'GOTOXY
-       44 USER 'PAGE              48 USER 'LIST
-       4C USER 'CR
-       50 USER 'R/W               54 USER 'QUIT
-       58 USER 'ABORT             5C USER 'CREATE
-       60 USER 'FIRST             64 USER 'LIMIT
-     ( 68 dummy for vocabs )   |  6C USER VLFTH
-     ( 70 dummy for vocabs )   |  74 USER BOTSTACK
-       78 USER I/O \ change  (key) , etc. if you change this
-\ 68000 : uninitialised user variable     ( 18  3 86 CRC       )
-\ leave gap to 80 for expansion of initialised user variables
-   80 USER BLK                84 USER IN
-   88 USER OUT                8C USER SCR
-   90 USER OFFSET             94 USER CONTEXT
-   98 USER CURRENT            9C USER STATE
-   A0 USER BASE               A4 USER DPL
-   A8 USER FLD                AC USER CSP
-   B0 USER R#                 B4 USER HLD
-   B8 USER USE                BC USER PREV
 
-\ |  C0 USER CURSEG          |  C4 USER MEMPTR
 
-CODE FIRST  OFUSER 'FIRST S -[ MOV,  NEXT     ;C
 
-CODE LIMIT  OFUSER 'LIMIT S -[ MOV,  NEXT     ;C
-\ 68000 : here allot , c, w,              ( 22  8 91 CRC 15:08 )
-CODE HERE   OFUSER DP S -[ MOV,  NEXT     ;C
 
-CODE ALLOT  S [+ DR0 MOV,  DR0 OFUSER DP ADD,  NEXT     ;C
 
-CODE ,   OFUSER DP AR0 MOV,
-    4 # OFUSER DP ADDQ,   'NF ! CFA T@ 2+ *+ BRA, ;C
 
-CODE W,  OFUSER DP AR0 MOV,
-    2 # OFUSER DP ADDQ,  'NF W! CFA T@ 2+ *+ BRA, ;C
 
-CODE C,  OFUSER DP AR0 MOV,
-    1 # OFUSER DP ADDQ,  'NF C! CFA T@ 2+ *+ BRA, ;C
 
-CODE BACK    OFUSER DP AR0 MOV,   AR0 DR0 MOV,
-  DR0 S [ SUB,  'NF W, CFA T@ 4+ *+ BRA,  ;C
-\ 68000 : = key emit page cr r/w ?terminal( 27  6 91 CRC  9:23 )
-CODE = DR0 CLR,  S [+ DR1 MOV,  S [ DR1 CMP,
-  EQ IF,  1 # DR0 MOVQ, THEN,  DR0 S [ MOV,   NEXT   ;C
 
-: KEY             PAUSE  'KEY       @EXECUTE    STOP
 
-: EMIT   OUT 1+!  PAUSE  'EMIT      @EXECUTE    STOP
 
-: PAGE                  'PAGE @ EXECUTE  OUT OFF ;
 
-: CR                    'CR   @ EXECUTE  OUT OFF ;
 
-: R/W        PAUSE  'R/W       @EXECUTE    STOP
 
-: ?TERMINAL  PAUSE  '?TERMINAL @EXECUTE    STOP
 
-\ 68000 : traverse latest pfa             ( 17  9 88 CRC 12:49 )
-LABEL (TRAV)   BEGIN,  DR0 AR0 ADD,  7 # AR0 [ .B BTST,
-  NE UNTIL,  RTS,
 
-CODE NFA  FE # DR0 MOVQ,  S [ AR0 MOV,  8 # AR0 SUBQ,
-  (TRAV) *+ BSR,  AR0 S [ MOV,  NEXT  ;C
 
-CODE PFA   2 # DR0 MOVQ,  S [ AR0 MOV,  1 # AR0 SUBQ,
-  (TRAV) *+ BSR,  9 # AR0 .W ADD,  AR0 S [ MOV,  NEXT  ;C
 
-CODE TRAVERSE   S [+ DR0 MOV,  S [ AR0 MOV,
-  (TRAV) *+ BSR,  AR0 S [ MOV,  NEXT  ;C
 
-CODE LATEST  OFUSER CURRENT AR0 MOV,  AR0 [ S -[ MOV,  NEXT ;C
 
-CODE LFA 8 # S [ SUBQ, NEXT ;C       CODE CFA   ;C
-\ 68000 : space (page) u< ?align 4/ 4*    ( 17  9 88 CRC 12:51 )
-: SPACE    BL EMIT  ;
 
-: (PAGE)   0C EMIT  ;
 
-CODE U<   DR0 CLR,  S [+ DR1 MOV,  S [ DR1 CMP,
-   HI IF,  1 # DR0 ADDQ,  THEN,  DR0 S [ MOV,  NEXT  ;C
 
-CODE ?ALIGN   OFUSER DP DR0 MOV,  1 # DR1 MOVQ,  DR1 DR0 AND,
-          DR0 OFUSER DP ADD,   NEXT ;C
 
-CODE 4/  S [ DR0 MOV,  2 # DR0 LSR,  DR0 S [ MOV,  NEXT ;C
 
-CODE 4*  S [ DR0 MOV,  2 # DR0 LSL,  DR0 S [ MOV,  NEXT ;C
 
 
-\ 68000 : !csp ?error ?comp ?exec ?loading( 15  2 86 CRC       )
-CODE !CSP   S OFUSER CSP MOV,  NEXT     ;C
 
-: ?ERROR    SWAP IF GAP   ( error) ELSE DROP THEN ;
 
-: ?COMP     STATE @ 0=   11 ?ERROR ;
 
-: ?EXEC     STATE @      12 ?ERROR ;
 
-: ?PAIRS    -  13 ?ERROR ;
 
-: ?CSP      SP@ CSP @ - 14 ?ERROR ;
 
-: ?LOADING  BLK @ 0= 16 ?ERROR ;
 
 
-\ 68000 : compile [ smudge hex bounds hex ( 29  1 89 CRC 10:19 )
-: COMPILE    ?COMP  R> DUP 4+ >R @ , ;
 
-CODE [  OFUSER STATE CLR, NEXT  ;C IMMEDIATE
 
-CODE ]  C0 #L OFUSER STATE MOV,  NEXT ;C
 
-CODE SMUDGE   OFUSER CURRENT AR0 MOV,
- AR0 [ AR0 MOV,  5 # AR0 [ BCHG,  NEXT ;C
 
-CODE HEX      10 # DR0 MOVQ,  DR0 OFUSER BASE MOV,  NEXT ;C
 
-CODE DECIMAL  0A # DR0 MOVQ,  DR0 OFUSER BASE MOV,  NEXT ;C
 
-CODE BOUNDS  S [+ DR0 MOV,  S [ DR1 MOV,  DR1 DR0 ADD,
-  DR0 S [ MOV,  DR1 S -[ MOV,  NEXT  ;C
-\ 68000 : fill erase blanks abort quit    ( 29  5 86 CRC 17:11 )
-CODE FILL S [+ DR0 MOV,  S [+ DR1 MOV,  S [+ AR0 MOV,
-  BEGIN, DR0 AR0 [+ .B MOV,  1 # DR1 SUBQ,  EQ UNTIL,  NEXT ;C
 
-CODE ERASE           DR0 CLR,
-       'NF FILL CFA T@ 2+ *+ BRA, ;C
 
-CODE BLANKS  BL # DR0 .W MOV,
-       'NF FILL CFA T@ 2+ *+ BRA, ;C
 
-: QUIT   'QUIT  @EXECUTE STOP      'NF QUIT  CFA ' *QUIT*  !
 
-: ABORT  'ABORT @EXECUTE STOP      'NF ABORT CFA ' *ABORT* !
 
-: TYPE   'TYPE  @EXECUTE STOP
 
-\ 68000 : (;code) <builds does>             27  2 85 CRC
-: (;CODE) R> LATEST PFA CFA ! ;  'NF (;CODE) CFA ' *(;CODE)* !
 
-: <BUILDS   0 CONSTANT -4 ALLOT ;   \ new <builds ... does>
-HERE DELTA - ' *DOES>* ! ?CR
-  ASSEMBLER  LABEL DODOES
-  RP [+ DR7 .L MOV,  \ get does addr
-  IP RP -[ MOV,      \ push ip -- docol
-  DR7 IP .L MOV,     \ we interpret at does
-  W S -[ MOV,        \ put w on stack
-  NEXT
 
-: DOES>  COMPILE (;CODE) LIT { SETNEW
-  ASSEMBLER DODOES ,  NEWFORTH }  4EB9 W,  , ; IMMEDIATE
-                                    \ absolute .long jsr,
 
-\ 68000 : count (type) -trailing (.") (cr)( 30  8 86 CRC 16:30 )
-CODE COUNT  S [ AR0 MOV,  1 # S [ ADDQ,  DR0 CLR,
-  AR0 [ DR0 .B MOV,  DR0 S -[ MOV,  NEXT   ;C
 
-: (TYPE) -DUP IF BOUNDS DO R C@ EMIT LOOP  ELSE DROP THEN ;
 
-CODE -TRAILING  S [+ DR0 MOV,  S [ AR0 MOV,  DR0 AR0 ADD,
-  1 # DR0 ADDQ, BEGIN, 1 # DR0 SUBQ, NE IF, BL # AR0 -[ .B CMP,
-  DROP ROT ROT NE UNTIL,  2 THEN,  DR0 S -[ MOV,  NEXT  ;C
 
-: (.") R COUNT DUP 1+ =CELLS  R> + >R TYPE ;
-   'NF (.")           CFA  ' *(.")*        !
 
-: (CR)  ."   " ;
 
 
-\ 68000 : ." (expect) expect query        ( 13  4 86 CRC       )
-: ." ASCII "  STATE @
-     IF COMPILE (.") GAP ( word)  HERE C@ 1+ =CELLS ALLOT
-     ELSE GAP ( word) HERE COUNT TYPE THEN ;          IMMEDIATE
 
-: (EXPECT) OVER + OVER          \ add for atari/ibm pc keyboard
-     DO KEY DUP 14 +ORIGIN W@ =   OVER 16 +ORIGIN W@ = OR
-        IF DROP 08 OVER R = DUP R> 2- + >R - ELSE
-          DUP 0D = IF LEAVE DROP BL 0 ELSE  DUP THEN R C!
-        0 R 1+ C! THEN   EMIT ( DROP)  LOOP     DROP ;
 
-: EXPECT  PAUSE 'EXPECT  @EXECUTE  STOP
 
-: QUERY TIB @ A0  EXPECT  IN OFF  ;
 
 
-\ 68000 : x hold pad word (number)        ( 12  2 87 CRC 17:20 )
-: X       BLK @ IF ?EXEC THEN R> DROP ;         IMMEDIATE
-CODE HOLD 1 # OFUSER HLD SUBQ,   OFUSER HLD AR0 MOV,
-  S [+ DR0 MOV,  DR0 AR0 [ .B MOV,   NEXT ;C
-CODE PAD   OFUSER DP S -[ MOV,  80 #L S [ ADD,  NEXT ;C
-: WORD BLK @ IF BLK @  GAP  ELSE  TIB @ THEN IN @ + SWAP
-  ENCLOSE HERE 22 BLANKS IN +! OVER - >R  R HERE C!
-  + HERE 1+ R> CMOVE ;    \  gap = block
-CODE UPPER  S [+ DR0 MOV,  S [+ AR0 MOV,
-  ASCII a # DR2 .B MOVQ,  ASCII z # DR3 .B MOVQ,  DR0 FALSE DO,
-  AR0 [ DR1 .B MOV,  DR1 DR3 .B CMP,  HS IF,  DR1 DR2 .B CMP,
-    LS IF,  20 # AR0 [ .B EOR,  THEN,  THEN,   1 # AR0 ADDQ,
-    LOOP, NEXT   ;C
-: (NUMBER) BEGIN 1+ DUP >R C@ BASE @ DIGIT
-  WHILE SWAP BASE @ U* DROP ROT BASE  @ U* D+
-       DPL @ 1+ IF DPL 1+! THEN R> REPEAT R> ;
-\ 68000 : number -find error id.          ( 29  5 86 CRC 17:14 )
-: NUMBER 0 0 ROT DUP 1+ C@ ASCII - = DUP >R + -1
-  BEGIN DPL ! (NUMBER) DUP C@ BL -
-      WHILE DUP C@ ASCII . - 0 ?ERROR 0 REPEAT
-  DROP R> IF DMINUS THEN ;
 
-: -FIND BL WORD HERE COUNT UPPER HERE CONTEXT @ @ (FIND)
-  DUP 0= IF DROP HERE LATEST (FIND) THEN ;
 
-: ERROR   WARNING @ 0<
-  IF ABORT THEN HERE COUNT TYPE ."  ? "
-  GAP ( message) SP!  BLK @ IF IN @ BLK @ THEN
-  QUIT                                STOP
 
-: ID. PAD BL ASCII _ FILL DUP PFA LFA OVER -
-     PAD SWAP CMOVE PAD COUNT 1F AND TYPE SPACE ;
-\ 68000 : b/drv maxblk drive empty-buffers( 18  1 87 CRC 12:44 )
-DECIMAL
-360 CONSTANT B/DRV               719 CONSTANT MAXBLK
-360 CONSTANT B/SIDE          \   359 for 1 drive
-PRIVATE IFTRUE DECIMAL 180 HEX LOAD IFEND
 
-: DRIVE  B/DRV U* DROP OFFSET ! ;
 
-CODE SETU/P          OFUSER 'FIRST DR0 MOV,
-  DR0 OFUSER USE MOV,  DR0 OFUSER PREV MOV,  NEXT ;C
 
-: EMPTY-BUFFERS FIRST LIMIT OVER - ERASE SETU/P ;
 
 
 
 
-\ 68000 : create {compile] literal        ( 26  7 87 CRC 15:23 )
-: CREATE  'CREATE   @EXECUTE     STOP
 
-: [COMPILE] -FIND 0= 0 ?ERROR DROP CFA , ;            IMMEDIATE
 
-: LITERAL  STATE @ IF  DUP  FFFF8000 7FFF WITHIN
-     IF  COMPILE WLIT W,  ELSE  COMPILE LIT ,  THEN THEN ;
-IMMEDIATE
 
-PRIVATE IFTRUE
-| -1 VARIABLE BADMAP  20 ALLOT
-'NF BADMAP CFA 8 + DELTA + 20 ERASE           IFEND
 
 
 
 
-\ 68000 : dliteral ?stack interpret immed ( 29  1 89 CRC 10:53 )
-: DLITERAL  STATE @ IF SWAP [COMPILE] LITERAL
-        [COMPILE] LITERAL  THEN ;                   IMMEDIATE
 
-: ?STACK  S0 @ SP@            U< 1 ?ERROR
-               SP@ BOTSTACK @ U< 7 ?ERROR ;
-\ fixed so that tos & bos are user variables for multitasking
 
-: INTERPRET   BEGIN -FIND  IF  ( found) STATE @ <
-        IF CFA , ELSE  CFA EXECUTE THEN
-        ELSE HERE NUMBER  DPL @ 1+
-        IF [COMPILE] DLITERAL ELSE DROP [COMPILE] LITERAL THEN
-        THEN ?STACK AGAIN     STOP
 
-CODE IMMEDIATE  OFUSER CURRENT AR0 MOV,
- AR0 [ AR0 MOV,  6 # AR0 [ BCHG,  NEXT   ;C
-\ 68000 : vocabulary forth definitions (  ( 12  2 87 CRC 17:27 )
-: VOCABULARY <BUILDS  81A0  W, CURRENT @ 2- ,
-       HERE VOC-LINK @ , VOC-LINK !  ;CODE
-       2 # W ADDQ,  W OFUSER CONTEXT MOV,  NEXT ;C
-' *VOCAB* !    ( Romable vocabulary !!!!!)
 
-CODE FORTH   OFUSER VLFTH AR0 LEA,  AR0 OFUSER CONTEXT MOV,
- NEXT  ;C       IMMEDIATE
 
-CODE DEFINITIONS  OFUSER CONTEXT  OFUSER CURRENT MOV,  NEXT ;C
 
-: (  ASCII ) WORD      ;                             IMMEDIATE
 
 
 
 
-\ 68000 : (quit) (abort)                  (  4  7 91 CRC 12:58 )
-: (QUIT)   BLK OFF [COMPILE] [  BEGIN BEGIN
-  RP! CR QUERY INTERPRET  STATE @ 0= UNTIL ."  OK" AGAIN STOP
 
-: (ABORT) SP! DECIMAL CR ." real-FORTH 1.3 23  8 91"
-   [COMPILE] FORTH  DEFINITIONS  OFFSET OFF   QUIT  STOP
 
 
 
@@ -5534,46 +4986,11 @@ CODE DEFINITIONS  OFUSER CONTEXT  OFUSER CURRENT MOV,  NEXT ;C
 
 
 
-\ 68000 : iob +iob emp startup            (  9  7 87 CRC 22:17 )
-DPNEW @ LABEL IOB 12 DUP ALLOT ERASE   \ iob layout  n.b. is not
-\ bytes     0-3    4-7  8-9  A-B   C-D  E-F 10-11    romable!!
-\   buffer addr  ->DSB  dev sect track side count
-\                unused 0-1 1-9   0-79  0-1  1-9
-CODE +IOB   IOB #L S [ ADD,  NEXT  ;C
 
-| -1 VARIABLE EMPT  \ should be a constant when we rom
-\  0 VARIABLE DSKSET  \ do only if patched!
-LABEL  STRTUP  ." strtup = " STRTUP 6 U.R
 
-                         \ install in the iob: the count.
-} SP! EMPT @ IF EMPT OFF EMPTY-BUFFERS THEN  1 10 +IOB W!
-  -F8 +ORIGIN @  \ DUP DSKSET !
-  -DUP IF  EXECUTE  THEN -1 BADMAP !
-  SETU/P        ABORT {
-\ 68000 : ct->0 getcmd cmdboot            (  4  8 91 CRC 12:53 )
-PRIVATE IFTRUE
-CODE CT->0      \ addr ---  addr ct | count to next 0
-  S [ AR0 MOV,  BEGIN,  AR0 [+ DR0 .B MOV,  EQ UNTIL,
-  1 # AR0 SUBQ,  S [ AR0 SUB,  AR0 S -[ MOV,  NEXT ;C
 
-| : GETCMD        \  --- addr ct | return addr & ct of cmd line
-  -100 +ORIGIN @  80 + DUP C@   \  desktop or msh?
-  7F - IF  COUNT  ELSE  1+ CT->0  THEN ;
 
-| : CMDBOOT       \  ---  | fetch & execute command line
-  { 'NF (QUIT) CFA } LITERAL 'QUIT !
-  GETCMD  DUP IF  CR 2DUP TYPE  SPACE  2DUP
-  TIB @ SWAP 2DUP + 4 ERASE  CMOVE  IN OFF  INTERPRET
-  DROP 1- OFF     CTL G EMIT   ELSE  2DROP  THEN  QUIT STOP
 
-\ 68000 : Memory setup                    ( 15  2 86 CRC       )
-\ do setup for memory here. Return highest addr in dr0
-LABEL -SETSTUF-
-ASSEMBLER  0 #L DR0 MOV,   -4 ALLOT
- \ this is done to leave the opcode of an #L MOV, in place. If
- \ the user wants to force a given high address, he can  !  it
- \ in over the next opcode, and patch the bsr in  COLD  to
- \ point to this opcode instead of to SETSTUF.
 
 
 
@@ -5582,31 +4999,9 @@ ASSEMBLER  0 #L DR0 MOV,   -4 ALLOT
 
 
 
-\ 68000 : Memory setup                    ( 23  7 86 CRC 10:59 )
-HEX  \ do setup for memory here. Return highest addr in dr0
-LABEL SETSTUF     \ forth boot parameters in ar0.
-436 @# DR0 .L MOV,   \  _memtop, top of available memory
-    \ enter here with pre-calculated memory size in dr0
-  FBASE *+ AR0 LEA,    DR0 DR1 MOV,
-  TM   TOS - #L DR1 SUB,        DR1 AR0 1C &[ MOV, \ tos
-  TOS  BOT - #L DR1 SUB,        DR1 AR0 84 &[ MOV, \ bos
-  BOT  RTS - #L DR1 SUB,        DR1 AR0 20 &[ MOV, \ rts
-  RTS TIBX - #L DR1 SUB,        DR1 AR0 24 &[ MOV, \ tib
-  US #L DR1 SUB,  DR1 DR2 MOV,  DR1 AR0 18 &[ MOV, \ uarea
-  'NF VLFTH CFA 4+ TW@ 4+ #L DR1 ADD,  \ get offset into user
-  ( of forth vocab )            DR1 AR0 38 &[ MOV, \ voc-link
-  100        #L DR2 SUB,        DR2 AR0 74 &[ MOV, \ limit
-  CO         #L DR2 SUB,        DR2 AR0 70 &[ MOV, \ first
 
-\ 68000 : Memory setup                    ( 18  1 87 CRC 12:51 )
-  \ Set maxblk according to the number of floppies on system.
-PRIVATE IFTRUE DECIMAL -169 HEX +LOAD  OTHERWISE
 
-LABEL SETDISKS
-4A6 ( _nflops) @# DR3 .W MOV,   DECIMAL 360 # DR3 MULU,
-   1 # DR3 SUBQ,  DR3 'NF MAXBLK CFA 4+ @#L MOV,  RTS,
 
-IFEND
 
 
 
@@ -5614,95 +5009,22 @@ IFEND
 
 
 
-\ 68000 : setsup                          (  2  6 86 CRC 10:47 )
-LABEL SETSUP
-  18 FBASE + *+ U MOV, \ set user area pointer
 
-  FBASE 10 + *+ AR1 LEA,  \ from addr
-  U   AR0 MOV, \ to addrs
-  AR1 DR2 ADD, \ limit of the move
 
-BEGIN,  AR1 [+ AR0 [+ MOV,  AR1 DR2 .L CMP,  LT UNTIL,
-\ move user area stuff out from cold start area
 
-  STRTUP #L IP MOV,  RTS,  \ execute cold start orphan
 
 
 
 
-\ 68000 : cold                            ( 27  6 91 CRC 21:01 )
-CODE COLD  SETSTUF *+ BSR,
-      COLDS #L DR2 .L MOV,  EQ IF,    \ forced
 
-LABEL WARM   10 #L DR2 .L MOV,  THEN,
-      SETSUP *+ BSR,
-      'NF RP! CFA T@ *+ BRA, ;C
-LABEL COLDSTART    RP FBASE -FC + @#l MOV,      \ must be in
-     HERE 0C + DELTA - #L RP -[ MOV,            \  user !!
-     26 ( 38 decimal) # RP -[ .W MOV,
-     0E # TRAP,   6 # RP ADDQ,  \ we want to be in supervisor!
-     'NF COLD CFA T@ *+ BRA,   FORTH     ;S
-DR2 contains the number of words moved into the user area; by
-the end of the setup it has the address of the last byte moved.
-DR0 has the top address in memory placed it it.
 
-\ 68000 : +buf update                     ( 16  5 86 CRC 15:48 )
-CODE +BUF \ bufaddr --- bufaddr' | locate next buffer in ram
-  DR1 CLR,  S [ DR0 MOV,  6 *B/BUF* + #L DR0 ADD,
-  OFUSER 'LIMIT DR0 CMP,
-     EQ IF,  OFUSER 'FIRST DR0 MOV,  THEN,
-  DR0 S [ MOV,
-  OFUSER PREV DR0 CMP,  NE IF,  1 # DR1 ADDQ,  THEN,
-  DR1 S -[ MOV,  NEXT   ;C
 
-CODE UPDATE   \  -  | flag most recent buffer as updated
-  OFUSER PREV AR0 MOV,  7 # AR0 [ .B BSET,  NEXT ;C
 
 
-;s
-: <#      MOI   HLD ! ;              \ must be moi to use w/
 
-\ 68000 : arithmetic stuff -- +- to mod   ( 22  5 86 CRC 16:56 )
-CODE +-  S [+ TST, MI IF,               S [ NEG,  THEN, NEXT ;C
-CODE D+- S [+ TST, MI IF,  4 S &[ NEG,  S [ NEGX, THEN, NEXT ;C
-CODE ABS S [  TST, MI IF,  S [ NEG, THEN,               NEXT ;C
-: DABS    DUP D+-  ;
-CODE MIN  S [+ DR0 MOV,  S [ DR1 MOV,  DR0 DR1 CMP,
-  PL IF,  DR0 S [ MOV,  THEN,  NEXT    ;C
-CODE MAX  S [+ DR0 MOV,  S [ DR1 MOV,  DR0 DR1 CMP,
-  MI IF,  DR0 S [ MOV,  THEN,  NEXT    ;C
 
-: M/      OVER >R >R DABS
-              R ABS U/ R> R XOR +- SWAP R> +- SWAP ;
-: *       U* DROP ;
-: /MOD    >R S->D R> M/ ;
-: /       /MOD      NIP  ;    \ SWAP DROP ;
-: MOD     /MOD      DROP ;
-\ 68000 : more arithmetic, number output  ( 18  6 86 CRC 11:13 )
-: */MOD   >R M* R> M/ ;
-: */      */MOD NIP ;  \  SWAP DROP ;
-: M/MOD   >R 0 R U/ R> SWAP >R U/ R> ;
-: SPACES  0 MAX -DUP IF 0 DO SPACE LOOP THEN ;
-CODE <#   U OFUSER HLD MOV, NEXT ;C   \ must be moi to use w/
-: #>      2DROP HLD @ MOI   OVER - ; \ wp-forth &/or tasker !!!!
-: SIGN    ROT 0< IF ASCII - HOLD THEN ;
-: #   BASE @ M/MOD ROT 9 OVER < IF 7 + THEN ASCII 0 + HOLD ;
 
-: #S      BEGIN # 2DUP OR 0= UNTIL ;
-: D.R     >R SWAP  OVER  DABS  <#  #S  SIGN #>
-          R> OVER  -  SPACES  TYPE ;
-: D.      0 D.R SPACE ;
-: .R      >R S->D R> D.R ;    : .       S->D D. ;
-: ?       @ . ;  : W? W@ . ;  : C?      C@ . ;
-\ 68000 : vlist buffer                    ( 13  4 86 CRC       )
-: VLIST   CR  CONTEXT @  @
-     BEGIN OUT @ C/L >   IF  CR THEN
-        DUP ID. SPACE SPACE PFA  LFA  @
-        DUP 0=  ?TERMINAL OR UNTIL   DROP            ;
 
-: BUFFER   USE @ DUP >R BEGIN +BUF UNTIL  USE !
-        R @ 0< IF R 4+ R @ 7FFFFFFF AND 0       R/W  THEN
-        R ! R PREV ! R> 4+ ;
 
 
 
@@ -5710,27 +5032,11 @@ CODE <#   U OFUSER HLD MOV, NEXT ;C   \ must be moi to use w/
 
 
 
-\ 68000 : block (line) .line message load ( 27 10 86 CRC 13:17 )
-: BLOCK   PAUSE OFFSET @ + >R PREV @ DUP @ R - DUP +
-    IF BEGIN +BUF 0= IF DROP R BUFFER DUP R 1 R/W 4- THEN
-       DUP @ R - DUP + 0= UNTIL DUP PREV ! THEN R> DROP 4+ ;
 
-: (LINE)  >R C/L B/BUF */MOD R>  + BLOCK + C/L ;
-: .LINE   (LINE) -TRAILING TYPE ;
 
-: MESSAGE WARNING @ IF ( we have disk ) -DUP
-       IF 1 OFFSET @ - .LINE THEN ELSE  \ 4 is fig std.
-          ." msg # " .  THEN ;
 
-: LOAD  BLK @ >R  IN @ >R  IN OFF BLK !  INTERPRET
-        R> IN !   R> BLK ! ;
 
-: --> ?LOADING IN OFF BLK 1+! ;               IMMEDIATE
-\ 68000 : #bufs flush                     ( 17 10 85 CRC       )
-: #BUFS  LIMIT FIRST - B/BUF  6  +  /MOD \ number of buffers
-     SWAP IF ." Bad buffers!"  EMPT ON COLD  THEN ;
 
-: FLUSH  #BUFS  1+  0 DO 7FFFFFFF BUFFER DROP LOOP ;
 
 
 
@@ -5742,76 +5048,18 @@ CODE <#   U OFUSER HLD MOV, NEXT ;C   \ must be moi to use w/
 
 
 
-\ 68000 : toret readsec writesec          (  4  8 86 CRC 12:36 )
-\ shoves appropriate number of things from buffer to return
-\ stack for BIOS' convenience. Feh.
-HEX
-| CODE (SECT)  \ addr diskblk flag  ---  flag  | sect setup
-  S [+ DR1 MOV,  S [+ DR0 MOV,  IOB *+ AR0 LEA,
-  9 # DR0 DIVU,  DR0 AR0 0C &[ .W MOV,                \ track
-  DR0 .W SWAP,  1 # DR0 ADDQ,  DR0 AR0 0A &[ .W MOV,  \ sect
-  S [ AR0 [ MOV,   DR1 S [ MOV,  NEXT   ;C     \ addr
 
-CODE -DISK \ fl --  er | fl 0: write   1: read; er 0: ok
-  RP DR7 MOV,  IOB 12 + *+ AR0 LEA,
-  8 # DR0 .W MOV,  DR0 DR3 .W MOV,  \ mov 9 words -- $12 bytes
-  FALSE DR0  DO,  AR0 -[ RP -[ .W MOV,  LOOP,
-  S [ TST,  EQ IF,  1 # DR3 .W ADDQ,  THEN,   DR3 RP -[ .W MOV,
-  0E # TRAP,  DR0 S [ MOV,  DR7 RP MOV,   NEXT  ;C   ;S
-\ 68000 : (r/w)                           ( 21  6 87 CRC 15:35 )
-\ iob layout. is shoved to return stack by  -disk, scr 359
-\ bytes     0-3    4-7  8-9  A-B   C-D  E-F 10-11
-\   buffer addr  ->DSB  dev sect track side count
 
-: ?DERR    \ fl --- | disk error indicator
-  -DUP IF BASE @ HEX SWAP 6 .R BASE ! SPACE 8 ERROR THEN ;
 
-| : SECT  \ addr diskblk flag ---   | read/write sector
-  (SECT)  -DISK  ?DERR ;
 
-: (R/W)  \ addr  blk  fl ---   | write, fl=0; read, fl=1
-  OVER 0 MAXBLK WITHIN 0=      6 ?ERROR    >R
-        0 B/DRV U/   8 +IOB W!  \ set device, 1- 2
-  DUP + ( 2*)  2DUP  R SECT  200 1 D+  R> SECT ;
-PRIVATE IFTRUE DECIMAL -177 -167 HEX +THRU  IFEND
-\ 68000 : ' index list (list)               25 12 84 CRC
-: ' -FIND 0= 0 ?ERROR DROP [COMPILE] LITERAL ;        IMMEDIATE
 
-: INDEX   CR  1+  SWAP    DO CR R  5 .R
-   SPACE  0  R .LINE  ?TERMINAL  IF  LEAVE  THEN   LOOP ;
 
-: LIST    'LIST @EXECUTE STOP
 
-: (LIST)    DECIMAL
-   CR  DUP  SCR !  ." scr # "   .  10 0
-   DO  CR R 3 .R SPACE R SCR @ .LINE  LOOP CR ;
 
 
 
 
 
-\ 68000 : forget, multitasking version    ( 11 12 86 CRC 18:08 )
-| : PFUI   TIB OVER U< IF TIB - THEN  ;
-| : PFUI2  PFUI >R PFUI R>         U< ;
-    \ filtre addresses outside our task.         \ multitasking
-| CODE TASKFIX   70 ( forth's voc link) U &[ AR0 LEA,
-  S [ AR0 CMP,  LE IF,  AR0 S [ MOV,  THEN,  NEXT      ;C
-: (FORGET) \ pfa ---  | can be compiled into definitions
-   NFA  DUP FENCE @ PFUI2 15 ?ERROR
-   >R  VOC-LINK @  taskfix         BEGIN
-     R OVER PFUI2 WHILE [COMPILE] FORTH  DEFINITIONS
-     @ taskfix DUP VOC-LINK !  REPEAT      BEGIN  pause
-        DUP 6 - BEGIN PFA LFA @  taskfix  DUP R PFUI2  UNTIL
-     OVER 4- !  @ taskfix -DUP 0= UNTIL   R> DP ! ;
-: FORGET   [COMPILE] ' STATE @ IF COMPILE (FORGET)
-                               ELSE (FORGET) THEN ;  IMMEDIATE
-;S Make  FORGET  smart enough to compile it!! Very useful!
-\ 68000 : (create)                        ( 16 10 85 CRC       )
-: (CREATE)     FIRST HERE 0A0 + U< 2 ?ERROR
-   ?ALIGN -FIND IF DROP NFA ID.   4 MESSAGE SPACE THEN
-   HERE  DUP C@ WIDTH @ MIN 1+ =CELLS ALLOT
-   DUP A0 TOGGLE HERE 1- 80 TOGGLE
-   LATEST , CURRENT @ ! HERE 4+ , ;
 
 
 
@@ -5822,22 +5070,6 @@ PRIVATE IFTRUE DECIMAL -177 -167 HEX +THRU  IFEND
 
 
 
-\ 68000 : compiler directives               16  2 85 CRC
-: BEGIN       ?COMP HERE 1 ;                          IMMEDIATE
-: THEN        ?COMP 2 ?PAIRS HERE OVER - SWAP W! ;    IMMEDIATE
-: ENDIF       [COMPILE]  THEN  ;                      IMMEDIATE
-: DO          COMPILE (DO) HERE 3 ;                   IMMEDIATE
-: LOOP        3 ?PAIRS COMPILE (LOOP)  BACK ;         IMMEDIATE
-: +LOOP       3 ?PAIRS COMPILE (+LOOP) BACK ;         IMMEDIATE
-: UNTIL       1 ?PAIRS COMPILE 0BRANCH BACK ;         IMMEDIATE
-: END         [COMPILE]  UNTIL ;                      IMMEDIATE
-: AGAIN       1 ?PAIRS COMPILE BRANCH  BACK ;         IMMEDIATE
-: REPEAT      >R >R [COMPILE] AGAIN R> R> 2-
-                    [COMPILE] THEN  ;                 IMMEDIATE
-: IF          COMPILE 0BRANCH HERE 0 W, 2 ;           IMMEDIATE
-: ELSE        2 ?PAIRS COMPILE BRANCH HERE 0 W,
-       SWAP 2 [COMPILE] THEN  2 ;                     IMMEDIATE
-: WHILE       [COMPILE] IF 2+ ;                       IMMEDIATE
 
 
 
@@ -5854,81 +5086,849 @@ PRIVATE IFTRUE DECIMAL -177 -167 HEX +THRU  IFEND
 
 
 
-\ Overlay Code -- after Greg Stevenson    ( 18  4 86 CRC 10:21 )
-    BASE @ DECIMAL
-| *B/BUF* 26 - CONSTANT SEGSIZE
-\ |    0 VARIABLE CURSEG       |         0 VARIABLE MEMPTR
-| : @SEG  DUP CURSEG ! BLOCK  DROP ;  \ Block #-1 ---
-| : DESCRIPTORS CURSEG @ BLOCK ;      \ --- addr
-| : OBJECT  DESCRIPTORS 26 + ;        \ --- addr
-| : NEXTSEG  SEGSIZE MEMPTR +! ;      \ ---
-| : ?SEGS     PAD 6 + @   PAD 2+ @ - \ --- n
-        SEGSIZE /MOD SWAP IF 1+ THEN ;
-| : RESTOREDES   DESCRIPTORS  6 + @  DP        !
-                 DESCRIPTORS 10 + @  CURRENT @ !
-                 DESCRIPTORS 14 + @  CONTEXT @ !
-                 DESCRIPTORS 18 + @  VOC-LINK  !  ;
-BASE ! ." ." ;S
 
-\ Overlay Code -- after Greg Stevenson    ( 18  4 86 CRC 10:21 )
-    BASE @ DECIMAL
-| : SAVEDES        \      ---
-                     PAD           OFF    \ overlay marker
-    [COMPILE] ' NFA  PAD    2+       !    \ start addr
-    HERE             PAD   6 +       !    \ end addr
-    LATEST           PAD  10 +       !    \ dictionary link 1
-    CONTEXT @ @      PAD  14 +       !    \ dictionary link 2
-    VOC-LINK @       PAD  18 +       ! ;  \ dictionary link 3
-BASE ! ." ." ;S
 
-Syntax:     SAVEDES   <WORDNAME>
-    PAD  is used as a holding area & contents are placed in all
-blocks of the image array.
 
 
-\ Overlay Code -- after Greg Stevenson    ( 18  4 86 CRC 10:36 )
-    BASE @ DECIMAL
-: SAVEOVER                     \ Block #-1 ---
-   [COMPILE] FORTH  SAVEDES
-   PAD 2+ @ MEMPTR !
-   ?SEGS DUP PAD 22 + !
-   BOUNDS           DO
-       I BUFFER DROP   \ so we don't read it off the disk
-       I @SEG UPDATE
-       PAD DESCRIPTORS 26 CMOVE
-       MEMPTR @ OBJECT SEGSIZE CMOVE
-       NEXTSEG I 5 .R  LOOP FLUSH ;
-BASE ! ." ." ;S
-     Syntax:      <BLOCK#>   SAVEOVER  <WORDNAME>
-where <BLOCK#> is the starting block and <WORDNAME> is the first
-word to be saved to the virtual array.
-\ Overlay Code -- after Greg Stevenson    ( 18  4 86 CRC 10:36 )
-    BASE @ DECIMAL
-: BRING                         \ Block #-1  ---
-  [COMPILE] FORTH  DUP @SEG RESTOREDES
-  DESCRIPTORS    2+ @ MEMPTR !
-  DESCRIPTORS 22 +  @     \ # of segments
-   BOUNDS           DO
-        I @SEG
-        OBJECT MEMPTR @ SEGSIZE CMOVE NEXTSEG
-        46 EMIT LOOP CR ;
-BASE ! ." ." ;S
-       syntax:   <BLOCK#>  BRING
-  where <BLOCK#> is the starting block of a previously saved
-overlay.
 
 
-\ Overlay Code -- testing stuff           ( 12  2 87 CRC 18:39 )
-FORGET TASK                     : TASK ;          DECIMAL
-B/BUF CONSTANT *B/BUF*          375 CONSTANT TESTMEM
-|    0 VARIABLE CURSEG       |         0 VARIABLE MEMPTR
 
--4 -1 +THRU              FORTH DEFINITIONS
-373 LOAD   DECIMAL  TESTMEM SAVEOVER IF.
 
 
 
-EDITOR FLUSH
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
