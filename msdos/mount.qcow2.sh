@@ -7,20 +7,20 @@
 
 #  per http://ask.xmodulo.com/mount-qcow2-disk-image-linux.html
 
-runUser=root
+runUser=root                    # execute as this user only.
 virtualDisk=/var/lib/libvirt/images/FreeDOS.1.2.qcow2
 
-# This is the user for whom we will mount the virtual drive, so that
+# This is the user for whom we will mount the virtual drive, so this
 # user may read from and write to the virtual drive.
 user=charles
-
-uid=$(grep ${user} /etc/passwd | cut -d: -f 3)
-gid=$(grep ${user} /etc/passwd | cut -d: -f 4)
 
 if [ "$USER" != "$runUser" ] ; then
   echo Wrong user: you must be $runUser to run this script!
   exit 1
 fi
+
+uid=$(grep ${user} /etc/passwd | cut -d: -f 3)
+gid=$(grep ${user} /etc/passwd | cut -d: -f 4)
 
 #  harmless if redundant.
 modprobe nbd max_part=8
