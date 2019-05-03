@@ -5,7 +5,7 @@
 
 # umount /mnt && partx --delete /dev/nbd0 && qemu-nbd --disconnect /dev/nbd0
 
-#  per http://ask.xmodulo.com/mount-qcow2-disk-image-linux.html
+# per http://ask.xmodulo.com/mount-qcow2-disk-image-linux.html
 
 runUser=root                    # execute as this user only.
 virtualDisk=/var/lib/libvirt/images/FreeDOS.1.2.qcow2
@@ -18,6 +18,9 @@ if [ "$USER" != "$runUser" ] ; then
   echo Wrong user: you must be $runUser to run this script!
   exit 1
 fi
+
+# Mount wants the uid and gid of the intended user, rather than the
+# user name, so we get them.
 
 uid=$(grep ${user} /etc/passwd | cut -d: -f 3)
 gid=$(grep ${user} /etc/passwd | cut -d: -f 4)
