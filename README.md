@@ -26,17 +26,17 @@ The license is the [3-Clause BSD License](https://opensource.org/licenses/BSD-3-
 
 # Installation
 
-Screen files are not very friendly to version control systems like [git](https://git-scm.com/). To solve that problem, we store the screen files (extension .scr) as text files (.scn). To convert, use the program scr2scn.pl, available at the same place you got real-Forth, [https://github.com/charlescurley](https://github.com/charlescurley).
+Screen files are not very friendly to version control systems like [git](https://git-scm.com/). To solve that problem, we store the screen files (extension .scr) as text files (.scn). To convert, use the program scr2scn.pl, available at pretty much the same place you got real-Forth, [https://github.com/charlescurley/scr2scn](https://github.com/charlescurley/scr2scn).
 
 So the first job is to convert the text files to screen files.
 
     scr2scn.pl *.scn
 
-Now follow the instructions for your target machine. Or you may have to be creative if you are using a different VM or computer to run the program.
+Now follow the instructions below for your target machine. Or you may have to be creative if you are using a different VM or computer to run the program.
 
 ## MS-DOS
 
-Use something like the file `mount.qcow2.sh` to mount your MS-DOS drive. You may need the package `qemu-nbd`. You may have to edit the user name of your user and the path to the file of the virtual disk. You may want to install it in root's path.
+Use something like the file `mount.qcow2.sh` (in the `msdos` directory of this repo) to mount your MS-DOS drive. You may need the package `qemu-nbd`. You may have to edit the user name of your user and the path to the file of the virtual disk. You may want to install it in root's path.
 
 Create a directory on the virtual machine's hard drive, say `\rf`. Copy the Forth executable (`RFF.COM`) and any screen files into that directory.
 
@@ -64,7 +64,7 @@ When running either Forth for the first time, use `9 load` to compile the utilit
 
 fastForth is know to work with the Hatari emulator. It is set up to emulate an Atari Mega ST with 2 MB of RAM, and three disk partitions. The first two are ASCI 32 MB partitions built per Hatari instructions. The third is a GEMDOS drive, useful for copying files into and out of the first two partitions. It is essential to emulate a 68000 because the fastForth trap handlers are for 68000. Trap handlers for later versions of the 680x0 family would be welcome. Feel free to crank the emulated CPU up to 32MHz.
 
-fastForth will run in color or monochrome mode. If it finds the computer in 16 color mode, it will force the resolution to four color mode, better for software development. It does not return the resolution to 16 color mode on exit.
+fastForth will run in color or monochrome mode. If it finds the computer in 16 color mode, it will force the resolution to four color mode, better for software development. It does not return the resolution to 16 color mode on exit. For this reason, four color mode is preferable.
 
 ### XSteem
 
@@ -77,6 +77,8 @@ Create a directory in the root of your GEMDOS drive, say `ff`. Then copy the exe
     cp *.TTP *.SCR *.scr .../ff
 
 Boot the Hatari. Use GEM to copy the directory from the GEMDOS drive to one of your ASCI drives. Enter the directory. Double click on `FAST4TH.TTP`. You may enter a useful command line, such as `3 load`, or not, as you wish.
+
+When running either Forth for the first time, use `9 load` to compile the utilities overlay for the first time. Thereafter, `3 load` will bring them in.
 
 For more information, see the section on booting on the Atari in the User Documentation for fastForth.
 
