@@ -24,9 +24,15 @@ More recently,
 
 The license is the [3-Clause BSD License](https://opensource.org/licenses/BSD-3-Clause). The [SPDX](https://spdx.org) short identifier is BSD-3-Clause. A copy of the license is included in the distribution.
 
+# Documentation
+
+There is documentation scattered throughout the screens files.
+
+More immediate, the main documentation is in a version control system friendly file format called "flat Open Document format", file extension `.fodt`. [LibreOffice](https://www.libreoffice.org/) handles FODT, and other word processors may also. You may find it useful to export them as PDFs.
+
 # Installation
 
-Screen files are not very friendly to version control systems like [git](https://git-scm.com/). To solve that problem, we store the screen files (extension .scr) as text files (.scn). To convert, use the program scr2scn.pl, available at pretty much the same place you got real-Forth, [https://github.com/charlescurley/scr2scn](https://github.com/charlescurley/scr2scn).
+Screen files are not very friendly to version control systems like [git](https://git-scm.com/). To solve that problem, we store the screen files (extension `.scr`) as text files (`.scn`). To convert, use the program scr2scn.pl, available at pretty much the same place you got real-Forth, [https://github.com/charlescurley/scr2scn](https://github.com/charlescurley/scr2scn).
 
 So the first job is to convert the text files to screen files.
 
