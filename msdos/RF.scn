@@ -9358,203 +9358,28 @@ FORTH DEFINITIONS
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 \ messdos: bios disk access               (  1  1 88 CRC 16:34 )
+forget task         107 needed iftrue
+: task ;
+-1 constant 3.5"    3.5" 0= constant 5.25"
+editor flush    1 +blk 5 +blk thru
 ;s
 
 disk drivers that use IBM PC BIOS calls to access floppy disks.
 
-
-
-
-
-
-
-
-
-
+This code is aimed at recovering non-standard raw screen floppy
+diskettes, usually 3.5". The normal DSDD format was 9 sectors
+per track; 10 per also works. Also the normal floppy is 80
+cylinders. 82 works on some drives.  HD diskettes are not
+supported here.
 
 
 \ messdos: bios disk access               (  1  1 88 CRC 16:34 )
 DECIMAL
-3.5" IFTRUE                 \  720 k 3.5" floppies
+3.5" IFTRUE                     \  720 k 3.5" floppies
 720 CONSTANT B/DRV              1439 CONSTANT MAXBLK   IFEND
 
-5.25"  SERIAL OR  FILES OR  IFTRUE    \  360 k 5.25" floppies
+5.25"  IFTRUE                   \  360 k 5.25" floppies
 360 CONSTANT B/DRV               719 CONSTANT MAXBLK   IFEND
 
 : DRIVE  B/DRV U* DROP OFFSET ! ;
@@ -9566,9 +9391,8 @@ DECIMAL
 
 
 \ messdos: bios disk access               (  1  1 88 CRC 16:34 )
-SERIAL FILES  OR  IFTRUE   ;S  IFEND
-LABEL DISKTABLE  6 ALLOT      DISKTABLE DELTA + 6 ERASE
-CODE +DISK   AX POP,  DISKTABLE # AX ADD,  1PUSH C;
+0 variable DISKTABLE  4 ALLOT      DISKTABLE 6 ERASE
+CODE +DISK   AX POP,  DISKTABLE # AX ADD,  1PUSH
 DECIMAL
 5.25" IFTRUE                  720 CONSTANT SEC/DRV
 18 CONSTANT SEC/CYL             9 CONSTANT SEC/SIDE  IFEND
@@ -9581,19 +9405,196 @@ DECIMAL
   SEC/SIDE /MOD  1 +DISK C!   \ side
                  2 +DISK C! ; \ sector number
 : DERROR   -DUP IF  BASE @ HEX  SWAP .  BASE !  8 ERROR  THEN ;
+
 \ messdos: bios disk access               (  1  1 88 CRC 15:18 )
-SERIAL IFTRUE  DECIMAL 201 203 THRU ;S  IFEND
-FILES  IFTRUE  DECIMAL 212 213 THRU ;S  IFEND
+base @ hex
 CODE SR/W       \  1 = read, 0 = write
   AX POP, ( fl )  AX AX OR,   \ count --> al  r/w f --> ah
   0= IF,  ( write ) 301 # AX MOV,  ELSE,  201 # AX MOV,  THEN,
-  DISKTABLE T#) BX LEA,
+  DISKTABLE #) BX LEA,
   0 [BX] DX MOV,  \ drive --> dl  side --> dh
   2 [BX] CX MOV,  \ track --> ch  sect --> cl
   4 [BX] BX MOV,  ( addr --> bx )   CL INC,  13 INT,
-  < IF,  AH AL MOV,  FF # AX AND,   ELSE,   AX AX SUB,  THEN,
-  1PUSH  C;
-: (R/W)         \  addr blk# fl ---
+  < IF,  AH AL MOV,  ff # AX AND,   ELSE,   AX AX SUB,  THEN,
+  1PUSH
+: (dR/W)         \  addr blk# fl ---
   OVER 0 MAXBLK WITHIN 0= 6 ?ERROR   ROT 4 +DISK ! \ addr
   >R  DUP + ( 2* ) DUP  CALC  R  SR/W  DERROR
   200  4 +DISK +!  1+   CALC  R> SR/W  DERROR ;
+base !
+\ messdos: bios disk access               (  1  1 88 CRC 15:18 )
+: fr/w  [ 'r/w  @ ] literal  'r/w ! ;
+
+: dr/w  [ ' (dr/w) cfa ] literal  'r/w ! ;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+\ messdos: bios disk access               (  1  1 88 CRC 16:34 )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
