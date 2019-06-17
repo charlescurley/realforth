@@ -4369,7 +4369,7 @@ ASSEMBLER DEFINITIONS
 \ 8086 Assembler                          (  6 12 87 CRC 21:59 )
 ;S
 The 8086 Assembler was written by Mike Perry.
-To create and assembler language definition, use the defining
+To create an assembler language definition, use the defining
 word CODE.  How the assembler operates is a very
 interesting example of the power of CREATE DOES>   Basically
 the instructions are categorized and a defining word is
