@@ -3358,16 +3358,16 @@ BASE @ DECIMAL   FORTH  DEFINITIONS     FORGET TASK
 : HOURLY   ." At $40 per hour: "
   4000 60 */ 0 <# # # ASCII . HOLD #S
   BL HOLD ASCII $ HOLD #> TYPE ;
+\ +load +thru                             ( 16  6 19 crc 22:08 )
+forget task                     forth definitions
 
+: +load \ offset ---  | load relative
+   +blk load ;
 
+: +thru \ offset1 offset2 ---  | load relative
+  +blk swap  +blk swap  thru ;
 
-
-
-
-
-
-
-
+: task ;
 
 
 
