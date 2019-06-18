@@ -9598,3 +9598,202 @@ base !
 
 
 
+\ begin multiple file handler             (  1  1 93 CRC 19:15 )
+210 NEEDED +THRU
+FILING  FORGET TASK
+FORTH DEFINITIONS     ( : TASK ; )      CACHE \ r/w vector
+VOCABULARY SCREENS IMMEDIATE    SCREENS DEFINITIONS
+BASE  @ >R      DECIMAL
+
+1 12 +THRU              FORTH DEFINITIONS
+
+R> BASE !               EDITOR FLUSH
+: TASK ;                SCREENS
+
+MR/W    FLIST
+
+
+
+\ multi-files: variables descriptors field( 30 12 92 CRC 20:19 )
+0 VARIABLE HNDL         \ holds addr of file to be accessed.
+0 VARIABLE FLINK        \ linked list of file descriptors
+
+: DESCRIPTOR  <BUILDS ,  DOES>  @ HNDL  @ + ;
+\            0       2        4      6        8      10
+\ descriptor:  link | handle | pend | delta | lend | name....
+ 0 DESCRIPTOR LINK
+ 2 DESCRIPTOR HANDLE
+ 4 DESCRIPTOR PEND
+ 6 DESCRIPTOR DELTA
+ 8 DESCRIPTOR LEND
+10 DESCRIPTOR NAME
+
+
+
+\ multi-files: scrfile:                   ( 18  6 19 crc 17:45 )
+' MAXBLK CONSTANT 'MAXBLK
+
+: FWORD \ -- | word for file names
+  BLK  @ IF BLK  @ BLOCK  ELSE  TIB  @  THEN  IN  @ + SWAP
+  ENCLOSE  HERE C/L ERASE  IN +!  OVER - >R  R HERE C!
+  + HERE 1+ R> CMOVE ;
+
+: SCRFILE:      \ c: pend delta  ---
+                \ r:   --- addr
+  <BUILDS HERE HNDL  !  FLINK  @ ,  LINK FLINK  !
+  2DUP + 1-  MAXBLK MAX  'MAXBLK  !
+  0 , ( handle)  , ( pend ) 1- , ( delta) 0 ,   \ lend
+  FILING BL FWORD  HERE C@ 2+ ALLOT        \ file name
+\ HERE FENCE  !
+  DOES> ;
+\ multi-files: .des .files                ( 30 12 18 crc 18:29 )
+\            0       2        4      6        8      10
+\ descriptor:  link | handle | pend | delta | lend | name....
+: .DES  \  ---  | descriptor described
+  CR HNDL @ NFA ID.  10 TAB   SCREENS
+  HANDLE    @       ."  H"          3 .R
+  PEND      @  DUP  ."  S: "         6 .R
+  DELTA     @  +    ."  E: "  6 .R    LEND @ ."  L:" 6 .R
+  NAME     SPACE COUNT TYPE ;
+
+forth definitions
+: FLIST         \ print out the files and their places
+  SCREENS FLINK @ BEGIN  HNDL !  .DES
+  LINK @ -DUP 0= UNTIL  CR ;
+CODE 4+  AX POP,  4 # W MOV,  W AX ADD,  1PUSH
+  NEXT                  SCREENS DEFINITIONS
+\ multi-files: closefl closeall disks     ( 18  6 19 crc 17:44 )
+: CLOSEFL       \  ---  | close file at hndl
+  HANDLE  @ -DUP IF  HANDLE OFF  FILING (CLF) -DUP IF  HEX .
+  ABORT" File Close error" THEN  HANDLE OFF  THEN ;
+
+\ this should be done <only> after a flush!
+: CLOSEALL      \ close all files currently open
+  FLINK @ BEGIN  HNDL !  CLOSEFL  LINK @ -DUP 0= UNTIL ;
+
+FORTH DEFINITIONS
+: DISKS         360 * ;
+SCREENS DEFINITIONS
+
+
+
+
+\ multi-files: openfl openall             ( 18  6 19 crc 17:57 )
+\            0       2        4      6        8      10
+\ descriptor:  link | handle | pend | delta | lend | name....
+: OPENFL        \  ---  | open file at hndl
+  HANDLE @  0= IF       \ if it's not already open...
+    NAME 1+  (OPF) DUP 0< IF HEX . ABORT" File Open Error" THEN
+    HANDLE !
+    0. HANDLE @ 2 LSEEK  B/BUF U/ NIP LEND  !   \ length
+    PEND @  DELTA @ +  MAXBLK MAX  'MAXBLK  !
+    THEN ;
+
+
+
+
+
+
+\ multi-files: exercise                   ( 18  6 19 crc 17:42 )
+BASE  @ DECIMAL
+: EXERCISE      \ open, then close all files.
+  FLINK  @ ?CR
+  BEGIN  HNDL  !  NAME COUNT TYPE COL
+      OPENFL  CLOSEFL  LINK  @ -DUP 0= UNTIL ?CR ;
+
+: COPIES        \ src dest ct ---  src' dest' | screen copier
+  BASE  @ 10 - IF  7 EMIT  ABORT" Try this in decimal!"  THEN
+  BEGIN  >R 2DUP  EDITOR COPY FORTH  1 DUP D+
+    R  #BUFS MOD 0= IF  FLUSH  THEN     \ cut drive head motion
+    R> 1-  DUP 0=  ?TERMINAL OR  UNTIL DROP FLUSH ;
+BASE !
+
+
+
+\ multi-files: files defined              ( 26  3 19 crc 12:03 )
+FORTH DEFINITIONS       SCREENS
+\ lsize     delta       forth name      path\filename
+   2 DISKS  0 DISKS   SCRFILE: MAINF    \rf\rf.scr  \ this file
+   2 DISKS  2 DISKS   SCRFILE: 8086x    \rf\8086x.scr \ source
+   2 DISKS  4 DISKS   SCRFILE: GLOS     \rf\glossary.scr
+\  2 disks  6 disks   scrfile: goodies  d:\rf\goodies.scr
+\  2 disks  8 disks   scrfile: xferff   \rf\xferff.scr \ xfer
+\  2 disks 10 disks   scrfile: xferffx  \rf\xferffx.scr \ xfer
+
+
+
+
+
+
+
+\ multi-files: select correct?            ( 18  6 19 crc 17:42 )
+SCREENS DEFINITIONS
+: FSEEKERR  ABORT"  File Seek Error" ;
+
+: OVRFLW  ABORT"  File Size Overflow" ;
+
+: CORRECT?      \ blk# -- fl | is current hndl correct?
+  PEND @  LEND @  OVER +  WITHIN ;
+
+: SELECT        \ blk# --  | sets hndl to correct descriptor
+  DUP CORRECT? 0= IF  CLOSEFL
+  FLINK @ BEGIN  dup 0= if  fseekerr  then
+     HNDL !  LINK @  OVER CORRECT?  UNTIL
+  2DROP  ELSE DROP THEN  OPENFL ;
+
+
+\ multi-files: onemore                    ( 20  3 93 CRC 15:01 )
+: ONEMORE       \ addr blk# r/w  --- fl
+                \ if last + 1, build it else error out.
+  OVER  DELTA  @ -  lEND  @ =  IF       \ End 1+ ?
+    IF                                  \ do on reads:
+      DROP  DUP B/BUF  BLANKS  2 ERASE  \ build it
+    ELSE                                \ on writes:
+      PEND   @ -                        \ loc in file
+      B/BUF U*  HANDLE  @ 0 LSEEK       \ go to spot in file
+      0< IF  FSEEKERR  THEN             \ Error out?
+      B/BUF  HANDLE  @  WTF             \ Write it to disk
+      B/BUF - IF OVRFLW  THEN  THEN     \ Out of disk space?
+    lEND  @ 1+ lEND  !  0               \ Adjust file descriptor
+  ELSE  1 THEN ;                        \ Nope, do regular
+
+: FNOPN  ABORT"  File not open!!" ;
+\ multi-files: (mr/w)                     ( 18  6 19 crc 17:41 )
+         \ r/w for a file, descriptor in hndl
+: (MR/W) \ addr blk# r/w  ---  | select file, then read or write
+  OVER MAXBLK >  6 ?ERROR       \ No accesses past maxblk
+  OVER SELECT                   \ Set to correct file
+  ONEMORE  IF                   \ Read to eof + 1 blk?
+    >R  PEND   @ -              \ Otherwise, read or write.
+    DUP  lEND  @ > 6 ?ERROR  DUP  0< 6 ?ERROR   \ Range check
+    HANDLE  @ IF  B/BUF U*      \ Set up for seek
+      HANDLE  @ 0 LSEEK                 \ in file
+        0< IF  FSEEKERR  THEN  DROP     \ Error out?
+        B/BUF  HANDLE  @  R> IF  RDF    \ Read or write?
+          ELSE  WTF  THEN               \ write
+        B/BUF - IF OVRFLW  THEN         \ Out of disk space?
+      ELSE  FNOPN  THEN  THEN  ;        \ File open?
+
+\ multi-files: set      mr/w +vol:        ( 18  6 19 crc 17:34 )
+FORTH DEFINITIONS
+: MR/W  SCREENS  EXERCISE  MAINF  HNDL !  OPENFL
+  ' (MR/W) CFA 'R/W  !  ;
+
+: OR/W  SCREENS ' (R/W) CFA 'R/W  !  CLOSEALL ;
+
+: +VOL:         \ blk# -- blk#' | index into a file
+  [COMPILE] ' DUP CFA @ SCREENS  [ ' MAINF CFA @ ] LITERAL
+  - IF  BELL ABORT" Not a valid file name! "  THEN
+  [ ' PEND @ ] LITERAL + @ + ;
+: OPENING:      0 +VOL: ;
+\ set a given file to be our current disk.
+: SETVOL: OPENING:   OFFSET ! ;
+
+
+\ multi-files: loaders                    ( 26  3 19 crc 12:04 )
+\  22 +VOL: STP  LOADER DISKING
+\ 302 +VOL: STP  LOADER DESKJET
+\   3 +VOL: DBMS LOADER DATABASE
+\   0 +VOL: GLOS LOADER ~~~
+\   3 +VOL: STP  LOADER LIFE
+\ 660 +VOL: STP  LOADER DIALER
