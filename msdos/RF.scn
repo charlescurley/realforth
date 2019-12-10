@@ -2188,7 +2188,7 @@ FILING DEFINITIONS                0 VARIABLE FLCT 0 ,
 0 VARIABLE (ATT)
 0 VARIABLE DMY  -2 ALLOT ASCII * C, ASCII . C,  ASCII * C, 0 C,
 BLK @ 1+ DUP 0C + THRU ( DECIMAL 112 LOAD )  BASE !
-FORTH DEFINITIONS  : TODAY  TODAY  FILING .FILENAME  SPACE ;
+FORTH DEFINITIONS \ : TODAY  TODAY  FILING .FILENAME  SPACE ;
 : TASK ;   EDITOR FLUSH         600 load \ screens
 \ dos interface: getpath (del)            (  2  7 90 crc  9:41 )
 CODE GETPATH  \ addr drive  ---  | get current path name
