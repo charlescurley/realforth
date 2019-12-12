@@ -800,7 +800,7 @@ CODE -ROT  S 4 &[ DR0 MOV,  S 8 &[ S 4 &[ MOV,
 
 \ Loader screen                           ( 13  4 90 crc 15:28 )
 : LOADER  \  scr#-1   ---  <name>  defines screen to load
-  <BUILDS ,     \ Section 7.4
+  <BUILDS ,
   DOES> WARNING @ >R WARNING OFF   @ LOAD  R> WARNING ! ;
     23 LOADER DOCUMENTING          53 LOADER DISKING
    174 LOADER RECITE              222 LOADER CREF
@@ -9628,7 +9628,7 @@ MR/W    FLIST
  8 DESCRIPTOR LEND
 10 DESCRIPTOR NAME
 
-
+: nextfl pend @  delta @ + ;
 
 \ multi-files: scrfile:                   ( 18  6 19 crc 17:45 )
 ' MAXBLK CONSTANT 'MAXBLK
@@ -9644,16 +9644,16 @@ MR/W    FLIST
   2DUP + 1-  MAXBLK MAX  'MAXBLK  !
   0 , ( handle)  , ( pend ) 1- , ( delta) 0 ,   \ lend
   FILING BL FWORD  HERE C@ 2+ ALLOT        \ file name
-\ HERE FENCE  !
+  HERE FENCE  !
   DOES> ;
 \ multi-files: .des .files                ( 30 12 18 crc 18:29 )
 \            0       2        4      6        8      10
 \ descriptor:  link | handle | pend | delta | lend | name....
 : .DES  \  ---  | descriptor described
   CR HNDL @ NFA ID.  10 TAB   SCREENS
-  HANDLE    @       ."  H"          3 .R
-  PEND      @  DUP  ."  S: "         6 .R
-  DELTA     @  +    ."  E: "  6 .R    LEND @ ."  L:" 6 .R
+  HANDLE    @       ."  H"           3 .R
+  PEND      @       ."  S: "         6 .R
+  NEXTFL    1+      ."  E: "  6 .R    LEND @ ."  L:" 6 .R
   NAME     SPACE COUNT TYPE ;
 
 forth definitions
@@ -9664,8 +9664,8 @@ CODE 4+  AX POP,  4 # W MOV,  W AX ADD,  1PUSH
   NEXT                  SCREENS DEFINITIONS
 \ multi-files: closefl closeall disks     ( 18  6 19 crc 17:44 )
 : CLOSEFL       \  ---  | close file at hndl
-  HANDLE  @ -DUP IF  HANDLE OFF  FILING (CLF) -DUP IF  HEX .
-  ABORT" File Close error" THEN  HANDLE OFF  THEN ;
+  HANDLE  @ -DUP IF  HANDLE OFF lend off FILING (CLF) -DUP
+  IF HEX . ABORT" File Close error" THEN  HANDLE OFF  THEN ;
 
 \ this should be done <only> after a flush!
 : CLOSEALL      \ close all files currently open
@@ -9673,9 +9673,9 @@ CODE 4+  AX POP,  4 # W MOV,  W AX ADD,  1PUSH
 
 FORTH DEFINITIONS
 : DISKS         360 * ;
+
+: cold  screens closeall cold  stop
 SCREENS DEFINITIONS
-
-
 
 
 \ multi-files: openfl openall             ( 18  6 19 crc 17:57 )
@@ -9686,7 +9686,7 @@ SCREENS DEFINITIONS
     NAME 1+  (OPF) DUP 0< IF HEX . ABORT" File Open Error" THEN
     HANDLE !
     0. HANDLE @ 2 LSEEK  B/BUF U/ NIP LEND  !   \ length
-    PEND @  DELTA @ +  MAXBLK MAX  'MAXBLK  !
+    nextfl  MAXBLK MAX  'MAXBLK  !
     THEN ;
 
 
@@ -9726,18 +9726,18 @@ FORTH DEFINITIONS       SCREENS
 
 
 
-\ multi-files: select correct?            ( 18  6 19 crc 17:42 )
+\ multi-files: select correct?            ( 19  6 19 crc 19:08 )
 SCREENS DEFINITIONS
 : FSEEKERR  ABORT"  File Seek Error" ;
 
 : OVRFLW  ABORT"  File Size Overflow" ;
 
 : CORRECT?      \ blk# -- fl | is current hndl correct?
-  PEND @  LEND @  OVER +  WITHIN ;
+  pend @  nextfl  within ;
 
 : SELECT        \ blk# --  | sets hndl to correct descriptor
-  DUP CORRECT? 0= IF  CLOSEFL
-  FLINK @ BEGIN  dup 0= if  fseekerr  then
+  DUP CORRECT? 0= IF  CLOSEall
+  FLINK @ BEGIN  DUP 0= IF  FSEEKERR  THEN
      HNDL !  LINK @  OVER CORRECT?  UNTIL
   2DROP  ELSE DROP THEN  OPENFL ;
 
@@ -9745,7 +9745,7 @@ SCREENS DEFINITIONS
 \ multi-files: onemore                    ( 20  3 93 CRC 15:01 )
 : ONEMORE       \ addr blk# r/w  --- fl
                 \ if last + 1, build it else error out.
-  OVER  DELTA  @ -  lEND  @ =  IF       \ End 1+ ?
+  OVER  pend  @ -  LEND @ 1- > IF          \ End 1+ ?
     IF                                  \ do on reads:
       DROP  DUP B/BUF  BLANKS  2 ERASE  \ build it
     ELSE                                \ on writes:
@@ -9753,8 +9753,8 @@ SCREENS DEFINITIONS
       B/BUF U*  HANDLE  @ 0 LSEEK       \ go to spot in file
       0< IF  FSEEKERR  THEN             \ Error out?
       B/BUF  HANDLE  @  WTF             \ Write it to disk
-      B/BUF - IF OVRFLW  THEN  THEN     \ Out of disk space?
-    lEND  @ 1+ lEND  !  0               \ Adjust file descriptor
+      B/BUF - IF ." 1+ " OVRFLW  THEN  THEN \ Out of disk space?
+    lEND 1+!  0                         \ Adjust file descriptor
   ELSE  1 THEN ;                        \ Nope, do regular
 
 : FNOPN  ABORT"  File not open!!" ;
@@ -9771,7 +9771,7 @@ SCREENS DEFINITIONS
         0< IF  FSEEKERR  THEN  DROP     \ Error out?
         B/BUF  HANDLE  @  R> IF  RDF    \ Read or write?
           ELSE  WTF  THEN               \ write
-        B/BUF - IF OVRFLW  THEN         \ Out of disk space?
+        B/BUF - IF ." mr/w " OVRFLW  THEN \ Out of disk space?
       ELSE  FNOPN  THEN  THEN  ;        \ File open?
 
 \ multi-files: set      mr/w +vol:        ( 18  6 19 crc 17:34 )
