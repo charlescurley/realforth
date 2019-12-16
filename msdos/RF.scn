@@ -1944,7 +1944,7 @@ CODE LEAP   4 # RP ADD,  ' ;S CFA @ #) JMP,
 BASE @ >R  DECIMAL
 : IP@+   IP @ 2 IP +! ;
 
-: .LABEL  [ BLK @ 1- ] LITERAL .LINE SPACE ;
+: .LABEL  [ BLK @ 1- ] LITERAL  offset @ -  .LINE SPACE ;
 
 : N.            \ print a number in both hex and decimal
                 BASE @ SWAP  DUP  DECIMAL 7 .R
@@ -3581,7 +3581,7 @@ CODE QU  AX POP,  AX AX XOR,  1PUSH   BASE @  DECIMAL
     ENDCASE   HERE OVER U< IF QU THEN  \ don't go past  here
               -DUP WHILE 2+ REPEAT R> 2DROP ;
 
-
+: .line  offset @ -  .line ;
 \   cross reference utility. Ken Bell     ( 22  5 92 crc  9:23 )
 : (WHO)  \ pfa-1  ---  | search dict. for given word
    >R SPACE COL  VOC-LINK @   BEGIN   DUP 2- @
