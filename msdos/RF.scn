@@ -9550,19 +9550,19 @@ base !
 
 
 
+\ .vocs                                   ( 20 12 19 crc 23:02 )
+forth definitions               forget task
+: (.VOC)        \ vla ---   | print name of the vocabulary
+  DUP LIMIT U< IF 4 - NFA ID.  ELSE  ." Forth" DROP THEN ;
 
+: .CON  ." Context: " CONTEXT @ (.VOC) ;
 
+: .CUR  ." Current: " CURRENT @ (.VOC) ;
 
-
-
-
-
-
-
-
-
-
-
+: .VOCS         \   ---   | print vocabularies.
+  COL .CON COL .CUR
+  VOC-LINK  BEGIN @ -DUP  WHILE COL DUP (.VOC)  REPEAT ;
+: TASK ;        ;S
 
 
 
