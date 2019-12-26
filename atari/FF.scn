@@ -154,7 +154,7 @@ DECIMAL
  300 LOAD ( disassem)    120 LOAD ( un:)  50 LOAD \ loaders
  191 LOAD ( try)  96 LOAD ( cal)  ( 27 LOAD )  35 LOAD
  104 LOAD ( present)      21 LOAD (  cx) 501 LOAD  \ lned
-
+: ?DICT  FIRST HERE - 1024 / U.  9 MESSAGE  SPACE ;
 ' TASK C>N N>L L>S FENCE F!     UTILITIES SAVEOVER LI
 CR 15 MESSAGE  CR MF CR         HERE FIRST OVER - ERASE
 LNCTR OFF  EDITOR  PROGRAMMER crc PTODAY CR  CLR.EOP
@@ -1594,7 +1594,7 @@ February, 1900. From a handout at Orange County fig, 3, 85.
   SWAP 1+ DUP 13 = IF DROP 1+ 1 THEN SWAP
   ?TERMINAL IF LEAVE THEN  LOOP 2DROP ;
 
-: YEAR   1 SWAP 12 MONTHS ;  \  y ---  year printed out
+: YEAR   1 SWAP 12 MONTHS ;  \  y -- year printed out
 
 : WEEKS  7 * ;
 -->
@@ -3939,7 +3939,7 @@ REGISTERS  6 + CONSTANT PC      SR@ VARIABLE HSR
 
  0 ADREG AR0     4 ADREG AR1     8 ADREG AR2    0C ADREG AR3
 10 ADREG AR4    14 ADREG AR5    18 ADREG AR6    1C ADREG AR7
-0C ADREG S                      18 ADREG U      1C ADREG RP
+0C ADREG SP                     18 ADREG U      1C ADREG RP
 
 : DAREG  CREATE  W,  DOES> W@     REGISTERS 0C + + ;
 
@@ -3947,9 +3947,9 @@ REGISTERS  6 + CONSTANT PC      SR@ VARIABLE HSR
 10 DAREG DR4    14 DAREG DR5    18 DAREG DR6    1C DAREG DR7
                 14 DAREG INDEX  18 DAREG LIMIT
 
-
-
-
+: SHOWRETURN   RP F@ 10 - 30 DUMP ;
+: SHOWSTACK    SP F@ 10 - 30 DUMP ;
+: SHOWSTACKS   SHOWSTACK SHOWRETURN ;
 \ status register help words              ( 11  2 89 CRC  9:01 )
 : .BIT  \  d c -- d'  | add c to $ under const iff d is odd
   >R 2 M/MOD ROT R> SWAP 0= IF DROP BL THEN HOLD ;
@@ -4202,10 +4202,10 @@ CODE STEP     TRACESTEPS @#L CLR,
  AR0 USP MOV,                 \ set user stack accordingly
  REGISTERS 2C + *+ AR0 MOV,  RTE,        ;C             FIXED
 
+CODE S ' STEP *+ BRA,  ;C  FIXED
 CODE STEPS  \ ct ---   | step through ct steps, then stop
  S [+ DR0 MOV,  1 # DR0 SUBQ,
  DR0 TRACESTEPS @#L MOV,  ' STEP 6 + *+ BRA,  ;C        FIXED
-
 \ Trace capability: trace ix              ( 20  6 86 CRC 14:56 )
 IX 7 # SPEAKER @#L BCLR,  NE IF,  TRACESTEPS @#L CLR,
    2FFF # RP [ .W AND,              \ end of tracing
@@ -4282,16 +4282,16 @@ FORTH DEFINITIONS
                  DEBUG DEFINITIONS
 
 CODE >STACK \ ct  ---  | move ct items from host stack to target
-   S [+ DR0 MOV,  DEBUG S ASSEMBLER *+ AR0 MOV,
+   S [+ DR0 MOV,  DEBUG SP ASSEMBLER *+ AR0 MOV,
    DR0 DR1 MOV,  2 # DR1 LSL,  DR1 AR0 SUB,  AR0 AR1 MOV,
    1 # DR0 SUBQ,  DR0 FALSE DO,  S [+ AR0 [+ MOV,  LOOP,
-   AR1 DEBUG S ASSEMBLER @#L MOV,  ' SHOWALL *+ BRA,  ;C
+   AR1 DEBUG SP ASSEMBLER @#L MOV,  ' SHOWALL *+ BRA,  ;C
 \ Trace capability: skip tracing          ( 17  9 88 CRC 14:15 )
 : SKIP   \ Skip execution of the next instruction.
   PC F@ DISASSEMBLER IP F! CR INST IP F@ CR INST DEBUG PC F! ;
 
-: SETUP   DEBUG  starts S F!  STARTrp RP F!  STARTUSP USP F!
-  DR0 S OVER - ERASE ;
+: SETUP   DEBUG  starts SP F!  STARTrp RP F!  STARTUSP USP F!
+  DR0 SP OVER - ERASE ;
 ISSETUP: SETUP
 
 CODE CONTINUE  \ continue, until breakpoint, you hope
@@ -4305,7 +4305,7 @@ CODE CONTINUE  \ continue, until breakpoint, you hope
 ;S debugger help screen                   ( 26  6 86 CRC 13:01 )
 >STACK       -- move  ct  items from host to target stack
 sr w@ .STAT  -- print out the most recent status register.
-AR0  DR0   S  RP , etc. -- select registers by name.
+AR0  DR0   SP  RP , etc. -- select registers by name.
 NOTRACE      -- Stop trace in a compiled word.
 SR@  &  SR!  -- for playing with the status register.
        --> VERY dangerous!!! This can shut off keyboard, etc,!!
@@ -4379,7 +4379,7 @@ HEX
 
   0  ADDREG AR0  1  ADDREG AR1  2  ADDREG AR2  3  ADDREG AR3
   4  ADDREG AR4  5  ADDREG AR5  6  ADDREG AR6  7  ADDREG AR7
-                                               3  ADDREG S
+                                3  addreg sp   3  ADDREG S
                                 6  ADDREG U    7  ADDREG RP
  \ These just happen to be the "C" registers, ay - yup!!
 \ 68000 assem: addressing modes           ( 29  5 86 CRC 14:53 )
@@ -6751,16 +6751,16 @@ R> BASE !               EDITOR FLUSH
 12 DESCRIPTOR NAME
 
 \ multi-files: scrfile:                   ( 31 12 92 CRC 10:50 )
-: SCRFILE:      \ c: lend delta  ---
+\            0       4        6      8       10     12
+\ descriptor:  link | handle | pend | delta | lend | name....
+: SCRFILE:      \ c: pend delta  ---
                 \ r:   --- addr
-  CREATE  HERE HNDL F!  FLINK F@ ,  LINK FLINK F!
+  CREATE  HERE HNDL F!  FLINK F@ ,  LINK FLINK F!       \ link
   2dup + 1-  maxblk max  'maxblk f!
-  0 ,  W,  1- W,
+  0 , ( handle)  W, ( pend)  1- W,  ( delta)
   FILING BL FWORD  HERE C@ 2+ ALLOT ?ALIGN \ file name
   HERE FENCE F!
   DOES> ;
-
-
 
 
 
@@ -6771,6 +6771,7 @@ R> BASE !               EDITOR FLUSH
 \ descriptor:  link | handle | pend | delta | lend | name....
 : .DES  \ addr ---  | descriptor described
   HNDL F@ >R  CR DUP P>C C>N ID.  HNDL F!  10 TAB
+  handle   w@       ."  Handle"          3 .r
   DELTA    W@  DUP  ."  Start: "         6 .R
   LEND     W@  +    ."  End: "           6 .R
   NAME     SPACE COUNT TYPE
@@ -6780,7 +6781,6 @@ forth definitions
 : FLIST         \ print out the files and their places
   screens FLINK BEGIN  F@ -DUP WHILE  DUP .DES  REPEAT  CR ;
 screens definitions
-
 
 \ multi-files: closefl closeall disks     (  6 11 93 CRC 21:29 )
 : CLOSEFL       \ addr ---  | close file at given descriptor
@@ -6817,9 +6817,9 @@ SCREENS DEFINITIONS
 \ multi-files: exercise                   ( 18  9 93 CRC 22:26 )
 BASE F@ DECIMAL
 : EXERCISE      \ open, then close all files.
-  FLINK F@ HNDL F!  ?cr
-  FLINK BEGIN  F@ -DUP WHILE  dup 12 + count type col
-      DUP OPENFL   DUP CLOSEFL  REPEAT ?cr ;
+  FLINK F@  ?cr
+  BEGIN  dup hndl f!  name count type col
+      DUP OPENFL  CLOSEFL  link f@  -dup 0= until ?cr ;
 
 : COPIES        \ src dest ct ---  src' dest' | screen copier
   BASE F@ 10 - IF  7 EMIT  ABORT" Try this in decimal!"  THEN
@@ -6894,10 +6894,8 @@ SCREENS DEFINITIONS
         B/BUF - IF OVRFLW  THEN         \ Out of disk space?
       ELSE  FNOPN  THEN  THEN  ;        \ File open?
 
-\ multi-files: set      mr/w +vol:        (  1  1 93 CRC 19:19 )
+\ multi-files: set      mr/w +vol:        ( 18  6 19 crc 11:40 )
 FORTH DEFINITIONS
-: SET  4+ 4+ W@  OFFSET F! ;
-
 : MR/W  SCREENS  EXERCISE  MAINF  OPENFL
   ' (MR/W) 'R/W F!  MAINF HNDL F! ;
 
@@ -6909,7 +6907,9 @@ FORTH DEFINITIONS
   C>P 8 + W@ +  ( OFFSET F@ + ) ;
 : OPENING:      0 +VOL: ;
 \ set a given file to be our current disk.
-: setvol: opening:  offset off  offset ! ;
+: SETVOL: OPENING:  OFFSET OFF  OFFSET ! ;
+
+
 \ multi-files: loaders                    ( 26  3 19 crc 12:04 )
 \  22 +VOL: STP  LOADER DISKING
 \ 302 +VOL: STP  LOADER DESKJET
@@ -10446,13 +10446,13 @@ HEX
    #LEAD + 1 TEXT 1LINE 0= IF BOTTOM 0 ERROR THEN
    #LEAD + SWAP - DELETE RSTR Q ;
 
-\ search research cont edit ender         ( 15  1 86 CRC       )
+\ search research cont edit ender         ( 21  4 19 crc 16:26 )
 HEX E0 USER ENDER    ENDER OFF       DECIMAL
-
 : RESEARCH    \ from-2  to-1   ---  wanted string
   CR BOTTOM 1+ SWAP DO FORTH I SCR F! EDITOR TOP
-     BEGIN 1LINE DUP ?TERMINAL OR IF LEAVE THEN
-     1023 R# F@ < OR UNTIL ." ." LOOP Z ;
+    forth i editor  block w@ if \ Don't search binary scrs
+      BEGIN 1LINE DUP ?TERMINAL OR IF LEAVE THEN
+      1023 R# F@ < OR UNTIL  then  ." ." LOOP Z ;
 
 : SEARCH  DUP ENDER F! 1 TEXT RESEARCH ;  \ from-2  to-1   ---
 
