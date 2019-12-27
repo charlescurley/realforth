@@ -6120,7 +6120,7 @@ LABEL ACR    0D C,  0A C,                                  0 C,
 LABEL ROOM   TXT *Forth overwrites OS*"                    0 C,
 LABEL ANYKEY TXT  Hit any Key."                            0 C,
 LABEL SCRSTUF  LI C,  ASCII v C,   LI C, ASCII e C,        0 C,
-  LABEL DTR  TXT Jsr/Bsr Threaded fastForth"   0D C, 0A C, 0 C,
+  LABEL DTR  TXT Jsr/Bsr Threaded FastForth"   0D C, 0A C, 0 C,
 \ LABEL DTR  TXT Indirect Threaded realForth"  0D C, 0A C, 0 C,
 LABEL COPY TXT Copyright 1994+ Charles Curley" 0D C, 0A C, 0 C,
 LABEL MSHRINKFL TXT Mshrink Failed!"           0D C, 0A C, 0 C,
@@ -7946,7 +7946,7 @@ CODE RP!   10 U &[ RP MOV,                      NEXT     ;C
 \       dr5: index                      dr6: limit
 CODE LEAVE  DR5 DR6       MOV,                  NEXT     ;C
 
-code ?leave  s [+ dr0 mov,  ne if,  dr5 dr6 mov,  then, next  ;c
+CODE ?LEAVE  s [+ dr0 mov,  ne if,  dr5 dr6 mov,  then, next  ;c
 
 
 
@@ -8472,7 +8472,7 @@ DECIMAL \ patch today's date into (abort). automated version ctl
 : (QUIT)   BLK OFF [COMPILE] [  BEGIN BEGIN
   RP! CR QUERY INTERPRET  STATE F@ 0= UNTIL ."  ok" AGAIN STOP
 
-: (ABORT) SP! DECIMAL CR ." FastForth 3.0 30  3 19 "
+: (ABORT) SP! DECIMAL CR ." FastForth 3.0 24  9 19 "
   [COMPILE] FORTH  DEFINITIONS  QUIT  STOP
 
   SETNEW (GETTIME) W, SETOLD    LABEL TIMESTAMP
