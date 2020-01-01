@@ -50,7 +50,7 @@ real-FORTH on MS-DOS               (c) 1981-98 by Charles Curley
 ( ."  Please do a  9 LOAD  first!!" ABORT for new users        )
 ' RHANDLE DROP   ( ensure we're on the host!)
 DECIMAL      338 CONSTANT UTILITIES     UTILITIES BRING
-  CR R# @ ABS B/BUF MIN R# !    CACHE           FORTH
+  CR R# @ ABS B/BUF MIN R# !  ( CACHE)          FORTH
   ' (ERL) CFA 'ERL !    ' (BOT) CFA 'BOT !      VMODE.SET
   ' P?T  CFA '?TERMINAL !       2827 ATTRIBUTE !        DOK OK
   ' TASK NFA FENCE !    HEX 0F MESSAGE  CLR.EOP
@@ -154,7 +154,7 @@ HEX : \ ?LOADING  IN @ C/L + -40 AND  IN ! ; IMMEDIATE  : | ;
    58 LOAD    61 LOAD ( utilities ) 63 LOAD   291 LOAD \ @L
 : ?DICT  BASE @ FIRST HERE - HEX U.  9 MESSAGE BASE ! SPACE ;
    300 LOAD 121 LOAD  50 LOAD   HERE FENCE ! ?CR 15 MESSAGE ?CR
-   495 LOAD  191 LOAD   96 LOAD   260 LOAD  DOK  570 LOAD
+ ( 495 LOAD) 191 LOAD   96 LOAD   260 LOAD  DOK  570 LOAD
    104 LOAD   21 LOAD   HERE 1024 BLANKS  ?CR ?DICT CR
  SCR @ ABS MAXBLK MIN SCR ! UTILITIES SAVEOVER LI PAD C/L BLANKS
 
@@ -2187,9 +2187,9 @@ FILING DEFINITIONS                0 VARIABLE FLCT 0 ,
 0 VARIABLE PATH 3E ALLOT          0 CONSTANT HANDLE
 0 VARIABLE (ATT)
 0 VARIABLE DMY  -2 ALLOT ASCII * C, ASCII . C,  ASCII * C, 0 C,
-BLK @ 1+ DUP 0C + THRU ( DECIMAL 112 LOAD )  BASE !
+BLK @ 1+ DUP 0C + THRU  DECIMAL ( 112 LOAD )
 FORTH DEFINITIONS \ : TODAY  TODAY  FILING .FILENAME  SPACE ;
-: TASK ;   EDITOR FLUSH         600 load \ screens
+: TASK ;   EDITOR FLUSH     600 load  base ! \ screens
 \ dos interface: getpath (del)            (  2  7 90 crc  9:41 )
 CODE GETPATH  \ addr drive  ---  | get current path name
   DX POP,  IP AX MOV,  IP POP,  AX PUSH,
@@ -6161,7 +6161,7 @@ R> BASE !  FORTH DEFINITIONS   EDITOR FLUSH
 \ save image from vectors                 (  7  2 90 crc  7:59 )
 HEX  0D CONSTANT TSKSZ  0 VARIABLE TSK TSKSZ ALLOT
 : RESTVEC   EMPTY-BUFFERS  LNCTR OFF  R# OFF SCR OFF
-  [ ATTRIBUTE @ ] LITERAL  ATTRIBUTE !  CACHE
+  [ ATTRIBUTE @ ] LITERAL  ATTRIBUTE ! ( CACHE)
   CR ." Copyright 1981-1990, Charles Curley " CR ?DICT  EDITOR
   HOLDER PLACEF [ (STAMP) PLACEF - 22 + ] LITERAL   CMOVE
   0 0  DEBUG SAFEIX 0  100 CMOVEL     HOMESEG
@@ -9230,14 +9230,14 @@ FORTH DEFINITIONS
 : INSERTKEY   PLACEF 1 TOGGLE   BELL ;
 
 
-\ line editor: lefts rights               (  2  3 19 crc  0:02 )
-: lefts         \  ---  | move left until next blank
-  begin left   buf @ curs @ + c@ bl =
-        curs @ 0=  or until ;
+\ line editor: lefts rights               (  2  3 19 crc  0:02 )
+: LEFTS         \  ---  | move left until next blank
+  BEGIN LEFT   BUF @ CURS @ + C@ BL =
+        CURS @ 0=  OR UNTIL ;
 
-: rights        \  ---  | move right until next blank
-  begin right  buf @ curs @ + c@ bl =
-        size @  curs @ =  or until ;
+: RIGHTS        \  ---  | move right until next blank
+  BEGIN RIGHT  BUF @ CURS @ + C@ BL =
+        SIZE @  CURS @ =  OR UNTIL ;
 
 
 
@@ -9551,7 +9551,7 @@ base !
 
 
 \ .vocs                                   ( 20 12 19 crc 23:02 )
-forth definitions               forget task
+FORTH DEFINITIONS               FORGET TASK
 : (.VOC)        \ vla ---   | print name of the vocabulary
   DUP LIMIT U< IF 4 - NFA ID.  ELSE  ." Forth" DROP THEN ;
 
@@ -9601,17 +9601,17 @@ forth definitions               forget task
 \ begin multiple file handler             (  1  1 93 CRC 19:15 )
 210 NEEDED +THRU
 FILING  FORGET TASK
-FORTH DEFINITIONS     ( : TASK ; )      CACHE \ r/w vector
+FORTH DEFINITIONS     ( : TASK ; ) \    CACHE \ r/w vector
 VOCABULARY SCREENS IMMEDIATE    SCREENS DEFINITIONS
 BASE  @ >R      DECIMAL
 
 1 12 +THRU              FORTH DEFINITIONS
 
-R> BASE !               EDITOR FLUSH
+EDITOR FLUSH
 : TASK ;                SCREENS
 
-MR/W    FLIST
-
+MR/W    FLIST           502 LOAD
+R> BASE !
 
 
 \ multi-files: variables descriptors field( 30 12 92 CRC 20:19 )
@@ -9733,7 +9733,7 @@ SCREENS DEFINITIONS
 : OVRFLW  ABORT"  File Size Overflow" ;
 
 : CORRECT?      \ blk# -- fl | is current hndl correct?
-  pend @  nextfl  within ;
+  PEND @  NEXTFL  WITHIN ;
 
 : SELECT        \ blk# --  | sets hndl to correct descriptor
   DUP CORRECT? 0= IF  CLOSEall
