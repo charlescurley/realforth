@@ -5102,22 +5102,22 @@ MSSG LAE Rastercopy,"
   IP F@ OVER -  45 TAB  2DUP ASCI  56 TAB (WDUMP) ;
 
 
-\ 68k disassembler. (dis)                 ( 15  5 91 CRC 16:19 )
+\ 68k disassembler. (dis)                 (  6  1 20 crc 11:20 )
 FORTH DEFINITIONS
 : (DIS)   BASE F@ HEX !CSP BEGIN ?STACK  CR DISASSEMBLER INST
     SP@  CSP F@ - IF .S THEN
     KEY DUP CTL T = IF  RANGE F@  IP F! ."  **" THEN
+        DUP CTL L = IF  FORTH L                 THEN
+        DUP CTL B = IF        B                 THEN
+        DUP CTL N = IF        N DISASSEMBLER    THEN
   LI = UNTIL BASE F! ;
 
 : DISASSEM  DUP RANGE F!  IP F!  (DIS) ;
 
+: RESUME    IP F@ DISASSEM ;
 : SYMBOLIC   DISASSEMBLER [ ' SADDREG  ] LITERAL 'ADDREG F! ;
-
 : NON-SYMBOLIC  DISASSEMBLER
   [ ' NSADDREG ] LITERAL 'ADDREG F! ;
-
-
-
 \ trial area for 0do, i'                  ( 27  2 92 CRC 11:11 )
 \       dr5: index                      dr6: limit
 CODE (0DO)  \ lim ---   | equivalent of  0 (do)
@@ -6779,8 +6779,8 @@ R> BASE !               EDITOR FLUSH
 
 forth definitions
 : FLIST         \ print out the files and their places
-  screens FLINK BEGIN  F@ -DUP WHILE  DUP .DES  REPEAT  CR ;
-screens definitions
+  SCREENS FLINK BEGIN  F@ -DUP WHILE  DUP .DES  REPEAT  CR ;
+SCREENS DEFINITIONS
 
 \ multi-files: closefl closeall disks     (  6 11 93 CRC 21:29 )
 : CLOSEFL       \ addr ---  | close file at given descriptor
@@ -8159,13 +8159,13 @@ EXPECTING DEFINITIONS
 
 
 \ line editor: lefts rights               (  1  3 19 crc 17:03 )
-: lefts         \   ---   | move left until next blank
-  begin left   buf f@ curs f@ + c@ bl =
-        curs f@ 0=  or until ;
+: LEFTS         \   ---   | move left until next blank
+  BEGIN LEFT   BUF F@ CURS F@ + C@ BL =
+        CURS F@ 0=  OR UNTIL ;
 
-: rights        \   ---   | move right until next blank
-  begin right  buf f@ curs f@ + c@ bl =
-        size f@  curs f@ =  or until ;
+: RIGHTS        \   ---   | move right until next blank
+  BEGIN RIGHT  BUF F@ CURS F@ + C@ BL =
+        SIZE F@  CURS F@ =  OR UNTIL ;
 
 
 
@@ -8198,8 +8198,8 @@ FORTH DEFINITIONS
   BEGIN   KEY   DUP 0= IF   KEY  CASE           \ code, later
         ASCII ; OF      DATE            ENDOF   \ f1, date
         ASCII < OF      KILL            ENDOF   \ f2, kill line
-        ascii > of      lefts           endof   \ f4, lefts
-        ascii ? of      rights          endof   \ f5, rights
+        ASCII > OF      LEFTS           ENDOF   \ f4, lefts
+        ASCII ? OF      RIGHTS          ENDOF   \ f5, rights
         ASCII A OF      HISTORY  CR     ENDOF   \ f7, history
         ASCII B OF      RETRIEVE        ENDOF   \ f8, retrieve
         ASCII G OF      REND            ENDOF   \ home key
@@ -10450,7 +10450,7 @@ HEX
 HEX E0 USER ENDER    ENDER OFF       DECIMAL
 : RESEARCH    \ from-2  to-1   ---  wanted string
   CR BOTTOM 1+ SWAP DO FORTH I SCR F! EDITOR TOP
-    forth i editor  block w@ if \ Don't search binary scrs
+    FORTH I EDITOR  BLOCK W@ IF \ Don't search binary scrs
       BEGIN 1LINE DUP ?TERMINAL OR IF LEAVE THEN
       1023 R# F@ < OR UNTIL  then  ." ." LOOP Z ;
 
