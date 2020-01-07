@@ -52,9 +52,7 @@ You may also wish to copy the batch files, `RF.BAT` and `RFX.BAT`, to launch rea
 
 Now unmount and disconnect the virtual disk (adapting this line as you go):
 
-    ```
     umount /mnt && partx --delete /dev/nbd0 && qemu-nbd --disconnect /dev/nbd0
-    ```
 
 You should now be able to boot the virtual machine and run real-Forth.
 
