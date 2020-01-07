@@ -2,9 +2,9 @@ This README file is in github markdown.
 
 # Welcome to real-Forth
 
-This is real-Forth, a descendant of fig-Forth, for the 8086 *et al*. It runs on top of MS-DOS or an MS-DOS clone such as Free-DOS. Like fig-Forth, it is a traditional indirect threaded Forth. It uses screen files to emulate Forth's traditional raw block access to floppy or hard drives.
+This is real-Forth, a 16 bit descendant of fig-Forth, for the 8086 *et al*. It runs on top of MS-DOS or an MS-DOS clone such as Free-DOS. Like fig-Forth, it is a traditional indirect threaded Forth. It uses screen files to emulate Forth's traditional raw block access to floppy or hard drives.
 
-It includes fastForth, a direct JSR/BSR threaded Forth for the 68000 and Atari ST.
+It includes fastForth, a 32 bit direct JSR/BSR threaded Forth for the 68000 and Atari ST.
 
 For more information on the differences between these Forths and fig-Forth, see the chapter on Pedigree in the real-Forth User's Guide.
 
@@ -48,17 +48,13 @@ Create a directory on the virtual machine's hard drive, say `\rf`. Copy the Fort
 
     cp RFF.COM *.SCR *.scr /mnt/RF
 
-You may also wish to create a batch file, `RF.BAT`, to launch real-Forth, and put that in your path.
+You may also wish to copy the batch files, `RF.BAT` and `RFX.BAT`, to launch real-Forth, into your path.
 
-```batchfile
-c:
-cd \rf
-rff 3 load cr filing cr ."  iok"
-```
+Now unmount and disconnect the virtual disk (adapting this line as you go):
 
-Now unmount and disconnect the virtual disk:
-
+    ```
     umount /mnt && partx --delete /dev/nbd0 && qemu-nbd --disconnect /dev/nbd0
+    ```
 
 You should now be able to boot the virtual machine and run real-Forth.
 
