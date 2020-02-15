@@ -2049,9 +2049,9 @@ FORTH DEFINITIONS   BASE   !
 ( Substitute CREATE for auto sourcecode li(  9  4 90 crc 13:22 )
    BASE @ HEX       ' (CREATE) CFA  'CREATE !
 : WHERENOW      ( line start & blk compressed for storage )
-   BLK @  offset @ + 10 *  IN @ C/L /  OR ;
+   BLK @  OFFSET @ + 10 *  IN @ C/L /  OR ;
 : WHERETHEN     ( unpack line# & blk :   ---  r#-2  scr-1 )
-   DUP -10 AND  10 / offset @ -  SWAP 0F AND C/L * ;
+   DUP -10 AND  10 / OFFSET @ -  SWAP 0F AND C/L * ;
 
 : NEWCREATE  2 ALLOT  (CREATE) WHERENOW  LATEST 2- !
     OUT @ C/L >  IF CR  THEN ;     ' NEWCREATE CFA 'CREATE !
