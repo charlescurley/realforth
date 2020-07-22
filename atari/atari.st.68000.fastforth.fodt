@@ -9,35 +9,35 @@
   
   
   <dc:language>en-US</dc:language>
-  <meta:editing-cycles>259</meta:editing-cycles>
-  <meta:editing-duration>P49DT22H38M55S</meta:editing-duration>
+  <meta:editing-cycles>265</meta:editing-cycles>
+  <meta:editing-duration>P49DT23H13M14S</meta:editing-duration>
   
   
   
   
   
- <meta:initial-creator>Charles Curley</meta:initial-creator><dc:date>2020-01-07T10:12:13.364919500</dc:date><dc:creator>Charles Curley</dc:creator><dc:subject>fast-Forth on Atari ST</dc:subject><meta:document-statistic meta:table-count="10" meta:image-count="2" meta:object-count="0" meta:page-count="22" meta:paragraph-count="512" meta:word-count="4945" meta:character-count="27383" meta:non-whitespace-character-count="22728"/><meta:user-defined meta:name="Forth Supported">September 14, 1994</meta:user-defined><meta:user-defined meta:name="Product Name">fast-Forth on Atari ST</meta:user-defined><meta:user-defined meta:name="Version Number">3.0</meta:user-defined><meta:user-defined meta:name="hardware">Atari ST</meta:user-defined><meta:template xlink:type="simple" xlink:actuate="onRequest" xlink:title="Technical Document Template" xlink:href="../../../projects/.config/libreoffice/4/user/template/technical.ott" meta:date="2019-01-19T13:30:22.264021378"/></office:meta>
+ <meta:initial-creator>Charles Curley</meta:initial-creator><dc:date>2020-07-22T16:01:32.534478099</dc:date><dc:creator>Charles Curley</dc:creator><dc:subject>fast-Forth on Atari ST</dc:subject><meta:document-statistic meta:table-count="10" meta:image-count="2" meta:object-count="0" meta:page-count="23" meta:paragraph-count="515" meta:word-count="5005" meta:character-count="27704" meta:non-whitespace-character-count="22988"/><meta:user-defined meta:name="Forth Supported">September 14, 1994</meta:user-defined><meta:user-defined meta:name="Product Name">fast-Forth on Atari ST</meta:user-defined><meta:user-defined meta:name="Version Number">3.0</meta:user-defined><meta:user-defined meta:name="hardware">Atari ST</meta:user-defined><meta:template xlink:type="simple" xlink:actuate="onRequest" xlink:title="Technical Document Template" xlink:href="../../../projects/.config/libreoffice/4/user/template/technical.ott" meta:date="2019-01-19T13:30:22.264021378"/></office:meta>
  <office:settings>
   <config:config-item-set config:name="ooo:view-settings">
-   <config:config-item config:name="ViewAreaTop" config:type="long">565132</config:config-item>
+   <config:config-item config:name="ViewAreaTop" config:type="long">620617</config:config-item>
    <config:config-item config:name="ViewAreaLeft" config:type="long">0</config:config-item>
-   <config:config-item config:name="ViewAreaWidth" config:type="long">22694</config:config-item>
-   <config:config-item config:name="ViewAreaHeight" config:type="long">15191</config:config-item>
+   <config:config-item config:name="ViewAreaWidth" config:type="long">22751</config:config-item>
+   <config:config-item config:name="ViewAreaHeight" config:type="long">9567</config:config-item>
    <config:config-item config:name="ShowRedlineChanges" config:type="boolean">false</config:config-item>
    <config:config-item config:name="InBrowseMode" config:type="boolean">false</config:config-item>
    <config:config-item-map-indexed config:name="Views">
     <config:config-item-map-entry>
      <config:config-item config:name="ViewId" config:type="string">view2</config:config-item>
-     <config:config-item config:name="ViewLeft" config:type="long">3727</config:config-item>
-     <config:config-item config:name="ViewTop" config:type="long">573989</config:config-item>
+     <config:config-item config:name="ViewLeft" config:type="long">5346</config:config-item>
+     <config:config-item config:name="ViewTop" config:type="long">621097</config:config-item>
      <config:config-item config:name="VisibleLeft" config:type="long">0</config:config-item>
-     <config:config-item config:name="VisibleTop" config:type="long">565132</config:config-item>
-     <config:config-item config:name="VisibleRight" config:type="long">22692</config:config-item>
-     <config:config-item config:name="VisibleBottom" config:type="long">580321</config:config-item>
+     <config:config-item config:name="VisibleTop" config:type="long">620617</config:config-item>
+     <config:config-item config:name="VisibleRight" config:type="long">22749</config:config-item>
+     <config:config-item config:name="VisibleBottom" config:type="long">630183</config:config-item>
      <config:config-item config:name="ZoomType" config:type="short">3</config:config-item>
      <config:config-item config:name="ViewLayoutColumns" config:type="short">1</config:config-item>
      <config:config-item config:name="ViewLayoutBookMode" config:type="boolean">false</config:config-item>
-     <config:config-item config:name="ZoomFactor" config:type="short">104</config:config-item>
+     <config:config-item config:name="ZoomFactor" config:type="short">117</config:config-item>
      <config:config-item config:name="IsSelectedFrame" config:type="boolean">false</config:config-item>
      <config:config-item config:name="AnchoredTextOverflowLegacy" config:type="boolean">false</config:config-item>
     </config:config-item-map-entry>
@@ -108,7 +108,7 @@
    <config:config-item config:name="UnxForceZeroExtLeading" config:type="boolean">true</config:config-item>
    <config:config-item config:name="TabAtLeftIndentForParagraphsInList" config:type="boolean">false</config:config-item>
    <config:config-item config:name="PrintRightPages" config:type="boolean">true</config:config-item>
-   <config:config-item config:name="Rsid" config:type="int">22489041</config:config-item>
+   <config:config-item config:name="Rsid" config:type="int">22509590</config:config-item>
    <config:config-item config:name="MathBaselineAlignment" config:type="boolean">false</config:config-item>
    <config:config-item config:name="MsWordCompTrailingBlanks" config:type="boolean">false</config:config-item>
    <config:config-item config:name="InvertBorderSpacing" config:type="boolean">false</config:config-item>
@@ -1058,228 +1058,231 @@
   <style:style style:name="P71" style:family="paragraph" style:parent-style-name="Text_20_body">
    <style:text-properties officeooo:paragraph-rsid="014e7804"/>
   </style:style>
-  <style:style style:name="P72" style:family="paragraph" style:parent-style-name="Table_20_Contents">
-   <style:text-properties officeooo:rsid="00949a85" officeooo:paragraph-rsid="00949a85"/>
+  <style:style style:name="P72" style:family="paragraph" style:parent-style-name="Text_20_body">
+   <style:text-properties officeooo:rsid="014e7804" officeooo:paragraph-rsid="014e7804"/>
   </style:style>
   <style:style style:name="P73" style:family="paragraph" style:parent-style-name="Table_20_Contents">
-   <style:text-properties officeooo:paragraph-rsid="00949a85"/>
-  </style:style>
-  <style:style style:name="P74" style:family="paragraph" style:parent-style-name="Table_20_Contents">
-   <style:text-properties officeooo:paragraph-rsid="00a447dc"/>
-  </style:style>
-  <style:style style:name="P75" style:family="paragraph" style:parent-style-name="Table_20_Contents">
-   <style:text-properties officeooo:rsid="00d5f4c9" officeooo:paragraph-rsid="00d5f4c9"/>
-  </style:style>
-  <style:style style:name="P76" style:family="paragraph" style:parent-style-name="Table_20_Contents">
-   <style:text-properties officeooo:paragraph-rsid="00d5f4c9"/>
-  </style:style>
-  <style:style style:name="P77" style:family="paragraph" style:parent-style-name="Table_20_Contents">
-   <style:text-properties officeooo:rsid="00e1634a" officeooo:paragraph-rsid="00e1634a"/>
-  </style:style>
-  <style:style style:name="P78" style:family="paragraph" style:parent-style-name="Table_20_Contents">
-   <style:text-properties officeooo:rsid="00e1634a" officeooo:paragraph-rsid="00e1fb6f"/>
-  </style:style>
-  <style:style style:name="P79" style:family="paragraph" style:parent-style-name="Table_20_Contents">
-   <style:text-properties officeooo:rsid="00e1fb6f" officeooo:paragraph-rsid="00e1fb6f"/>
-  </style:style>
-  <style:style style:name="P80" style:family="paragraph" style:parent-style-name="Table_20_Heading">
-   <style:text-properties officeooo:paragraph-rsid="00949a85"/>
-  </style:style>
-  <style:style style:name="P81" style:family="paragraph" style:parent-style-name="Table_20_Heading">
    <style:text-properties officeooo:rsid="00949a85" officeooo:paragraph-rsid="00949a85"/>
   </style:style>
-  <style:style style:name="P82" style:family="paragraph" style:parent-style-name="Table_20_Heading">
+  <style:style style:name="P74" style:family="paragraph" style:parent-style-name="Table_20_Contents">
+   <style:text-properties officeooo:paragraph-rsid="00949a85"/>
+  </style:style>
+  <style:style style:name="P75" style:family="paragraph" style:parent-style-name="Table_20_Contents">
+   <style:text-properties officeooo:paragraph-rsid="00a447dc"/>
+  </style:style>
+  <style:style style:name="P76" style:family="paragraph" style:parent-style-name="Table_20_Contents">
+   <style:text-properties officeooo:rsid="00d5f4c9" officeooo:paragraph-rsid="00d5f4c9"/>
+  </style:style>
+  <style:style style:name="P77" style:family="paragraph" style:parent-style-name="Table_20_Contents">
+   <style:text-properties officeooo:paragraph-rsid="00d5f4c9"/>
+  </style:style>
+  <style:style style:name="P78" style:family="paragraph" style:parent-style-name="Table_20_Contents">
    <style:text-properties officeooo:rsid="00e1634a" officeooo:paragraph-rsid="00e1634a"/>
   </style:style>
-  <style:style style:name="P83" style:family="paragraph" style:parent-style-name="Contents_20_1">
+  <style:style style:name="P79" style:family="paragraph" style:parent-style-name="Table_20_Contents">
+   <style:text-properties officeooo:rsid="00e1634a" officeooo:paragraph-rsid="00e1fb6f"/>
+  </style:style>
+  <style:style style:name="P80" style:family="paragraph" style:parent-style-name="Table_20_Contents">
+   <style:text-properties officeooo:rsid="00e1fb6f" officeooo:paragraph-rsid="00e1fb6f"/>
+  </style:style>
+  <style:style style:name="P81" style:family="paragraph" style:parent-style-name="Table_20_Heading">
+   <style:text-properties officeooo:paragraph-rsid="00949a85"/>
+  </style:style>
+  <style:style style:name="P82" style:family="paragraph" style:parent-style-name="Table_20_Heading">
+   <style:text-properties officeooo:rsid="00949a85" officeooo:paragraph-rsid="00949a85"/>
+  </style:style>
+  <style:style style:name="P83" style:family="paragraph" style:parent-style-name="Table_20_Heading">
+   <style:text-properties officeooo:rsid="00e1634a" officeooo:paragraph-rsid="00e1634a"/>
+  </style:style>
+  <style:style style:name="P84" style:family="paragraph" style:parent-style-name="Contents_20_1">
    <style:paragraph-properties>
     <style:tab-stops>
      <style:tab-stop style:position="6in" style:type="right" style:leader-style="dotted" style:leader-text="."/>
     </style:tab-stops>
    </style:paragraph-properties>
   </style:style>
-  <style:style style:name="P84" style:family="paragraph" style:parent-style-name="Contents_20_2">
+  <style:style style:name="P85" style:family="paragraph" style:parent-style-name="Contents_20_2">
    <style:paragraph-properties>
     <style:tab-stops>
      <style:tab-stop style:position="5.8035in" style:type="right" style:leader-style="dotted" style:leader-text="."/>
     </style:tab-stops>
    </style:paragraph-properties>
   </style:style>
-  <style:style style:name="P85" style:family="paragraph" style:parent-style-name="Contents_20_3">
+  <style:style style:name="P86" style:family="paragraph" style:parent-style-name="Contents_20_3">
    <style:paragraph-properties>
     <style:tab-stops>
      <style:tab-stop style:position="5.6071in" style:type="right" style:leader-style="dotted" style:leader-text="."/>
     </style:tab-stops>
    </style:paragraph-properties>
   </style:style>
-  <style:style style:name="P86" style:family="paragraph" style:parent-style-name="Contents_20_4">
+  <style:style style:name="P87" style:family="paragraph" style:parent-style-name="Contents_20_4">
    <style:paragraph-properties>
     <style:tab-stops>
      <style:tab-stop style:position="5.4102in" style:type="right" style:leader-style="dotted" style:leader-text="."/>
     </style:tab-stops>
    </style:paragraph-properties>
   </style:style>
-  <style:style style:name="P87" style:family="paragraph" style:parent-style-name="Warning">
+  <style:style style:name="P88" style:family="paragraph" style:parent-style-name="Warning">
    <style:text-properties officeooo:paragraph-rsid="00c5ced8"/>
   </style:style>
-  <style:style style:name="P88" style:family="paragraph" style:parent-style-name="Warning">
+  <style:style style:name="P89" style:family="paragraph" style:parent-style-name="Warning">
    <style:text-properties officeooo:rsid="00d70756" officeooo:paragraph-rsid="00d70756"/>
   </style:style>
-  <style:style style:name="P89" style:family="paragraph" style:parent-style-name="Warning">
+  <style:style style:name="P90" style:family="paragraph" style:parent-style-name="Warning">
    <style:text-properties officeooo:rsid="00d70756" officeooo:paragraph-rsid="00e1634a"/>
   </style:style>
-  <style:style style:name="P90" style:family="paragraph" style:parent-style-name="Warning">
+  <style:style style:name="P91" style:family="paragraph" style:parent-style-name="Warning">
    <style:text-properties officeooo:paragraph-rsid="00e1634a"/>
   </style:style>
-  <style:style style:name="P91" style:family="paragraph" style:parent-style-name="Index_20_1">
+  <style:style style:name="P92" style:family="paragraph" style:parent-style-name="Index_20_1">
    <style:paragraph-properties>
     <style:tab-stops>
      <style:tab-stop style:position="6in" style:type="right" style:leader-style="dotted" style:leader-text="."/>
     </style:tab-stops>
    </style:paragraph-properties>
   </style:style>
-  <style:style style:name="P92" style:family="paragraph" style:parent-style-name="Text_20_body" style:master-page-name="">
+  <style:style style:name="P93" style:family="paragraph" style:parent-style-name="Text_20_body" style:master-page-name="">
    <style:paragraph-properties style:page-number="auto"/>
    <style:text-properties fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
   </style:style>
-  <style:style style:name="P93" style:family="paragraph" style:parent-style-name="Appendix_20_1" style:master-page-name="">
+  <style:style style:name="P94" style:family="paragraph" style:parent-style-name="Appendix_20_1" style:master-page-name="">
    <style:paragraph-properties style:page-number="auto"/>
   </style:style>
-  <style:style style:name="P94" style:family="paragraph" style:parent-style-name="Heading_20_1">
+  <style:style style:name="P95" style:family="paragraph" style:parent-style-name="Heading_20_1">
    <style:text-properties officeooo:paragraph-rsid="00c2c5fe"/>
   </style:style>
-  <style:style style:name="P95" style:family="paragraph" style:parent-style-name="Heading_20_1">
-   <style:text-properties officeooo:rsid="00ae1df6" officeooo:paragraph-rsid="00bfae53"/>
-  </style:style>
   <style:style style:name="P96" style:family="paragraph" style:parent-style-name="Heading_20_1">
-   <style:paragraph-properties fo:break-before="page"/>
+   <style:text-properties officeooo:rsid="00ae1df6" officeooo:paragraph-rsid="00bfae53"/>
   </style:style>
   <style:style style:name="P97" style:family="paragraph" style:parent-style-name="Heading_20_1">
    <style:paragraph-properties fo:break-before="page"/>
-   <style:text-properties officeooo:paragraph-rsid="00d70756"/>
   </style:style>
-  <style:style style:name="P98" style:family="paragraph" style:parent-style-name="Heading_20_2">
-   <style:text-properties officeooo:rsid="00c3d4a0" officeooo:paragraph-rsid="00c5ced8"/>
-  </style:style>
-  <style:style style:name="P99" style:family="paragraph" style:parent-style-name="Heading_20_2">
-   <style:text-properties officeooo:rsid="00487707" officeooo:paragraph-rsid="00487707"/>
-  </style:style>
-  <style:style style:name="P100" style:family="paragraph" style:parent-style-name="Heading_20_2">
-   <style:text-properties officeooo:paragraph-rsid="0045d120"/>
-  </style:style>
-  <style:style style:name="P101" style:family="paragraph" style:parent-style-name="Heading_20_2">
-   <style:text-properties officeooo:rsid="00a447dc" officeooo:paragraph-rsid="00a447dc"/>
-  </style:style>
-  <style:style style:name="P102" style:family="paragraph" style:parent-style-name="Heading_20_2">
-   <style:text-properties officeooo:paragraph-rsid="00e1634a"/>
-  </style:style>
-  <style:style style:name="P103" style:family="paragraph" style:parent-style-name="Heading_20_2">
-   <style:text-properties officeooo:rsid="00e1fb6f" officeooo:paragraph-rsid="00e1fb6f"/>
-  </style:style>
-  <style:style style:name="P104" style:family="paragraph" style:parent-style-name="Heading_20_2">
-   <style:text-properties officeooo:rsid="014e7804" officeooo:paragraph-rsid="014e7804"/>
-  </style:style>
-  <style:style style:name="P105" style:family="paragraph" style:parent-style-name="Heading_20_3">
-   <style:text-properties officeooo:rsid="00242008" officeooo:paragraph-rsid="00242008"/>
-  </style:style>
-  <style:style style:name="P106" style:family="paragraph" style:parent-style-name="Heading_20_3">
-   <style:text-properties officeooo:paragraph-rsid="0045d120"/>
-  </style:style>
-  <style:style style:name="P107" style:family="paragraph" style:parent-style-name="Heading_20_3">
-   <style:text-properties officeooo:rsid="00648cbf" officeooo:paragraph-rsid="00648cbf"/>
-  </style:style>
-  <style:style style:name="P108" style:family="paragraph" style:parent-style-name="Heading_20_3">
-   <style:text-properties officeooo:rsid="00670075" officeooo:paragraph-rsid="00670075"/>
-  </style:style>
-  <style:style style:name="P109" style:family="paragraph" style:parent-style-name="Heading_20_3">
-   <style:text-properties officeooo:rsid="006cc0a6" officeooo:paragraph-rsid="006cc0a6"/>
-  </style:style>
-  <style:style style:name="P110" style:family="paragraph" style:parent-style-name="Heading_20_3">
-   <style:text-properties officeooo:rsid="00d70756" officeooo:paragraph-rsid="00d70756"/>
-  </style:style>
-  <style:style style:name="P111" style:family="paragraph" style:parent-style-name="Heading_20_3">
-   <style:text-properties officeooo:rsid="00e1fb6f" officeooo:paragraph-rsid="00e1fb6f"/>
-  </style:style>
-  <style:style style:name="P112" style:family="paragraph" style:parent-style-name="Sample_20_Code_20_Last">
-   <style:text-properties officeooo:paragraph-rsid="00d70756"/>
-  </style:style>
-  <style:style style:name="P113" style:family="paragraph" style:parent-style-name="Sample_20_Code_20_Last">
-   <style:text-properties officeooo:paragraph-rsid="00e1634a"/>
-  </style:style>
-  <style:style style:name="P114" style:family="paragraph" style:parent-style-name="Text_20_body" style:master-page-name="Standard">
-   <style:paragraph-properties style:page-number="auto"/>
-   <style:text-properties fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
-  </style:style>
-  <style:style style:name="P115" style:family="paragraph" style:parent-style-name="Text_20_body">
-   <style:text-properties officeooo:rsid="014e7804" officeooo:paragraph-rsid="014e7804"/>
-  </style:style>
-  <style:style style:name="P116" style:family="paragraph" style:parent-style-name="Text_20_body" style:list-style-name="L1"/>
-  <style:style style:name="P117" style:family="paragraph" style:parent-style-name="Text_20_body" style:list-style-name="L1">
-   <style:text-properties officeooo:paragraph-rsid="00d70756"/>
-  </style:style>
-  <style:style style:name="P118" style:family="paragraph" style:parent-style-name="Heading_20_1">
-   <style:text-properties officeooo:paragraph-rsid="00c2c5fe"/>
-  </style:style>
-  <style:style style:name="P119" style:family="paragraph" style:parent-style-name="Heading_20_1">
-   <style:text-properties officeooo:rsid="00ae1df6" officeooo:paragraph-rsid="00bfae53"/>
-  </style:style>
-  <style:style style:name="P120" style:family="paragraph" style:parent-style-name="Heading_20_1">
+  <style:style style:name="P98" style:family="paragraph" style:parent-style-name="Heading_20_1">
    <style:paragraph-properties fo:break-before="page"/>
    <style:text-properties officeooo:paragraph-rsid="00d70756"/>
   </style:style>
-  <style:style style:name="P121" style:family="paragraph" style:parent-style-name="Heading_20_2">
-   <style:text-properties officeooo:rsid="014e7804" officeooo:paragraph-rsid="014e7804"/>
+  <style:style style:name="P99" style:family="paragraph" style:parent-style-name="Heading_20_2">
+   <style:text-properties officeooo:rsid="00c3d4a0" officeooo:paragraph-rsid="00c5ced8"/>
   </style:style>
-  <style:style style:name="P122" style:family="paragraph" style:parent-style-name="Heading_20_2">
+  <style:style style:name="P100" style:family="paragraph" style:parent-style-name="Heading_20_2">
    <style:text-properties officeooo:rsid="00487707" officeooo:paragraph-rsid="00487707"/>
   </style:style>
-  <style:style style:name="P123" style:family="paragraph" style:parent-style-name="Heading_20_2">
+  <style:style style:name="P101" style:family="paragraph" style:parent-style-name="Heading_20_2">
    <style:text-properties officeooo:paragraph-rsid="0045d120"/>
   </style:style>
-  <style:style style:name="P124" style:family="paragraph" style:parent-style-name="Heading_20_2">
+  <style:style style:name="P102" style:family="paragraph" style:parent-style-name="Heading_20_2">
    <style:text-properties officeooo:rsid="00a447dc" officeooo:paragraph-rsid="00a447dc"/>
   </style:style>
-  <style:style style:name="P125" style:family="paragraph" style:parent-style-name="Heading_20_2">
+  <style:style style:name="P103" style:family="paragraph" style:parent-style-name="Heading_20_2">
+   <style:text-properties officeooo:paragraph-rsid="00e1634a"/>
+  </style:style>
+  <style:style style:name="P104" style:family="paragraph" style:parent-style-name="Heading_20_2">
    <style:text-properties officeooo:rsid="00e1fb6f" officeooo:paragraph-rsid="00e1fb6f"/>
   </style:style>
-  <style:style style:name="P126" style:family="paragraph" style:parent-style-name="Heading_20_3">
+  <style:style style:name="P105" style:family="paragraph" style:parent-style-name="Heading_20_2">
+   <style:text-properties officeooo:rsid="014e7804" officeooo:paragraph-rsid="014e7804"/>
+  </style:style>
+  <style:style style:name="P106" style:family="paragraph" style:parent-style-name="Heading_20_3">
    <style:text-properties officeooo:rsid="00242008" officeooo:paragraph-rsid="00242008"/>
   </style:style>
-  <style:style style:name="P127" style:family="paragraph" style:parent-style-name="Heading_20_3">
+  <style:style style:name="P107" style:family="paragraph" style:parent-style-name="Heading_20_3">
    <style:text-properties officeooo:paragraph-rsid="0045d120"/>
   </style:style>
-  <style:style style:name="P128" style:family="paragraph" style:parent-style-name="Contents_20_1">
+  <style:style style:name="P108" style:family="paragraph" style:parent-style-name="Heading_20_3">
+   <style:text-properties officeooo:rsid="00648cbf" officeooo:paragraph-rsid="00648cbf"/>
+  </style:style>
+  <style:style style:name="P109" style:family="paragraph" style:parent-style-name="Heading_20_3">
+   <style:text-properties officeooo:rsid="00670075" officeooo:paragraph-rsid="00670075"/>
+  </style:style>
+  <style:style style:name="P110" style:family="paragraph" style:parent-style-name="Heading_20_3">
+   <style:text-properties officeooo:rsid="006cc0a6" officeooo:paragraph-rsid="006cc0a6"/>
+  </style:style>
+  <style:style style:name="P111" style:family="paragraph" style:parent-style-name="Heading_20_3">
+   <style:text-properties officeooo:rsid="00d70756" officeooo:paragraph-rsid="00d70756"/>
+  </style:style>
+  <style:style style:name="P112" style:family="paragraph" style:parent-style-name="Heading_20_3">
+   <style:text-properties officeooo:rsid="00e1fb6f" officeooo:paragraph-rsid="00e1fb6f"/>
+  </style:style>
+  <style:style style:name="P113" style:family="paragraph" style:parent-style-name="Sample_20_Code_20_Last">
+   <style:text-properties officeooo:paragraph-rsid="00d70756"/>
+  </style:style>
+  <style:style style:name="P114" style:family="paragraph" style:parent-style-name="Sample_20_Code_20_Last">
+   <style:text-properties officeooo:paragraph-rsid="00e1634a"/>
+  </style:style>
+  <style:style style:name="P115" style:family="paragraph" style:parent-style-name="Heading_20_1">
+   <style:text-properties officeooo:paragraph-rsid="00c2c5fe"/>
+  </style:style>
+  <style:style style:name="P116" style:family="paragraph" style:parent-style-name="Heading_20_1">
+   <style:text-properties officeooo:rsid="00ae1df6" officeooo:paragraph-rsid="00bfae53"/>
+  </style:style>
+  <style:style style:name="P117" style:family="paragraph" style:parent-style-name="Heading_20_1">
+   <style:paragraph-properties fo:break-before="page"/>
+   <style:text-properties officeooo:paragraph-rsid="00d70756"/>
+  </style:style>
+  <style:style style:name="P118" style:family="paragraph" style:parent-style-name="Index_20_1">
    <style:paragraph-properties>
     <style:tab-stops>
      <style:tab-stop style:position="6in" style:type="right" style:leader-style="dotted" style:leader-text="."/>
     </style:tab-stops>
    </style:paragraph-properties>
   </style:style>
-  <style:style style:name="P129" style:family="paragraph" style:parent-style-name="Contents_20_2">
+  <style:style style:name="P119" style:family="paragraph" style:parent-style-name="Heading_20_2">
+   <style:text-properties officeooo:rsid="014e7804" officeooo:paragraph-rsid="014e7804"/>
+  </style:style>
+  <style:style style:name="P120" style:family="paragraph" style:parent-style-name="Heading_20_2">
+   <style:text-properties officeooo:rsid="00487707" officeooo:paragraph-rsid="00487707"/>
+  </style:style>
+  <style:style style:name="P121" style:family="paragraph" style:parent-style-name="Heading_20_2">
+   <style:text-properties officeooo:paragraph-rsid="0045d120"/>
+  </style:style>
+  <style:style style:name="P122" style:family="paragraph" style:parent-style-name="Heading_20_2">
+   <style:text-properties officeooo:rsid="00a447dc" officeooo:paragraph-rsid="00a447dc"/>
+  </style:style>
+  <style:style style:name="P123" style:family="paragraph" style:parent-style-name="Heading_20_2">
+   <style:text-properties officeooo:rsid="00e1fb6f" officeooo:paragraph-rsid="00e1fb6f"/>
+  </style:style>
+  <style:style style:name="P124" style:family="paragraph" style:parent-style-name="Heading_20_3">
+   <style:text-properties officeooo:rsid="00242008" officeooo:paragraph-rsid="00242008"/>
+  </style:style>
+  <style:style style:name="P125" style:family="paragraph" style:parent-style-name="Heading_20_3">
+   <style:text-properties officeooo:paragraph-rsid="0045d120"/>
+  </style:style>
+  <style:style style:name="P126" style:family="paragraph" style:parent-style-name="Text_20_body" style:master-page-name="Standard">
+   <style:paragraph-properties style:page-number="auto"/>
+   <style:text-properties fo:font-size="10pt" style:font-size-asian="10pt" style:font-size-complex="10pt"/>
+  </style:style>
+  <style:style style:name="P127" style:family="paragraph" style:parent-style-name="Text_20_body" style:list-style-name="L1"/>
+  <style:style style:name="P128" style:family="paragraph" style:parent-style-name="Text_20_body" style:list-style-name="L1">
+   <style:text-properties officeooo:paragraph-rsid="00d70756"/>
+  </style:style>
+  <style:style style:name="P129" style:family="paragraph" style:parent-style-name="Text_20_body">
+   <style:text-properties officeooo:paragraph-rsid="01577816"/>
+  </style:style>
+  <style:style style:name="P130" style:family="paragraph" style:parent-style-name="Contents_20_1">
    <style:paragraph-properties>
     <style:tab-stops>
-     <style:tab-stop style:position="5.8035in" style:type="right" style:leader-style="dotted" style:leader-text="."/>
+     <style:tab-stop style:position="6in" style:type="right" style:leader-style="dotted" style:leader-text="."/>
     </style:tab-stops>
    </style:paragraph-properties>
   </style:style>
-  <style:style style:name="P130" style:family="paragraph" style:parent-style-name="Contents_20_4">
+  <style:style style:name="P131" style:family="paragraph" style:parent-style-name="Contents_20_4">
    <style:paragraph-properties>
     <style:tab-stops>
      <style:tab-stop style:position="5.4102in" style:type="right" style:leader-style="dotted" style:leader-text="."/>
     </style:tab-stops>
    </style:paragraph-properties>
   </style:style>
-  <style:style style:name="P131" style:family="paragraph" style:parent-style-name="Contents_20_3">
+  <style:style style:name="P132" style:family="paragraph" style:parent-style-name="Contents_20_3">
    <style:paragraph-properties>
     <style:tab-stops>
      <style:tab-stop style:position="5.6071in" style:type="right" style:leader-style="dotted" style:leader-text="."/>
     </style:tab-stops>
    </style:paragraph-properties>
   </style:style>
-  <style:style style:name="P132" style:family="paragraph" style:parent-style-name="Index_20_1">
+  <style:style style:name="P133" style:family="paragraph" style:parent-style-name="Contents_20_2">
    <style:paragraph-properties>
     <style:tab-stops>
-     <style:tab-stop style:position="6in" style:type="right" style:leader-style="dotted" style:leader-text="."/>
+     <style:tab-stop style:position="5.8035in" style:type="right" style:leader-style="dotted" style:leader-text="."/>
     </style:tab-stops>
    </style:paragraph-properties>
   </style:style>
@@ -1493,6 +1496,9 @@
   <style:style style:name="T70" style:family="text">
    <style:text-properties officeooo:rsid="01553aae"/>
   </style:style>
+  <style:style style:name="T71" style:family="text">
+   <style:text-properties officeooo:rsid="01577816"/>
+  </style:style>
   <style:style style:name="fr1" style:family="graphic" style:parent-style-name="Frame">
    <style:graphic-properties fo:margin-left="0in" fo:margin-right="0in" fo:margin-top="0in" fo:margin-bottom="0in" style:wrap="none" style:vertical-pos="top" style:vertical-rel="paragraph" style:horizontal-pos="center" style:horizontal-rel="paragraph" fo:padding="0in" fo:border="none" style:shadow="none" draw:shadow-opacity="100%"/>
   </style:style>
@@ -1632,7 +1638,7 @@
        <text:p text:style-name="HeaderTableContents"><text:title>A User&apos;s Guide to fast-Forth</text:title></text:p>
       </table:table-cell>
       <table:table-cell office:value-type="string">
-       <text:p text:style-name="Header_20_right"><text:chapter text:display="number" text:outline-level="1">7</text:chapter><text:s/><text:chapter text:display="name" text:outline-level="1">Index</text:chapter></text:p>
+       <text:p text:style-name="Header_20_right"><text:chapter text:display="number" text:outline-level="1">5</text:chapter><text:s/><text:chapter text:display="name" text:outline-level="1">More Information</text:chapter></text:p>
       </table:table-cell>
      </table:table-row>
     </table:table>
@@ -1643,13 +1649,13 @@
      <table:table-column table:style-name="FooterTable1.A" table:number-columns-repeated="3"/>
      <table:table-row>
       <table:table-cell office:value-type="string">
-       <text:p text:style-name="Footer_20_left"><text:date style:data-style-name="N76" text:date-value="2020-01-07T10:12:13.610489568">January 7, 2020</text:date></text:p>
+       <text:p text:style-name="Footer_20_left"><text:date style:data-style-name="N76" text:date-value="2020-07-22T16:01:32.587389866">July 22, 2020</text:date></text:p>
       </table:table-cell>
       <table:table-cell office:value-type="string">
        <text:p text:style-name="FooterTableContents"><text:initial-creator>Charles Curley</text:initial-creator></text:p>
       </table:table-cell>
       <table:table-cell office:value-type="string">
-       <text:p text:style-name="Footer_20_right">Page <text:page-number text:select-page="current">22</text:page-number><text:s/>of <text:page-count>22</text:page-count></text:p>
+       <text:p text:style-name="Footer_20_right">Page <text:page-number text:select-page="current">23</text:page-number><text:s/>of <text:page-count>23</text:page-count></text:p>
       </table:table-cell>
      </table:table-row>
     </table:table>
@@ -1681,13 +1687,13 @@
      <table:table-column table:style-name="FooterTable.A" table:number-columns-repeated="3"/>
      <table:table-row>
       <table:table-cell office:value-type="string">
-       <text:p text:style-name="P5"><text:date style:data-style-name="N76" text:date-value="2020-01-07T10:12:13.612620038">January 7, 2020</text:date></text:p>
+       <text:p text:style-name="P5"><text:date style:data-style-name="N76" text:date-value="2020-07-22T16:01:32.588428384">July 22, 2020</text:date></text:p>
       </table:table-cell>
       <table:table-cell office:value-type="string">
        <text:p text:style-name="P4"><text:initial-creator>Charles Curley</text:initial-creator></text:p>
       </table:table-cell>
       <table:table-cell office:value-type="string">
-       <text:p text:style-name="P6">Page <text:page-number text:select-page="current">0</text:page-number><text:s/>of <text:page-count>22</text:page-count></text:p>
+       <text:p text:style-name="P6">Page <text:page-number text:select-page="current">0</text:page-number><text:s/>of <text:page-count>23</text:page-count></text:p>
       </table:table-cell>
      </table:table-row>
     </table:table>
@@ -1723,14 +1729,14 @@
     <text:sequence-decl text:display-outline-level="0" text:name="Drawing"/>
     <text:sequence-decl text:display-outline-level="0" text:name="Figure"/>
    </text:sequence-decls>
-   <text:p text:style-name="P114"/>
+   <text:p text:style-name="P126"/>
    <text:p text:style-name="Title"><text:title>A User&apos;s Guide to fast-Forth</text:title></text:p>
    <text:p text:style-name="Subtitle"><text:user-defined style:data-style-name="N0" text:name="Product Name">fast-Forth on Atari ST</text:user-defined></text:p>
    <text:p text:style-name="P9"/>
    <text:p text:style-name="P11">Supports <text:span text:style-name="T1">fast-Forth</text:span> <text:span text:style-name="T1">on or </text:span>after <text:user-defined style:data-style-name="N0" text:name="Forth Supported">September 14, 1994</text:user-defined><text:s/>on the <text:user-defined style:data-style-name="N0" text:name="hardware">Atari ST</text:user-defined>.</text:p>
    <text:p text:style-name="P9"/>
    <text:p text:style-name="P10">Revision: <text:user-defined style:data-style-name="N0" text:name="Version Number">3.0</text:user-defined></text:p>
-   <text:p text:style-name="P11">Date of revision: <text:date style:data-style-name="N76" text:date-value="2020-01-07T10:12:13.619239018">January 7, 2020</text:date></text:p>
+   <text:p text:style-name="P11">Date of revision: <text:date style:data-style-name="N76" text:date-value="2020-07-22T16:01:32.590060969">July 22, 2020</text:date></text:p>
    <text:p text:style-name="P11"/>
    <text:p text:style-name="P11"/>
    <text:p text:style-name="P11"/>
@@ -1833,62 +1839,62 @@
      <text:index-title text:style-name="Sect1" text:name="Table of Contents1_Head">
       <text:p text:style-name="Contents_20_Heading">Table of Contents</text:p>
      </text:index-title>
-     <text:p text:style-name="P128">1 <text:s/>System Requirements <text:tab/>4</text:p>
-     <text:p text:style-name="P129">1.1 <text:s/>Hatari Emulator <text:tab/>4</text:p>
-     <text:p text:style-name="P129">1.2 <text:s/>fast-Forth and TOS <text:tab/>5</text:p>
-     <text:p text:style-name="P128">2 <text:s/>Booting on the Atari <text:tab/>6</text:p>
-     <text:p text:style-name="P129">2.1 <text:s/>To Run fast-Forth <text:tab/>6</text:p>
-     <text:p text:style-name="P129">2.2 <text:s/>Command Line Tail <text:tab/>6</text:p>
-     <text:p text:style-name="P129">2.3 <text:s/>To Autoboot to fast-Forth <text:tab/>6</text:p>
-     <text:p text:style-name="P128">3 <text:s/>Atari ST Specifics <text:tab/>8</text:p>
-     <text:p text:style-name="P129">3.1 <text:s/>Source <text:tab/>8</text:p>
-     <text:p text:style-name="P129">3.2 <text:s/>KEY and EMIT <text:tab/>8</text:p>
-     <text:p text:style-name="P131">3.2.1 <text:s/>I/O <text:tab/>8</text:p>
-     <text:p text:style-name="P131">3.2.2 <text:s/>The Printer Driver. <text:tab/>9</text:p>
-     <text:p text:style-name="P129">3.3 <text:s/>Raw Disk R/W <text:tab/>9</text:p>
-     <text:p text:style-name="P131">3.3.1 <text:s/>Floppy Disk <text:tab/>9</text:p>
-     <text:p text:style-name="P131">3.3.2 <text:s/>+IOB and the IO Block <text:tab/>10</text:p>
-     <text:p text:style-name="P130">3.3.2.1 <text:s/>-DISK <text:tab/>10</text:p>
-     <text:p text:style-name="P131">3.3.3 <text:s/>Raw Disk Drivers and Disk Map <text:tab/>10</text:p>
-     <text:p text:style-name="P130">3.3.3.1 <text:s/>B/SIDE <text:tab/>10</text:p>
-     <text:p text:style-name="P130">3.3.3.2 <text:s/>MAXBLK <text:tab/>10</text:p>
-     <text:p text:style-name="P130">3.3.3.3 <text:s/>Hard Disk Layout <text:tab/>10</text:p>
-     <text:p text:style-name="P130">3.3.3.4 <text:s/>Selecting A Disk Format. <text:tab/>11</text:p>
-     <text:p text:style-name="P131">3.3.4 <text:s/>Floppy Disk Initialization <text:tab/>11</text:p>
-     <text:p text:style-name="P129">3.4 <text:s/>Pseudo Disking <text:tab/>11</text:p>
-     <text:p text:style-name="P131">3.4.1 <text:s/>BACKUP and BACKDOWN <text:tab/>11</text:p>
-     <text:p text:style-name="P130">3.4.1.1 <text:s/>Installation <text:tab/>12</text:p>
-     <text:p text:style-name="P129">3.5 <text:s/>Editor Keystrokes. <text:tab/>12</text:p>
-     <text:p text:style-name="P131">3.5.1 <text:s/>Editor Keys. <text:tab/>12</text:p>
-     <text:p text:style-name="P129">3.6 <text:s/>RS-232 Port Configuration. <text:tab/>14</text:p>
-     <text:p text:style-name="P131">3.6.1 <text:s/>Baud Rate <text:tab/>14</text:p>
-     <text:p text:style-name="P131">3.6.2 <text:s/>Flow Control <text:tab/>14</text:p>
-     <text:p text:style-name="P129">3.7 <text:s/>EXPECT <text:tab/>14</text:p>
-     <text:p text:style-name="P129">3.8 <text:s/>Time and Date <text:tab/>15</text:p>
-     <text:p text:style-name="P131">3.8.1 <text:s/>Time of Day <text:tab/>15</text:p>
-     <text:p text:style-name="P130">3.8.1.1 <text:s/>Setting the Clock <text:tab/>15</text:p>
-     <text:p text:style-name="P130">3.8.1.2 <text:s/>Reading the Clock <text:tab/>15</text:p>
-     <text:p text:style-name="P131">3.8.2 <text:s/>The Date <text:tab/>15</text:p>
-     <text:p text:style-name="P130">3.8.2.1 <text:s/>Setting the Date <text:tab/>16</text:p>
-     <text:p text:style-name="P130">3.8.2.2 <text:s/>Reading the Date <text:tab/>16</text:p>
-     <text:p text:style-name="P129">3.9 <text:s/>Continuous Clock Display <text:tab/>16</text:p>
-     <text:p text:style-name="P129">3.10 <text:s/>Cursor Configuration <text:tab/>16</text:p>
-     <text:p text:style-name="P129">3.11 <text:s/>The Color Palette. <text:tab/>16</text:p>
-     <text:p text:style-name="P131"><text:soft-page-break/>3.11.1 <text:s/>PALETTESET <text:tab/>16</text:p>
-     <text:p text:style-name="P131">3.11.2 <text:s/>SETCOLOUR <text:tab/>17</text:p>
-     <text:p text:style-name="P129">3.12 <text:s/>Assembly Language <text:tab/>17</text:p>
-     <text:p text:style-name="P131">3.12.1 <text:s/>Register Usage <text:tab/>17</text:p>
-     <text:p text:style-name="P128">4 <text:s/>Improvements <text:tab/>18</text:p>
-     <text:p text:style-name="P128">5 <text:s/>More Information <text:tab/>19</text:p>
-     <text:p text:style-name="P128">6 <text:s/>Contact Information <text:tab/>20</text:p>
-     <text:p text:style-name="P128">7 <text:s/>Index <text:tab/>21</text:p>
+     <text:p text:style-name="P130">1 <text:s/>System Requirements <text:tab/>4</text:p>
+     <text:p text:style-name="P133">1.1 <text:s/>Hatari Emulator <text:tab/>4</text:p>
+     <text:p text:style-name="P133">1.2 <text:s/>fast-Forth and TOS <text:tab/>5</text:p>
+     <text:p text:style-name="P130">2 <text:s/>Booting on the Atari <text:tab/>6</text:p>
+     <text:p text:style-name="P133">2.1 <text:s/>To Run fast-Forth <text:tab/>6</text:p>
+     <text:p text:style-name="P133">2.2 <text:s/>Command Line Tail <text:tab/>6</text:p>
+     <text:p text:style-name="P133">2.3 <text:s/>To Autoboot to fast-Forth <text:tab/>6</text:p>
+     <text:p text:style-name="P130">3 <text:s/>Atari ST Specifics <text:tab/>8</text:p>
+     <text:p text:style-name="P133">3.1 <text:s/>Source <text:tab/>8</text:p>
+     <text:p text:style-name="P133">3.2 <text:s/>KEY and EMIT <text:tab/>8</text:p>
+     <text:p text:style-name="P132">3.2.1 <text:s/>I/O <text:tab/>8</text:p>
+     <text:p text:style-name="P132">3.2.2 <text:s/>The Printer Driver. <text:tab/>9</text:p>
+     <text:p text:style-name="P133">3.3 <text:s/>Raw Disk R/W <text:tab/>9</text:p>
+     <text:p text:style-name="P132">3.3.1 <text:s/>Floppy Disk <text:tab/>10</text:p>
+     <text:p text:style-name="P132">3.3.2 <text:s/>+IOB and the IO Block <text:tab/>10</text:p>
+     <text:p text:style-name="P131">3.3.2.1 <text:s/>-DISK <text:tab/>10</text:p>
+     <text:p text:style-name="P132">3.3.3 <text:s/>Raw Disk Drivers and Disk Map <text:tab/>10</text:p>
+     <text:p text:style-name="P131">3.3.3.1 <text:s/>B/SIDE <text:tab/>10</text:p>
+     <text:p text:style-name="P131">3.3.3.2 <text:s/>MAXBLK <text:tab/>10</text:p>
+     <text:p text:style-name="P131">3.3.3.3 <text:s/>Hard Disk Layout <text:tab/>11</text:p>
+     <text:p text:style-name="P131">3.3.3.4 <text:s/>Selecting A Disk Format. <text:tab/>11</text:p>
+     <text:p text:style-name="P132">3.3.4 <text:s/>Floppy Disk Initialization <text:tab/>11</text:p>
+     <text:p text:style-name="P133">3.4 <text:s/>Pseudo Disking <text:tab/>12</text:p>
+     <text:p text:style-name="P132">3.4.1 <text:s/>BACKUP and BACKDOWN <text:tab/>12</text:p>
+     <text:p text:style-name="P131">3.4.1.1 <text:s/>Installation <text:tab/>12</text:p>
+     <text:p text:style-name="P133">3.5 <text:s/>Editor Keystrokes. <text:tab/>12</text:p>
+     <text:p text:style-name="P132">3.5.1 <text:s/>Editor Keys. <text:tab/>13</text:p>
+     <text:p text:style-name="P133">3.6 <text:s/>RS-232 Port Configuration. <text:tab/>14</text:p>
+     <text:p text:style-name="P132">3.6.1 <text:s/>Baud Rate <text:tab/>14</text:p>
+     <text:p text:style-name="P132">3.6.2 <text:s/>Flow Control <text:tab/>14</text:p>
+     <text:p text:style-name="P133">3.7 <text:s/>EXPECT <text:tab/>15</text:p>
+     <text:p text:style-name="P133">3.8 <text:s/>Time and Date <text:tab/>15</text:p>
+     <text:p text:style-name="P132">3.8.1 <text:s/>Time of Day <text:tab/>15</text:p>
+     <text:p text:style-name="P131">3.8.1.1 <text:s/>Setting the Clock <text:tab/>15</text:p>
+     <text:p text:style-name="P131">3.8.1.2 <text:s/>Reading the Clock <text:tab/>15</text:p>
+     <text:p text:style-name="P132">3.8.2 <text:s/>The Date <text:tab/>16</text:p>
+     <text:p text:style-name="P131">3.8.2.1 <text:s/>Setting the Date <text:tab/>16</text:p>
+     <text:p text:style-name="P131">3.8.2.2 <text:s/>Reading the Date <text:tab/>16</text:p>
+     <text:p text:style-name="P133">3.9 <text:s/>Continuous Clock Display <text:tab/>16</text:p>
+     <text:p text:style-name="P133">3.10 <text:s/>Cursor Configuration <text:tab/>16</text:p>
+     <text:p text:style-name="P133">3.11 <text:s/>The Color Palette. <text:tab/>16</text:p>
+     <text:p text:style-name="P132"><text:soft-page-break/>3.11.1 <text:s/>PALETTESET <text:tab/>16</text:p>
+     <text:p text:style-name="P132">3.11.2 <text:s/>SETCOLOUR <text:tab/>17</text:p>
+     <text:p text:style-name="P133">3.12 <text:s/>Assembly Language <text:tab/>17</text:p>
+     <text:p text:style-name="P132">3.12.1 <text:s/>Register Usage <text:tab/>17</text:p>
+     <text:p text:style-name="P130">4 <text:s/>Improvements <text:tab/>19</text:p>
+     <text:p text:style-name="P130">5 <text:s/>More Information <text:tab/>20</text:p>
+     <text:p text:style-name="P130">6 <text:s/>Contact Information <text:tab/>21</text:p>
+     <text:p text:style-name="P130">7 <text:s/>Index <text:tab/>22</text:p>
     </text:index-body>
    </text:table-of-content>
    <text:p text:style-name="Text_20_body"/>
    <text:h text:style-name="Heading_20_1" text:outline-level="1"><text:alphabetical-index-mark text:string-value="System requirements"/>System Requirements</text:h>
-   <text:p text:style-name="P12">fast-Forth for the Atari ST requires <text:span text:style-name="T2">a hard drive and an operating system such as </text:span><text:alphabetical-index-mark-start text:id="IMark94377313125752"/><text:span text:style-name="T2">TOS</text:span><text:alphabetical-index-mark-end text:id="IMark94377313125752"/><text:span text:style-name="T2"> or </text:span><text:alphabetical-index-mark-start text:id="IMark94379718358680"/><text:span text:style-name="T2">E</text:span><text:alphabetical-index-mark-start text:id="IMark94379718428856"/><text:span text:style-name="T2">muTOS</text:span><text:alphabetical-index-mark-end text:id="IMark94379718428856"/><text:alphabetical-index-mark-end text:id="IMark94379718358680"/><text:span text:style-name="T2">. Because EmuTOS is a complete emulation of TOS (and, indeed descended from it), references to TOS also apply to EmuTOS.</text:span></text:p>
-   <text:h text:style-name="P104" text:outline-level="2">Hatari Emulator</text:h>
-   <text:p text:style-name="P47">Since 2018, fast-Forth development has been done on a <text:alphabetical-index-mark-start text:id="IMark94379718349848"/>Hatari<text:alphabetical-index-mark-end text:id="IMark94379718349848"/> emulator <text:span text:style-name="T46">under Linux </text:span>running EmuTOS 9.<text:span text:style-name="T66">10</text:span> <text:span text:style-name="T45">and up</text:span>. The emulated machine has two megabytes of RAM, and emulated hard drives. C; <text:span text:style-name="T58">and D:</text:span> drive<text:span text:style-name="T58">s</text:span> <text:span text:style-name="T58">are</text:span> 32 MB emulated Atari SCSI drive, where development is done. <text:span text:style-name="T66">Another</text:span> drive is <text:span text:style-name="T66">what Hatari calls </text:span>a GEMDOS drive, to allow copying of files between the emulated Atari and the underlying Linux machine. The processor emulated is a 68000. The machine emulated is a Mega ST, so as to give the emulated Atari a real time clock.</text:p>
+   <text:p text:style-name="P129">fast-Forth for the Atari ST requires <text:span text:style-name="T2">a hard drive and an operating system such as </text:span><text:alphabetical-index-mark-start text:id="IMark93898621625672"/><text:span text:style-name="T2">TOS</text:span><text:alphabetical-index-mark-end text:id="IMark93898621625672"/><text:span text:style-name="T2"> or </text:span><text:alphabetical-index-mark-start text:id="IMark93898655030680"/><text:span text:style-name="T2">EmuTOS</text:span><text:alphabetical-index-mark-end text:id="IMark93898655030680"/><text:span text:style-name="T2">. Because EmuTOS is a complete emulation of TOS (and, indeed descended from it), references to TOS also apply to EmuTOS.</text:span></text:p>
+   <text:h text:style-name="P105" text:outline-level="2">Hatari Emulator</text:h>
+   <text:p text:style-name="P47">Since 2018, fast-Forth development has been done on a <text:alphabetical-index-mark-start text:id="IMark93898625019016"/>Hatari<text:alphabetical-index-mark-end text:id="IMark93898625019016"/> emulator <text:span text:style-name="T46">under Linux </text:span>running EmuTOS 9.<text:span text:style-name="T66">10</text:span> <text:span text:style-name="T45">and up</text:span>. The emulated machine has two megabytes of RAM, and emulated hard drives. C; <text:span text:style-name="T58">and D:</text:span> drive<text:span text:style-name="T58">s</text:span> <text:span text:style-name="T58">are</text:span> 32 MB emulated Atari SCSI drive, where development is done. <text:span text:style-name="T66">Another</text:span> drive is <text:span text:style-name="T66">what Hatari calls </text:span>a GEMDOS drive, to allow copying of files between the emulated Atari and the underlying Linux machine. The processor emulated is a 68000. The machine emulated is a Mega ST, so as to give the emulated Atari a real time clock.</text:p>
    <text:p text:style-name="P47">It is essential to emulate a 68000 because the fast-forth trap handlers are for 68000. Trap handlers for later versions of the 680x0 family would be welcome. Feel free to crank the emulated CPU up to 32MHz.</text:p>
    <text:p text:style-name="P48">According to the Hatari manual,</text:p>
    <text:p text:style-name="Quotations">All other keys on the keyboard act as the normal Atari ST keys so pressing SPACE on your PC will result in an emulated press of the SPACE key on the ST. The following keys have special meanings:</text:p>
@@ -1956,59 +1962,59 @@
    </table:table>
    <text:p text:style-name="P12"><text:span text:style-name="T3">fast-Forth may also support </text:span>either one Atari <text:span text:style-name="T67">floppy</text:span> <text:alphabetical-index-mark text:string-value="Disk drive"/>disk drive and enough spare ram to form a ram drive of 360K, or two disk drives, <text:span text:style-name="T2">with optional direct diskette drivers</text:span>. Double sided disks are supported. fast-Forth <text:span text:style-name="T2">can perform</text:span> direct <text:span text:style-name="T66">raw </text:span>disk access to the <text:alphabetical-index-mark text:string-value="Floppy disk"/>floppy disks <text:span text:style-name="T66">or hard drive</text:span>.</text:p>
    <text:p text:style-name="Text_20_body">A printer driver for the parallel or serial port is provided.</text:p>
-   <text:h text:style-name="Heading_20_2" text:outline-level="2"><text:soft-page-break/>fast-Forth and <text:alphabetical-index-mark-start text:id="IMark94379718312392"/>TOS<text:alphabetical-index-mark-end text:id="IMark94379718312392"/></text:h>
+   <text:h text:style-name="Heading_20_2" text:outline-level="2"><text:soft-page-break/>fast-Forth and <text:alphabetical-index-mark-start text:id="IMark93898603877608"/>TOS<text:alphabetical-index-mark-end text:id="IMark93898603877608"/></text:h>
    <text:p text:style-name="P13">fast-Forth for the Atari ST is a full blown 32 bit FORTH. All data paths are 32 bits, and the full addressing range of the 68000 is supported.</text:p>
-   <text:p text:style-name="Text_20_body">fast-Forth will automatically ask TOS for as much memory as it can get. This means that fast-Forth will run on an Atari ST with any memory size, from the <text:span text:style-name="T28">original</text:span> half, one and four megabyte models to <text:span text:style-name="T28">subsequent</text:span> models with larger memory sizes. However, it will be necessary to recompile the utilities overlay (&quot;<text:alphabetical-index-mark-start text:id="IMark94379706290296"/><text:span text:style-name="Teletype">9 load</text:span><text:alphabetical-index-mark-end text:id="IMark94379706290296"/>&quot;) when moving to a machine with a different amount of memory <text:span text:style-name="T63">or on first running fast-Forth</text:span>.</text:p>
+   <text:p text:style-name="Text_20_body">fast-Forth will automatically ask TOS for as much memory as it can get. This means that fast-Forth will run on an Atari ST with any memory size, from the <text:span text:style-name="T28">original</text:span> half, one and four megabyte models to <text:span text:style-name="T28">subsequent</text:span> models with larger memory sizes. However, it will be necessary to recompile the utilities overlay (&quot;<text:alphabetical-index-mark-start text:id="IMark93898621625672"/><text:span text:style-name="Teletype">9 load</text:span><text:alphabetical-index-mark-end text:id="IMark93898621625672"/>&quot;) when moving to a machine with a different amount of memory <text:span text:style-name="T63">or on first running fast-Forth</text:span>.</text:p>
    <text:h text:style-name="Heading_20_1" text:outline-level="1">Booting on the Atari</text:h>
-   <text:p text:style-name="P115">See the section on Installation in the file README.md in the git repository.</text:p>
+   <text:p text:style-name="P72">See the section on Installation in the file README.md in the git repository.</text:p>
    <text:h text:style-name="Heading_20_2" text:outline-level="2">To Run fast-Forth</text:h>
    <text:p text:style-name="P17">We will assume you are running from a hard drive.</text:p>
-   <text:p text:style-name="P16">fast-Forth is executed like any other application under GEM. Open the appropriate directory, and &quot;double click&quot; the mouse over the file named &quot;<text:span text:style-name="T5">FAST4TH</text:span>.TTP&quot;. <text:span text:style-name="T5">A pop up window will ask for parameters. These are optional, but should be a line of executable forth. “</text:span><text:alphabetical-index-mark-start text:id="IMark94377313125752"/><text:span text:style-name="T5">3 load</text:span><text:alphabetical-index-mark-end text:id="IMark94377313125752"/><text:span text:style-name="T5">” is typical. When you are ready to go on, click on “OK” or simply hit the Enter key. See section </text:span><text:span text:style-name="T5"><text:bookmark-ref text:reference-format="chapter" text:ref-name="__RefHeading___Toc6518_859971406">2.2</text:bookmark-ref></text:span><text:span text:style-name="T5"><text:s/></text:span><text:span text:style-name="T5"><text:bookmark-ref text:reference-format="text" text:ref-name="__RefHeading___Toc6518_859971406">Command Line Tail</text:bookmark-ref></text:span><text:span text:style-name="T5">, </text:span><text:span text:style-name="T5"><text:bookmark-ref text:reference-format="direction" text:ref-name="__RefHeading___Toc6518_859971406">below</text:bookmark-ref></text:span><text:span text:style-name="T5">.</text:span></text:p>
+   <text:p text:style-name="P16">fast-Forth is executed like any other application under GEM. Open the appropriate directory, and &quot;double click&quot; the mouse over the file named &quot;<text:span text:style-name="T5">FAST4TH</text:span>.TTP&quot;. <text:span text:style-name="T5">A pop up window will ask for parameters. These are optional, but should be a line of executable forth. “</text:span><text:alphabetical-index-mark-start text:id="IMark93898629901640"/><text:span text:style-name="T5">3 load</text:span><text:alphabetical-index-mark-end text:id="IMark93898629901640"/><text:span text:style-name="T5">” is typical. When you are ready to go on, click on “OK” or simply hit the Enter key. See section </text:span><text:span text:style-name="T5"><text:bookmark-ref text:reference-format="chapter" text:ref-name="__RefHeading___Toc6518_859971406">2.2</text:bookmark-ref></text:span><text:span text:style-name="T5"><text:s/></text:span><text:span text:style-name="T5"><text:bookmark-ref text:reference-format="text" text:ref-name="__RefHeading___Toc6518_859971406">Command Line Tail</text:bookmark-ref></text:span><text:span text:style-name="T5">, </text:span><text:span text:style-name="T5"><text:bookmark-ref text:reference-format="direction" text:ref-name="__RefHeading___Toc6518_859971406">below</text:bookmark-ref></text:span><text:span text:style-name="T5">.</text:span></text:p>
    <text:p text:style-name="P16">The screen will be cleared. <text:span text:style-name="T5">A</text:span> copyright message will appear, and then the fast-Forth sign on message will appear:</text:p>
    <text:p text:style-name="Text_20_body">fast-Forth v.v dd/mm/yy</text:p>
-   <text:h text:style-name="Heading_20_2" text:outline-level="2"><text:bookmark-start text:name="__RefHeading___Toc6518_859971406"/><text:alphabetical-index-mark-start text:id="IMark94379706290296"/>Command Line Tail<text:bookmark-end text:name="__RefHeading___Toc6518_859971406"/><text:alphabetical-index-mark-end text:id="IMark94379706290296"/></text:h>
-   <text:p text:style-name="P16">fast-Forth for the Atari ST and <text:span text:style-name="T39">real-Forth </text:span>for MS-DOS support command line tail interpretation. You may provide a line of forth commands to fast-Forth from a <text:alphabetical-index-mark text:string-value="Shell"/>shell or from the <text:alphabetical-index-mark text:string-value="Desktop"/>desktop. A typical command would be <text:s/>&quot;<text:alphabetical-index-mark-start text:id="IMark94379815223592"/><text:span text:style-name="Teletype">3 load</text:span><text:alphabetical-index-mark-end text:id="IMark94379815223592"/>&quot; <text:s/>or <text:s/>&quot;<text:span text:style-name="Teletype">3 load application</text:span>&quot; , where <text:s/><text:span text:style-name="Teletype">APPLICATION</text:span> <text:s/>is a previously defined loader word,. <text:span text:style-name="T6">e.g.: “</text:span><text:alphabetical-index-mark-start text:id="IMark94377628277448"/><text:span text:style-name="Teletype"><text:span text:style-name="T6">3 load</text:span></text:span><text:alphabetical-index-mark-end text:id="IMark94377628277448"/><text:span text:style-name="Teletype"><text:span text:style-name="T6"> filing</text:span></text:span><text:span text:style-name="T6">”.</text:span></text:p>
-   <text:p text:style-name="P59">The real power of this feature becomes apparent when it is used in <text:alphabetical-index-mark text:string-value="Shell scripts"/>shell scripts or <text:alphabetical-index-mark text:string-value="Batch files"/><text:span text:style-name="T31">batch files</text:span>. Different applications written in fast-Forth may be selected according to which batch file or shell script is selected by the user. The desktop, of course, does not support shell scripts, but some after market shells for the Atari ST do. fast-Forth has been verified to be compatible with <text:alphabetical-index-mark-start text:id="IMark94379784661928"/>Mark Williams Company<text:alphabetical-index-mark-end text:id="IMark94379784661928"/>&apos;s <text:alphabetical-index-mark-start text:id="IMark94379717550520"/>MSH<text:alphabetical-index-mark-end text:id="IMark94379717550520"/> <text:span text:style-name="T7">and </text:span><text:alphabetical-index-mark-start text:id="IMark94377258363800"/><text:span text:style-name="T7">EmuTOS</text:span><text:alphabetical-index-mark-end text:id="IMark94377258363800"/><text:span text:style-name="T7">’ EmuCON.</text:span></text:p>
-   <text:h text:style-name="Heading_20_2" text:outline-level="2">To <text:alphabetical-index-mark-start text:id="IMark94379717643352"/><text:alphabetical-index-mark-start text:id="IMark94379726107176"/><text:span text:style-name="T29">A</text:span>utoboot to fast-Forth<text:alphabetical-index-mark-end text:id="IMark94379726107176"/><text:alphabetical-index-mark-end text:id="IMark94379717643352"/></text:h>
-   <text:p text:style-name="P18">It is possible to have your Atari boot up directly into fast-Forth. To do this, you must have a boot disk with a folder named &quot;<text:alphabetical-index-mark-start text:id="IMark94378306710392"/>AUTO<text:alphabetical-index-mark-end text:id="IMark94378306710392"/>&quot; <text:span text:style-name="T60">on your boot disk (typically A: or C:)</text:span>.</text:p>
-   <text:list xml:id="list898375592" text:style-name="L1">
+   <text:h text:style-name="Heading_20_2" text:outline-level="2"><text:bookmark-start text:name="__RefHeading___Toc6518_859971406"/><text:alphabetical-index-mark-start text:id="IMark93898625019016"/>Command Line Tail<text:bookmark-end text:name="__RefHeading___Toc6518_859971406"/><text:alphabetical-index-mark-end text:id="IMark93898625019016"/></text:h>
+   <text:p text:style-name="P16">fast-Forth for the Atari ST and <text:span text:style-name="T39">real-Forth </text:span>for MS-DOS support command line tail interpretation. You may provide a line of forth commands to fast-Forth from a <text:alphabetical-index-mark text:string-value="Shell"/>shell or from the <text:alphabetical-index-mark text:string-value="Desktop"/>desktop. A typical command would be <text:s/>&quot;<text:alphabetical-index-mark-start text:id="IMark93898621625672"/><text:span text:style-name="Teletype">3 load</text:span><text:alphabetical-index-mark-end text:id="IMark93898621625672"/>&quot; <text:s/>or <text:s/>&quot;<text:span text:style-name="Teletype">3 load application</text:span>&quot; , where <text:s/><text:span text:style-name="Teletype">APPLICATION</text:span> <text:s/>is a previously defined loader word,. <text:span text:style-name="T6">e.g.: “</text:span><text:alphabetical-index-mark-start text:id="IMark93898651007672"/><text:span text:style-name="Teletype"><text:span text:style-name="T6">3 load</text:span></text:span><text:alphabetical-index-mark-end text:id="IMark93898651007672"/><text:span text:style-name="Teletype"><text:span text:style-name="T6"> filing</text:span></text:span><text:span text:style-name="T6">”.</text:span></text:p>
+   <text:p text:style-name="P59">The real power of this feature becomes apparent when it is used in <text:alphabetical-index-mark text:string-value="Shell scripts"/>shell scripts or <text:alphabetical-index-mark text:string-value="Batch files"/><text:span text:style-name="T31">batch files</text:span>. Different applications written in fast-Forth may be selected according to which batch file or shell script is selected by the user. The desktop, of course, does not support shell scripts, but some after market shells for the Atari ST do. fast-Forth has been verified to be compatible with <text:alphabetical-index-mark-start text:id="IMark93898555567368"/>Mark Williams Company<text:alphabetical-index-mark-end text:id="IMark93898555567368"/>&apos;s <text:alphabetical-index-mark-start text:id="IMark93898649284008"/>MSH<text:alphabetical-index-mark-end text:id="IMark93898649284008"/> <text:span text:style-name="T7">and </text:span><text:alphabetical-index-mark-start text:id="IMark93898649711320"/><text:span text:style-name="T7">EmuTOS</text:span><text:alphabetical-index-mark-end text:id="IMark93898649711320"/><text:span text:style-name="T7">’ EmuCON.</text:span></text:p>
+   <text:h text:style-name="Heading_20_2" text:outline-level="2">To <text:alphabetical-index-mark-start text:id="IMark93898624354712"/><text:alphabetical-index-mark-start text:id="IMark93898651332632"/><text:span text:style-name="T29">A</text:span>utoboot to fast-Forth<text:alphabetical-index-mark-end text:id="IMark93898651332632"/><text:alphabetical-index-mark-end text:id="IMark93898624354712"/></text:h>
+   <text:p text:style-name="P18">It is possible to have your Atari boot up directly into fast-Forth. To do this, you must have a boot disk with a folder named &quot;<text:alphabetical-index-mark-start text:id="IMark93898632054664"/>AUTO<text:alphabetical-index-mark-end text:id="IMark93898632054664"/>&quot; <text:span text:style-name="T60">on your boot disk (typically A: or C:)</text:span>.</text:p>
+   <text:list xml:id="list3147016957" text:style-name="L1">
     <text:list-item>
-     <text:p text:style-name="P116">Pull down the File menu of the desktop.</text:p>
+     <text:p text:style-name="P127">Pull down the File menu of the desktop.</text:p>
     </text:list-item>
     <text:list-item>
-     <text:p text:style-name="P116">In the File menu, select the New Folder option. A dialog box will appear.</text:p>
+     <text:p text:style-name="P127">In the File menu, select the New Folder option. A dialog box will appear.</text:p>
     </text:list-item>
     <text:list-item>
-     <text:p text:style-name="P116">Type in the name of the folder, &quot;AUTO&quot;, <text:span text:style-name="T8">with n</text:span>o extension.</text:p>
+     <text:p text:style-name="P127">Type in the name of the folder, &quot;AUTO&quot;, <text:span text:style-name="T8">with n</text:span>o extension.</text:p>
     </text:list-item>
     <text:list-item>
-     <text:p text:style-name="P117">Enter the newly created folder by double clicking its entry on the directory. You will see a new directory with no entries and a path name: &quot;A:\AUTO\&quot; <text:span text:style-name="T60">or &quot;C:\AUTO\&quot;</text:span>.</text:p>
+     <text:p text:style-name="P128">Enter the newly created folder by double clicking its entry on the directory. You will see a new directory with no entries and a path name: &quot;A:\AUTO\&quot; <text:span text:style-name="T60">or &quot;C:\AUTO\&quot;</text:span>.</text:p>
     </text:list-item>
     <text:list-item>
-     <text:p text:style-name="P116">Copy the file<text:span text:style-name="T9">s</text:span> &quot;<text:span text:style-name="T9">FAST4TH</text:span>.TTP&quot; <text:span text:style-name="T9">and “FF.SCR”</text:span> into the AUTO folder.</text:p>
+     <text:p text:style-name="P127">Copy the file<text:span text:style-name="T9">s</text:span> &quot;<text:span text:style-name="T9">FAST4TH</text:span>.TTP&quot; <text:span text:style-name="T9">and “FF.SCR”</text:span> into the AUTO folder.</text:p>
     </text:list-item>
     <text:list-item>
-     <text:p text:style-name="P116"><text:soft-page-break/>Leave the folder by clicking the X in the upper left hand corner of the directory window.</text:p>
+     <text:p text:style-name="P127"><text:soft-page-break/>Leave the folder by clicking the X in the upper left hand corner of the directory window.</text:p>
     </text:list-item>
    </text:list>
    <text:p text:style-name="Text_20_body">If the above instructions are carried out successfully, it should be possible to boot directly into fast-Forth by hitting reset or at power on.</text:p>
    <text:p text:style-name="P19">You should be aware that at boot time, files in AUTO are executed in the order they are found in the directory, with no sorting or other selection order made. Thus, you will probably have to play some games to get your AUTO folder to execute in the order you want. The are some public domain utilities available for ordering your AUTO directory. If you have PC_DITTO or some other means of executing MS-DOS, and a directory sorting utility, then careful naming of your executable <text:span text:style-name="T70">file</text:span>s and an occasional sort of the directory will solve the problem.</text:p>
-   <text:p text:style-name="P19">If all else fails, copy everything out of <text:alphabetical-index-mark-start text:id="IMark94379784661928"/>AUTO<text:alphabetical-index-mark-end text:id="IMark94379784661928"/> to another folder, delete everything from AUTO, and copy the programs back in the order you want them to execute.</text:p>
+   <text:p text:style-name="P19">If all else fails, copy everything out of <text:alphabetical-index-mark-start text:id="IMark93898651544920"/>AUTO<text:alphabetical-index-mark-end text:id="IMark93898651544920"/> to another folder, delete everything from AUTO, and copy the programs back in the order you want them to execute.</text:p>
    <text:h text:style-name="Heading_20_1" text:outline-level="1">Atari ST Specifics</text:h>
-   <text:p text:style-name="Text_20_body">The Atari ST uses as its operating system something called <text:alphabetical-index-mark-start text:id="IMark94377628454088"/>TOS<text:alphabetical-index-mark-end text:id="IMark94377628454088"/>, which stands for the Tramiel Operating System. This operating system is documented in some detail in information released to developers by Atari, and in several books published by <text:alphabetical-index-mark-start text:id="IMark94379719092840"/>Abacus Software<text:alphabetical-index-mark-end text:id="IMark94379719092840"/> and others. Most of that information is aimed more at &quot;C&quot; language or assembly language developers rather than at FORTH developers. What follows is what your fast-Forth developers have gleaned from this information and been able to actually use. You may find it useful to use the fast-Forth disassembler on the relevant code to see what is in the latest release. <text:span text:style-name="T10">For more sources of information, see </text:span><text:span text:style-name="T10"><text:bookmark-ref text:reference-format="chapter" text:ref-name="__RefHeading___Toc7010_859971406">5</text:bookmark-ref></text:span><text:span text:style-name="T10"><text:s/></text:span><text:span text:style-name="T10"><text:bookmark-ref text:reference-format="text" text:ref-name="__RefHeading___Toc7010_859971406">More Information</text:bookmark-ref></text:span><text:span text:style-name="T10"><text:s/>page </text:span><text:span text:style-name="T10"><text:bookmark-ref text:reference-format="page" text:ref-name="__RefHeading___Toc7010_859971406">19</text:bookmark-ref></text:span><text:span text:style-name="T10">, </text:span><text:span text:style-name="T10"><text:bookmark-ref text:reference-format="direction" text:ref-name="__RefHeading___Toc7010_859971406">below</text:bookmark-ref></text:span><text:span text:style-name="T10">.</text:span></text:p>
-   <text:p text:style-name="P65">There is also an open source successor to TOS, called <text:alphabetical-index-mark-start text:id="IMark94380035195320"/>EmuTOS<text:alphabetical-index-mark-end text:id="IMark94380035195320"/>. Development work on fast-Forth has been done on EmuTOS since 2018.</text:p>
-   <text:h text:style-name="P99" text:outline-level="2">Source</text:h>
-   <text:p text:style-name="P36">The best way to see how a forth word works is to examine its source code. With the <text:s/><text:alphabetical-index-mark-start text:id="IMark94379757454696"/><text:span text:style-name="Teletype">FILING</text:span><text:alphabetical-index-mark-end text:id="IMark94379757454696"/> <text:s/>overlay in place, use the word <text:s/><text:alphabetical-index-mark-start text:id="IMark94379719033800"/><text:span text:style-name="Teletype">SEE</text:span>:<text:alphabetical-index-mark-end text:id="IMark94379719033800"/> .</text:p>
+   <text:p text:style-name="Text_20_body">The Atari ST uses as its operating system something called <text:alphabetical-index-mark-start text:id="IMark93898610235320"/>TOS<text:alphabetical-index-mark-end text:id="IMark93898610235320"/>, which stands for the Tramiel Operating System. This operating system is documented in some detail in information released to developers by Atari, and in several books published by <text:alphabetical-index-mark-start text:id="IMark93898604725768"/>Abacus Software<text:alphabetical-index-mark-end text:id="IMark93898604725768"/> and others. Most of that information is aimed more at &quot;C&quot; language or assembly language developers rather than at FORTH developers. What follows is what your fast-Forth developers have gleaned from this information and been able to actually use. You may find it useful to use the fast-Forth disassembler on the relevant code to see what is in the latest release. <text:span text:style-name="T10">For more sources of information, see </text:span><text:span text:style-name="T10"><text:bookmark-ref text:reference-format="chapter" text:ref-name="__RefHeading___Toc7010_859971406">5</text:bookmark-ref></text:span><text:span text:style-name="T10"><text:s/></text:span><text:span text:style-name="T10"><text:bookmark-ref text:reference-format="text" text:ref-name="__RefHeading___Toc7010_859971406">More Information</text:bookmark-ref></text:span><text:span text:style-name="T10"><text:s/>page </text:span><text:span text:style-name="T10"><text:bookmark-ref text:reference-format="page" text:ref-name="__RefHeading___Toc7010_859971406">20</text:bookmark-ref></text:span><text:span text:style-name="T10">, </text:span><text:span text:style-name="T10"><text:bookmark-ref text:reference-format="direction" text:ref-name="__RefHeading___Toc7010_859971406">below</text:bookmark-ref></text:span><text:span text:style-name="T10">.</text:span></text:p>
+   <text:p text:style-name="P65">There is also an open source successor to TOS, called <text:alphabetical-index-mark-start text:id="IMark93898652999080"/>EmuTOS<text:alphabetical-index-mark-end text:id="IMark93898652999080"/>. Development work on fast-Forth has been done on EmuTOS since 2018.</text:p>
+   <text:h text:style-name="P100" text:outline-level="2">Source</text:h>
+   <text:p text:style-name="P36">The best way to see how a forth word works is to examine its source code. With the <text:s/><text:alphabetical-index-mark-start text:id="IMark93898642358872"/><text:span text:style-name="Teletype">FILING</text:span><text:alphabetical-index-mark-end text:id="IMark93898642358872"/> <text:s/>overlay in place, use the word <text:s/><text:alphabetical-index-mark-start text:id="IMark93898652999080"/><text:span text:style-name="Teletype">SEE</text:span>:<text:alphabetical-index-mark-end text:id="IMark93898652999080"/> .</text:p>
    <text:p text:style-name="Sample_20_Code_20_Last">See: (key)</text:p>
-   <text:p text:style-name="P65">Unlike other real-Forth products, <text:s/><text:span text:style-name="Teletype">SEE:</text:span> <text:s/><text:span text:style-name="T66">for fast-Forth </text:span>works on the entire dictionary. But the kernel source must be available. To make the kernel source available, bring in the filing overlay. See <text:span text:style-name="T65">the discussion of <text:s/></text:span><text:alphabetical-index-mark-start text:id="IMark94379784661928"/><text:span text:style-name="Teletype"><text:span text:style-name="T66">SCREENS</text:span></text:span><text:alphabetical-index-mark-end text:id="IMark94379784661928"/><text:span text:style-name="T65"> <text:s/>in the real-Forth User’s Guide.</text:span></text:p>
+   <text:p text:style-name="P65">Unlike other real-Forth products, <text:s/><text:span text:style-name="Teletype">SEE:</text:span> <text:s/><text:span text:style-name="T66">for fast-Forth </text:span>works on the entire dictionary. But the kernel source must be available. To make the kernel source available, bring in the filing overlay. See <text:span text:style-name="T65">the discussion of <text:s/></text:span><text:alphabetical-index-mark-start text:id="IMark93898555567368"/><text:span text:style-name="Teletype"><text:span text:style-name="T66">SCREENS</text:span></text:span><text:alphabetical-index-mark-end text:id="IMark93898555567368"/><text:span text:style-name="T65"> <text:s/>in the real-Forth User’s Guide.</text:span></text:p>
    <text:h text:style-name="Heading_20_2" text:outline-level="2">KEY <text:s/>and <text:s/>EMIT</text:h>
-   <text:p text:style-name="P20">The FORTH functions <text:s/><text:alphabetical-index-mark-start text:id="IMark94379718443176"/><text:span text:style-name="Teletype">KEY</text:span><text:alphabetical-index-mark-end text:id="IMark94379718443176"/> <text:s/>and <text:s/><text:alphabetical-index-mark-start text:id="IMark94377634679736"/><text:span text:style-name="Teletype">EMIT</text:span><text:alphabetical-index-mark-end text:id="IMark94377634679736"/> are implemented with calls to <text:alphabetical-index-mark-start text:id="IMark94379718258760"/>TOS<text:alphabetical-index-mark-end text:id="IMark94379718258760"/>&apos;s <text:alphabetical-index-mark-start text:id="IMark94379718614824"/>BIOS<text:alphabetical-index-mark-end text:id="IMark94379718614824"/>. Both use trap number 13. <text:s/><text:span text:style-name="Teletype">EMIT</text:span> <text:s/>uses function number three, the BIOS output routine. This function does not return until the character has been output.</text:p>
-   <text:p text:style-name="Text_20_body"><text:span text:style-name="Teletype">KEY</text:span> <text:s/>uses function number 2, the BIOS character in routine. This routine does not return until a character has been input. If the input device is the <text:alphabetical-index-mark text:string-value="Console"/>console, then this routine returns two data. The ASCII code of the key, if any, is returned in the low byte of data register 0. The <text:alphabetical-index-mark-start text:id="IMark94379784661928"/>GSX<text:alphabetical-index-mark-end text:id="IMark94379784661928"/> 2.0 compatible scan code is returned in the low byte of the high word of DR0. Otherwise the character is returned in the low byte of DR0.</text:p>
-   <text:p text:style-name="Text_20_body">Code in the utilities overlay interprets the <text:alphabetical-index-mark text:string-value="Scan codes"/>scan codes, for use in the editor and the line editor which replaces <text:s/><text:alphabetical-index-mark-start text:id="IMark94379726107176"/><text:span text:style-name="Teletype">(</text:span><text:alphabetical-index-mark-start text:id="IMark94377626731432"/><text:span text:style-name="Teletype">EXPECT</text:span><text:alphabetical-index-mark-end text:id="IMark94377626731432"/><text:span text:style-name="Teletype">)</text:span><text:alphabetical-index-mark-end text:id="IMark94379726107176"/> .</text:p>
-   <text:h text:style-name="Heading_20_3" text:outline-level="3"><text:alphabetical-index-mark-start text:id="IMark94377634679736"/>I/O<text:alphabetical-index-mark-end text:id="IMark94377634679736"/></text:h>
-   <text:p text:style-name="P29">The <text:alphabetical-index-mark-start text:id="IMark94379718445384"/>BIOS<text:alphabetical-index-mark-end text:id="IMark94379718445384"/> routines also require that a device be specified for input and output. <text:s/><text:alphabetical-index-mark-start text:id="IMark94379717643352"/><text:span text:style-name="Teletype">(EMIT)</text:span><text:alphabetical-index-mark-end text:id="IMark94379717643352"/> <text:s/>and <text:s/><text:alphabetical-index-mark-start text:id="IMark94380035195320"/><text:span text:style-name="Teletype">(KEY)</text:span><text:alphabetical-index-mark-end text:id="IMark94380035195320"/><text:span text:style-name="Teletype"> </text:span><text:s/>share a user variable called <text:s/><text:alphabetical-index-mark-start text:id="IMark94379718707000"/><text:span text:style-name="Teletype">I/O</text:span><text:alphabetical-index-mark-end text:id="IMark94379718707000"/> . <text:s/><text:alphabetical-index-mark-start text:id="IMark94379718678584"/><text:span text:style-name="Teletype">(KEY)</text:span><text:alphabetical-index-mark-end text:id="IMark94379718678584"/> <text:s/>uses the word at <text:s/><text:span text:style-name="Teletype">I/O</text:span> ; <text:s/><text:alphabetical-index-mark-start text:id="IMark94379719137688"/><text:span text:style-name="Teletype">(EMIT)</text:span><text:alphabetical-index-mark-end text:id="IMark94379719137688"/> <text:s/>the word at <text:s/><text:span text:style-name="Teletype">I/O 2+</text:span> . Thus, the <text:alphabetical-index-mark text:string-value="Console"/>console may be forced by:</text:p>
+   <text:p text:style-name="P20">The FORTH functions <text:s/><text:alphabetical-index-mark-start text:id="IMark93898650000984"/><text:span text:style-name="Teletype">KEY</text:span><text:alphabetical-index-mark-end text:id="IMark93898650000984"/> <text:s/>and <text:s/><text:alphabetical-index-mark-start text:id="IMark93898623957576"/><text:span text:style-name="Teletype">EMIT</text:span><text:alphabetical-index-mark-end text:id="IMark93898623957576"/> are implemented with calls to <text:alphabetical-index-mark-start text:id="IMark93898648014696"/>TOS<text:alphabetical-index-mark-end text:id="IMark93898648014696"/>&apos;s <text:alphabetical-index-mark-start text:id="IMark93898651501112"/>BIOS<text:alphabetical-index-mark-end text:id="IMark93898651501112"/>. Both use trap number 13. <text:s/><text:span text:style-name="Teletype">EMIT</text:span> <text:s/>uses function number three, the BIOS output routine. This function does not return until the character has been output.</text:p>
+   <text:p text:style-name="Text_20_body"><text:span text:style-name="Teletype">KEY</text:span> <text:s/>uses function number 2, the BIOS character in routine. This routine does not return until a character has been input. If the input device is the <text:alphabetical-index-mark text:string-value="Console"/>console, then this routine returns two data. The ASCII code of the key, if any, is returned in the low byte of data register 0. The <text:alphabetical-index-mark-start text:id="IMark93898555567368"/>GSX<text:alphabetical-index-mark-end text:id="IMark93898555567368"/> 2.0 compatible scan code is returned in the low byte of the high word of DR0. Otherwise the character is returned in the low byte of DR0.</text:p>
+   <text:p text:style-name="Text_20_body">Code in the utilities overlay interprets the <text:alphabetical-index-mark text:string-value="Scan codes"/>scan codes, for use in the editor and the line editor which replaces <text:s/><text:alphabetical-index-mark-start text:id="IMark93898641139896"/><text:span text:style-name="Teletype">(</text:span><text:alphabetical-index-mark-start text:id="IMark93898621625672"/><text:span text:style-name="Teletype">EXPECT</text:span><text:alphabetical-index-mark-end text:id="IMark93898621625672"/><text:span text:style-name="Teletype">)</text:span><text:alphabetical-index-mark-end text:id="IMark93898641139896"/> .</text:p>
+   <text:h text:style-name="Heading_20_3" text:outline-level="3"><text:alphabetical-index-mark-start text:id="IMark93898652999080"/>I/O<text:alphabetical-index-mark-end text:id="IMark93898652999080"/></text:h>
+   <text:p text:style-name="P29">The <text:alphabetical-index-mark-start text:id="IMark93898642358872"/>BIOS<text:alphabetical-index-mark-end text:id="IMark93898642358872"/> routines also require that a device be specified for input and output. <text:s/><text:alphabetical-index-mark-start text:id="IMark93898623957576"/><text:span text:style-name="Teletype">(EMIT)</text:span><text:alphabetical-index-mark-end text:id="IMark93898623957576"/> <text:s/>and <text:s/><text:alphabetical-index-mark-start text:id="IMark93898649394984"/><text:span text:style-name="Teletype">(KEY)</text:span><text:alphabetical-index-mark-end text:id="IMark93898649394984"/><text:span text:style-name="Teletype"> </text:span><text:s/>share a user variable called <text:s/><text:alphabetical-index-mark-start text:id="IMark93898552338680"/><text:span text:style-name="Teletype">I/O</text:span><text:alphabetical-index-mark-end text:id="IMark93898552338680"/> . <text:s/><text:alphabetical-index-mark-start text:id="IMark93898644441736"/><text:span text:style-name="Teletype">(KEY)</text:span><text:alphabetical-index-mark-end text:id="IMark93898644441736"/> <text:s/>uses the word at <text:s/><text:span text:style-name="Teletype">I/O</text:span> ; <text:s/><text:alphabetical-index-mark-start text:id="IMark93898558810680"/><text:span text:style-name="Teletype">(EMIT)</text:span><text:alphabetical-index-mark-end text:id="IMark93898558810680"/> <text:s/>the word at <text:s/><text:span text:style-name="Teletype">I/O 2+</text:span> . Thus, the <text:alphabetical-index-mark text:string-value="Console"/>console may be forced by:</text:p>
    <text:p text:style-name="Sample_20_Code_20_Last"><text:soft-page-break/>HEX 20002 I/O !</text:p>
-   <text:p text:style-name="Text_20_body"><text:alphabetical-index-mark-start text:id="IMark94379718445384"/>Devices<text:alphabetical-index-mark-end text:id="IMark94379718445384"/> are specified in the following manner:</text:p>
+   <text:p text:style-name="Text_20_body"><text:alphabetical-index-mark-start text:id="IMark93898642358872"/>Devices<text:alphabetical-index-mark-end text:id="IMark93898642358872"/> are specified in the following manner:</text:p>
    <table:table table:name="ioDeviceNumbers" table:style-name="ioDeviceNumbers">
     <table:table-column table:style-name="ioDeviceNumbers.A"/>
     <table:table-column table:style-name="ioDeviceNumbers.B"/>
@@ -2032,7 +2038,7 @@
     </table:table-row>
     <table:table-row>
      <table:table-cell table:style-name="ioDeviceNumbers.A2" office:value-type="string">
-      <text:p text:style-name="Table_20_Contents"><text:alphabetical-index-mark-start text:id="IMark94377625345272"/>Aux<text:alphabetical-index-mark-end text:id="IMark94377625345272"/> (serial)</text:p>
+      <text:p text:style-name="Table_20_Contents"><text:alphabetical-index-mark-start text:id="IMark93898555567368"/>Aux<text:alphabetical-index-mark-end text:id="IMark93898555567368"/> (serial)</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ioDeviceNumbers.B2" office:value-type="string">
       <text:p text:style-name="Table_20_Contents">1</text:p>
@@ -2040,7 +2046,7 @@
     </table:table-row>
     <table:table-row>
      <table:table-cell table:style-name="ioDeviceNumbers.A2" office:value-type="string">
-      <text:p text:style-name="Table_20_Contents"><text:alphabetical-index-mark-start text:id="IMark94377313125752"/>Console<text:alphabetical-index-mark-end text:id="IMark94377313125752"/> (<text:alphabetical-index-mark text:string-value="Keyboard"/>keyboard/monitor)</text:p>
+      <text:p text:style-name="Table_20_Contents"><text:alphabetical-index-mark-start text:id="IMark93898652999080"/>Console<text:alphabetical-index-mark-end text:id="IMark93898652999080"/> (<text:alphabetical-index-mark text:string-value="Keyboard"/>keyboard/monitor)</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ioDeviceNumbers.B2" office:value-type="string">
       <text:p text:style-name="Table_20_Contents">2</text:p>
@@ -2048,7 +2054,7 @@
     </table:table-row>
     <table:table-row>
      <table:table-cell table:style-name="ioDeviceNumbers.A2" office:value-type="string">
-      <text:p text:style-name="Table_20_Contents"><text:alphabetical-index-mark-start text:id="IMark94377634679736"/>Midi<text:alphabetical-index-mark-end text:id="IMark94377634679736"/> Interface</text:p>
+      <text:p text:style-name="Table_20_Contents"><text:alphabetical-index-mark-start text:id="IMark93898621625672"/>Midi<text:alphabetical-index-mark-end text:id="IMark93898621625672"/> Interface</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ioDeviceNumbers.B2" office:value-type="string">
       <text:p text:style-name="Table_20_Contents">3</text:p>
@@ -2056,7 +2062,7 @@
     </table:table-row>
     <table:table-row>
      <table:table-cell table:style-name="ioDeviceNumbers.A2" office:value-type="string">
-      <text:p text:style-name="Table_20_Contents"><text:alphabetical-index-mark-start text:id="IMark94379718614552"/>Keyboard<text:alphabetical-index-mark-end text:id="IMark94379718614552"/> <text:alphabetical-index-mark-start text:id="IMark94379706290296"/>I/O<text:alphabetical-index-mark-end text:id="IMark94379706290296"/></text:p>
+      <text:p text:style-name="Table_20_Contents"><text:alphabetical-index-mark-start text:id="IMark93898621274056"/>Keyboard<text:alphabetical-index-mark-end text:id="IMark93898621274056"/> <text:alphabetical-index-mark-start text:id="IMark93898652999080"/>I/O<text:alphabetical-index-mark-end text:id="IMark93898652999080"/></text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ioDeviceNumbers.B2" office:value-type="string">
       <text:p text:style-name="Table_20_Contents">4</text:p>
@@ -2064,7 +2070,7 @@
     </table:table-row>
     <table:table-row>
      <table:table-cell table:style-name="ioDeviceNumbers.A2" office:value-type="string">
-      <text:p text:style-name="Table_20_Contents"><text:alphabetical-index-mark-start text:id="IMark94379718445384"/>Raw console<text:alphabetical-index-mark-end text:id="IMark94379718445384"/> (bypass VT52)</text:p>
+      <text:p text:style-name="Table_20_Contents"><text:alphabetical-index-mark-start text:id="IMark93898647400856"/>Raw console<text:alphabetical-index-mark-end text:id="IMark93898647400856"/> (bypass VT52)</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="ioDeviceNumbers.B2" office:value-type="string">
       <text:p text:style-name="Table_20_Contents">5</text:p>
@@ -2074,17 +2080,20 @@
    <text:p text:style-name="Text_20_body">No range checking for these values is made, and any other value may crash the system.</text:p>
    <text:p text:style-name="Text_20_body">The Keyboard i/o refers to communications with the keyboard processor, which maintains, among other things, the real time clock.</text:p>
    <text:p text:style-name="Text_20_body">The raw console output bypasses the VT52 emulator code that runs the video display.</text:p>
+   <text:p text:style-name="P129"><text:alphabetical-index-mark-start text:id="IMark93898651362312"/><text:span text:style-name="Teletype">(EMIT)</text:span><text:alphabetical-index-mark-end text:id="IMark93898651362312"/> <text:s/><text:span text:style-name="T71">does a logical and of the outgoing character with a value stored in a headerless word (16 bit) variable, called <text:s/></text:span><text:alphabetical-index-mark-start text:id="IMark93898651362408"/><text:span text:style-name="Teletype"><text:span text:style-name="T71">MASK</text:span></text:span><text:alphabetical-index-mark-end text:id="IMark93898651362408"/><text:span text:style-name="T71"> . The default value is 127 (decimal), or 7F (hex). For ease of access, you can conveniently define a pseudovariable called <text:s/></text:span><text:span text:style-name="Teletype"><text:span text:style-name="T71">`MASK</text:span></text:span><text:span text:style-name="T71"> <text:s/>like so:</text:span></text:p>
+   <text:p text:style-name="Sample_20_Code_20_Last">&apos; (emit) c&gt;n n&gt;l l&gt;s 2- constant &apos;mask</text:p>
+   <text:p text:style-name="Text_20_body"><text:span text:style-name="T71">The phrase </text:span><text:span text:style-name="Teletype">&apos;</text:span><text:span text:style-name="Teletype"><text:span text:style-name="T71">mask w?</text:span></text:span><text:span text:style-name="T71"> should then return 7F.</text:span></text:p>
    <text:h text:style-name="Heading_20_3" text:outline-level="3">The Printer Driver.</text:h>
-   <text:p text:style-name="P20">Rather than change the contents of <text:s/><text:alphabetical-index-mark-start text:id="IMark94379757454696"/><text:span text:style-name="Teletype">I/O</text:span><text:alphabetical-index-mark-end text:id="IMark94379757454696"/> , the printer driver on screen 64 follows the fast-Forth custom of a separate driver for the printer. The driver uses the contents of the variable <text:s/><text:alphabetical-index-mark-start text:id="IMark94377626731432"/><text:span text:style-name="Teletype">SERIAL</text:span><text:alphabetical-index-mark-end text:id="IMark94377626731432"/> <text:s/>to determine its output. To sent output to the parallel device,</text:p>
+   <text:p text:style-name="P20">Rather than change the contents of <text:s/><text:alphabetical-index-mark-start text:id="IMark93898652999080"/><text:span text:style-name="Teletype">I/O</text:span><text:alphabetical-index-mark-end text:id="IMark93898652999080"/> , the printer driver on screen 64 follows the fast-Forth custom of a separate driver for the printer. The driver uses the contents of the variable <text:s/><text:alphabetical-index-mark-start text:id="IMark93898641139896"/><text:span text:style-name="Teletype">SERIAL</text:span><text:alphabetical-index-mark-end text:id="IMark93898641139896"/> <text:s/>to determine its output. To sent output to the parallel device,</text:p>
    <text:p text:style-name="Sample_20_Code_20_Last">printer serial off</text:p>
    <text:p text:style-name="Text_20_body">To send output to the serial device,</text:p>
    <text:p text:style-name="Sample_20_Code_20_Last">printer serial on</text:p>
    <text:h text:style-name="Heading_20_2" text:outline-level="2"><text:span text:style-name="T26">Raw Disk </text:span>R/W</text:h>
-   <text:p text:style-name="P38">The current version of fast-Forth for the Atari ST uses files to simulate screens disks.<text:span text:style-name="T27"> See the discussion of filing in the real-Forth User’s Guide. </text:span>The raw disk I/O is available as add-ons. <text:span text:style-name="T35">The key to this flexibility is that in fast-Forth <text:s/></text:span><text:alphabetical-index-mark-start text:id="IMark94377625345272"/><text:span text:style-name="Teletype"><text:span text:style-name="T35">R/W</text:span></text:span><text:alphabetical-index-mark-end text:id="IMark94377625345272"/><text:span text:style-name="T35"> <text:s/>is vectored.</text:span></text:p>
-   <text:h text:style-name="P105" text:outline-level="3"><text:alphabetical-index-mark text:string-value="Floppy disk"/>Floppy Disk</text:h>
-   <text:p text:style-name="P20"><text:alphabetical-index-mark-start text:id="IMark94379706290296"/><text:span text:style-name="Teletype">R/W</text:span><text:alphabetical-index-mark-end text:id="IMark94379706290296"/> <text:s/>for the floppy disk uses two <text:alphabetical-index-mark-start text:id="IMark94379717643352"/>BIOS<text:alphabetical-index-mark-end text:id="IMark94379717643352"/> calls, both to trap number 13. They are function number 8, to read a sector, and 9, to write one. Since each function reads or writes 512 bytes, it is necessary to call each one twice to transfer a screen. Since the floppy disk has an odd number of sectors per track, it is necessary to set the full disk IO block up twice. This is done in the word <text:s/><text:alphabetical-index-mark-start text:id="IMark94379718614552"/><text:span text:style-name="Teletype">SECT</text:span><text:alphabetical-index-mark-end text:id="IMark94379718614552"/> .</text:p>
-   <text:h text:style-name="Heading_20_3" text:outline-level="3"><text:soft-page-break/>+IOB <text:s/>and the IO Block</text:h>
-   <text:p text:style-name="P22">The <text:alphabetical-index-mark text:string-value="IO block, or IOB"/>IO Block, or IOB, resides in the dictionary, and is accessed via the word <text:s/><text:alphabetical-index-mark-start text:id="IMark94379778185992"/><text:span text:style-name="Teletype">+IOB</text:span><text:alphabetical-index-mark-end text:id="IMark94379778185992"/> . This word has the same syntax as <text:s/><text:alphabetical-index-mark-start text:id="IMark94379726107176"/><text:span text:style-name="Teletype">+ORIGIN</text:span><text:alphabetical-index-mark-end text:id="IMark94379726107176"/> , and is used the same way. The locations in the IOB are as follows:</text:p>
+   <text:p text:style-name="P38">The current version of fast-Forth for the Atari ST uses files to simulate screens disks.<text:span text:style-name="T27"> See the discussion of filing in the real-Forth User’s Guide. </text:span>The raw disk I/O is available as add-ons. <text:span text:style-name="T35">The key to this flexibility is that in fast-Forth <text:s/></text:span><text:alphabetical-index-mark-start text:id="IMark93898555567368"/><text:span text:style-name="Teletype"><text:span text:style-name="T35">R/W</text:span></text:span><text:alphabetical-index-mark-end text:id="IMark93898555567368"/><text:span text:style-name="T35"> <text:s/>is vectored.</text:span></text:p>
+   <text:h text:style-name="P106" text:outline-level="3"><text:soft-page-break/><text:alphabetical-index-mark text:string-value="Floppy disk"/>Floppy Disk</text:h>
+   <text:p text:style-name="P20"><text:alphabetical-index-mark-start text:id="IMark93898623957576"/><text:span text:style-name="Teletype">R/W</text:span><text:alphabetical-index-mark-end text:id="IMark93898623957576"/> <text:s/>for the floppy disk uses two <text:alphabetical-index-mark-start text:id="IMark93898610235320"/>BIOS<text:alphabetical-index-mark-end text:id="IMark93898610235320"/> calls, both to trap number 13. They are function number 8, to read a sector, and 9, to write one. Since each function reads or writes 512 bytes, it is necessary to call each one twice to transfer a screen. Since the floppy disk has an odd number of sectors per track, it is necessary to set the full disk IO block up twice. This is done in the word <text:s/><text:alphabetical-index-mark-start text:id="IMark93898647610216"/><text:span text:style-name="Teletype">SECT</text:span><text:alphabetical-index-mark-end text:id="IMark93898647610216"/> .</text:p>
+   <text:h text:style-name="Heading_20_3" text:outline-level="3">+IOB <text:s/>and the IO Block</text:h>
+   <text:p text:style-name="P22">The <text:alphabetical-index-mark text:string-value="IO block, or IOB"/>IO Block, or IOB, resides in the dictionary, and is accessed via the word <text:s/><text:alphabetical-index-mark-start text:id="IMark93898648078008"/><text:span text:style-name="Teletype">+IOB</text:span><text:alphabetical-index-mark-end text:id="IMark93898648078008"/> . This word has the same syntax as <text:s/><text:alphabetical-index-mark-start text:id="IMark93898621625672"/><text:span text:style-name="Teletype">+ORIGIN</text:span><text:alphabetical-index-mark-end text:id="IMark93898621625672"/> , and is used the same way. The locations in the IOB are as follows:</text:p>
    <table:table table:name="ioBlock" table:style-name="ioBlock">
     <table:table-column table:style-name="ioBlock.A"/>
     <table:table-column table:style-name="ioBlock.B"/>
@@ -2206,44 +2215,44 @@
     </table:table-row>
    </table:table>
    <text:h text:style-name="Heading_20_4" text:outline-level="4">-DISK</text:h>
-   <text:p text:style-name="P41">The contents of the IOB are placed on the processor stack, where <text:alphabetical-index-mark-start text:id="IMark94377313125752"/>BIOS<text:alphabetical-index-mark-end text:id="IMark94377313125752"/> expects to find them, by the word <text:s/><text:alphabetical-index-mark-start text:id="IMark94379726107176"/><text:span text:style-name="Teletype">-DISK</text:span><text:alphabetical-index-mark-end text:id="IMark94379726107176"/> , which then does the appropriate action, read or write.</text:p>
+   <text:p text:style-name="P41">The contents of the IOB are placed on the processor stack, where <text:alphabetical-index-mark-start text:id="IMark93898652999080"/>BIOS<text:alphabetical-index-mark-end text:id="IMark93898652999080"/> expects to find them, by the word <text:s/><text:alphabetical-index-mark-start text:id="IMark93898621485240"/><text:span text:style-name="Teletype">-DISK</text:span><text:alphabetical-index-mark-end text:id="IMark93898621485240"/> , which then does the appropriate action, read or write.</text:p>
    <text:h text:style-name="Heading_20_3" text:outline-level="3"><text:span text:style-name="T16">Raw </text:span><text:alphabetical-index-mark text:string-value="Disk driver"/>Disk Drivers and Disk Map</text:h>
-   <text:p text:style-name="P35">There are five disk drivers <text:span text:style-name="T16">available</text:span>. The four floppy drivers provide 10 sectors per track, or nine (<text:alphabetical-index-mark-start text:id="IMark94379757454696"/>TOS<text:alphabetical-index-mark-end text:id="IMark94379757454696"/> and <text:alphabetical-index-mark-start text:id="IMark94379718258760"/>MS<text:span text:style-name="T16">-</text:span>DOS<text:alphabetical-index-mark-end text:id="IMark94379718258760"/> standard). They also provide 80 tracks or 82 (TOS and MS<text:span text:style-name="T16">-</text:span>DOS standard). All adjust <text:s/><text:alphabetical-index-mark-start text:id="IMark94379727807096"/><text:span text:style-name="Teletype">MAXBLK</text:span><text:alphabetical-index-mark-end text:id="IMark94379727807096"/> <text:s/>and <text:s/><text:alphabetical-index-mark-start text:id="IMark94379728449736"/><text:span text:style-name="Teletype">B/DRV</text:span><text:alphabetical-index-mark-end text:id="IMark94379728449736"/> <text:s/>to suit.</text:p>
+   <text:p text:style-name="P35">There are five disk drivers <text:span text:style-name="T16">available</text:span>. The four floppy drivers provide 10 sectors per track, or nine (<text:alphabetical-index-mark-start text:id="IMark93898649513176"/>TOS<text:alphabetical-index-mark-end text:id="IMark93898649513176"/> and <text:alphabetical-index-mark-start text:id="IMark93898621625672"/>MS<text:span text:style-name="T16">-</text:span>DOS<text:alphabetical-index-mark-end text:id="IMark93898621625672"/> standard). They also provide 80 tracks or 82 (TOS and MS<text:span text:style-name="T16">-</text:span>DOS standard). All adjust <text:s/><text:alphabetical-index-mark-start text:id="IMark93898652112072"/><text:span text:style-name="Teletype">MAXBLK</text:span><text:alphabetical-index-mark-end text:id="IMark93898652112072"/> <text:s/>and <text:s/><text:alphabetical-index-mark-start text:id="IMark93898629802168"/><text:span text:style-name="Teletype">B/DRV</text:span><text:alphabetical-index-mark-end text:id="IMark93898629802168"/> <text:s/>to suit.</text:p>
    <text:h text:style-name="Heading_20_4" text:outline-level="4">B/SIDE</text:h>
-   <text:p text:style-name="P35">To simplify the use of double sided disk drivers, the word <text:s/><text:alphabetical-index-mark-start text:id="IMark94377313125752"/><text:span text:style-name="Teletype">B/SIDE</text:span><text:alphabetical-index-mark-end text:id="IMark94377313125752"/> , or Blocks per Side, is included in the fast-Forth kernel for the ST. It is always set to 360 or 410.</text:p>
+   <text:p text:style-name="P35">To simplify the use of double sided disk drivers, the word <text:s/><text:alphabetical-index-mark-start text:id="IMark93898641139896"/><text:span text:style-name="Teletype">B/SIDE</text:span><text:alphabetical-index-mark-end text:id="IMark93898641139896"/> , or Blocks per Side, is included in the fast-Forth kernel for the ST. It is always set to 360 or 410.</text:p>
    <text:h text:style-name="Heading_20_4" text:outline-level="4">MAXBLK</text:h>
-   <text:p text:style-name="P35"><text:alphabetical-index-mark-start text:id="IMark94377634679736"/><text:span text:style-name="Teletype">MAXBLK</text:span><text:alphabetical-index-mark-end text:id="IMark94377634679736"/> <text:s/>is set on boot, depending on the number of <text:alphabetical-index-mark text:string-value="Floppy disk"/>floppy disk drives available. As there is no way to determine whether single or double sided disks will be used, single sided disks are assumed. Thus, depending on the number of floppy drives and the number of sides and sectors to be used, <text:s/><text:span text:style-name="Teletype">MAXBLK</text:span> <text:s/>may return one of several values.</text:p>
+   <text:p text:style-name="P35"><text:alphabetical-index-mark-start text:id="IMark93898642358872"/><text:span text:style-name="Teletype">MAXBLK</text:span><text:alphabetical-index-mark-end text:id="IMark93898642358872"/> <text:s/>is set on boot, depending on the number of <text:alphabetical-index-mark text:string-value="Floppy disk"/>floppy disk drives available. As there is no way to determine whether single or double sided disks will be used, single <text:soft-page-break/>sided disks are assumed. Thus, depending on the number of floppy drives and the number of sides and sectors to be used, <text:s/><text:span text:style-name="Teletype">MAXBLK</text:span> <text:s/>may return one of several values.</text:p>
    <text:h text:style-name="Heading_20_4" text:outline-level="4"><text:alphabetical-index-mark text:string-value="Hard disk"/>Hard Disk Layout</text:h>
-   <text:p text:style-name="P35">The boot default <text:alphabetical-index-mark text:string-value="Disk driver"/>disk driver is the hard disk only option, which uses hard <text:alphabetical-index-mark text:string-value="Disk drive"/>disk drive D as a raw access disk. This driver prohibits writes to block 0, so the <text:alphabetical-index-mark-start text:id="IMark94379718991320"/>TOS<text:alphabetical-index-mark-end text:id="IMark94379718991320"/> and <text:alphabetical-index-mark-start text:id="IMark94379719250056"/>MS<text:span text:style-name="T32">-</text:span>DOS<text:alphabetical-index-mark-end text:id="IMark94379719250056"/> required data contained in the first block of the partition are preserved.</text:p>
-   <text:p text:style-name="P35"><text:soft-page-break/>The hard disk starts at block number <text:s/><text:alphabetical-index-mark-start text:id="IMark94377626731432"/><text:span text:style-name="Teletype">MINHBLK</text:span><text:alphabetical-index-mark-end text:id="IMark94377626731432"/> <text:s/>and ends at <text:s/><text:alphabetical-index-mark-start text:id="IMark94379717643352"/><text:span text:style-name="Teletype">MAXHBLK</text:span><text:alphabetical-index-mark-end text:id="IMark94379717643352"/> , which is calculated at hard <text:alphabetical-index-mark text:string-value="Disk driver"/>disk driver installation time. In addition, if no floppy driver is specified, the first 720 blocks are mapped to low block numbers, starting at 0. This allows the first 720 blocks to emulated a double sided <text:alphabetical-index-mark-start text:id="IMark94379719010632"/>TOS<text:alphabetical-index-mark-end text:id="IMark94379719010632"/> formatted <text:alphabetical-index-mark text:string-value="Floppy disk"/>floppy disk.</text:p>
-   <text:p text:style-name="P35">One or two actual floppy disk may be substituted for the emulated one by selecting a floppy disk driver. In addition, the hard disk driver for blocks starting at <text:s/><text:alphabetical-index-mark-start text:id="IMark94379707962984"/><text:span text:style-name="Teletype">MINHBLK</text:span><text:alphabetical-index-mark-end text:id="IMark94379707962984"/> <text:s/>may be added to the floppy driver. This allows you to back up the hard disk by copying portions of it to one or more floppies. For this reason, it is suggested that you divide the hard disk into volumes of 360 or multiples of 360 blocks.</text:p>
+   <text:p text:style-name="P35">The boot default <text:alphabetical-index-mark text:string-value="Disk driver"/>disk driver is the hard disk only option, which uses hard <text:alphabetical-index-mark text:string-value="Disk drive"/>disk drive D as a raw access disk. This driver prohibits writes to block 0, so the <text:alphabetical-index-mark-start text:id="IMark93898652999080"/>TOS<text:alphabetical-index-mark-end text:id="IMark93898652999080"/> and <text:alphabetical-index-mark-start text:id="IMark93898645956968"/>MS<text:span text:style-name="T32">-</text:span>DOS<text:alphabetical-index-mark-end text:id="IMark93898645956968"/> required data contained in the first block of the partition are preserved.</text:p>
+   <text:p text:style-name="P35">The hard disk starts at block number <text:s/><text:alphabetical-index-mark-start text:id="IMark93898647466040"/><text:span text:style-name="Teletype">MINHBLK</text:span><text:alphabetical-index-mark-end text:id="IMark93898647466040"/> <text:s/>and ends at <text:s/><text:alphabetical-index-mark-start text:id="IMark93898655506328"/><text:span text:style-name="Teletype">MAXHBLK</text:span><text:alphabetical-index-mark-end text:id="IMark93898655506328"/> , which is calculated at hard <text:alphabetical-index-mark text:string-value="Disk driver"/>disk driver installation time. In addition, if no floppy driver is specified, the first 720 blocks are mapped to low block numbers, starting at 0. This allows the first 720 blocks to emulated a double sided <text:alphabetical-index-mark-start text:id="IMark93898649664168"/>TOS<text:alphabetical-index-mark-end text:id="IMark93898649664168"/> formatted <text:alphabetical-index-mark text:string-value="Floppy disk"/>floppy disk.</text:p>
+   <text:p text:style-name="P35">One or two actual floppy disk may be substituted for the emulated one by selecting a floppy disk driver. In addition, the hard disk driver for blocks starting at <text:s/><text:alphabetical-index-mark-start text:id="IMark93898638369608"/><text:span text:style-name="Teletype">MINHBLK</text:span><text:alphabetical-index-mark-end text:id="IMark93898638369608"/> <text:s/>may be added to the floppy driver. This allows you to back up the hard disk by copying portions of it to one or more floppies. For this reason, it is suggested that you divide the hard disk into volumes of 360 or multiples of 360 blocks.</text:p>
    <text:h text:style-name="Heading_20_4" text:outline-level="4">Selecting A Disk Format.</text:h>
-   <text:p text:style-name="P35">The floppy disk format is selected with one of four words: <text:s/><text:alphabetical-index-mark-start text:id="IMark94379757454696"/><text:span text:style-name="Teletype">9.SS</text:span><text:alphabetical-index-mark-end text:id="IMark94379757454696"/> , <text:s/><text:alphabetical-index-mark-start text:id="IMark94379778185992"/><text:span text:style-name="Teletype">10.SS</text:span><text:alphabetical-index-mark-end text:id="IMark94379778185992"/> , <text:s/><text:alphabetical-index-mark-start text:id="IMark94379784661928"/><text:span text:style-name="Teletype">9.DS</text:span><text:alphabetical-index-mark-end text:id="IMark94379784661928"/> , and <text:s/><text:alphabetical-index-mark-start text:id="IMark94377625345272"/><text:span text:style-name="Teletype">10.DS</text:span><text:alphabetical-index-mark-end text:id="IMark94377625345272"/> . These indicate the count of sectors per track, and the sidedness of the driver to be installed.</text:p>
-   <text:p text:style-name="P35">The <text:span text:style-name="T68">h</text:span>ard disk <text:span text:style-name="T68">driver</text:span> selects raw access to <text:alphabetical-index-mark-start text:id="IMark94379718057480"/>TOS<text:alphabetical-index-mark-end text:id="IMark94379718057480"/> drive D. The hard disk may be made available above the floppy disks by executing a floppy <text:alphabetical-index-mark text:string-value="Disk driver"/>disk driver selector word, and then the word <text:s/><text:alphabetical-index-mark-start text:id="IMark94377625345272"/><text:span text:style-name="Teletype">+HARDDISK</text:span><text:alphabetical-index-mark-end text:id="IMark94377625345272"/> . Thus, to install a double sided extended floppy driver and the hard disk, execute the phrase</text:p>
+   <text:p text:style-name="P35">The floppy disk format is selected with one of four words: <text:s/><text:alphabetical-index-mark-start text:id="IMark93898621485240"/><text:span text:style-name="Teletype">9.SS</text:span><text:alphabetical-index-mark-end text:id="IMark93898621485240"/> , <text:s/><text:alphabetical-index-mark-start text:id="IMark93898638369608"/><text:span text:style-name="Teletype">10.SS</text:span><text:alphabetical-index-mark-end text:id="IMark93898638369608"/> , <text:s/><text:alphabetical-index-mark-start text:id="IMark93898629901640"/><text:span text:style-name="Teletype">9.DS</text:span><text:alphabetical-index-mark-end text:id="IMark93898629901640"/> , and <text:s/><text:alphabetical-index-mark-start text:id="IMark93898604993496"/><text:span text:style-name="Teletype">10.DS</text:span><text:alphabetical-index-mark-end text:id="IMark93898604993496"/> . These indicate the count of sectors per track, and the sidedness of the driver to be installed.</text:p>
+   <text:p text:style-name="P35">The <text:span text:style-name="T68">h</text:span>ard disk <text:span text:style-name="T68">driver</text:span> selects raw access to <text:alphabetical-index-mark-start text:id="IMark93898651215656"/>TOS<text:alphabetical-index-mark-end text:id="IMark93898651215656"/> drive D. The hard disk may be made available above the floppy disks by executing a floppy <text:alphabetical-index-mark text:string-value="Disk driver"/>disk driver selector word, and then the word <text:s/><text:alphabetical-index-mark-start text:id="IMark93898621274056"/><text:span text:style-name="Teletype">+HARDDISK</text:span><text:alphabetical-index-mark-end text:id="IMark93898621274056"/> . Thus, to install a double sided extended floppy driver and the hard disk, execute the phrase</text:p>
    <text:p text:style-name="Sample_20_Code_20_Last">10.DS +HARDDISK</text:p>
-   <text:p text:style-name="P35">To restore the hard disk only, execute the word <text:s/><text:alphabetical-index-mark-start text:id="IMark94379718720248"/><text:alphabetical-index-mark-start text:id="IMark94379757454696"/><text:span text:style-name="Teletype">HARDDISK</text:span><text:alphabetical-index-mark-end text:id="IMark94379757454696"/><text:alphabetical-index-mark-end text:id="IMark94379718720248"/> .</text:p>
+   <text:p text:style-name="P35">To restore the hard disk only, execute the word <text:s/><text:alphabetical-index-mark-start text:id="IMark93898648026440"/><text:alphabetical-index-mark-start text:id="IMark93898621485240"/><text:span text:style-name="Teletype">HARDDISK</text:span><text:alphabetical-index-mark-end text:id="IMark93898621485240"/><text:alphabetical-index-mark-end text:id="IMark93898648026440"/> .</text:p>
    <text:p text:style-name="P35">All of these functions may be <text:span text:style-name="T18">executed</text:span> from the command line.</text:p>
-   <text:h text:style-name="P106" text:outline-level="3"><text:alphabetical-index-mark text:string-value="Floppy disk"/>Floppy Disk <text:span text:style-name="T22">Initialization</text:span></text:h>
+   <text:h text:style-name="P107" text:outline-level="3"><text:alphabetical-index-mark text:string-value="Floppy disk"/>Floppy Disk <text:span text:style-name="T22">Initialization</text:span></text:h>
    <text:p text:style-name="P35">The fast-Forth disking facility includes code to initialize an entire disk or one track, or (on double sided drives) one cylinder. See the User&apos;s Guide to <text:span text:style-name="T69">real</text:span>-Forth. The interleave is set to a factor of two, which speeds access for fast-Forth up noticeably, and seems to speed up file disks as well. Since the fast-Forth disk copy utilities will copy file disks as well as screens disks, this is a simple way to obtain better disk performance.</text:p>
-   <text:h text:style-name="P100" text:outline-level="2">Pseudo Disking</text:h>
-   <text:p text:style-name="P35">To facilitate backups on a single drive system equipped with enough RAM, a pseudo <text:alphabetical-index-mark text:string-value="Disk driver"/>disk driver is included on screens 7 and 8. This code provides a ram disk of 360 blocks -- the equivalent of one side of a <text:alphabetical-index-mark text:string-value="Floppy disk"/>floppy disk. The driver requires either <text:alphabetical-index-mark-start text:id="IMark94379778185992"/>TOS<text:alphabetical-index-mark-end text:id="IMark94379778185992"/> in ROM or a megabyte of RAM.</text:p>
-   <text:h text:style-name="P106" text:outline-level="3">BACKUP <text:s/>and <text:s/>BACKDOWN</text:h>
-   <text:p text:style-name="P35">Included with the pseudo disk code are two words, <text:s/><text:alphabetical-index-mark-start text:id="IMark94379719540952"/><text:span text:style-name="Teletype">BACKUP</text:span><text:alphabetical-index-mark-end text:id="IMark94379719540952"/> <text:s/>and <text:s/><text:alphabetical-index-mark-start text:id="IMark94379718602696"/><text:span text:style-name="Teletype">BACKDOWN</text:span><text:alphabetical-index-mark-end text:id="IMark94379718602696"/> . <text:span text:style-name="Teletype">BACKUP</text:span> <text:s/>backs 360 blocks starting at a given block number up to the pseudo disk. It leaves the <text:soft-page-break/>starting block number on the stack, ready for <text:s/><text:span text:style-name="Teletype">BACKDOWN</text:span> . Thus, the two words may be used to copy disks on a single drive system. Note that this is not the same word <text:s/><text:span text:style-name="Teletype">BACKUP</text:span> <text:s/>that is in the disking facility.</text:p>
+   <text:h text:style-name="P101" text:outline-level="2"><text:soft-page-break/>Pseudo Disking</text:h>
+   <text:p text:style-name="P35">To facilitate backups on a single drive system equipped with enough RAM, a pseudo <text:alphabetical-index-mark text:string-value="Disk driver"/>disk driver is included on screens 7 and 8. This code provides a ram disk of 360 blocks -- the equivalent of one side of a <text:alphabetical-index-mark text:string-value="Floppy disk"/>floppy disk. The driver requires either <text:alphabetical-index-mark-start text:id="IMark93898629901640"/>TOS<text:alphabetical-index-mark-end text:id="IMark93898629901640"/> in ROM or a megabyte of RAM.</text:p>
+   <text:h text:style-name="P107" text:outline-level="3">BACKUP <text:s/>and <text:s/>BACKDOWN</text:h>
+   <text:p text:style-name="P35">Included with the pseudo disk code are two words, <text:s/><text:alphabetical-index-mark-start text:id="IMark93898641139896"/><text:span text:style-name="Teletype">BACKUP</text:span><text:alphabetical-index-mark-end text:id="IMark93898641139896"/> <text:s/>and <text:s/><text:alphabetical-index-mark-start text:id="IMark93898621274056"/><text:span text:style-name="Teletype">BACKDOWN</text:span><text:alphabetical-index-mark-end text:id="IMark93898621274056"/> . <text:span text:style-name="Teletype">BACKUP</text:span> <text:s/>backs 360 blocks starting at a given block number up to the pseudo disk. It leaves the starting block number on the stack, ready for <text:s/><text:span text:style-name="Teletype">BACKDOWN</text:span> . Thus, the two words may be used to copy disks on a single drive system. Note that this is not the same word <text:s/><text:span text:style-name="Teletype">BACKUP</text:span> <text:s/>that is in the disking facility.</text:p>
    <text:p text:style-name="P35">Backup leaves the source block number on the stack, so that the sequence for backing up a single sided disk is:</text:p>
    <text:p text:style-name="Sample_20_Code">0 BACKUP</text:p>
    <text:p text:style-name="Sample_20_Code_20_Last">&lt;change disks&gt; BACKDOWN</text:p>
    <text:p text:style-name="P35">To back up a double sided disk:</text:p>
    <text:p text:style-name="Sample_20_Code">0 BACKUP</text:p>
    <text:p text:style-name="Sample_20_Code">&lt;change disks&gt; BACKDOWN</text:p>
-   <text:p text:style-name="Sample_20_Code">&lt;change disks&gt; 360 <text:alphabetical-index-mark-start text:id="IMark94379719250056"/>BACKUP<text:alphabetical-index-mark-end text:id="IMark94379719250056"/></text:p>
-   <text:p text:style-name="Sample_20_Code_20_Last">&lt;change disks&gt; <text:alphabetical-index-mark-start text:id="IMark94379719011768"/>BACKDOWN<text:alphabetical-index-mark-end text:id="IMark94379719011768"/></text:p>
-   <text:p text:style-name="P35">Note that these routines work with both forth screen and <text:alphabetical-index-mark-start text:id="IMark94379707962504"/>TOS<text:alphabetical-index-mark-end text:id="IMark94379707962504"/> file disks, provided that the correct floppy <text:alphabetical-index-mark text:string-value="Disk driver"/>disk driver is installed.</text:p>
+   <text:p text:style-name="Sample_20_Code">&lt;change disks&gt; 360 <text:alphabetical-index-mark-start text:id="IMark93898637873576"/>BACKUP<text:alphabetical-index-mark-end text:id="IMark93898637873576"/></text:p>
+   <text:p text:style-name="Sample_20_Code_20_Last">&lt;change disks&gt; <text:alphabetical-index-mark-start text:id="IMark93898653004440"/>BACKDOWN<text:alphabetical-index-mark-end text:id="IMark93898653004440"/></text:p>
+   <text:p text:style-name="P35">Note that these routines work with both forth screen and <text:alphabetical-index-mark-start text:id="IMark93898641264984"/>TOS<text:alphabetical-index-mark-end text:id="IMark93898641264984"/> file disks, provided that the correct floppy <text:alphabetical-index-mark text:string-value="Disk driver"/>disk driver is installed.</text:p>
    <text:h text:style-name="Heading_20_4" text:outline-level="4">Installation</text:h>
    <text:p text:style-name="P35">To install a ram disk, use the word <text:s/><text:span text:style-name="Teletype">RAMDISK</text:span> . To remove a ramdisk, use the word <text:s/><text:span text:style-name="Teletype">OLDDISK</text:span> .</text:p>
    <text:h text:style-name="Heading_20_2" text:outline-level="2"><text:span text:style-name="T25">Editor</text:span> Keyst<text:span text:style-name="T11">r</text:span>okes.</text:h>
    <text:p text:style-name="P23">The fast-Forth screen editor and the line editor both use the full Atari <text:alphabetical-index-mark text:string-value="Keyboard"/>keyboard. This requires that the extended keyboard handlers be installed. These are found on screens 130 and 131. They are a normal part of the overlays. <text:span text:style-name="T40">See the User’s Guide to real-Forth for more information.</text:span></text:p>
    <text:p text:style-name="P63">Function keys are indicated with a lower case f followed by a number, e.g. f5. Shifted function keys are indicated with a capital F, e.g. F5.</text:p>
-   <text:h text:style-name="Heading_20_3" text:outline-level="3">Editor Keys.</text:h>
+   <text:h text:style-name="Heading_20_3" text:outline-level="3"><text:soft-page-break/>Editor Keys.</text:h>
    <text:p text:style-name="P23">In the <text:span text:style-name="T58">screen </text:span>editor, the following keys map to their appropriate functions.</text:p>
    <table:table table:name="editorKeys" table:style-name="editorKeys">
     <table:table-column table:style-name="editorKeys.A"/>
@@ -2284,7 +2293,6 @@
       <text:p text:style-name="Table_20_Contents">Emulated with the SCROLL LOCK key on most PCs. <text:span text:style-name="T44">Also, F2.</text:span></text:p>
      </table:table-cell>
     </table:table-row>
-    <text:soft-page-break/>
     <table:table-row table:style-name="editorKeys.1">
      <table:table-cell table:style-name="editorKeys.A2" office:value-type="string">
       <text:p text:style-name="Table_20_Contents">Insert</text:p>
@@ -2298,7 +2306,7 @@
     </table:table-row>
     <table:table-row table:style-name="editorKeys.1">
      <table:table-cell table:style-name="editorKeys.A2" office:value-type="string">
-      <text:p text:style-name="P76"><text:span text:style-name="T58">f</text:span>1</text:p>
+      <text:p text:style-name="P77"><text:span text:style-name="T58">f</text:span>1</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="editorKeys.A2" office:value-type="string">
       <text:p text:style-name="Table_20_Contents">Blanks Left, <text:span text:style-name="T41">BLL</text:span></text:p>
@@ -2397,24 +2405,24 @@
     </table:table-row>
     <table:table-row table:style-name="editorKeys.1">
      <table:table-cell table:style-name="editorKeys.A2" office:value-type="string">
-      <text:p text:style-name="P75">F1</text:p>
+      <text:p text:style-name="P76">F1</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="editorKeys.A2" office:value-type="string">
-      <text:p text:style-name="P75">Help</text:p>
+      <text:p text:style-name="P76">Help</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="editorKeys.C2" office:value-type="string">
-      <text:p text:style-name="P75">Show the help screen</text:p>
+      <text:p text:style-name="P76">Show the help screen</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="editorKeys.1">
      <table:table-cell table:style-name="editorKeys.A2" office:value-type="string">
-      <text:p text:style-name="P75">F2</text:p>
+      <text:p text:style-name="P76">F2</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="editorKeys.A2" office:value-type="string">
-      <text:p text:style-name="P75">Undo</text:p>
+      <text:p text:style-name="P76">Undo</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="editorKeys.C2" office:value-type="string">
-      <text:p text:style-name="P75">Revert the screen to the last saved version.</text:p>
+      <text:p text:style-name="P76">Revert the screen to the last saved version.</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="editorKeys.1">
@@ -2422,7 +2430,7 @@
       <text:p text:style-name="Table_20_Contents">Left Arrow,<text:line-break/><text:span text:style-name="T58">ctl f</text:span></text:p>
      </table:table-cell>
      <table:table-cell table:style-name="editorKeys.A2" office:value-type="string">
-      <text:p text:style-name="P72">LEFTARROW</text:p>
+      <text:p text:style-name="P73">LEFTARROW</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="editorKeys.C2" office:value-type="string">
       <text:p text:style-name="Table_20_Contents">Move the cursor left, <text:span text:style-name="T12">with wrapping</text:span>.</text:p>
@@ -2433,7 +2441,7 @@
       <text:p text:style-name="Table_20_Contents">Right Arrow,<text:line-break/><text:span text:style-name="T58">ctl g</text:span></text:p>
      </table:table-cell>
      <table:table-cell table:style-name="editorKeys.A2" office:value-type="string">
-      <text:p text:style-name="P72">RIGHTARROW</text:p>
+      <text:p text:style-name="P73">RIGHTARROW</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="editorKeys.C2" office:value-type="string">
       <text:p text:style-name="Table_20_Contents">Move the cursor right, <text:span text:style-name="T12">with wrapping</text:span>.</text:p>
@@ -2441,24 +2449,24 @@
     </table:table-row>
     <table:table-row table:style-name="editorKeys.1">
      <table:table-cell table:style-name="editorKeys.A2" office:value-type="string">
-      <text:p text:style-name="P72">Up Arrow,<text:line-break/><text:span text:style-name="T58">ctl t</text:span></text:p>
+      <text:p text:style-name="P73">Up Arrow,<text:line-break/><text:span text:style-name="T58">ctl t</text:span></text:p>
      </table:table-cell>
      <table:table-cell table:style-name="editorKeys.A2" office:value-type="string">
-      <text:p text:style-name="P72">UPARROW</text:p>
+      <text:p text:style-name="P73">UPARROW</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="editorKeys.C2" office:value-type="string">
-      <text:p text:style-name="P73">Move the cursor <text:span text:style-name="T42">up</text:span>, <text:span text:style-name="T12">with screen wrapping</text:span>.</text:p>
+      <text:p text:style-name="P74">Move the cursor <text:span text:style-name="T42">up</text:span>, <text:span text:style-name="T12">with screen wrapping</text:span>.</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="editorKeys.1">
      <table:table-cell table:style-name="editorKeys.A2" office:value-type="string">
-      <text:p text:style-name="P72">Down Arrow,<text:line-break/><text:span text:style-name="T58">ctl v</text:span></text:p>
+      <text:p text:style-name="P73">Down Arrow,<text:line-break/><text:span text:style-name="T58">ctl v</text:span></text:p>
      </table:table-cell>
      <table:table-cell table:style-name="editorKeys.A2" office:value-type="string">
-      <text:p text:style-name="P72">DOWNARROW</text:p>
+      <text:p text:style-name="P73">DOWNARROW</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="editorKeys.C2" office:value-type="string">
-      <text:p text:style-name="P73">Move the cursor <text:span text:style-name="T42">down</text:span>, <text:span text:style-name="T12">with screen wrapping</text:span>.</text:p>
+      <text:p text:style-name="P74">Move the cursor <text:span text:style-name="T42">down</text:span>, <text:span text:style-name="T12">with screen wrapping</text:span>.</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="editorKeys.1">
@@ -2469,15 +2477,15 @@
       <text:p text:style-name="Table_20_Contents"/>
      </table:table-cell>
      <table:table-cell table:style-name="editorKeys.C2" office:value-type="string">
-      <text:p text:style-name="P74">Move the cursor to the extreme right end of the input line.</text:p>
+      <text:p text:style-name="P75">Move the cursor to the extreme right end of the input line.</text:p>
      </table:table-cell>
     </table:table-row>
    </table:table>
-   <text:p text:style-name="P63">In addition, a lot of functions are available with control keys. See the real-Forth manual or the source code for details.</text:p>
+   <text:p text:style-name="P63"><text:soft-page-break/>In addition, a lot of functions are available with control keys. See the real-Forth manual or the source code for details.</text:p>
    <text:p text:style-name="P63"><text:span text:style-name="T59">For a map of the Atari key board with key codes, see </text:span><text:a xlink:type="simple" xlink:href="http://www.atarimuseum.com/computers/16bits/STINTERN.htm#KEYMAP" text:style-name="Internet_20_link" text:visited-style-name="Visited_20_Internet_20_Link"><text:span text:style-name="T59">http://www.atarimuseum.com/computers/16bits/STINTERN.htm#KEYMAP</text:span></text:a><text:span text:style-name="T59"> or </text:span><text:a xlink:type="simple" xlink:href="http://eerott.mbnet.fi/hatari/img/st-keymap.png" text:style-name="Internet_20_link" text:visited-style-name="Visited_20_Internet_20_Link"><text:span text:style-name="T59">http://eerott.mbnet.fi/hatari/img/st-keymap.png</text:span></text:a><text:span text:style-name="T59">.</text:span></text:p>
-   <text:h text:style-name="P101" text:outline-level="2"><text:soft-page-break/><text:alphabetical-index-mark-start text:id="IMark94379718143096"/>RS-232<text:alphabetical-index-mark-end text:id="IMark94379718143096"/> Port Configuration.</text:h>
+   <text:h text:style-name="P102" text:outline-level="2"><text:alphabetical-index-mark-start text:id="IMark93898629901640"/>RS-232<text:alphabetical-index-mark-end text:id="IMark93898629901640"/> Port Configuration.</text:h>
    <text:h text:style-name="Heading_20_3" text:outline-level="3">Baud Rate</text:h>
-   <text:p text:style-name="P31">The word <text:s/><text:alphabetical-index-mark-start text:id="IMark94379718991320"/><text:span text:style-name="Teletype">RSCONF</text:span><text:alphabetical-index-mark-end text:id="IMark94379718991320"/> <text:s/>in the <text:s/><text:alphabetical-index-mark-start text:id="IMark94379719011768"/><text:span text:style-name="Teletype">PRINTER</text:span><text:alphabetical-index-mark-end text:id="IMark94379719011768"/> <text:s/>vocabulary is used to set the RS-232 configuration. <text:s/><text:span text:style-name="Teletype">RSCONF</text:span> <text:s/>expects a number from 0 to 15 on the stack to indicate the proposed baud rate. These numbers are as follows:</text:p>
+   <text:p text:style-name="P31">The word <text:s/><text:alphabetical-index-mark-start text:id="IMark93898641264984"/><text:span text:style-name="Teletype">RSCONF</text:span><text:alphabetical-index-mark-end text:id="IMark93898641264984"/> <text:s/>in the <text:s/><text:alphabetical-index-mark-start text:id="IMark93898621274056"/><text:span text:style-name="Teletype">PRINTER</text:span><text:alphabetical-index-mark-end text:id="IMark93898621274056"/> <text:s/>vocabulary is used to set the RS-232 configuration. <text:s/><text:span text:style-name="Teletype">RSCONF</text:span> <text:s/>expects a number from 0 to 15 on the stack to indicate the proposed baud rate. These numbers are as follows:</text:p>
    <table:table table:name="baudNumbers" table:style-name="baudNumbers">
     <table:table-column table:style-name="baudNumbers.A"/>
     <table:table-column table:style-name="baudNumbers.B"/>
@@ -2612,49 +2620,49 @@
      </table:table-cell>
     </table:table-row>
    </table:table>
-   <text:p text:style-name="Text_20_body">The baud rate may also be set using the routine on screen 200. The word <text:s/><text:alphabetical-index-mark-start text:id="IMark94379719540952"/><text:span text:style-name="Teletype">BAUD</text:span><text:alphabetical-index-mark-end text:id="IMark94379719540952"/> <text:s/>expects a valid baud rate on the stack, and will check for validity. If the baud rate is valid, the appropriate baud number is passed on to <text:s/><text:alphabetical-index-mark-start text:id="IMark94379719269928"/><text:span text:style-name="Teletype">RSCONF</text:span><text:alphabetical-index-mark-end text:id="IMark94379719269928"/> .</text:p>
+   <text:p text:style-name="Text_20_body">The baud rate may also be set using the routine on screen 200. The word <text:s/><text:alphabetical-index-mark-start text:id="IMark93898629901640"/><text:span text:style-name="Teletype">BAUD</text:span><text:alphabetical-index-mark-end text:id="IMark93898629901640"/> <text:s/>expects a valid baud rate on the stack, and will check for validity. If the baud rate is valid, the appropriate baud number is passed on to <text:s/><text:alphabetical-index-mark-start text:id="IMark93898610235320"/><text:span text:style-name="Teletype">RSCONF</text:span><text:alphabetical-index-mark-end text:id="IMark93898610235320"/> .</text:p>
    <text:h text:style-name="Heading_20_3" text:outline-level="3">Flow <text:alphabetical-index-mark text:string-value="Flow control"/>Control</text:h>
-   <text:p text:style-name="P24">The word <text:s/><text:alphabetical-index-mark-start text:id="IMark94379718991320"/><text:span text:style-name="Teletype">RSCONF</text:span><text:alphabetical-index-mark-end text:id="IMark94379718991320"/> <text:s/>loads a value called &quot;flow&quot; to configure the flow control of the <text:alphabetical-index-mark-start text:id="IMark94379719269928"/>RS-232<text:alphabetical-index-mark-end text:id="IMark94379719269928"/> port. 0 indicates that no flow control is used. 1 indicates the use of XON/XOFF protocol (also known as control-S control-Q<text:span text:style-name="T13">)</text:span>. 2 indicates the use of the CTS/RTS lines of the RS-232 standard. 3 indicates the use of both control modes. The flow word is currently loaded from an immediate word in the definition of <text:s/><text:span text:style-name="Teletype">RSCONF</text:span> . This may be changed if the user desires.</text:p>
-   <text:h text:style-name="Heading_20_2" text:outline-level="2"><text:alphabetical-index-mark-start text:id="IMark94379699180184"/>EXPECT<text:alphabetical-index-mark-end text:id="IMark94379699180184"/></text:h>
-   <text:p text:style-name="P25"><text:span text:style-name="Teletype">EXPECT</text:span> <text:s/>as provided for the Atari ST respects both DEL ($7F) and BS ($08) as destructive backspace characters. This is because both keys are provided, and the user may get confused if one works and the other doesn&apos;t. The code looks at two word size locations in the origin area, <text:s/><text:span text:style-name="Teletype">14 </text:span><text:alphabetical-index-mark-start text:id="IMark94379718258760"/><text:span text:style-name="Teletype">+ORIGIN</text:span><text:alphabetical-index-mark-end text:id="IMark94379718258760"/> , and <text:s/><text:span text:style-name="Teletype">16 </text:span><text:alphabetical-index-mark-start text:id="IMark94379706290296"/><text:span text:style-name="Teletype">+ORIGIN</text:span><text:alphabetical-index-mark-end text:id="IMark94379706290296"/> . These are hex values. As usual, either may be changed.</text:p>
-   <text:h text:style-name="Heading_20_2" text:outline-level="2"><text:soft-page-break/><text:alphabetical-index-mark text:string-value="Time and date"/>Time and Date</text:h>
+   <text:p text:style-name="P24">The word <text:s/><text:alphabetical-index-mark-start text:id="IMark93898642358872"/><text:span text:style-name="Teletype">RSCONF</text:span><text:alphabetical-index-mark-end text:id="IMark93898642358872"/> <text:s/>loads a value called &quot;flow&quot; to configure the flow control of the <text:alphabetical-index-mark-start text:id="IMark93898621274056"/>RS-232<text:alphabetical-index-mark-end text:id="IMark93898621274056"/> port. 0 indicates that no flow control is used. 1 indicates the use of XON/XOFF protocol (also known as control-S control-Q<text:span text:style-name="T13">)</text:span>. 2 indicates the use of the CTS/RTS lines of the RS-232 standard. 3 indicates the use of both control modes. The flow word is currently loaded from an immediate word in the definition of <text:s/><text:span text:style-name="Teletype">RSCONF</text:span> . This may be changed if the user desires.</text:p>
+   <text:h text:style-name="Heading_20_2" text:outline-level="2"><text:soft-page-break/><text:alphabetical-index-mark-start text:id="IMark93898621485240"/>EXPECT<text:alphabetical-index-mark-end text:id="IMark93898621485240"/></text:h>
+   <text:p text:style-name="P25"><text:span text:style-name="Teletype">EXPECT</text:span> <text:s/>as provided for the Atari ST respects both DEL ($7F) and BS ($08) as destructive backspace characters. This is because both keys are provided, and the user may get confused if one works and the other doesn&apos;t. The code looks at two word size locations in the origin area, <text:s/><text:span text:style-name="Teletype">14 </text:span><text:alphabetical-index-mark-start text:id="IMark93898621625672"/><text:span text:style-name="Teletype">+ORIGIN</text:span><text:alphabetical-index-mark-end text:id="IMark93898621625672"/> , and <text:s/><text:span text:style-name="Teletype">16 </text:span><text:alphabetical-index-mark-start text:id="IMark93898621274056"/><text:span text:style-name="Teletype">+ORIGIN</text:span><text:alphabetical-index-mark-end text:id="IMark93898621274056"/> . These are hex values. As usual, either may be changed.</text:p>
+   <text:h text:style-name="Heading_20_2" text:outline-level="2"><text:alphabetical-index-mark text:string-value="Time and date"/>Time and Date</text:h>
    <text:p text:style-name="P26">The Atari maintains a clock and a calendar in the microprocessor which runs the keyboard. <text:span text:style-name="T14">The original Atari ST had no provision for updating this on power on. Aftermarket real time clocks for the ST provided the initialization, and subsequent models had real time clocks.</text:span></text:p>
-   <text:p text:style-name="P26">These two functions are available through calls to the <text:alphabetical-index-mark-start text:id="IMark94379718258760"/><text:alphabetical-index-mark-start text:id="IMark94379757454696"/>BIOS<text:alphabetical-index-mark-end text:id="IMark94379757454696"/><text:alphabetical-index-mark-end text:id="IMark94379718258760"/>. These calls have been implemented in fast-Forth, on screens 132 to 134. As the clock and calendar are used by fast-Forth and are not battery backed up, it is necessary to reset them after either a reset or a powerup. The user will be reminded by whichever load screen he uses on cold start. Both should be set after a reset, since the editor STAMP function uses them.</text:p>
+   <text:p text:style-name="P26">These two functions are available through calls to the <text:alphabetical-index-mark-start text:id="IMark93898555567368"/><text:alphabetical-index-mark-start text:id="IMark93898636272744"/>BIOS<text:alphabetical-index-mark-end text:id="IMark93898636272744"/><text:alphabetical-index-mark-end text:id="IMark93898555567368"/>. These calls have been implemented in fast-Forth, on screens 132 to 134. As the clock and calendar are used by fast-Forth and are not battery backed up, it is necessary to reset them after either a reset or a powerup. The user will be reminded by whichever load screen he uses on cold start. Both should be set after a reset, since the editor STAMP function uses them.</text:p>
    <text:h text:style-name="Heading_20_3" text:outline-level="3"><text:alphabetical-index-mark text:string-value="Time of day"/>Time of Day</text:h>
-   <text:h text:style-name="Heading_20_4" text:outline-level="4">Setting the <text:alphabetical-index-mark-start text:id="IMark94379778185992"/>Clock<text:alphabetical-index-mark-end text:id="IMark94379778185992"/></text:h>
-   <text:p text:style-name="P32">The clock may be set to the nearest two seconds with the word <text:s/><text:alphabetical-index-mark-start text:id="IMark94377634679736"/><text:span text:style-name="Teletype">SETTIME</text:span><text:alphabetical-index-mark-end text:id="IMark94377634679736"/> . The syntax is the word <text:s/><text:span text:style-name="Teletype">SETTIME</text:span> <text:s/>followed by a string containing hours, minutes and seconds separated by colons. Twenty four hour time only is supported. E.g.</text:p>
+   <text:h text:style-name="Heading_20_4" text:outline-level="4">Setting the <text:alphabetical-index-mark-start text:id="IMark93898623957576"/>Clock<text:alphabetical-index-mark-end text:id="IMark93898623957576"/></text:h>
+   <text:p text:style-name="P32">The clock may be set to the nearest two seconds with the word <text:s/><text:alphabetical-index-mark-start text:id="IMark93898620558792"/><text:span text:style-name="Teletype">SETTIME</text:span><text:alphabetical-index-mark-end text:id="IMark93898620558792"/> . The syntax is the word <text:s/><text:span text:style-name="Teletype">SETTIME</text:span> <text:s/>followed by a string containing hours, minutes and seconds separated by colons. Twenty four hour time only is supported. E.g.</text:p>
    <text:p text:style-name="Sample_20_Code_20_Last">settime 14:05:10</text:p>
    <text:p text:style-name="Text_20_body">Leading zeros may be omitted within the time string. E.g. the following is legal, and equivalent to the previous example:</text:p>
    <text:p text:style-name="Sample_20_Code_20_Last">settime 14:5:10</text:p>
    <text:p text:style-name="Text_20_body">The seconds value may be omitted entirely, or the minutes if the time is on the hour exactly:</text:p>
    <text:p text:style-name="Sample_20_Code">settime 14:5:</text:p>
    <text:p text:style-name="Sample_20_Code_20_Last">settime 14::</text:p>
-   <text:h text:style-name="Heading_20_4" text:outline-level="4">Reading the <text:alphabetical-index-mark-start text:id="IMark94379719010632"/>Clock<text:alphabetical-index-mark-end text:id="IMark94379719010632"/></text:h>
-   <text:p text:style-name="P26">The clock may be read with the word <text:s/><text:alphabetical-index-mark-start text:id="IMark94379706290296"/>.<text:span text:style-name="Teletype">TIME</text:span><text:alphabetical-index-mark-end text:id="IMark94379706290296"/> . Alternatively, a string with the current time may be obtained with the word <text:s/><text:alphabetical-index-mark-start text:id="IMark94379699180184"/><text:span text:style-name="Teletype">GETTIME</text:span><text:alphabetical-index-mark-end text:id="IMark94379699180184"/> . This word returns an address and count, ready for <text:s/><text:alphabetical-index-mark-start text:id="IMark94379717643352"/><text:span text:style-name="Teletype">TYPE</text:span><text:alphabetical-index-mark-end text:id="IMark94379717643352"/> . The time is automatically included in the date stamp of the editor (se<text:span text:style-name="T68">e</text:span> the User&apos;s Guide to <text:span text:style-name="T68">real</text:span>-Forth.) This is done in the word <text:s/><text:alphabetical-index-mark-start text:id="IMark94379766929064"/><text:span text:style-name="Teletype">SETSTAMP</text:span><text:alphabetical-index-mark-end text:id="IMark94379766929064"/> , screen 135.</text:p>
-   <text:h text:style-name="Heading_20_3" text:outline-level="3">The <text:alphabetical-index-mark-start text:id="IMark94379718258760"/>Date<text:alphabetical-index-mark-end text:id="IMark94379718258760"/></text:h>
-   <text:p text:style-name="P27">fast-Forth accepts and prints out the date in the same format used by the screen stamp and the <text:s/><text:alphabetical-index-mark-start text:id="IMark94377625345272"/><text:span text:style-name="Teletype">SINCE</text:span><text:alphabetical-index-mark-end text:id="IMark94377625345272"/> <text:s/>utility (se<text:span text:style-name="T68">e</text:span> the User&apos;s Guide to <text:span text:style-name="T68">real</text:span>-Forth.) This format is always day, month, year. Rollover for the year 2000 is provided.</text:p>
-   <text:h text:style-name="Heading_20_4" text:outline-level="4"><text:soft-page-break/>Setting the Date</text:h>
-   <text:p text:style-name="P27">The date may be set with the word <text:s/><text:alphabetical-index-mark-start text:id="IMark94379718614552"/><text:span text:style-name="Teletype">SETDATE</text:span><text:alphabetical-index-mark-end text:id="IMark94379718614552"/> . Like <text:s/><text:alphabetical-index-mark-start text:id="IMark94377313125752"/><text:span text:style-name="Teletype">SINCE</text:span><text:alphabetical-index-mark-end text:id="IMark94377313125752"/> , the word is followed by three numeric strings: the day, the month, and the year. E.g, for 20 January, 1986:</text:p>
+   <text:h text:style-name="Heading_20_4" text:outline-level="4">Reading the <text:alphabetical-index-mark-start text:id="IMark93898652999080"/>Clock<text:alphabetical-index-mark-end text:id="IMark93898652999080"/></text:h>
+   <text:p text:style-name="P26">The clock may be read with the word <text:s/><text:alphabetical-index-mark-start text:id="IMark93898620558792"/>.<text:span text:style-name="Teletype">TIME</text:span><text:alphabetical-index-mark-end text:id="IMark93898620558792"/> . Alternatively, a string with the current time may be obtained with the word <text:s/><text:alphabetical-index-mark-start text:id="IMark93898652999080"/><text:span text:style-name="Teletype">GETTIME</text:span><text:alphabetical-index-mark-end text:id="IMark93898652999080"/> . This word returns an address and count, <text:soft-page-break/>ready for <text:s/><text:alphabetical-index-mark-start text:id="IMark93898623548872"/><text:span text:style-name="Teletype">TYPE</text:span><text:alphabetical-index-mark-end text:id="IMark93898623548872"/> . The time is automatically included in the date stamp of the editor (se<text:span text:style-name="T68">e</text:span> the User&apos;s Guide to <text:span text:style-name="T68">real</text:span>-Forth.) This is done in the word <text:s/><text:alphabetical-index-mark-start text:id="IMark93898623966616"/><text:span text:style-name="Teletype">SETSTAMP</text:span><text:alphabetical-index-mark-end text:id="IMark93898623966616"/> , screen 135.</text:p>
+   <text:h text:style-name="Heading_20_3" text:outline-level="3">The <text:alphabetical-index-mark-start text:id="IMark93898621485240"/>Date<text:alphabetical-index-mark-end text:id="IMark93898621485240"/></text:h>
+   <text:p text:style-name="P27">fast-Forth accepts and prints out the date in the same format used by the screen stamp and the <text:s/><text:alphabetical-index-mark-start text:id="IMark93898641264984"/><text:span text:style-name="Teletype">SINCE</text:span><text:alphabetical-index-mark-end text:id="IMark93898641264984"/> <text:s/>utility (se<text:span text:style-name="T68">e</text:span> the User&apos;s Guide to <text:span text:style-name="T68">real</text:span>-Forth.) This format is always day, month, year. Rollover for the year 2000 is provided.</text:p>
+   <text:h text:style-name="Heading_20_4" text:outline-level="4">Setting the Date</text:h>
+   <text:p text:style-name="P27">The date may be set with the word <text:s/><text:alphabetical-index-mark-start text:id="IMark93898641264984"/><text:span text:style-name="Teletype">SETDATE</text:span><text:alphabetical-index-mark-end text:id="IMark93898641264984"/> . Like <text:s/><text:alphabetical-index-mark-start text:id="IMark93898642358872"/><text:span text:style-name="Teletype">SINCE</text:span><text:alphabetical-index-mark-end text:id="IMark93898642358872"/> , the word is followed by three numeric strings: the day, the month, and the year. E.g, for 20 January, 1986:</text:p>
    <text:p text:style-name="Sample_20_Code_20_Last">setdate 20 1 86</text:p>
    <text:h text:style-name="Heading_20_4" text:outline-level="4">Reading the Date</text:h>
-   <text:p text:style-name="P33">The clock may be read with the word <text:s/>.<text:alphabetical-index-mark-start text:id="IMark94379718143096"/><text:span text:style-name="Teletype">DATE</text:span><text:alphabetical-index-mark-end text:id="IMark94379718143096"/> . Alternatively, a string with the current time may be obtained with the word <text:s/><text:alphabetical-index-mark-start text:id="IMark94379718602696"/><text:span text:style-name="Teletype">(DATE)</text:span><text:alphabetical-index-mark-end text:id="IMark94379718602696"/> . This word returns an address and count, ready for <text:s/><text:alphabetical-index-mark-start text:id="IMark94379719010632"/><text:span text:style-name="Teletype">TYPE</text:span><text:alphabetical-index-mark-end text:id="IMark94379719010632"/> . The date is automatically included in the date stamp of the editor (se<text:span text:style-name="T68">e</text:span> the User&apos;s Guide to <text:span text:style-name="T68">real</text:span>-Forth.) This is done in the word <text:s/><text:span text:style-name="Teletype">SETSTAMP</text:span> , screen 135.It is thus unnecessary to use the editor words <text:s/><text:span text:style-name="Teletype"><text:span text:style-name="T15">DAY</text:span></text:span> , <text:s/><text:span text:style-name="Teletype"><text:span text:style-name="T15">MONTH</text:span></text:span> , and <text:s/><text:span text:style-name="Teletype"><text:span text:style-name="T15">YEAR</text:span></text:span> . These are retained but commented out of the source code. The word <text:s/><text:alphabetical-index-mark-start text:id="IMark94378306113272"/><text:span text:style-name="Teletype"><text:span text:style-name="T15">PROGRAMMER</text:span></text:span><text:alphabetical-index-mark-end text:id="IMark94378306113272"/> <text:s/>is compiled into the utilities, and is useful.</text:p>
-   <text:h text:style-name="Heading_20_2" text:outline-level="2"><text:alphabetical-index-mark-start text:id="IMark94379718143096"/>Continuous <text:alphabetical-index-mark-start text:id="IMark94379726107176"/>Clock<text:alphabetical-index-mark-end text:id="IMark94379726107176"/> <text:alphabetical-index-mark-start text:id="IMark94379718602696"/>Display<text:alphabetical-index-mark-end text:id="IMark94379718602696"/><text:alphabetical-index-mark-end text:id="IMark94379718143096"/></text:h>
-   <text:p text:style-name="P27">The <text:alphabetical-index-mark text:string-value="Time"/>time is continuously displayed in the upper right hand corner of the display when the word <text:s/><text:alphabetical-index-mark-start text:id="IMark94379719010632"/><text:span text:style-name="Teletype">(</text:span><text:span text:style-name="Teletype"><text:span text:style-name="T17">TKEY</text:span></text:span><text:span text:style-name="Teletype">)</text:span><text:alphabetical-index-mark-end text:id="IMark94379719010632"/> <text:s/>is the active version of <text:s/><text:alphabetical-index-mark-start text:id="IMark94379784661928"/><text:span text:style-name="Teletype">(KEY)</text:span><text:alphabetical-index-mark-end text:id="IMark94379784661928"/> . Alternatively, <text:s/><text:alphabetical-index-mark-start text:id="IMark94379718614552"/><text:span text:style-name="Teletype">(</text:span><text:span text:style-name="Teletype"><text:span text:style-name="T17">N</text:span></text:span><text:span text:style-name="Teletype">KEY)</text:span><text:alphabetical-index-mark-end text:id="IMark94379718614552"/> <text:s/>may be used. These are both on screens 130-131.</text:p>
-   <text:h text:style-name="Heading_20_2" text:outline-level="2"><text:alphabetical-index-mark-start text:id="IMark94379719540952"/>Cursor Configuration<text:alphabetical-index-mark-end text:id="IMark94379719540952"/></text:h>
+   <text:p text:style-name="P33">The clock may be read with the word <text:s/>.<text:alphabetical-index-mark-start text:id="IMark93898641264984"/><text:span text:style-name="Teletype">DATE</text:span><text:alphabetical-index-mark-end text:id="IMark93898641264984"/> . Alternatively, a string with the current time may be obtained with the word <text:s/><text:alphabetical-index-mark-start text:id="IMark93898621485240"/><text:span text:style-name="Teletype">(DATE)</text:span><text:alphabetical-index-mark-end text:id="IMark93898621485240"/> . This word returns an address and count, ready for <text:s/><text:alphabetical-index-mark-start text:id="IMark93898621530648"/><text:span text:style-name="Teletype">TYPE</text:span><text:alphabetical-index-mark-end text:id="IMark93898621530648"/> . The date is automatically included in the date stamp of the editor (se<text:span text:style-name="T68">e</text:span> the User&apos;s Guide to <text:span text:style-name="T68">real</text:span>-Forth.) This is done in the word <text:s/><text:span text:style-name="Teletype">SETSTAMP</text:span> , screen 135.It is thus unnecessary to use the editor words <text:s/><text:span text:style-name="Teletype"><text:span text:style-name="T15">DAY</text:span></text:span> , <text:s/><text:span text:style-name="Teletype"><text:span text:style-name="T15">MONTH</text:span></text:span> , and <text:s/><text:span text:style-name="Teletype"><text:span text:style-name="T15">YEAR</text:span></text:span> . These are retained but commented out of the source code. The word <text:s/><text:alphabetical-index-mark-start text:id="IMark93898605771560"/><text:span text:style-name="Teletype"><text:span text:style-name="T15">PROGRAMMER</text:span></text:span><text:alphabetical-index-mark-end text:id="IMark93898605771560"/> <text:s/>is compiled into the utilities, and is useful.</text:p>
+   <text:h text:style-name="Heading_20_2" text:outline-level="2"><text:alphabetical-index-mark-start text:id="IMark93898641264984"/>Continuous <text:alphabetical-index-mark-start text:id="IMark93898642764392"/>Clock<text:alphabetical-index-mark-end text:id="IMark93898642764392"/> <text:alphabetical-index-mark-start text:id="IMark93898621485240"/>Display<text:alphabetical-index-mark-end text:id="IMark93898621485240"/><text:alphabetical-index-mark-end text:id="IMark93898641264984"/></text:h>
+   <text:p text:style-name="P27">The <text:alphabetical-index-mark text:string-value="Time"/>time is continuously displayed in the upper right hand corner of the display when the word <text:s/><text:alphabetical-index-mark-start text:id="IMark93898644441704"/><text:span text:style-name="Teletype">(</text:span><text:span text:style-name="Teletype"><text:span text:style-name="T17">TKEY</text:span></text:span><text:span text:style-name="Teletype">)</text:span><text:alphabetical-index-mark-end text:id="IMark93898644441704"/> <text:s/>is the active version of <text:s/><text:alphabetical-index-mark-start text:id="IMark93898651089576"/><text:span text:style-name="Teletype">(KEY)</text:span><text:alphabetical-index-mark-end text:id="IMark93898651089576"/> . Alternatively, <text:s/><text:alphabetical-index-mark-start text:id="IMark93898643101416"/><text:span text:style-name="Teletype">(</text:span><text:span text:style-name="Teletype"><text:span text:style-name="T17">N</text:span></text:span><text:span text:style-name="Teletype">KEY)</text:span><text:alphabetical-index-mark-end text:id="IMark93898643101416"/> <text:s/>may be used. These are both on screens 130-131.</text:p>
+   <text:h text:style-name="Heading_20_2" text:outline-level="2"><text:alphabetical-index-mark-start text:id="IMark93898623957576"/>Cursor Configuration<text:alphabetical-index-mark-end text:id="IMark93898623957576"/></text:h>
    <text:p text:style-name="P28">The cursor configuration may be set with the code on screen 45. The options are: hide the cursor, show the cursor, make the cursor blink, make the cursor steady, set the cursor blink rate, and return the current cursor blink rate.</text:p>
    <text:h text:style-name="Heading_20_2" text:outline-level="2">The <text:span text:style-name="T20">C</text:span>olor Palette.</text:h>
-   <text:h text:style-name="Heading_20_3" text:outline-level="3"><text:alphabetical-index-mark-start text:id="IMark94379717643352"/>PALETTESET<text:alphabetical-index-mark-end text:id="IMark94379717643352"/></text:h>
+   <text:h text:style-name="Heading_20_3" text:outline-level="3"><text:alphabetical-index-mark-start text:id="IMark93898555567368"/>PALETTESET<text:alphabetical-index-mark-end text:id="IMark93898555567368"/></text:h>
    <text:p text:style-name="P30">The following has been tested in the medium resolution mode of the Atari, but has not been tested for the low resolution mode or high (monochrome) resolution mode.</text:p>
-   <text:p text:style-name="Text_20_body">The <text:alphabetical-index-mark text:string-value="Color palette"/>color palette is set using code on screen 4<text:span text:style-name="T21">8</text:span>. A palette of 16 colors is used in the low resolution mode; four in the medium resolution mode. The word <text:s/><text:span text:style-name="Teletype">PALLETESET</text:span> <text:s/>is a defining word which may be used for predefined palettes, e.g. <text:s/><text:span text:style-name="Teletype">BL</text:span><text:span text:style-name="Teletype"><text:span text:style-name="T19">E</text:span></text:span><text:span text:style-name="Teletype">U</text:span> <text:s/>and <text:s/><text:span text:style-name="Teletype"><text:span text:style-name="T19">VERT</text:span></text:span> , also on screen 4<text:span text:style-name="T19">8</text:span>. A <text:span text:style-name="T22">palette</text:span> color may be defined in a word of data. The bit assignments are as follows:</text:p>
+   <text:p text:style-name="Text_20_body"><text:soft-page-break/>The <text:alphabetical-index-mark text:string-value="Color palette"/>color palette is set using code on screen 4<text:span text:style-name="T21">8</text:span>. A palette of 16 colors is used in the low resolution mode; four in the medium resolution mode. The word <text:s/><text:span text:style-name="Teletype">PALLETESET</text:span> <text:s/>is a defining word which may be used for predefined palettes, e.g. <text:s/><text:span text:style-name="Teletype">BL</text:span><text:span text:style-name="Teletype"><text:span text:style-name="T19">E</text:span></text:span><text:span text:style-name="Teletype">U</text:span> <text:s/>and <text:s/><text:span text:style-name="Teletype"><text:span text:style-name="T19">VERT</text:span></text:span> , also on screen 4<text:span text:style-name="T19">8</text:span>. A <text:span text:style-name="T22">palette</text:span> color may be defined in a word of data. The bit assignments are as follows:</text:p>
    <text:p text:style-name="Sample_20_Code">0A <text:s text:c="2"/>9 <text:s text:c="3"/>8 <text:s text:c="3"/>7 <text:s text:c="3"/>6 <text:s text:c="3"/>5 <text:s text:c="3"/>4 <text:s text:c="3"/>3 <text:s text:c="3"/>2 <text:s text:c="3"/>1 <text:s text:c="3"/>0</text:p>
    <text:p text:style-name="Sample_20_Code_20_Last">| <text:s text:c="2"/>red <text:s text:c="3"/>| <text:s text:c="2"/>X <text:s/>| <text:s text:c="2"/>green <text:s text:c="3"/>| <text:s text:c="2"/>X <text:s text:c="2"/>| <text:s text:c="2"/>blue <text:s text:c="3"/>|</text:p>
-   <text:p text:style-name="Text_20_body"><text:soft-page-break/>Bits 0F to 0B are all &quot;don&apos;t care&quot;. The higher the value within the nybble, the more intense the basic color will be, so that the word 7 will be an intense blue, and 777 will be white.</text:p>
-   <text:h text:style-name="Heading_20_3" text:outline-level="3"><text:alphabetical-index-mark-start text:id="IMark94379718258760"/>SETCOLOUR<text:alphabetical-index-mark-end text:id="IMark94379718258760"/></text:h>
+   <text:p text:style-name="Text_20_body">Bits 0F to 0B are all &quot;don&apos;t care&quot;. The higher the value within the nybble, the more intense the basic color will be, so that the word 7 will be an intense blue, and 777 will be white.</text:p>
+   <text:h text:style-name="Heading_20_3" text:outline-level="3"><text:alphabetical-index-mark-start text:id="IMark93898642358872"/>SETCOLOUR<text:alphabetical-index-mark-end text:id="IMark93898642358872"/></text:h>
    <text:p text:style-name="P30"><text:span text:style-name="T50">T</text:span>his word may be used to set any <text:alphabetical-index-mark text:string-value="Color"/>color to any value. Its syntax is: <text:s/>colorvalue <text:s/>color# <text:s/>--- oldcolor. E.g. to set color 2 to a yellow color,</text:p>
    <text:p text:style-name="Sample_20_Code_20_Last">HEX 770 2 SETCOLOUR</text:p>
-   <text:p text:style-name="Text_20_body">This word is used to save the color scheme inherited from the launching environment. This saving is done when the utilities overlay is either recompiled (<text:alphabetical-index-mark-start text:id="IMark94379719011768"/><text:span text:style-name="Teletype">9 load</text:span><text:alphabetical-index-mark-end text:id="IMark94379719011768"/>) or brought in to memory (<text:alphabetical-index-mark-start text:id="IMark94379699180184"/><text:span text:style-name="Teletype">3 load</text:span><text:alphabetical-index-mark-end text:id="IMark94379699180184"/>). <text:span text:style-name="T52">If the </text:span><text:alphabetical-index-mark-start text:id="IMark94379766929064"/><text:span text:style-name="Teletype"><text:span text:style-name="T52">ATEXIT</text:span></text:span><text:alphabetical-index-mark-end text:id="IMark94379766929064"/><text:span text:style-name="T52"> facility is loaded, t</text:span>he inherited scheme is restored by the execution of the words <text:s/><text:alphabetical-index-mark-start text:id="IMark94379784661928"/><text:span text:style-name="Teletype">COLD</text:span><text:alphabetical-index-mark-end text:id="IMark94379784661928"/> <text:s/>or <text:s/><text:alphabetical-index-mark-start text:id="IMark94379726554792"/><text:span text:style-name="Teletype"><text:span text:style-name="T51">BYE</text:span></text:span><text:alphabetical-index-mark-end text:id="IMark94379726554792"/> .</text:p>
-   <text:h text:style-name="P103" text:outline-level="2">Assembly Language</text:h>
-   <text:h text:style-name="Heading_20_3" text:outline-level="3"><text:alphabetical-index-mark-start text:id="IMark94379719011768"/>Register Usage<text:alphabetical-index-mark-end text:id="IMark94379719011768"/></text:h>
+   <text:p text:style-name="Text_20_body">This word is used to save the color scheme inherited from the launching environment. This saving is done when the utilities overlay is either recompiled (<text:alphabetical-index-mark-start text:id="IMark93898555567368"/><text:span text:style-name="Teletype">9 load</text:span><text:alphabetical-index-mark-end text:id="IMark93898555567368"/>) or brought in to memory (<text:alphabetical-index-mark-start text:id="IMark93898629901640"/><text:span text:style-name="Teletype">3 load</text:span><text:alphabetical-index-mark-end text:id="IMark93898629901640"/>). <text:span text:style-name="T52">If the </text:span><text:alphabetical-index-mark-start text:id="IMark93898631621592"/><text:span text:style-name="Teletype"><text:span text:style-name="T52">ATEXIT</text:span></text:span><text:alphabetical-index-mark-end text:id="IMark93898631621592"/><text:span text:style-name="T52"> facility is loaded, t</text:span>he inherited scheme is restored by the execution of the words <text:s/><text:alphabetical-index-mark-start text:id="IMark93898651955368"/><text:span text:style-name="Teletype">COLD</text:span><text:alphabetical-index-mark-end text:id="IMark93898651955368"/> <text:s/>or <text:s/><text:alphabetical-index-mark-start text:id="IMark93898550609832"/><text:span text:style-name="Teletype"><text:span text:style-name="T51">BYE</text:span></text:span><text:alphabetical-index-mark-end text:id="IMark93898550609832"/> .</text:p>
+   <text:h text:style-name="P104" text:outline-level="2">Assembly Language</text:h>
+   <text:h text:style-name="Heading_20_3" text:outline-level="3"><text:alphabetical-index-mark-start text:id="IMark93898641139896"/>Register Usage<text:alphabetical-index-mark-end text:id="IMark93898641139896"/></text:h>
    <text:p text:style-name="P68">fast-Forth uses several processor registers. Several have Forth names as well as register names. The Forth name are consistent across the assembler, disassembler and debugger.</text:p>
    <table:table table:name="processorRegisters" table:style-name="processorRegisters">
     <table:table-column table:style-name="processorRegisters.A"/>
@@ -2662,83 +2670,84 @@
     <table:table-header-rows>
      <table:table-row table:style-name="processorRegisters.1">
       <table:table-cell table:style-name="processorRegisters.A1" office:value-type="string">
-       <text:p text:style-name="P82">Register</text:p>
+       <text:p text:style-name="P83">Register</text:p>
       </table:table-cell>
       <table:table-cell table:style-name="processorRegisters.B1" office:value-type="string">
-       <text:p text:style-name="P82">Use</text:p>
+       <text:p text:style-name="P83">Use</text:p>
       </table:table-cell>
      </table:table-row>
     </table:table-header-rows>
     <table:table-row table:style-name="processorRegisters.1">
      <table:table-cell table:style-name="processorRegisters.A2" office:value-type="string">
-      <text:p text:style-name="P77">AR0-AR2, DR0-DR2</text:p>
+      <text:p text:style-name="P78">AR0-AR2, DR0-DR2</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="processorRegisters.B2" office:value-type="string">
-      <text:p text:style-name="P77">Scratch registers. The operating system returns values in DR0 and occasionally in AR0. It does not guarantee to preserve any of them.</text:p>
+      <text:p text:style-name="P78">Scratch registers. The operating system returns values in DR0 and occasionally in AR0. It does not guarantee to preserve any of them.</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="processorRegisters.1">
      <table:table-cell table:style-name="processorRegisters.A2" office:value-type="string">
-      <text:p text:style-name="P77">AR3</text:p>
+      <text:p text:style-name="P78">AR3</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="processorRegisters.B2" office:value-type="string">
-      <text:p text:style-name="P77">Forth’s stack register. Also called S<text:span text:style-name="T64">P or S</text:span>.</text:p>
+      <text:p text:style-name="P78">Forth’s stack register. Also called S<text:span text:style-name="T64">P or S</text:span>.</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="processorRegisters.1">
      <table:table-cell table:style-name="processorRegisters.A2" office:value-type="string">
-      <text:p text:style-name="P77">AR6</text:p>
+      <text:p text:style-name="P78">AR6</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="processorRegisters.B2" office:value-type="string">
-      <text:p text:style-name="P77">User area pointer. Also called U.</text:p>
+      <text:p text:style-name="P78">User area pointer. Also called U.</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="processorRegisters.1">
      <table:table-cell table:style-name="processorRegisters.A2" office:value-type="string">
-      <text:p text:style-name="P77">AR7</text:p>
+      <text:p text:style-name="P78">AR7</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="processorRegisters.B5" office:value-type="string">
-      <text:p text:style-name="P77">Forth’s return stack pointer. It is also the processor’s stack pointer. Also called RP.</text:p>
+      <text:p text:style-name="P78">Forth’s return stack pointer. It is also the processor’s stack pointer. Also called RP.</text:p>
      </table:table-cell>
     </table:table-row>
     <table:table-row table:style-name="processorRegisters.1">
      <table:table-cell table:style-name="processorRegisters.A2" office:value-type="string">
-      <text:p text:style-name="P77">DR6</text:p>
+      <text:p text:style-name="P78">DR6</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="processorRegisters.B2" office:value-type="string">
-      <text:p text:style-name="P77">The <text:span text:style-name="T62">limit</text:span> for loops. You should preserve this if you use it. (DO) pushes it onto the return stack before using it for a new loop. <text:span text:style-name="T62">Similarly, (LOOP) pops it.</text:span></text:p>
+      <text:p text:style-name="P78">The <text:span text:style-name="T62">limit</text:span> for loops. You should preserve this if you use it. (DO) pushes it onto the return stack before using it for a new loop. <text:span text:style-name="T62">Similarly, (LOOP) pops it.</text:span></text:p>
      </table:table-cell>
     </table:table-row>
+    <text:soft-page-break/>
     <table:table-row table:style-name="processorRegisters.1">
      <table:table-cell table:style-name="processorRegisters.A2" office:value-type="string">
-      <text:p text:style-name="P79">DR7</text:p>
+      <text:p text:style-name="P80">DR7</text:p>
      </table:table-cell>
      <table:table-cell table:style-name="processorRegisters.B5" office:value-type="string">
-      <text:p text:style-name="P78">The index for loops. You should preserve this if you use it. (DO) pushes it onto the return stack before using it for a new loop. <text:span text:style-name="T62">Similarly, (LOOP) pops it.</text:span></text:p>
+      <text:p text:style-name="P79">The index for loops. You should preserve this if you use it. (DO) pushes it onto the return stack before using it for a new loop. <text:span text:style-name="T62">Similarly, (LOOP) pops it.</text:span></text:p>
      </table:table-cell>
     </table:table-row>
    </table:table>
    <text:p text:style-name="Text_20_body"/>
-   <text:h text:style-name="P97" text:outline-level="1">Improvements</text:h>
+   <text:h text:style-name="P98" text:outline-level="1">Improvements</text:h>
    <text:p text:style-name="P64">This release of fast-Forth for the Atari ST (<text:span text:style-name="T37">release 3, 2019</text:span>) contains a number of improvements over past releases.</text:p>
    <text:p text:style-name="P64">The program now is contained in one executable file. This removes the need for a separate loader, as in previous releases. This means that people who use <text:alphabetical-index-mark text:string-value="Shell"/>shells may launch fast-Forth from a directory other than the one in which it is located.</text:p>
-   <text:p text:style-name="P64"><text:alphabetical-index-mark-start text:id="IMark94379757454696"/><text:span text:style-name="Teletype">DEBUG</text:span><text:alphabetical-index-mark-end text:id="IMark94379757454696"/> <text:s/>has been extended somewhat. The major improvement is that vectors are now chained to the vector found at the time the debug overlay is loaded, not the one found at compile time. This means that the debug overlay may be safely used regardless of the program from which fast-Forth was launched.</text:p>
-   <text:h text:style-name="P94" text:outline-level="1"><text:bookmark-start text:name="__RefHeading___Toc7010_859971406"/>More Information<text:bookmark-end text:name="__RefHeading___Toc7010_859971406"/></text:h>
-   <text:p text:style-name="P56">All information on the Atari ST used in fast-Forth and in this documentation is derived from the book <text:span text:style-name="titles">Atari ST Internals</text:span>, published by <text:alphabetical-index-mark-start text:id="IMark94379726107176"/>Abacus Software<text:alphabetical-index-mark-end text:id="IMark94379726107176"/>, and from the <text:alphabetical-index-mark-start text:id="IMark94379706290296"/><text:span text:style-name="T30">Mark Williams Company</text:span><text:alphabetical-index-mark-end text:id="IMark94379706290296"/><text:span text:style-name="T30"> </text:span>manual for their C for the Atari St.</text:p>
+   <text:p text:style-name="P64"><text:alphabetical-index-mark-start text:id="IMark93898621485240"/><text:span text:style-name="Teletype">DEBUG</text:span><text:alphabetical-index-mark-end text:id="IMark93898621485240"/> <text:s/>has been extended somewhat. The major improvement is that vectors are now chained to the vector found at the time the debug overlay is loaded, not the one found at compile time. This means that the debug overlay may be safely used regardless of the program from which fast-Forth was launched.</text:p>
+   <text:h text:style-name="P95" text:outline-level="1"><text:bookmark-start text:name="__RefHeading___Toc7010_859971406"/>More Information<text:bookmark-end text:name="__RefHeading___Toc7010_859971406"/></text:h>
+   <text:p text:style-name="P56">All information on the Atari ST used in fast-Forth and in this documentation is derived from the book <text:span text:style-name="titles">Atari ST Internals</text:span>, published by <text:alphabetical-index-mark-start text:id="IMark93898555567368"/>Abacus Software<text:alphabetical-index-mark-end text:id="IMark93898555567368"/>, and from the <text:alphabetical-index-mark-start text:id="IMark93898621625672"/><text:span text:style-name="T30">Mark Williams Company</text:span><text:alphabetical-index-mark-end text:id="IMark93898621625672"/><text:span text:style-name="T30"> </text:span>manual for their C for the Atari St.</text:p>
    <text:p text:style-name="P56">ABACUS Software<text:line-break/>BOX 7219<text:line-break/>Grand Rapids, MI 49510</text:p>
    <text:p text:style-name="P56">The Mark Williams C manual is available from them at:</text:p>
    <text:p text:style-name="P56">Mark Williams Company<text:line-break/>1430 W. Wrightwood Ave.<text:line-break/>Chicago, IL 60614</text:p>
    <text:p text:style-name="P15"><text:span text:style-name="T60">Both vendors appear to be defunct. </text:span>More recent information may be found at:</text:p>
-   <text:p text:style-name="P15"><text:alphabetical-index-mark-start text:id="IMark94379719250056"/>Hatari<text:alphabetical-index-mark-end text:id="IMark94379719250056"/>: <text:a xlink:type="simple" xlink:href="http://hatari.tuxfamily.org/" text:style-name="Internet_20_link" text:visited-style-name="Visited_20_Internet_20_Link">http://hatari.tuxfamily.org/</text:a></text:p>
+   <text:p text:style-name="P15"><text:alphabetical-index-mark-start text:id="IMark93898623957576"/>Hatari<text:alphabetical-index-mark-end text:id="IMark93898623957576"/>: <text:a xlink:type="simple" xlink:href="http://hatari.tuxfamily.org/" text:style-name="Internet_20_link" text:visited-style-name="Visited_20_Internet_20_Link">http://hatari.tuxfamily.org/</text:a></text:p>
    <text:p text:style-name="P15">Hatari Users Manual: <text:a xlink:type="simple" xlink:href="https://hg.tuxfamily.org/mercurialroot/hatari/hatari/raw-file/tip/doc/manual.html" text:style-name="Internet_20_link" text:visited-style-name="Visited_20_Internet_20_Link">https://hg.tuxfamily.org/mercurialroot/hatari/hatari/raw-file/tip/doc/manual.html</text:a></text:p>
-   <text:p text:style-name="P15">The documentation for <text:alphabetical-index-mark-start text:id="IMark94379717643352"/>TOS<text:alphabetical-index-mark-end text:id="IMark94379717643352"/>: <text:a xlink:type="simple" xlink:href="http://toshyp.atari.org/en/index.html" text:style-name="Internet_20_link" text:visited-style-name="Visited_20_Internet_20_Link">http://toshyp.atari.org/en/index.html</text:a></text:p>
+   <text:p text:style-name="P15">The documentation for <text:alphabetical-index-mark-start text:id="IMark93898629901640"/>TOS<text:alphabetical-index-mark-end text:id="IMark93898629901640"/>: <text:a xlink:type="simple" xlink:href="http://toshyp.atari.org/en/index.html" text:style-name="Internet_20_link" text:visited-style-name="Visited_20_Internet_20_Link">http://toshyp.atari.org/en/index.html</text:a></text:p>
    <text:p text:style-name="P50">Literature for the TOS operating system: <text:a xlink:type="simple" xlink:href="http://toshyp.atari.org/en/010004.html" text:style-name="Internet_20_link" text:visited-style-name="Visited_20_Internet_20_Link">http://toshyp.atari.org/en/010004.html</text:a></text:p>
    <text:p text:style-name="P56"><text:span text:style-name="T4">Atari.org: </text:span><text:a xlink:type="simple" xlink:href="http://atari.org/" text:style-name="Internet_20_link" text:visited-style-name="Visited_20_Internet_20_Link"><text:span text:style-name="T4">http://atari.org/</text:span></text:a></text:p>
    <text:p text:style-name="P54">Atari ST <text:alphabetical-index-mark text:string-value="Scan codes"/>scan codes: <text:a xlink:type="simple" xlink:href="http://eerott.mbnet.fi/hatari/img/st-keymap.png" text:style-name="Internet_20_link" text:visited-style-name="Visited_20_Internet_20_Link">http://eerott.mbnet.fi/hatari/img/st-keymap.png</text:a></text:p>
    <text:p text:style-name="P54">Scan Codes Demystified: <text:a xlink:type="simple" xlink:href="http://www.quadibloc.com/comp/scan.htm" text:style-name="Internet_20_link" text:visited-style-name="Visited_20_Internet_20_Link">http://www.quadibloc.com/comp/scan.htm</text:a></text:p>
-   <text:p text:style-name="P55"><text:alphabetical-index-mark-start text:id="IMark94379706290296"/><text:span text:style-name="T60">E</text:span>muTOS<text:alphabetical-index-mark-end text:id="IMark94379706290296"/>: <text:a xlink:type="simple" xlink:href="https://sourceforge.net/projects/emutos/" text:style-name="Internet_20_link" text:visited-style-name="Visited_20_Internet_20_Link">https://sourceforge.net/projects/emutos/</text:a></text:p>
+   <text:p text:style-name="P55"><text:alphabetical-index-mark-start text:id="IMark93898555567368"/><text:span text:style-name="T60">E</text:span>muTOS<text:alphabetical-index-mark-end text:id="IMark93898555567368"/>: <text:a xlink:type="simple" xlink:href="https://sourceforge.net/projects/emutos/" text:style-name="Internet_20_link" text:visited-style-name="Visited_20_Internet_20_Link">https://sourceforge.net/projects/emutos/</text:a></text:p>
    <text:p text:style-name="P56"><text:span text:style-name="T61">The Atari ST Internals, A programmers reference to the Atari ST, by Jim Boulton 1995. </text:span><text:a xlink:type="simple" xlink:href="http://www.atarimuseum.com/computers/16bits/STINTERN.htm" text:style-name="Internet_20_link" text:visited-style-name="Visited_20_Internet_20_Link"><text:span text:style-name="T61">http://www.atarimuseum.com/computers/16bits/STINTERN.htm</text:span></text:a></text:p>
-   <text:h text:style-name="P95" text:outline-level="1"><text:alphabetical-index-mark-start text:id="IMark94379699180184"/>Contact Information<text:alphabetical-index-mark-end text:id="IMark94379699180184"/></text:h>
+   <text:h text:style-name="P96" text:outline-level="1"><text:alphabetical-index-mark-start text:id="IMark93898555567368"/>Contact Information<text:alphabetical-index-mark-end text:id="IMark93898555567368"/></text:h>
    <text:p text:style-name="P49"/>
    <text:p text:style-name="P49"><draw:frame draw:style-name="fr1" draw:name="Frame1" text:anchor-type="paragraph" svg:width="1.7083in" draw:z-index="0">
      <draw:text-box fo:min-height="1.7083in">
@@ -2807,103 +2816,103 @@
      <text:index-title text:style-name="Sect1" text:name="Alphabetical Index1_Head">
       <text:p text:style-name="Index_20_Heading">Alphabetical Index</text:p>
      </text:index-title>
-     <text:p text:style-name="P132">10.DS<text:tab/>11</text:p>
-     <text:p text:style-name="P132">10.SS<text:tab/>11</text:p>
-     <text:p text:style-name="P132">3 load<text:tab/>6, 17</text:p>
-     <text:p text:style-name="P132">9 load<text:tab/>5, 17</text:p>
-     <text:p text:style-name="P132">9.DS<text:tab/>11</text:p>
-     <text:p text:style-name="P132">9.SS<text:tab/>11</text:p>
-     <text:p text:style-name="P132">Abacus Software<text:tab/>8, 19</text:p>
-     <text:p text:style-name="P132">ATEXIT<text:tab/>17</text:p>
-     <text:p text:style-name="P132">AUTO<text:tab/>6, 7</text:p>
-     <text:p text:style-name="P132">Autoboot to fast-Forth<text:tab/>6</text:p>
-     <text:p text:style-name="P132">Aux<text:tab/>9</text:p>
-     <text:p text:style-name="P132">B/DRV<text:tab/>10</text:p>
-     <text:p text:style-name="P132">B/SIDE<text:tab/>10</text:p>
-     <text:p text:style-name="P132">BACKDOWN<text:tab/>11, 12</text:p>
-     <text:p text:style-name="P132">BACKUP<text:tab/>11, 12</text:p>
-     <text:p text:style-name="P132">Batch files<text:tab/>6</text:p>
-     <text:p text:style-name="P132">BAUD<text:tab/>14</text:p>
-     <text:p text:style-name="P132">BIOS<text:tab/>8, 9, 10, 15</text:p>
-     <text:p text:style-name="P132">BYE<text:tab/>17</text:p>
-     <text:p text:style-name="P132">Clock<text:tab/>15, 16</text:p>
-     <text:p text:style-name="P132">COLD<text:tab/>17</text:p>
-     <text:p text:style-name="P132">Color<text:tab/>17</text:p>
-     <text:p text:style-name="P132">Color palette<text:tab/>16</text:p>
-     <text:p text:style-name="P132">Command Line Tail<text:tab/>6</text:p>
-     <text:p text:style-name="P132">Console<text:tab/>8, 9</text:p>
-     <text:p text:style-name="P132">Contact Information<text:tab/>20</text:p>
-     <text:p text:style-name="P132">Continuous Clock Display<text:tab/>16</text:p>
-     <text:p text:style-name="P132">Curley, Charles<text:tab/>20</text:p>
-     <text:p text:style-name="P132">Cursor Configuration<text:tab/>16</text:p>
-     <text:p text:style-name="P132">Date<text:tab/>15</text:p>
-     <text:p text:style-name="P132">DATE<text:tab/>16</text:p>
-     <text:p text:style-name="P132">DEBUG<text:tab/>18</text:p>
-     <text:p text:style-name="P132">Desktop<text:tab/>6</text:p>
-     <text:p text:style-name="P132">Devices<text:tab/>9</text:p>
-     <text:p text:style-name="P132">Disk drive<text:tab/>4, 10</text:p>
-     <text:p text:style-name="P132">Disk driver<text:tab/>10, 11, 12</text:p>
-     <text:p text:style-name="P132">Display<text:tab/>16</text:p>
-     <text:p text:style-name="P132">EMIT<text:tab/>8</text:p>
-     <text:p text:style-name="P132">EmuTOS<text:tab/>4, 6, 8, 19</text:p>
-     <text:p text:style-name="P132">EXPECT<text:tab/>8, 14</text:p>
-     <text:p text:style-name="P132">FILING<text:tab/>8</text:p>
-     <text:p text:style-name="P132">Floppy disk<text:tab/>4, 9, 10, 11</text:p>
-     <text:p text:style-name="P132">Flow control<text:tab/>14</text:p>
-     <text:p text:style-name="P132">GETTIME<text:tab/>15</text:p>
-     <text:p text:style-name="P132">GSX<text:tab/>8</text:p>
-     <text:p text:style-name="P132">Hard disk<text:tab/>10</text:p>
-     <text:p text:style-name="P132">HARDDISK<text:tab/>11</text:p>
-     <text:p text:style-name="P132">Hatari<text:tab/>4, 19</text:p>
-     <text:p text:style-name="P132">I/O<text:tab/>8, 9</text:p>
-     <text:p text:style-name="P132">IO block, or IOB<text:tab/>10</text:p>
-     <text:p text:style-name="P132">KEY<text:tab/>8</text:p>
-     <text:p text:style-name="P132">Keyboard<text:tab/>9, 12</text:p>
-     <text:p text:style-name="P132">Mark Williams Company<text:tab/>6, 19</text:p>
-     <text:p text:style-name="P132">MAXBLK<text:tab/>10</text:p>
-     <text:p text:style-name="P132">MAXHBLK<text:tab/>11</text:p>
-     <text:p text:style-name="P132">Midi<text:tab/>9</text:p>
-     <text:p text:style-name="P132">MINHBLK<text:tab/>11</text:p>
-     <text:p text:style-name="P132">MS-DOS<text:tab/>10</text:p>
-     <text:p text:style-name="P132">MSH<text:tab/>6</text:p>
-     <text:p text:style-name="P132">muTOS<text:tab/>4</text:p>
-     <text:p text:style-name="P132">PALETTESET<text:tab/>16</text:p>
-     <text:p text:style-name="P132">PRINTER<text:tab/>14</text:p>
-     <text:p text:style-name="P132">PROGRAMMER<text:tab/>16</text:p>
-     <text:p text:style-name="P132">R/W<text:tab/>9</text:p>
-     <text:p text:style-name="P132">Raw console<text:tab/>9</text:p>
-     <text:p text:style-name="P132">Register Usage<text:tab/>17</text:p>
-     <text:p text:style-name="P132">RS-232<text:tab/>14</text:p>
-     <text:p text:style-name="P132">RSCONF<text:tab/>14</text:p>
-     <text:p text:style-name="P132">Scan codes<text:tab/>8, 19</text:p>
-     <text:p text:style-name="P132">SCREENS<text:tab/>8</text:p>
-     <text:p text:style-name="P132">SECT<text:tab/>9</text:p>
-     <text:p text:style-name="P132">SEE:<text:tab/>8</text:p>
-     <text:p text:style-name="P132">SERIAL<text:tab/>9</text:p>
-     <text:p text:style-name="P132">SETCOLOUR<text:tab/>17</text:p>
-     <text:p text:style-name="P132">SETDATE<text:tab/>16</text:p>
-     <text:p text:style-name="P132">SETSTAMP<text:tab/>15</text:p>
-     <text:p text:style-name="P132">SETTIME<text:tab/>15</text:p>
-     <text:p text:style-name="P132">Shell<text:tab/>6, 18</text:p>
-     <text:p text:style-name="P132"><text:soft-page-break/>Shell scripts<text:tab/>6</text:p>
-     <text:p text:style-name="P132">SINCE<text:tab/>15, 16</text:p>
-     <text:p text:style-name="P132">System requirements<text:tab/>4</text:p>
-     <text:p text:style-name="P132">Time<text:tab/>16</text:p>
-     <text:p text:style-name="P132">Time and date<text:tab/>15</text:p>
-     <text:p text:style-name="P132">Time of day<text:tab/>15</text:p>
-     <text:p text:style-name="P132">TOS<text:tab/>4, 5, 8, 10, 11, 12, 19</text:p>
-     <text:p text:style-name="P132">TYPE<text:tab/>15, 16</text:p>
-     <text:p text:style-name="P132">-DISK<text:tab/>10</text:p>
-     <text:p text:style-name="P132">.TIME<text:tab/>15</text:p>
-     <text:p text:style-name="P132">(DATE)<text:tab/>16</text:p>
-     <text:p text:style-name="P132">(EMIT)<text:tab/>8</text:p>
-     <text:p text:style-name="P132">(EXPECT)<text:tab/>8</text:p>
-     <text:p text:style-name="P132">(KEY)<text:tab/>8, 16</text:p>
-     <text:p text:style-name="P132">(NKEY)<text:tab/>16</text:p>
-     <text:p text:style-name="P132">(TKEY)<text:tab/>16</text:p>
-     <text:p text:style-name="P132">+HARDDISK<text:tab/>11</text:p>
-     <text:p text:style-name="P132">+IOB<text:tab/>10</text:p>
-     <text:p text:style-name="P132">+ORIGIN<text:tab/>10, 14</text:p>
+     <text:p text:style-name="P118">10.DS<text:tab/>11</text:p>
+     <text:p text:style-name="P118">10.SS<text:tab/>11</text:p>
+     <text:p text:style-name="P118">3 load<text:tab/>6, 17</text:p>
+     <text:p text:style-name="P118">9 load<text:tab/>5, 17</text:p>
+     <text:p text:style-name="P118">9.DS<text:tab/>11</text:p>
+     <text:p text:style-name="P118">9.SS<text:tab/>11</text:p>
+     <text:p text:style-name="P118">Abacus Software<text:tab/>8, 20</text:p>
+     <text:p text:style-name="P118">ATEXIT<text:tab/>17</text:p>
+     <text:p text:style-name="P118">AUTO<text:tab/>6, 7</text:p>
+     <text:p text:style-name="P118">Autoboot to fast-Forth<text:tab/>6</text:p>
+     <text:p text:style-name="P118">Aux<text:tab/>9</text:p>
+     <text:p text:style-name="P118">B/DRV<text:tab/>10</text:p>
+     <text:p text:style-name="P118">B/SIDE<text:tab/>10</text:p>
+     <text:p text:style-name="P118">BACKDOWN<text:tab/>12</text:p>
+     <text:p text:style-name="P118">BACKUP<text:tab/>12</text:p>
+     <text:p text:style-name="P118">Batch files<text:tab/>6</text:p>
+     <text:p text:style-name="P118">BAUD<text:tab/>14</text:p>
+     <text:p text:style-name="P118">BIOS<text:tab/>8, 10, 15</text:p>
+     <text:p text:style-name="P118">BYE<text:tab/>17</text:p>
+     <text:p text:style-name="P118">Clock<text:tab/>15, 16</text:p>
+     <text:p text:style-name="P118">COLD<text:tab/>17</text:p>
+     <text:p text:style-name="P118">Color<text:tab/>17</text:p>
+     <text:p text:style-name="P118">Color palette<text:tab/>17</text:p>
+     <text:p text:style-name="P118">Command Line Tail<text:tab/>6</text:p>
+     <text:p text:style-name="P118">Console<text:tab/>8, 9</text:p>
+     <text:p text:style-name="P118">Contact Information<text:tab/>21</text:p>
+     <text:p text:style-name="P118">Continuous Clock Display<text:tab/>16</text:p>
+     <text:p text:style-name="P118">Curley, Charles<text:tab/>21</text:p>
+     <text:p text:style-name="P118">Cursor Configuration<text:tab/>16</text:p>
+     <text:p text:style-name="P118">Date<text:tab/>16</text:p>
+     <text:p text:style-name="P118">DATE<text:tab/>16</text:p>
+     <text:p text:style-name="P118">DEBUG<text:tab/>19</text:p>
+     <text:p text:style-name="P118">Desktop<text:tab/>6</text:p>
+     <text:p text:style-name="P118">Devices<text:tab/>9</text:p>
+     <text:p text:style-name="P118">Disk drive<text:tab/>4, 11</text:p>
+     <text:p text:style-name="P118">Disk driver<text:tab/>10, 11, 12</text:p>
+     <text:p text:style-name="P118">Display<text:tab/>16</text:p>
+     <text:p text:style-name="P118">EMIT<text:tab/>8</text:p>
+     <text:p text:style-name="P118">EmuTOS<text:tab/>4, 6, 8, 20</text:p>
+     <text:p text:style-name="P118">EXPECT<text:tab/>8, 15</text:p>
+     <text:p text:style-name="P118">FILING<text:tab/>8</text:p>
+     <text:p text:style-name="P118">Floppy disk<text:tab/>4, 10, 11, 12</text:p>
+     <text:p text:style-name="P118">Flow control<text:tab/>14</text:p>
+     <text:p text:style-name="P118">GETTIME<text:tab/>15</text:p>
+     <text:p text:style-name="P118">GSX<text:tab/>8</text:p>
+     <text:p text:style-name="P118">Hard disk<text:tab/>11</text:p>
+     <text:p text:style-name="P118">HARDDISK<text:tab/>11</text:p>
+     <text:p text:style-name="P118">Hatari<text:tab/>4, 20</text:p>
+     <text:p text:style-name="P118">I/O<text:tab/>8, 9</text:p>
+     <text:p text:style-name="P118">IO block, or IOB<text:tab/>10</text:p>
+     <text:p text:style-name="P118">KEY<text:tab/>8</text:p>
+     <text:p text:style-name="P118">Keyboard<text:tab/>9, 12</text:p>
+     <text:p text:style-name="P118">Mark Williams Company<text:tab/>6, 20</text:p>
+     <text:p text:style-name="P118">MASK<text:tab/>9</text:p>
+     <text:p text:style-name="P118">MAXBLK<text:tab/>10</text:p>
+     <text:p text:style-name="P118">MAXHBLK<text:tab/>11</text:p>
+     <text:p text:style-name="P118">Midi<text:tab/>9</text:p>
+     <text:p text:style-name="P118">MINHBLK<text:tab/>11</text:p>
+     <text:p text:style-name="P118">MS-DOS<text:tab/>10, 11</text:p>
+     <text:p text:style-name="P118">MSH<text:tab/>6</text:p>
+     <text:p text:style-name="P118">PALETTESET<text:tab/>16</text:p>
+     <text:p text:style-name="P118">PRINTER<text:tab/>14</text:p>
+     <text:p text:style-name="P118">PROGRAMMER<text:tab/>16</text:p>
+     <text:p text:style-name="P118">R/W<text:tab/>9, 10</text:p>
+     <text:p text:style-name="P118">Raw console<text:tab/>9</text:p>
+     <text:p text:style-name="P118">Register Usage<text:tab/>17</text:p>
+     <text:p text:style-name="P118">RS-232<text:tab/>14</text:p>
+     <text:p text:style-name="P118">RSCONF<text:tab/>14</text:p>
+     <text:p text:style-name="P118">Scan codes<text:tab/>8, 20</text:p>
+     <text:p text:style-name="P118">SCREENS<text:tab/>8</text:p>
+     <text:p text:style-name="P118">SECT<text:tab/>10</text:p>
+     <text:p text:style-name="P118">SEE:<text:tab/>8</text:p>
+     <text:p text:style-name="P118">SERIAL<text:tab/>9</text:p>
+     <text:p text:style-name="P118">SETCOLOUR<text:tab/>17</text:p>
+     <text:p text:style-name="P118">SETDATE<text:tab/>16</text:p>
+     <text:p text:style-name="P118">SETSTAMP<text:tab/>16</text:p>
+     <text:p text:style-name="P118">SETTIME<text:tab/>15</text:p>
+     <text:p text:style-name="P118">Shell<text:tab/>6, 19</text:p>
+     <text:p text:style-name="P118"><text:soft-page-break/>Shell scripts<text:tab/>6</text:p>
+     <text:p text:style-name="P118">SINCE<text:tab/>16</text:p>
+     <text:p text:style-name="P118">System requirements<text:tab/>4</text:p>
+     <text:p text:style-name="P118">Time<text:tab/>16</text:p>
+     <text:p text:style-name="P118">Time and date<text:tab/>15</text:p>
+     <text:p text:style-name="P118">Time of day<text:tab/>15</text:p>
+     <text:p text:style-name="P118">TOS<text:tab/>4, 5, 8, 10, 11, 12, 20</text:p>
+     <text:p text:style-name="P118">TYPE<text:tab/>16</text:p>
+     <text:p text:style-name="P118">-DISK<text:tab/>10</text:p>
+     <text:p text:style-name="P118">.TIME<text:tab/>15</text:p>
+     <text:p text:style-name="P118">(DATE)<text:tab/>16</text:p>
+     <text:p text:style-name="P118">(EMIT)<text:tab/>8, 9</text:p>
+     <text:p text:style-name="P118">(EXPECT)<text:tab/>8</text:p>
+     <text:p text:style-name="P118">(KEY)<text:tab/>8, 16</text:p>
+     <text:p text:style-name="P118">(NKEY)<text:tab/>16</text:p>
+     <text:p text:style-name="P118">(TKEY)<text:tab/>16</text:p>
+     <text:p text:style-name="P118">+HARDDISK<text:tab/>11</text:p>
+     <text:p text:style-name="P118">+IOB<text:tab/>10</text:p>
+     <text:p text:style-name="P118">+ORIGIN<text:tab/>10, 15</text:p>
     </text:index-body>
    </text:alphabetical-index>
    <text:p text:style-name="Text_20_body"/>
