@@ -6919,7 +6919,7 @@ FORTH DEFINITIONS
 \ 660 +VOL: STP  LOADER DIALER
 \ 600 +vol: stp  loader shell
 \ 520 +vol: stp  loader calcpi          \ 1960
-  723 +vol: ffx  loader life            \ 1443
+
 
 
 
