@@ -6917,7 +6917,7 @@ FORTH DEFINITIONS
 \   0 +VOL: GLOS LOADER ~~~
 \   3 +VOL: STP  LOADER LIFE
 \ 660 +VOL: STP  LOADER DIALER
-
+\ 600 +vol: stp  loader shell
 
 
 
@@ -7595,7 +7595,7 @@ FILING DEFINITIONS
 
 : LCENTRY  .NAME\  1A DTA + F@  FLSZ +!  COL ;
 
-: L     FILING  ' LENTRY   (LC) ;
+\ : L     FILING  ' LENTRY   (LC) ;
 
 
 \ ?outfile fcr ls lc                      ( 15  7 92 CRC  7:50 )
