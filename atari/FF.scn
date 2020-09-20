@@ -809,10 +809,10 @@ ATCOLD: PALCOLD         ATEXIT: PALCOLD
    201 LOADER TERM              \   702 LOADER XFER
    450 LOADER DEBUG                 207 LOADER SHOWOFF
    450 LOADER FILING                 87 LOADER CHECKBOOK
-  1960 loader calcpi               1443 loader life
 
 : NEEDED  \ scr# ---  | compiles scr if not already loaded.
   -FIND IF  2DROP DROP  ELSE  ( OFFSET F@ - ) LOAD  THEN ;
+
 
 \ fibonacci numbers                       ( 26  2 86 CRC 15:54 )
 filing
@@ -6918,8 +6918,8 @@ FORTH DEFINITIONS
 \   3 +VOL: STP  LOADER LIFE
 \ 660 +VOL: STP  LOADER DIALER
 \ 600 +vol: stp  loader shell
-
-
+\ 520 +vol: stp  loader calcpi          \ 1960
+  723 +vol: ffx  loader life            \ 1443
 
 
 
