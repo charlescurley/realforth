@@ -8213,8 +8213,8 @@ FORTH DEFINITIONS
         ASCII R OF      INSERTKEY       ENDOF   \ insert key
         ASCII a OF      KILL            ENDOF   \ undo key
         ASCII b OF      HELP            ENDOF   \ help key
-        ASCII S OF      LEFTS           ENDOF   \ ctl <--
-        ASCII T OF      RIGHTS          ENDOF   \ ctl -->
+        ASCII s OF      LEFTS           ENDOF   \ ctl <--
+        ASCII t OF      RIGHTS          ENDOF   \ ctl -->
         bell  ENDCASE   ELSE  DUP CTL M -
     IF  DUP 127 = IF  DEL  ELSE  DUP CTL H = IF  BKSP  ELSE
              DUP PLACE  THEN  THEN  THEN  THEN  ?STACK
