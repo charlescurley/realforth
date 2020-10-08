@@ -3760,9 +3760,10 @@ NECPAGE  SCR !
 
 \       target compiler: loaders, 132col  ( 27  1 92 CRC 11:49 )
 FORTH DEFINITIONS
-365 +BLK LOADER JSR             245 +BLK LOADER ATARI \ ff xcomp
-169 +BLK LOADER FILE              3 +BLK LOADER DOCUMENTED
-
+365 +BLK LOADER JSR    \ jsr threaded xcompiler
+  5 +BLK LOADER TARGET ( itc )  245 +BLK LOADER ATARI \ ff xcomp
+ 43      LOADER BOOT              3 +BLK LOADER DOCUMENTED
+169 +BLK LOADER FILE
 : BOTH  JSR ATARI ;     \ build atari fastForth
 
 : ?CR   OUT @ C/L > IF CR THEN ;        ?CR
@@ -3772,7 +3773,6 @@ FORTH DEFINITIONS
 : 80COL  ( ?PRINT IF CR CTL Y EMIT THEN ) ;     immediate
 
 \ : 2CONSTANT  <BUILDS SWAP  , ,    DOES> 2@ ;
-
 
 \ 68000 addressing setup                  (  2  9 85 CRC       )
 BASE @ HEX 8300 CONSTANT COMPILE-ADDR \ set on 241
@@ -6274,7 +6274,7 @@ LABEL TOSUPER
 
   AR3 [ AR0 MOV,                        \ get base addr of file,
   AR4 -100 AR0 &[ MOV,                  \ save base page addr
-  AR3 8 &[ AR0 -F8 &[ MOV,              \ cfa of disk handler
+  AR3 8 &[ AR0 -F8 &[ MOV,              \ cfa of disk opener
 \ ar0 ar7 -[ mov,  ar1 ar7 -[ mov,
 \ ar0 dr4 mov,  printreg *+ bsr,        \ show jump point
 \ ar7 [+ ar1 mov,  ar7 [+ ar0 mov,
@@ -6468,7 +6468,9 @@ DECIMAL         232 NEEDED TARGET       \       ATARI
 \ 'NF 10.DS    CFA ASSEMBLER SAFE 8 + DELTA + ! \ flop disk boot
 \ 'NF HARDDISK CFA ASSEMBLER SAFE 8 + DELTA + ! \ hard disk boot
 
-FILING home L FAST4TH.*        rm: fast4th.old
+FILING home L FAST4TH.*
+  rm: fast4th.anc
+  mv:: fast4th.old fast4th.anc
   mv:: fast4th.ttp fast4th.old
   FILING MKF: FAST4TH.TTP         HEX
 \ FILING MKF: FAST4TH.tst         HEX
@@ -6476,8 +6478,6 @@ FILEHEADER OVERHEAD HANDLE F@ WTF  .
 COMPILE-ADDR  DPNEW @ OVER - 200 +  ( ?? )
                     HANDLE F@ WTF  .  DECIMAL
 CR CLF  R-W L FAST4TH.*         EDITOR FLUSH  FORTH
-
-
 
 
 
@@ -7689,7 +7689,7 @@ SETOLD mf SETNEW     DECIMAL       WARNING ON
     31   85 +THRU   \ source from 1st : def to end of nucleus
      (   86 +LOAD CR  (  wdump) SETOLD SETNEW
    111  118 +THRU   \ forward references
-TXT Copyright 2019 C. Curley"   SETOLD SETNEW   EDITOR FLUSH
+TXT Copyright 2020 C. Curley"   SETOLD SETNEW   EDITOR FLUSH
 QUIET SETOLD ( CR mf ) HEX  DPNEW F@ IMAGETOP OVER - ERASE
 DECIMAL 119 +LOAD       \ file setup
 DECIMAL CR #BUFS . ." Buffers "  R> BASE F! CR PTODAY CR
@@ -7946,7 +7946,7 @@ CODE RP!   10 U &[ RP MOV,                      NEXT     ;C
 \       dr5: index                      dr6: limit
 CODE LEAVE  DR5 DR6       MOV,                  NEXT     ;C
 
-CODE ?LEAVE  s [+ dr0 mov,  ne if,  dr5 dr6 mov,  then, next  ;c
+CODE ?LEAVE  S [+ DR0 MOV,  NE IF,  DR5 DR6 MOV,  THEN, NEXT  ;C
 
 
 
@@ -8472,7 +8472,7 @@ DECIMAL \ patch today's date into (abort). automated version ctl
 : (QUIT)   BLK OFF [COMPILE] [  BEGIN BEGIN
   RP! CR QUERY INTERPRET  STATE F@ 0= UNTIL ."  ok" AGAIN STOP
 
-: (ABORT) SP! DECIMAL CR ." FastForth 3.0 24  9 19 "
+: (ABORT) SP! DECIMAL CR ." FastForth 3.0 13  9 20 "
   [COMPILE] FORTH  DEFINITIONS  QUIT  STOP
 
   SETNEW (GETTIME) W, SETOLD    LABEL TIMESTAMP

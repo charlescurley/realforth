@@ -61,7 +61,7 @@ DECIMAL
   ' TASK C>N FENCE F!
   PTODAY  CR 15 MESSAGE CR \ 27 message cr 28 message cr \ steem
   ." F12 for Hatari controls." cr
-  CLR.EOP quit
+  CLR.EOP
   real-FORTH decompiler: messages         ( 29  5 86 CRC 15:50 )
      Inline literal, value        = D
      Compiled inline string: "
@@ -176,9 +176,9 @@ Undo - abort this session       Insert - toggle placing mode
                <<Any key returns to editor!>>
 \ q & d checksum routine                  (  7  4 86 CRC 16:00 )
 CODE (CHECK) \ addr ct --- w | calculate checksum
- S [+ DR0 MOV,  S [ AR0 MOV,  DR1 CLR,  DR2 CLR,
+ S [+ DR0 MOV,  S [ AR0 MOV,  0 # DR1 movq,  0 # DR2 movq,
  BEGIN,  AR0 [+ DR1 .B MOV,  DR1 DR2 ADD,  1 # DR0 SUBQ,
-     EQ UNTIL,  DR2 S [ MOV,  NEXT
+     EQ UNTIL,  DR2 S [ MOV,  NEXT ;c
 
 : CHECKDICT   0 +ORIGIN HERE OVER - (CHECK) . ;
 
@@ -510,14 +510,14 @@ editor flush
 
 
 
+\ Test screen for clr, vs  0 # movq,      ( 22  7 20 crc 22:07 )
+flush
+forget task                     : task ;
+code test  dr0 clr,  0 # dr0 movq,
 
+                                    next  ;c
 
-
-
-
-
-
-
+editor
 
 
 
@@ -729,7 +729,7 @@ CODE SETCOLOUR \ colval colour# --- colorval | set a colour
 CODE SETSCREEN \ res phybase logbase --- | set screen parameters
   S [+ DR4 MOV,  S [+ DR2 MOV,  S [+ DR3 MOV,
   RP DR7 MOV,  4 # RP -[ .W MOV,  0E # TRAP,
-  2 # DR0 .W CMP,  EQ IF,  DR3 CLR,  1 # DR3 SUBQ,  THEN,
+  2 # DR0 .W CMP,  EQ IF,  0 # DR3 movq,  1 # DR3 SUBQ,  THEN,
   DR3 RP -[ .W MOV,  DR2 RP -[ MOV,  DR4 RP -[ MOV,
   5 # RP -[ .W MOV,  0E # TRAP,  DR7 RP MOV,  NEXT ;C  ;S
 SETSCREEN  will set the screen resolution iff the current
@@ -867,7 +867,7 @@ BASE F@ HEX CODE (NEXT)   RP [+ AR0 MOV,   DR5 TST,
   NE IF,  AR0 [ AR0 .W ADD,  1 # DR5 SUBQ,  AR0 [ JMP,  THEN,
    2 # AR0 ADDQ,  RP [+ DR5 MOV, AR0 [ JMP, ;C  FIXED
 CODE ?FINAL  \ fl --  | leave for ... next loop conditionally
-  S [+ TST,  NE IF,  DR5 CLR, THEN,  NEXT ;C
+  S [+ TST,  NE IF,  0 # DR5 movq, THEN,  NEXT ;C
 HERE  ASSEMBLER  DR5 RP -[ MOV,  S [+ DR5 MOV,
 : FOR  [ 4 CSP +! ] LITERAL  HERE 4 CMOVE  4 ALLOT
   HERE 6 ;  IMMEDIATE    BASE F!
@@ -2114,10 +2114,10 @@ CODE KEYMODE  \ mode ---  stat | get/set keyboard mode
 BASE F@ HEX
 CODE (GETTIME) \   ---  n | n is bit packed time from rtc
   2C # RP -[ .W MOV,  1 # TRAP,  2 # RP ADDQ,
-  DR1 CLR,  DR0 DR1 .W MOV,  DR1 S -[ MOV,  NEXT ;C
+  0 # DR1 movq,  DR0 DR1 .W MOV,  DR1 S -[ MOV,  NEXT ;C
 
 \ CODE (SETTIME) \ n  --- | n is bit packed time to rtc
-\ S [+ DR0 MOV,  DR0 RP -[ .W  MOV,  DR0 CLR,
+\ S [+ DR0 MOV,  DR0 RP -[ .W  MOV,  0 # DR0 movq,
 \ 2D # RP -[ .W MOV,  1 # TRAP,  4 # RP ADDQ, DR0 S -[ MOV, NEXT
 \   ;C
 CODE (GETDATE) \   ---  n | n is bit packed date from rtc
@@ -2210,10 +2210,10 @@ BLK F@ 1+ DUP 2+ THRU BASE F!
 BASE F@ HEX
 CODE (GETTIME) \   ---  n | n is bit packed time from rtc
   2C # RP -[ .W MOV,  1 # TRAP,  2 # RP ADDQ,
-  DR1 CLR,  DR0 DR1 .W MOV,  DR1 S -[ MOV,  NEXT ;C
+  0 # DR1 movq,  DR0 DR1 .W MOV,  DR1 S -[ MOV,  NEXT ;C
 
 \ CODE (SETTIME) \ n  --- | n is bit packed time to rtc
-\ S [+ DR0 MOV,  DR0 RP -[ .W  MOV,  DR0 CLR,
+\ S [+ DR0 MOV,  DR0 RP -[ .W  MOV,  0 # DR0 movq,
 \ 2D # RP -[ .W MOV,  1 # TRAP,  4 # RP ADDQ, DR0 S -[ MOV, NEXT
 \   ;C
 
@@ -2663,7 +2663,7 @@ CODE <KEY>  HEX   \  -- key/code | get key or atari code
    VT52KEYS @#L TST,  NE IF,          \ remap numeric keypad?
       DR0 DR1 MOV,  DR1 .W SWAP,  53 # DR1 .W CMP,  NE IF,
       3B # DR1 .W CMP,  GE IF,
-      DR0 .W CLR,  THEN, THEN, THEN,  \ yes...force fcn key
+      0 # DR0 movq,  THEN, THEN, THEN,  \ yes...force fcn key
    DR0 .W TST,  EQ IF,                \ if function key,
       DR0 .W SWAP,  100 # DR0 .W OR,  \ return scancode+100
    THEN,  FFFF #L DR0 AND,  DR0 S -[ MOV,  NEXT ;C
@@ -3241,7 +3241,7 @@ CODE CAPT  \ c --- c | to capture buffer if flag is asserted
 CODE FILTRE  S [ DR0 MOV,  NOCLOCK *+ DR1 MOV,
   \  BL # DR0 .W CMP,  LT IF, ROT 0 &D*+ DR0 .B MOV,  THEN,
   LI # DR0 .W CMP,  EQ IF,  3 # DR1 MOVQ,  ELSE, 1 # DR1 SUBQ,
-     MI IF,  DR1 CLR, THEN,  THEN,  DR1 NOCLOCK @#L MOV,
+     MI IF,  0 # DR1 movq, THEN,  THEN,  DR1 NOCLOCK @#L MOV,
   DR0 S [ MOV,  NEXT  ;C -->
 
 \ DUP CTL R = IF CAPTURE F!       ;S THEN  \ Compuserve dc2/dc4
@@ -3330,7 +3330,7 @@ HEX 777 VARIABLE OLDC         777 VARIABLE OLDB DECIMAL
 CODE +COLOUR  HEX  S [ DR0 MOV,  1 # DR0 ADDQ,
    3 # DR0 BTST,  NE IF,   8 # DR0    ADDQ,  THEN,
    7 # DR0 BTST,  NE IF,  80 # DR0 .W ADD,   THEN,
-  0B # DR0 BTST,  NE IF,       DR0    CLR,   THEN,
+  0B # DR0 BTST,  NE IF,   0 # DR0    movq,  THEN,
   DR0 S [ MOV,  NEXT   ;C DECIMAL
 \ CODE WVBL 37 # RP -[ .W MOV,  14 # TRAP,  2 # RP ADDQ, NEXT ;C
 \ CODE SCRDUMP  20 # RP -[ .W MOV,  ' WVBL 4+ *+ BRA, ;C FIXED
@@ -3733,7 +3733,7 @@ CODE -TEXT
   S [+ AR0 MOV,  S [+ DR0 MOV,  S [ AR1 MOV,
   BEGIN,  AR0 [+ AR1 [+ .B CMP,   ( Unstructured! Unstructured!)
      EQ IF,  DROP ROT ROT 1 # DR0 SUBQ,  EQ UNTIL,  2
-     DR1 CLR,  ELSE,
+     0 # DR1 movq,  ELSE,
      CC IF,  DR1 NEG,  THEN, THEN,  DR1 S [ MOV,  NEXT  ;C
 
                                             BASE F! ." ." ;S
@@ -7822,15 +7822,15 @@ FORTH DEFINITIONS
 : >UPFILE:  FILING MKF:  >UPLOAD ;
 FORTH DEFINITIONS
 
+\ filing extension: hex dump file names.  ( 27  8 20 crc 13:14 )
+forget task                     : task ;
+filing definitions
+: .dumpNAME  DTANAME CT->0 dump ;
+: LhSENTRY       \  --- | print directory entry
+  .dumpNAME CR ;
 
-
-
-
-
-
-
-
-
+: Lh  base @ hex  FILING  ' LhsENTRY   (LC)  base ! ;
+editor flush
 
 
 
@@ -8213,8 +8213,8 @@ FORTH DEFINITIONS
         ASCII R OF      INSERTKEY       ENDOF   \ insert key
         ASCII a OF      KILL            ENDOF   \ undo key
         ASCII b OF      HELP            ENDOF   \ help key
-\       ASCII s OF      LEND            ENDOF   \ ctl <--
-\       ASCII t OF      REND            ENDOF   \ ctl -->
+        ASCII S OF      LEFTS           ENDOF   \ ctl <--
+        ASCII T OF      RIGHTS          ENDOF   \ ctl -->
         bell  ENDCASE   ELSE  DUP CTL M -
     IF  DUP 127 = IF  DEL  ELSE  DUP CTL H = IF  BKSP  ELSE
              DUP PLACE  THEN  THEN  THEN  THEN  ?STACK
@@ -8238,18 +8238,18 @@ PAD  80 ASCII Z FILL
   R> SIZE +!  REDRAW ;
 
 
-\ help screen for line editor             (  4 11 93 CRC 10:20 )
+\ help screen for line editor             (  8 10 20 crc 15:04 )
             *help screen for fastforth line editor*
-<---, --->      move cursor in current line
-home            move to right hand end of line
-up, down arrows scroll through buffer
-insert          toggle insert/replace mode
-help            cause this help screen to appear
-undo            kill current line
+<---, --->              move cursor in current line
+home                    move to right hand end of line
+up, down arrows         scroll through buffer
+insert                  toggle insert/replace mode
+help (print screen)     cause this help screen to appear
+undo (scroll lock)      kill current line
+ctl <---, --->          move to next space in line or end
 f1      insert date             f2      kill current line
 f4      left to next space      f5      right to next space
 f7      history                 f8      scan for line
-
 
 
 
@@ -8462,17 +8462,17 @@ filing definitions
   0  whandle f@ f@  2  lseek drop  cr  pattern
   0 do  i 5 .r  (more)  loop  ;
 editor flush
+\ check a character for validity.         (  6  1 20 crc 14:51 )
+\ in the current base.
+forget task     : task ;        editor flush
+: oops  ." Not valid in base "  base @ decimal 1 .r  ." ."
+  abort  stop
 
+: c->n  \ char  ---  val  ~ convert a character if possibe.
+  base @  digit  0= if  oops  then ;
 
-
-
-
-
-
-
-
-
-
+;s      Coding challenge from Gorgon Charlton in the Farcebook
+group FORTH PROGRAMMING LANGUAGE 21st CENTURY.
 
 
 
